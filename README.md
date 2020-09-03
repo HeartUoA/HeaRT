@@ -1,7 +1,5 @@
 # Welcome to HeaRT
-We need a marketing genius to write us a brilliant sell story on HeaRT. Because it's just me writing this, sorry.
-Below you'll find instructions on how to set everything up. In the end, you should have the button called "Test Endpoint"
-in the frontend client work and return "John Doe, teaches the course: SOFTENG 700"
+What drives your teaching? Want to lift the hood on your assumptions and values about learning in your courses? The HeaRT tool, Hearing and Realising Teaching-voice, is a card game that gives you an image and a language to voice your inner thoughts on why you teach the way you do, online, in the classroom, in the lab or out in the field. Use it to plan, prioritise and share next steps in your course design; to work with your teaching team; include in your teaching portfolio, or provide a snapshot and action plan for future review.
 
 ## Frontend instructions
 
