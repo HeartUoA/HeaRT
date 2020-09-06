@@ -6,6 +6,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'ABeeZee';
+  src: local('ABeeZee'), url(./fonts/ABeeZee-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ABeeZee';
+  font-style: italic;
+  src: local('ABeeZee'), url(./fonts/ABeeZee-Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'MyHappyEnding';
+  src: local('MyHappyEnding'), url(./fonts/MyHappyEnding.ttf) format('truetype');
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'ABeeZee', 'MyHappyEnding';
 }
