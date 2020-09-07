@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "commitizen": "^4.2.1",
     "express": "^4.17.1",
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
@@ -31,6 +32,7 @@
     "axios-mock-adapter": "^1.18.1",
     "babel-preset-minify": "^0.5.1",
     "chalk": "^4.0.0",
+    "cz-conventional-changelog": "3.3.0",
     "husky": "^4.2.5",
     "jest": "^24.9.0",
     "mongodb-memory-server": "^6.6.1",
@@ -68,7 +70,13 @@
   },
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "pre-commit": "[[ -n $HUSKY_BYPASS ]] || pretty-quick --staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
