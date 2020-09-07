@@ -6,16 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@font-face {
-  font-family: 'ABeeZee';
-  src: local('ABeeZee'), url(./fonts/ABeeZee-Regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'ABeeZee';
-  font-style: italic;
-  src: local('ABeeZee'), url(./fonts/ABeeZee-Italic.ttf) format('truetype');
-}
+@import url('https://fonts.googleapis.com/css?family=ABeeZee');
 
 @font-face {
   font-family: 'MyHappyEnding';

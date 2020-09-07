@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../images/logo.svg';
+import logo from '../assets/images/logo.svg';
 import '../styles/Homepage.css';
 
 const Homepage: React.FC = () => {
@@ -19,7 +19,7 @@ const Homepage: React.FC = () => {
           <img src={logo} className="Logo" alt="logo"/>
           <p className="Logo-Title">HeaRT</p>
         </div>
-        <p className="App-Name">Hearing And Realising Teaching-voice</p>
+        <p className="App-Description">Hearing And Realising Teaching-voice</p>
       </div>
       <div className="Buttons-Container">
         <div className="Button" onClick={onPlayClick}>
