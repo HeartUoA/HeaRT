@@ -2,9 +2,9 @@ import MongodbMemoryServer from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
 import app from "../app";
-import User from "./user.model";
+import Item from "./item.model";
 
-describe("/api/users tests", () => {
+describe("/api/items tests", () => {
   const mongod = new MongodbMemoryServer();
 
   beforeAll(async () => {
@@ -18,19 +18,20 @@ describe("/api/users tests", () => {
   });
 
   afterEach(async () => {
-    await User.remove({});
+    await Item.remove({});
   });
 
-  it("should post and get a user", async () => {
+  it("should post and get items", async () => {
     const postResponse = await request(app)
-      .post("/api/users")
-      .send({ name: "John Doe", course: "SOFTENG 700" });
+      .post("/api/items")
+      .send({ name: "new item", value: 2000 });
     expect(postResponse.status).toBe(200);
+    expect(postResponse.body).toBe("Item saved!");
 
-    const getResponse = await request(app).get("/api/users");
+    const getResponse = await request(app).get("/api/items");
     expect(getResponse.status).toBe(200);
     expect(getResponse.body).toEqual([
-      expect.objectContaining({ name: "John Doe", course: "SOFTENG 700" }),
+      expect.objectContaining({ name: "new item", value: 2000 }),
     ]);
   });
 });
