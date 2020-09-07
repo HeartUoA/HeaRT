@@ -1,10 +1,10 @@
-import MongodbMemoryServer from 'mongodb-memory-server';
-import mongoose from 'mongoose';
-import request from 'supertest';
-import app from '../app';
-import Item from './item.model';
+import MongodbMemoryServer from "mongodb-memory-server";
+import mongoose from "mongoose";
+import request from "supertest";
+import app from "../app";
+import Item from "./item.model";
 
-describe('/api/items tests', () => {
+describe("/api/items tests", () => {
   const mongod = new MongodbMemoryServer();
 
   beforeAll(async () => {
@@ -21,15 +21,17 @@ describe('/api/items tests', () => {
     await Item.remove({});
   });
 
-  it('should post and get items', async () => {
+  it("should post and get items", async () => {
     const postResponse = await request(app)
-      .post('/api/items')
-      .send({ name: 'new item', value: 2000 });
+      .post("/api/items")
+      .send({ name: "new item", value: 2000 });
     expect(postResponse.status).toBe(200);
-    expect(postResponse.body).toBe('Item saved!');
+    expect(postResponse.body).toBe("Item saved!");
 
-    const getResponse = await request(app).get('/api/items');
+    const getResponse = await request(app).get("/api/items");
     expect(getResponse.status).toBe(200);
-    expect(getResponse.body).toEqual([expect.objectContaining({ name: 'new item', value: 2000 })]);
+    expect(getResponse.body).toEqual([
+      expect.objectContaining({ name: "new item", value: 2000 }),
+    ]);
   });
 });

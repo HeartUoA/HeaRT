@@ -1,6 +1,6 @@
-import { connect } from 'mongoose';
-import app from './app';
-import { port, url } from './config';
+import { connect } from "mongoose";
+import app from "./app";
+import { port, url } from "./config";
 
 (async () => {
   await connect(url, {
