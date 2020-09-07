@@ -7,13 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@import url('https://fonts.googleapis.com/css?family=ABeeZee');
+@import url("https://fonts.googleapis.com/css?family=ABeeZee");
 
 @font-face {
-  font-family: 'MyHappyEnding';
-  src: local('MyHappyEnding'), url(./fonts/MyHappyEnding.ttf) format('truetype');
+  font-family: "MyHappyEnding";
+  src: local("MyHappyEnding"), url(./fonts/MyHappyEnding.ttf) format("truetype");
 }
 
 code {
-  font-family: 'ABeeZee', 'MyHappyEnding';
+  font-family: "ABeeZee", "MyHappyEnding";
 }
