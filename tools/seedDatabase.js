@@ -1,6 +1,6 @@
 import { connect, disconnect } from 'mongoose';
 import chalk from 'chalk';
-import Item from '../server/items/item.model';
+import Course from '../server/course/course.model';
 import User from '../server/users/user.model';
 import { url } from '../server/config';
 
@@ -12,21 +12,23 @@ import { url } from '../server/config';
       useCreateIndex: true,
     });
     const users = await User.find({});
-    const items = await Item.find({});
-    if (users.length === 0 && items.length === 0) {
-      console.log(chalk.yellow('No users or items in the database, creating sample data...'));
+    const courses = await Course.find({});
+    if (users.length === 0 || courses.length === 0) {
+      console.log(chalk.yellow('No users or courses in the database, creating sample data...'));
+      console.log(chalk.yellow('Purging any pre-existing stale...'));
+      await User.deleteMany({})
+      await Course.deleteMany({})
       const user = new User({ name: 'John Doe', course: 'SOFTENG 700' });
       await user.save();
       console.log(chalk.green('Sample user successfuly created!'));
-      const newItems = [
-        { name: 'Dimension 1', value: 0.1 },
-        { name: 'Dimension 2', value: 1.2 },
-        { name: 'Dimension 3', value: 2.5 },
-        { name: 'Dimension 4', value: 0.5 },
-        { name: 'Dimension 5', value: 5.1 },
+      const newCourses = [
+        { name: 'SOFTENG 700', date: new Date(), cohortSize: 200, role: 'Course Cordinator', ageOfCourse: 5 },
+        { name: 'SOFTENG 750', date: new Date(), cohortSize: 100, role: 'Course Instructor', ageOfCourse: 4 },
+        { name: 'COMPSCI 221', date: new Date(), cohortSize: 263, role: 'Course Cordinator', ageOfCourse: 3 },
+        { name: 'BUSADMIN 350', date: new Date(), cohortSize: 140, role: 'Course Cordinator', ageOfCourse: 2 }
       ];
-      await Item.insertMany(newItems);
-      console.log(chalk.green(`${newItems.length} item(s) successfuly created!`));
+      await Course.insertMany(newCourses);
+      console.log(chalk.green(`${newCourses.length} course(s) successfuly created!`));
     } else {
       console.log(chalk.yellow('Database already initiated, skipping populating script'));
     }
