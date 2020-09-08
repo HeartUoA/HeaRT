@@ -1,10 +1,15 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
-
-// TODO: Need to set up Navigation/React Router
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const App: React.FC = () => {
-  return <Homepage />;
+  return (
+    <Router>
+      <Route exact path="/">
+        <Homepage />
+      </Route>
+    </Router>
+  );
 };
 
 export default App;
