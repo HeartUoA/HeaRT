@@ -5,7 +5,7 @@ What drives your teaching? Want to lift the hood on your assumptions and values 
 ## Developer Instructions
 
 To use the in-built commit helper, please ensure to install commitizen globally by running
-`yarn add commitizen -g`
+`npm install commitizen -g`
 You will then be able to add commit messages using `git cz`
 
 ## Frontend instructions
