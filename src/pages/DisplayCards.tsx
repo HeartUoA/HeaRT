@@ -17,13 +17,16 @@ const DisplayCards: React.FC = () => {
           <p className="Logo-Title">HeaRT</p>
         </div>
       </div>
-      <p className="Statement">Pick one statement</p>
-      <div className="Selection">
-        <div className="Cards">
-          <p className="Card-Text">{state.text}</p>
-        </div>
-        <div className="Cards">
-          <p className="Card-Text">{state.text}</p>
+
+      <div className="Main-Body">
+        <p className="Statement">Pick one statement</p>
+        <div className="Selection">
+          <div className="Cards">
+            <p className="Card-Text">{state.text}</p>
+          </div>
+          <div className="Cards">
+            <p className="Card-Text">{state.text}</p>
+          </div>
         </div>
       </div>
     </div>

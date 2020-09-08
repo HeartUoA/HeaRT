@@ -1,10 +1,15 @@
 .DisplayCards {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  background: #f6f7fc;
 }
 
 .DisplayCards-Header {
   display: flex;
+  position: fixed;
+  left: 0px;
+  right: 0px;
   background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
 }
 
@@ -20,23 +25,29 @@
 }
 .Logo-Title {
   display: flex;
-  font-family: "ABeeZee";
+  font-family: "MyHappyEnding";
   color: white;
   font-size: 100px;
   font-weight: normal;
-  margin: 0px 15px 0px 0px;
+  margin: 10px 15px 0px 0px;
 }
+
+.Main-Body {
+  display: flex;
+  flex-direction: column;
+  margin: 10% 0px 0px 0px;
+}
+
 .Statement {
   display: flex;
   font-family: "ABeeZee";
-  font-size: 80px;
+  font-size: 60px;
   justify-content: center;
-  margin: 4% 0px 0px 0px;
+  margin-bottom: 2%;
 }
 .Selection {
   display: flex;
   flex-direction: row;
-  background: white;
   height: 40vh;
   align-items: center;
   justify-content: space-evenly;
@@ -46,17 +57,20 @@
   border-radius: 20px;
   height: 33vh;
   width: 35vw;
+  min-width: 15vw;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: 4px 4px 10px #212121;
+  padding: 10px 10px 10px 10px;
 }
 
 .Card-Text {
   font-family: "ABeeZee";
   color: #212121;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   margin: 0px;
   cursor: pointer;
 }
