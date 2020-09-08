@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="libraryTable">
+    <library name="junit-3.8.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/OneDrive - The University of Auckland/4th Year/Sem1 2020/701/assignment4/kalah_resources/junit-3.8.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="kalah-vertical">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/OneDrive - The University of Auckland/4th Year/Sem1 2020/701/assignment4/kalah_resources/kalah-vertical.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
+</project>

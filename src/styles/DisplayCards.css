@@ -1,0 +1,62 @@
+.DisplayCards {
+  display: flex;
+  flex-direction: column;
+}
+
+.DisplayCards-Header {
+  display: flex;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+}
+
+.Logo-Container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.Logo {
+  height: 100px;
+  pointer-events: none;
+  margin: 0px 15px 0px 0px;
+}
+.Logo-Title {
+  display: flex;
+  font-family: "ABeeZee";
+  color: white;
+  font-size: 100px;
+  font-weight: normal;
+  margin: 0px 15px 0px 0px;
+}
+.Statement {
+  display: flex;
+  font-family: "ABeeZee";
+  font-size: 80px;
+  justify-content: center;
+  margin: 4% 0px 0px 0px;
+}
+.Selection {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  height: 40vh;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.Cards {
+  background: white;
+  border-radius: 20px;
+  height: 33vh;
+  width: 35vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 4px 4px 10px #212121;
+}
+
+.Card-Text {
+  font-family: "ABeeZee";
+  color: #212121;
+  text-align: center;
+  font-size: 40px;
+  margin: 0px;
+  cursor: pointer;
+}
