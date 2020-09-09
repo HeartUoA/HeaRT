@@ -1,13 +1,13 @@
 .DisplayCards {
   display: flex;
   flex-direction: column;
+  min-height: 700px;
   height: 100vh;
   background: #f6f7fc;
 }
 
 .DisplayCards-Header {
   display: flex;
-  position: fixed;
   left: 0px;
   right: 0px;
   background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
@@ -35,7 +35,6 @@
 .Main-Body {
   display: flex;
   flex-direction: column;
-  margin: 10% 0px 0px 0px;
 }
 
 .Statement {
@@ -43,7 +42,7 @@
   font-family: "ABeeZee";
   font-size: 60px;
   justify-content: center;
-  margin-bottom: 2%;
+
   text-align: center;
 }
 .Selection {
@@ -78,12 +77,13 @@
 
 .Navigation {
   justify-content: space-between;
-  position: fixed;
-  bottom: 0;
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 2vh;
+  margin-bottom: 15px;
+  height: 100%;
+  align-items: flex-end;
+  min-height: 80px;
 }
 
 .NavigationButtonL {
@@ -91,7 +91,8 @@
   background: #ff9cb8;
   height: 11vh;
   width: 12vw;
-  min-width: fit-content;
+  min-width: max-content;
+  min-height: 50px;
   cursor: pointer;
   float: left;
   margin-left: 9vw;
@@ -101,7 +102,8 @@
   background: #ff9cb8;
   height: 11vh;
   width: 12vw;
-  min-width: fit-content;
+  min-width: max-content;
+  min-height: 50px;
   cursor: pointer;
   float: right;
   margin-right: 9vw;
