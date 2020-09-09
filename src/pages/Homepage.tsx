@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
-
+import { Link } from "react-router-dom";
 const Homepage: React.FC = () => {
   const onPlayClick = () => {
     // TODO: Write code here to redirect to course info screen
@@ -21,9 +21,11 @@ const Homepage: React.FC = () => {
         <p className="App-Description">Hearing And Realising Teaching-voice</p>
       </div>
       <div className="Buttons-Container">
-        <div className="Button" onClick={onPlayClick}>
-          <p className="Button-Text">Play</p>
-        </div>
+        <Link to="/DisplayCards">
+          <div className="Button" onClick={onPlayClick}>
+            <p className="Button-Text">Play</p>
+          </div>
+        </Link>
         <div className="Button" onClick={onInstructionsClick}>
           <p className="Button-Text">Instructions</p>
         </div>
