@@ -21,7 +21,7 @@ const Homepage: React.FC = () => {
         <p className="App-Description">Hearing And Realising Teaching-voice</p>
       </div>
       <div className="Buttons-Container">
-        <Link to="/DisplayCards">
+        <Link className="Link" to="/DisplayCards">
           <div className="Button" onClick={onPlayClick}>
             <p className="Button-Text">Play</p>
           </div>
