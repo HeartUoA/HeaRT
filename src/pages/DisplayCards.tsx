@@ -34,13 +34,13 @@ const DisplayCards: React.FC = () => {
             <p className="Card-Text">{state.text}</p>
           </div>
         </div>
-        <div className="Navigation">
-          <div className="NavigationButtonL" onClick={onBackClick}>
-            <p className="Navigation-Button-Text">Back</p>
-          </div>
-          <div className="NavigationButtonR" onClick={onSkipClick}>
-            <p className="Navigation-Button-Text">Skip</p>
-          </div>
+      </div>
+      <div className="Navigation">
+        <div className="NavigationButtonL" onClick={onBackClick}>
+          <p className="Navigation-Button-Text">Back</p>
+        </div>
+        <div className="NavigationButtonR" onClick={onSkipClick}>
+          <p className="Navigation-Button-Text">Skip</p>
         </div>
       </div>
     </div>
