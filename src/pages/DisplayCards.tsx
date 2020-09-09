@@ -1,13 +1,56 @@
 import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
 import logo from "../assets/images/logo.svg";
+import edit from "../assets/images/edit.svg";
 import "../styles/DisplayCards.css";
 
+export enum CardSide {
+  Left,
+  Right,
+}
+
 const initialValues = {
-  text: "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
+  leftText: "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
+  rightText:
+    "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
+  leftEditing: false,
+  rightEditing: false,
 };
 
 const DisplayCards: React.FC = () => {
-  const [state] = useState(initialValues);
+  const [state, setState] = useState(initialValues);
+
+  const onEditClick = (side: CardSide) => {
+    var textElement;
+    switch (side) {
+      case CardSide.Left:
+        textElement = document.getElementById("leftCardEdit");
+        if (!!textElement) {
+          setState({
+            ...state,
+            leftEditing: !state.leftEditing,
+            leftText: textElement.innerText,
+          });
+        } else {
+          setState({ ...state, leftEditing: !state.leftEditing });
+        }
+        break;
+      case CardSide.Right:
+        textElement = document.getElementById("rightCardEdit");
+        if (!!textElement) {
+          setState({
+            ...state,
+            rightEditing: !state.rightEditing,
+            rightText: textElement.innerText,
+          });
+        } else {
+          setState({ ...state, rightEditing: !state.rightEditing });
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="DisplayCards">
@@ -22,10 +65,54 @@ const DisplayCards: React.FC = () => {
         <p className="Statement">Pick one statement</p>
         <div className="Selection">
           <div className="Cards">
-            <p className="Card-Text">{state.text}</p>
+            <ReactTooltip id="leftEditTooltip" place="top" effect="solid">
+              {state.leftEditing ? "Stop Editing Card" : "Edit Card Text"}
+            </ReactTooltip>
+            <img
+              src={edit}
+              className="Edit"
+              alt="edit"
+              data-tip
+              data-for="leftEditTooltip"
+              onClick={() => onEditClick(CardSide.Left)}
+            />
+            {state.leftEditing ? (
+              <div
+                id="leftCardEdit"
+                className="TextInput"
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+              >
+                {state.leftText}
+              </div>
+            ) : (
+              <p className="Card-Text">{state.leftText}</p>
+            )}
           </div>
           <div className="Cards">
-            <p className="Card-Text">{state.text}</p>
+            <ReactTooltip id="rightEditTooltip" place="top" effect="solid">
+              {state.rightEditing ? "Stop Editing Card" : "Edit Card Text"}
+            </ReactTooltip>
+            <img
+              src={edit}
+              className="Edit"
+              alt="edit"
+              data-tip
+              data-for="rightEditTooltip"
+              onClick={() => onEditClick(CardSide.Right)}
+            />
+            {state.rightEditing ? (
+              <div
+                id="rightCardEdit"
+                className="TextInput"
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+              >
+                {state.rightText}
+              </div>
+            ) : (
+              <p className="Card-Text">{state.rightText}</p>
+            )}
           </div>
         </div>
       </div>
