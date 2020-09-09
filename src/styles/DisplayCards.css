@@ -91,6 +91,7 @@
   background: #ff9cb8;
   height: 11vh;
   width: 12vw;
+  min-width: 24vw;
   cursor: pointer;
   float: left;
   margin-left: 9vw;
@@ -100,6 +101,7 @@
   background: #ff9cb8;
   height: 11vh;
   width: 12vw;
+  min-width: 24vw;
   cursor: pointer;
   float: right;
   margin-right: 9vw;
