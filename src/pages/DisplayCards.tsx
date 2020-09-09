@@ -19,6 +19,13 @@ const initialValues = {
 
 const DisplayCards: React.FC = () => {
   const [state, setState] = useState(initialValues);
+  const onBackClick = () => {
+    // TODO: Write code here to redirect to course info screen
+  };
+
+  const onSkipClick = () => {
+    // TODO: Write code here to redirect to instructions screen
+  };
 
   const onEditClick = (side: CardSide) => {
     var textElement;
@@ -55,9 +62,9 @@ const DisplayCards: React.FC = () => {
   return (
     <div className="DisplayCards">
       <div className="DisplayCards-Header">
-        <div className="Logo-Container">
+        <div className="DisplayCards-Logo-Container">
           <img src={logo} className="Logo" alt="logo" />
-          <p className="Logo-Title">HeaRT</p>
+          <p className="DisplayCards-Logo-Title">HeaRT</p>
         </div>
       </div>
 
@@ -114,6 +121,14 @@ const DisplayCards: React.FC = () => {
               <p className="Card-Text">{state.rightText}</p>
             )}
           </div>
+        </div>
+      </div>
+      <div className="Navigation">
+        <div className="NavigationButtonL" onClick={onBackClick}>
+          <p className="Navigation-Button-Text">Back</p>
+        </div>
+        <div className="NavigationButtonR" onClick={onSkipClick}>
+          <p className="Navigation-Button-Text">Skip</p>
         </div>
       </div>
     </div>
