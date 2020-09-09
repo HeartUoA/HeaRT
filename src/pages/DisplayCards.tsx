@@ -8,13 +8,19 @@ const initialValues = {
 
 const DisplayCards: React.FC = () => {
   const [state] = useState(initialValues);
+  const onBackClick = () => {
+    // TODO: Write code here to redirect to course info screen
+  };
 
+  const onSkipClick = () => {
+    // TODO: Write code here to redirect to instructions screen
+  };
   return (
     <div className="DisplayCards">
       <div className="DisplayCards-Header">
-        <div className="Logo-Container">
+        <div className="DisplayCards-Logo-Container">
           <img src={logo} className="Logo" alt="logo" />
-          <p className="Logo-Title">HeaRT</p>
+          <p className="DisplayCards-Logo-Title">HeaRT</p>
         </div>
       </div>
 
@@ -27,6 +33,14 @@ const DisplayCards: React.FC = () => {
           <div className="Cards">
             <p className="Card-Text">{state.text}</p>
           </div>
+        </div>
+      </div>
+      <div className="Navigation">
+        <div className="NavigationButtonL" onClick={onBackClick}>
+          <p className="Navigation-Button-Text">Back</p>
+        </div>
+        <div className="NavigationButtonR" onClick={onSkipClick}>
+          <p className="Navigation-Button-Text">Skip</p>
         </div>
       </div>
     </div>
