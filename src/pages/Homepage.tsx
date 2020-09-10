@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
+import Modal from "antd/lib/modal/Modal";
 
+interface IInstructionsState {
+  showInstructions: boolean;
+}
 const Homepage: React.FC = () => {
+  const [showInstructions, setShowInstructions] = useState(false);
   const onPlayClick = () => {
     // TODO: Write code here to redirect to course info screen
   };
 
   const onInstructionsClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    setShowInstructions(!showInstructions);
   };
 
   return (
