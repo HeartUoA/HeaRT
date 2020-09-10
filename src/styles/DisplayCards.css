@@ -84,6 +84,7 @@
 
 .Navigation {
   justify-content: space-between;
+  align-items: center;
   display: flex;
   flex-direction: row;
   margin: 15px 30px;
@@ -97,4 +98,17 @@
 
 .Navigation-Button-Text {
   font-size: 30px;
+}
+
+.Progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.Progress-Bar {
+  width: 65%;
+  margin: 5px 0px 0px;
 }
