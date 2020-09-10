@@ -7590,7 +7590,7 @@ textarea.ant-picker-input > input {
 }
 .ant-dropdown-menu-dark,
 .ant-dropdown-menu-dark .ant-dropdown-menu {
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  background: #001529;
 }
 .ant-dropdown-menu-dark .ant-dropdown-menu-item,
 .ant-dropdown-menu-dark .ant-dropdown-menu-submenu-title,
@@ -15166,7 +15166,7 @@ textarea.ant-input-number {
   padding: 0 50px;
   color: #212121;
   line-height: 64px;
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  background: #001529;
 }
 .ant-layout-footer {
   padding: 24px 50px;
@@ -15183,7 +15183,7 @@ textarea.ant-input-number {
   position: relative;
   /* fix firefox can't set width smaller than content on flex item */
   min-width: 0;
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  background: #001529;
   transition: all 0.2s;
 }
 .ant-layout-sider-children {
@@ -15223,7 +15223,7 @@ textarea.ant-input-number {
   font-size: 18px;
   line-height: 42px;
   text-align: center;
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  background: #001529;
   border-radius: 0 20px 20px 0;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -16573,7 +16573,7 @@ textarea.ant-mentions {
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
   color: rgba(255, 255, 255, 0.65);
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  background: #001529;
 }
 .ant-menu.ant-menu-dark .ant-menu-submenu-title .ant-menu-submenu-arrow,
 .ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow,
@@ -16618,7 +16618,7 @@ textarea.ant-mentions {
   top: 0;
   margin-top: 0;
   padding: 0 20px;
-  border-color: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  border-color: #001529;
   border-bottom: 0;
 }
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
@@ -20132,7 +20132,7 @@ span.ant-radio + * {
   font-feature-settings: "tnum";
   position: relative;
   height: 12px;
-  margin: 10px 6px 10px;
+  margin: 10px 10px 10px;
   padding: 4px 0;
   cursor: pointer;
   touch-action: none;
@@ -20199,26 +20199,26 @@ span.ant-radio + * {
   position: absolute;
   width: 100%;
   height: 4px;
-  background-color: #f5f5f5;
+  background-color: rgba(0, 21, 41, 0.2);
   border-radius: 20px;
   transition: background-color 0.3s;
 }
 .ant-slider-track {
   position: absolute;
   height: 4px;
-  background-color: #fff0f3;
+  background-color: #001529;
   border-radius: 20px;
   transition: background-color 0.3s;
 }
 .ant-slider-handle {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   margin-top: -5px;
-  background-color: #ffffff;
-  border: solid 2px #fff0f3;
+  background-color: #ff9cb8;
+  border: solid 0px #ff9cb8;
   border-radius: 50%;
-  box-shadow: 0;
+  box-shadow: 1;
   cursor: pointer;
   transition: border-color 0.3s, box-shadow 0.6s,
     transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -20236,13 +20236,13 @@ span.ant-radio + * {
   border-color: #ff9cb8;
 }
 .ant-slider:hover .ant-slider-rail {
-  background-color: #e1e1e1;
+  background-color: rgba(0, 21, 41, 0.2);
 }
 .ant-slider:hover .ant-slider-track {
-  background-color: #ffedf1;
+  background-color: #001529;
 }
 .ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
-  border-color: #ffedf1;
+  border-color: #ff9cb8;
 }
 .ant-slider-mark {
   position: absolute;
@@ -20287,7 +20287,7 @@ span.ant-radio + * {
   margin-left: -4px;
 }
 .ant-slider-dot-active {
-  border-color: #ffcedc;
+  border-color: #808a94;
 }
 .ant-slider-disabled {
   cursor: not-allowed;

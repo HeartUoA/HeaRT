@@ -11,10 +11,13 @@ interface DimensionProps {
 const Dimension: React.FC<DimensionProps> = (props) => {
   return (
     <Card className="Card-Dimension">
-      <Typography className="Card-Text">{props.dimensionValue}</Typography>
-      <div className="Captions-Container">
-        <Typography>Fixed</Typography>
-        <Typography>Active</Typography>
+      <p className="Card-Text">{props.dimensionValue}</p>
+      <div className="Slider">
+        <div className="Captions-Container">
+          <Typography>Fixed</Typography>
+          <Typography>Active</Typography>
+        </div>
+        <Slider className="Slider-Bar" defaultValue={props.scale} />
       </div>
     </Card>
   );
