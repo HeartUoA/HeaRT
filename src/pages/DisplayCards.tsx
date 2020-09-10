@@ -9,16 +9,26 @@ export enum CardSide {
   Right,
 }
 
-const initialValues = {
-  leftText: "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
-  rightText:
-    "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
-  leftEditing: false,
-  rightEditing: false,
+type Card = {
+  text: string;
+  isEditing: boolean;
+};
+
+const initialLeftCard: Card = {
+  text:
+    "(Left Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
+  isEditing: false,
+};
+
+const initialRightCard: Card = {
+  text:
+    "(Right Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
+  isEditing: false,
 };
 
 const DisplayCards: React.FC = () => {
-  const [state, setState] = useState(initialValues);
+  const [leftState, setLeftState] = useState(initialLeftCard);
+  const [rightState, setRightState] = useState(initialRightCard);
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen
   };
@@ -33,25 +43,23 @@ const DisplayCards: React.FC = () => {
       case CardSide.Left:
         textElement = document.getElementById("leftCardEdit");
         if (!!textElement) {
-          setState({
-            ...state,
-            leftEditing: !state.leftEditing,
-            leftText: textElement.innerText,
+          setLeftState({
+            text: textElement.innerText,
+            isEditing: !leftState.isEditing,
           });
         } else {
-          setState({ ...state, leftEditing: !state.leftEditing });
+          setLeftState({ ...leftState, isEditing: !leftState.isEditing });
         }
         break;
       case CardSide.Right:
         textElement = document.getElementById("rightCardEdit");
         if (!!textElement) {
-          setState({
-            ...state,
-            rightEditing: !state.rightEditing,
-            rightText: textElement.innerText,
+          setRightState({
+            text: textElement.innerText,
+            isEditing: !rightState.isEditing,
           });
         } else {
-          setState({ ...state, rightEditing: !state.rightEditing });
+          setRightState({ ...rightState, isEditing: !rightState.isEditing });
         }
         break;
       default:
@@ -73,7 +81,7 @@ const DisplayCards: React.FC = () => {
         <div className="Selection">
           <div className="Cards">
             <ReactTooltip id="leftEditTooltip" place="top" effect="solid">
-              {state.leftEditing ? "Stop Editing Card" : "Edit Card Text"}
+              {leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
             </ReactTooltip>
             <img
               src={edit}
@@ -83,22 +91,22 @@ const DisplayCards: React.FC = () => {
               data-for="leftEditTooltip"
               onClick={() => onEditClick(CardSide.Left)}
             />
-            {state.leftEditing ? (
+            {leftState.isEditing ? (
               <div
                 id="leftCardEdit"
                 className="TextInput"
                 contentEditable="true"
                 suppressContentEditableWarning={true}
               >
-                {state.leftText}
+                {leftState.text}
               </div>
             ) : (
-              <p className="Card-Text">{state.leftText}</p>
+              <p className="Card-Text">{leftState.text}</p>
             )}
           </div>
           <div className="Cards">
             <ReactTooltip id="rightEditTooltip" place="top" effect="solid">
-              {state.rightEditing ? "Stop Editing Card" : "Edit Card Text"}
+              {rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
             </ReactTooltip>
             <img
               src={edit}
@@ -108,17 +116,17 @@ const DisplayCards: React.FC = () => {
               data-for="rightEditTooltip"
               onClick={() => onEditClick(CardSide.Right)}
             />
-            {state.rightEditing ? (
+            {rightState.isEditing ? (
               <div
                 id="rightCardEdit"
                 className="TextInput"
                 contentEditable="true"
                 suppressContentEditableWarning={true}
               >
-                {state.rightText}
+                {rightState.text}
               </div>
             ) : (
-              <p className="Card-Text">{state.rightText}</p>
+              <p className="Card-Text">{rightState.text}</p>
             )}
           </div>
         </div>
