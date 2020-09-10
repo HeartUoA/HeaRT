@@ -1,0 +1,22 @@
+.Card-Dimension {
+  min-height: 350px;
+  width: 45%;
+  min-width: 350px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 4px 10px #212121;
+}
+
+.Card-Text {
+  text-align: center;
+  font-size: 30px;
+  margin: 0px;
+}
+
+.Captions-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+}
