@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { Card, Button, Typography, Layout, Progress } from "antd";
+import Header from "../components/Header";
 
-import logo from "../assets/images/logo.svg";
 import "../styles/DisplayCards.css";
 
 const initialValues = {
@@ -24,12 +24,7 @@ const DisplayCards: React.FC = () => {
 
   return (
     <div className="DisplayCards">
-      <Layout.Header className="DisplayCards-Header">
-        <div className="DisplayCards-Logo-Container">
-          <img src={logo} className="Logo" alt="logo" />
-          <Typography className="DisplayCards-Logo-Title">HeaRT</Typography>
-        </div>
-      </Layout.Header>
+      <Header />
 
       <div className="Content">
         <div>

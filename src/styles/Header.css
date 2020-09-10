@@ -1,0 +1,30 @@
+.Header {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: 100px;
+  padding: 10px 15px;
+  z-index: 100;
+}
+
+.Logo-Container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Logo {
+  height: 65px;
+  pointer-events: none;
+  margin: 0px 10px 0px 0px;
+}
+
+.Logo-Title {
+  display: flex;
+  font-family: "MyHappyEnding";
+  color: white;
+  font-size: 100px;
+  font-weight: normal;
+  margin: 15px 15px 0px 0px;
+}
