@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography } from "antd";
+import { Typography, Button } from "antd";
 import { Row } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
@@ -27,6 +27,13 @@ const tempValues = [
 
 const Preview: React.FC = () => {
   const [dimensions, setDimensions] = useState(tempValues);
+  const onBackClick = () => {
+    // TODO: Write code here to redirect to course info screen
+  };
+
+  const onSaveClick = () => {
+    // TODO: Write code here to redirect to instructions screen
+  };
   return (
     <div className="Preview">
       <Header />
@@ -37,6 +44,22 @@ const Preview: React.FC = () => {
             <Dimension {...item} />
           ))}
         </Row>
+        <div className="Navigation">
+          <Button
+            type="primary"
+            className="NavigationButton"
+            onClick={onBackClick}
+          >
+            <Typography className="Navigation-Button-Text">Back</Typography>
+          </Button>
+          <Button
+            type="primary"
+            className="NavigationButton"
+            onClick={onSaveClick}
+          >
+            <Typography className="Navigation-Button-Text">Save</Typography>
+          </Button>
+        </div>
       </div>
     </div>
   );
