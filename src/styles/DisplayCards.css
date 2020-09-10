@@ -3,14 +3,15 @@
   flex-direction: column;
   min-height: 700px;
   height: 100vh;
-  background: #f6f7fc;
 }
 
 .DisplayCards-Header {
-  display: flex;
-  left: 0px;
-  right: 0px;
-  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: 100px;
+  padding: 10px 15px;
 }
 
 .DisplayCards-Logo-Container {
@@ -18,58 +19,64 @@
   flex-direction: row;
   align-items: center;
 }
+
 .Logo {
-  height: 100px;
+  height: 65px;
   pointer-events: none;
-  margin: 0px 15px 0px 0px;
+  margin: 0px 10px 0px 0px;
 }
+
 .DisplayCards-Logo-Title {
   display: flex;
   font-family: "MyHappyEnding";
   color: white;
   font-size: 100px;
   font-weight: normal;
-  margin: 10px 15px 0px 0px;
+  margin: 15px 15px 0px 0px;
 }
 
-.Main-Body {
+.Content {
+  margin: 100px 0px 0px 0px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .Statement {
   display: flex;
-  font-family: "ABeeZee";
   font-size: 60px;
   justify-content: center;
-
   text-align: center;
 }
-.Selection {
+
+.Cards-Container {
   display: flex;
   flex-direction: row;
-  height: 40vh;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
-.Cards {
-  background: white;
-  border-radius: 20px;
-  height: 33vh;
-  width: 35vw;
-  min-width: 15vw;
-  min-height: 15vh;
+
+.Card {
+  height: 300px;
+  width: 45%;
+  min-width: 350px;
+  margin: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: 4px 4px 10px #212121;
-  padding: 10px 10px 10px 10px;
   cursor: pointer;
 }
 
-.Card-Text {
-  font-family: "ABeeZee";
+.Card:hover {
+  background-color: #ffc4d3;
   color: #212121;
+  border: none;
+}
+
+.Card-Text {
   text-align: center;
   font-size: 30px;
   margin: 0px;
@@ -79,41 +86,15 @@
   justify-content: space-between;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  margin-bottom: 15px;
-  height: 100%;
-  align-items: flex-end;
-  min-height: 80px;
+  margin: 15px 30px;
 }
 
-.NavigationButtonL {
-  border-radius: 20px;
-  background: #ff9cb8;
-  height: 11vh;
-  width: 12vw;
-  min-width: max-content;
-  min-height: 50px;
+.NavigationButton {
+  height: 80px;
+  width: 150px;
   cursor: pointer;
-  float: left;
-  margin-left: 9vw;
 }
-.NavigationButtonR {
-  border-radius: 20px;
-  background: #ff9cb8;
-  height: 11vh;
-  width: 12vw;
-  min-width: max-content;
-  min-height: 50px;
-  cursor: pointer;
-  float: right;
-  margin-right: 9vw;
-}
+
 .Navigation-Button-Text {
-  font-family: "ABeeZee";
-  display: flex;
-  font-size: 40px;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  height: 100%;
+  font-size: 30px;
 }

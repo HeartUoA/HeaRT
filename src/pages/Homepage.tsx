@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
-import { Link } from "react-router-dom";
+
 const Homepage: React.FC = () => {
   const onPlayClick = () => {
     // TODO: Write code here to redirect to course info screen
@@ -15,20 +18,22 @@ const Homepage: React.FC = () => {
     <div className="Homepage">
       <div className="Homepage-Header">
         <div className="Logo-Container">
-          <img src={logo} className="Logo" alt="logo" />
-          <p className="Logo-Title">HeaRT</p>
+          <img src={logo} className="Logo-Image" alt="logo" />
+          <Typography className="Logo-Title">HeaRT</Typography>
         </div>
-        <p className="App-Description">Hearing And Realising Teaching-voice</p>
+        <Typography className="App-Description">
+          Hearing And Realising Teaching-voice
+        </Typography>
       </div>
       <div className="Buttons-Container">
         <Link to="/DisplayCards">
-          <div className="Button" onClick={onPlayClick}>
-            <p className="Button-Text">Play</p>
-          </div>
+          <Button className="Button" onClick={onPlayClick}>
+            <Typography className="Button-Text">Play</Typography>
+          </Button>
         </Link>
-        <div className="Button" onClick={onInstructionsClick}>
-          <p className="Button-Text">Instructions</p>
-        </div>
+        <Button type="default" className="Button" onClick={onInstructionsClick}>
+          <Typography className="Button-Text">Instructions</Typography>
+        </Button>
       </div>
     </div>
   );
