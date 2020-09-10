@@ -22,7 +22,7 @@
   align-items: center;
 }
 
-.Logo {
+.Logo-Image {
   height: 165px;
   pointer-events: none;
   margin: 0px 15px 0px 0px;
@@ -41,7 +41,7 @@
   font-family: "ABeeZee";
   color: #323232;
   font-size: 50px;
-  margin: 0px 0px 10vh 0px;
+  margin: -60px 0px 80px 0px;
 }
 
 .Buttons-Container {
@@ -55,23 +55,21 @@
 
 .Button {
   background-color: #f6f7fc;
-  border-radius: 20px;
+  min-height: 100px;
   height: 20vh;
+  min-width: 450px;
   width: 35vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: 4px 4px 10px #212121;
+  margin: 50px;
+}
+
+.Button:hover,
+.Button:focus {
+  background-color: #ffc4d3;
+  color: #212121;
 }
 
 .Button-Text {
-  font-family: "ABeeZee";
-  color: #212121;
   font-size: 75px;
   margin: 0px;
   cursor: pointer;
-}
-
-.Link {
-  text-decoration: none;
 }

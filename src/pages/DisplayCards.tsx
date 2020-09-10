@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import ReactTooltip from "react-tooltip";
+
+import { Card, Button, Typography, Layout } from "antd";
+
 import logo from "../assets/images/logo.svg";
 import edit from "../assets/images/edit.svg";
 import "../styles/DisplayCards.css";
@@ -69,74 +72,84 @@ const DisplayCards: React.FC = () => {
 
   return (
     <div className="DisplayCards">
-      <div className="DisplayCards-Header">
+      <Layout.Header className="DisplayCards-Header">
         <div className="DisplayCards-Logo-Container">
           <img src={logo} className="Logo" alt="logo" />
-          <p className="DisplayCards-Logo-Title">HeaRT</p>
+          <Typography className="DisplayCards-Logo-Title">HeaRT</Typography>
         </div>
-      </div>
+      </Layout.Header>
 
-      <div className="Main-Body">
-        <p className="Statement">Pick one statement</p>
-        <div className="Selection">
-          <div className="Cards">
-            <ReactTooltip id="leftEditTooltip" place="top" effect="solid">
-              {leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
-            </ReactTooltip>
-            <img
-              src={edit}
-              className="Edit"
-              alt="edit"
-              data-tip
-              data-for="leftEditTooltip"
-              onClick={() => onEditClick(CardSide.Left)}
-            />
-            {leftState.isEditing ? (
-              <div
-                id="leftCardEdit"
-                className="TextInput"
-                contentEditable="true"
-                suppressContentEditableWarning={true}
-              >
-                {leftState.text}
-              </div>
-            ) : (
-              <p className="Card-Text">{leftState.text}</p>
-            )}
+      <div className="Content">
+        <div>
+          <Typography className="Statement">Pick one statement</Typography>
+          <div className="Cards-Container">
+            <Card className="Card">
+              <ReactTooltip id="leftEditTooltip" place="top" effect="solid">
+                {leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
+              </ReactTooltip>
+              <img
+                src={edit}
+                className="Edit"
+                alt="edit"
+                data-tip
+                data-for="leftEditTooltip"
+                onClick={() => onEditClick(CardSide.Left)}
+              />
+              {leftState.isEditing ? (
+                <div
+                  id="leftCardEdit"
+                  className="TextInput"
+                  contentEditable="true"
+                  suppressContentEditableWarning={true}
+                >
+                  {leftState.text}
+                </div>
+              ) : (
+                <p className="Card-Text">{leftState.text}</p>
+              )}
+            </Card>
+            <Card className="Card">
+              <ReactTooltip id="rightEditTooltip" place="top" effect="solid">
+                {rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
+              </ReactTooltip>
+              <img
+                src={edit}
+                className="Edit"
+                alt="edit"
+                data-tip
+                data-for="rightEditTooltip"
+                onClick={() => onEditClick(CardSide.Right)}
+              />
+              {rightState.isEditing ? (
+                <div
+                  id="rightCardEdit"
+                  className="TextInput"
+                  contentEditable="true"
+                  suppressContentEditableWarning={true}
+                >
+                  {rightState.text}
+                </div>
+              ) : (
+                <p className="Card-Text">{rightState.text}</p>
+              )}
+            </Card>
           </div>
-          <div className="Cards">
-            <ReactTooltip id="rightEditTooltip" place="top" effect="solid">
-              {rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
-            </ReactTooltip>
-            <img
-              src={edit}
-              className="Edit"
-              alt="edit"
-              data-tip
-              data-for="rightEditTooltip"
-              onClick={() => onEditClick(CardSide.Right)}
-            />
-            {rightState.isEditing ? (
-              <div
-                id="rightCardEdit"
-                className="TextInput"
-                contentEditable="true"
-                suppressContentEditableWarning={true}
-              >
-                {rightState.text}
-              </div>
-            ) : (
-              <p className="Card-Text">{rightState.text}</p>
-            )}
+          <div className="Navigation">
+            <Button
+              type="primary"
+              className="NavigationButton"
+              onClick={onBackClick}
+            >
+              <Typography className="Navigation-Button-Text">Back</Typography>
+            </Button>
+            <Button
+              type="primary"
+              className="NavigationButton"
+              onClick={onSkipClick}
+            >
+              <Typography className="Navigation-Button-Text">Skip</Typography>
+            </Button>
           </div>
-        </div>
-      </div>
-      <div className="Navigation">
-        <div className="NavigationButtonL" onClick={onBackClick}>
-          <p className="Navigation-Button-Text">Back</p>
-        </div>
-        <div className="NavigationButtonR" onClick={onSkipClick}>
-          <p className="Navigation-Button-Text">Skip</p>
         </div>
       </div>
     </div>
