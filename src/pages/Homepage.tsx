@@ -5,10 +5,8 @@ import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 import Modal from "antd/lib/modal/Modal";
+import Instructions from "../components/Instructions";
 
-interface IInstructionsState {
-  showInstructions: boolean;
-}
 const Homepage: React.FC = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const onPlayClick = () => {
@@ -40,6 +38,10 @@ const Homepage: React.FC = () => {
           <Typography className="Button-Text">Instructions</Typography>
         </Button>
       </div>
+      <Instructions
+        visible={showInstructions}
+        hide={onInstructionsClick}
+      ></Instructions>
     </div>
   );
 };
