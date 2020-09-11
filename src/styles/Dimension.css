@@ -1,10 +1,7 @@
 .Card-Dimension {
   min-height: 350px;
-  width: 45%;
-  min-width: 350px;
-  margin: 30px;
-  display: flex;
-  flex-direction: column;
+  width: 43%;
+  margin: 40px;
   box-shadow: 4px 4px 10px #212121;
 }
 
@@ -21,10 +18,20 @@
   font-size: 20px;
 }
 
+.User-Explanation {
+  margin-top: 5%;
+  font-size: 20px;
+}
+
 .Slider {
   margin-top: 5%;
 }
 
 .Slider-Bar {
   margin-top: 5%;
+}
+
+.Dimension-Row {
+  justify-content: space-evenly;
+  margin: 0px;
 }

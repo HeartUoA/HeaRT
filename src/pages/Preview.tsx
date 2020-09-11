@@ -10,18 +10,44 @@ const tempValues = [
   {
     dimensionValue: "Dimension1",
     scale: 100,
+    userExplanation: "This is a user explanation.",
   },
   {
     dimensionValue: "Dimension2",
     scale: 50,
+    userExplanation:
+      "Perhaps we should also point out the fact that the negative impact of the benefits of data integrity any rash or contextual approach the system mechanism and The Decision of...",
   },
   {
     dimensionValue: "Dimension3",
     scale: 0,
+    userExplanation: "",
   },
   {
     dimensionValue: "Dimension4",
     scale: 0,
+    userExplanation: "This is a user explanation.",
+  },
+  {
+    dimensionValue: "Dimension5",
+    scale: 100,
+    userExplanation: "This is a user explanation.",
+  },
+  {
+    dimensionValue: "Dimension6",
+    scale: 20,
+    userExplanation:
+      "Perhaps we should also point out the fact that the negative impact of the benefits of data integrity any rash or contextual approach the system mechanism and The Decision of...",
+  },
+  {
+    dimensionValue: "Dimension7",
+    scale: 0,
+    userExplanation: "",
+  },
+  {
+    dimensionValue: "Dimension8",
+    scale: 90,
+    userExplanation: "This is a user explanation.",
   },
 ];
 
@@ -39,7 +65,7 @@ const Preview: React.FC = () => {
       <Header />
       <div className="Content">
         <Typography className="Statement">Preview</Typography>
-        <Row>
+        <Row className="Dimension-Row">
           {dimensions.map((item) => (
             <Dimension {...item} />
           ))}

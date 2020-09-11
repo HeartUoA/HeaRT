@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Typography, Layout } from "antd";
 
@@ -10,7 +10,7 @@ const Header: React.FC = () => {
     <Layout.Header className="Header">
       <div className="Logo-Container">
         <img src={logo} className="Logo" alt="logo" />
-        <Typography className="Logo-Title">HeaRT</Typography>
+        <Typography className="Logo-Title-Header">HeaRT</Typography>
       </div>
     </Layout.Header>
   );
