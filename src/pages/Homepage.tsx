@@ -1,35 +1,43 @@
 import React from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+
+import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
-const Homepage: React.FC = () => {
+type RouterProps = RouteComponentProps;
+
+const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    props.history.push("/DisplayCards");
   };
 
   const onInstructionsClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    // TODO: Change code here to redirect to instructions screen (add URL)
+    // props.history.push("URL-HERE");
   };
 
   return (
     <div className="Homepage">
       <div className="Homepage-Header">
         <div className="Logo-Container">
-          <img src={logo} className="Logo" alt="logo" />
-          <p className="Logo-Title">HeaRT</p>
+          <img src={logo} className="Logo-Image" alt="logo" />
+          <Typography className="Logo-Title">HeaRT</Typography>
         </div>
-        <p className="App-Description">Hearing And Realising Teaching-voice</p>
+        <Typography className="App-Description">
+          Hearing And Realising Teaching-voice
+        </Typography>
       </div>
       <div className="Buttons-Container">
-        <div className="Button" onClick={onPlayClick}>
-          <p className="Button-Text">Play</p>
-        </div>
-        <div className="Button" onClick={onInstructionsClick}>
-          <p className="Button-Text">Instructions</p>
-        </div>
+        <Button className="Button" onClick={onPlayClick}>
+          <Typography className="Button-Text">Play</Typography>
+        </Button>
+        <Button type="default" className="Button" onClick={onInstructionsClick}>
+          <Typography className="Button-Text">Instructions</Typography>
+        </Button>
       </div>
     </div>
   );
 };
 
-export default Homepage;
+export default withRouter(Homepage);

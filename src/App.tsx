@@ -1,13 +1,19 @@
 import React from "react";
-import Homepage from "./pages/CourseInfo";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import DisplayCards from "./pages/DisplayCards";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Route exact path="/">
-        <Homepage />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
+        <Route path="/DisplayCards">
+          <DisplayCards />
+        </Route>
+      </Switch>
     </Router>
   );
 };
