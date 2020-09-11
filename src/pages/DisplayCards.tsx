@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import ReactTooltip from "react-tooltip";
 
-import { Card, Button, Typography, Layout } from "antd";
+import { Card, Button, Typography, Layout, Tooltip } from "antd";
 
 import logo from "../assets/images/logo.svg";
 import edit from "../assets/images/edit.svg";
@@ -41,7 +40,7 @@ const DisplayCards: React.FC = () => {
   };
 
   const onEditClick = (side: CardSide) => {
-    var textElement;
+    let textElement;
     switch (side) {
       case CardSide.Left:
         textElement = document.getElementById("leftCardEdit");
@@ -84,17 +83,19 @@ const DisplayCards: React.FC = () => {
           <Typography className="Statement">Pick one statement</Typography>
           <div className="Cards-Container">
             <Card className="Card">
-              <ReactTooltip id="leftEditTooltip" place="top" effect="solid">
-                {leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
-              </ReactTooltip>
-              <img
-                src={edit}
-                className="Edit"
-                alt="edit"
-                data-tip
-                data-for="leftEditTooltip"
-                onClick={() => onEditClick(CardSide.Left)}
-              />
+              <Tooltip
+                title={
+                  leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"
+                }
+                mouseEnterDelay={0.05}
+              >
+                <img
+                  src={edit}
+                  className="Edit"
+                  alt="edit"
+                  onClick={() => onEditClick(CardSide.Left)}
+                />
+              </Tooltip>
               {leftState.isEditing ? (
                 <div
                   id="leftCardEdit"
@@ -109,17 +110,19 @@ const DisplayCards: React.FC = () => {
               )}
             </Card>
             <Card className="Card">
-              <ReactTooltip id="rightEditTooltip" place="top" effect="solid">
-                {rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"}
-              </ReactTooltip>
-              <img
-                src={edit}
-                className="Edit"
-                alt="edit"
-                data-tip
-                data-for="rightEditTooltip"
-                onClick={() => onEditClick(CardSide.Right)}
-              />
+              <Tooltip
+                title={
+                  rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"
+                }
+                mouseEnterDelay={0.05}
+              >
+                <img
+                  src={edit}
+                  className="Edit"
+                  alt="edit"
+                  onClick={() => onEditClick(CardSide.Right)}
+                />
+              </Tooltip>
               {rightState.isEditing ? (
                 <div
                   id="rightCardEdit"
