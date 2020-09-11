@@ -12,6 +12,7 @@
   left: 0;
   height: 100px;
   padding: 10px 15px;
+  z-index: 100;
 }
 
 .DisplayCards-Logo-Container {
@@ -100,12 +101,20 @@
   font-size: 30px;
 }
 
-.Edit {
-  height: 30px;
+.Edit,
+.Save {
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.Edit {
+  height: 30px;
+}
+
+.Save {
+  height: 32px;
 }
 
 .TextInput {

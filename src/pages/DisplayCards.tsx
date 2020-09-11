@@ -4,6 +4,7 @@ import { Card, Button, Typography, Layout, Tooltip } from "antd";
 
 import logo from "../assets/images/logo.svg";
 import edit from "../assets/images/edit.svg";
+import save from "../assets/images/save.png";
 import "../styles/DisplayCards.css";
 
 export enum CardSide {
@@ -85,13 +86,13 @@ const DisplayCards: React.FC = () => {
             <Card className="Card">
               <Tooltip
                 title={
-                  leftState.isEditing ? "Stop Editing Card" : "Edit Card Text"
+                  leftState.isEditing ? "Save Edited Card" : "Edit Card Text"
                 }
                 mouseEnterDelay={0.05}
               >
                 <img
-                  src={edit}
-                  className="Edit"
+                  src={leftState.isEditing ? save : edit}
+                  className={leftState.isEditing ? "Save" : "Edit"}
                   alt="edit"
                   onClick={() => onEditClick(CardSide.Left)}
                 />
@@ -112,13 +113,13 @@ const DisplayCards: React.FC = () => {
             <Card className="Card">
               <Tooltip
                 title={
-                  rightState.isEditing ? "Stop Editing Card" : "Edit Card Text"
+                  rightState.isEditing ? "Save Edited Card" : "Edit Card Text"
                 }
                 mouseEnterDelay={0.05}
               >
                 <img
-                  src={edit}
-                  className="Edit"
+                  src={rightState.isEditing ? save : edit}
+                  className={rightState.isEditing ? "Save" : "Edit"}
                   alt="edit"
                   onClick={() => onEditClick(CardSide.Right)}
                 />
