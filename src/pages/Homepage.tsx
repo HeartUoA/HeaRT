@@ -1,17 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
-const Homepage: React.FC = () => {
+type RouterProps = RouteComponentProps;
+
+const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    props.history.push("/DisplayCards");
   };
 
   const onInstructionsClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    // TODO: Change code here to redirect to instructions screen (add URL)
+    // props.history.push("URL-HERE");
   };
 
   return (
@@ -26,11 +29,9 @@ const Homepage: React.FC = () => {
         </Typography>
       </div>
       <div className="Buttons-Container">
-        <Link to="/DisplayCards">
-          <Button className="Button" onClick={onPlayClick}>
-            <Typography className="Button-Text">Play</Typography>
-          </Button>
-        </Link>
+        <Button className="Button" onClick={onPlayClick}>
+          <Typography className="Button-Text">Play</Typography>
+        </Button>
         <Button type="default" className="Button" onClick={onInstructionsClick}>
           <Typography className="Button-Text">Instructions</Typography>
         </Button>
@@ -39,4 +40,4 @@ const Homepage: React.FC = () => {
   );
 };
 
-export default Homepage;
+export default withRouter(Homepage);
