@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Card, Button, Typography, Layout } from "antd";
+import { Card, Button, Typography, Layout, Progress } from "antd";
 
 import logo from "../assets/images/logo.svg";
 import "../styles/DisplayCards.css";
@@ -11,13 +11,17 @@ const initialValues = {
 
 const DisplayCards: React.FC = () => {
   const [state] = useState(initialValues);
+
   const onBackClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    // TODO: Write code here to redirect to course info screen or to previous card
   };
 
   const onSkipClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    // TODO: Write code here to redirect to the next card or another incomplete card
   };
+
+  const progressMade = { completed: 8, total: 14 };
+
   return (
     <div className="DisplayCards">
       <Layout.Header className="DisplayCards-Header">
@@ -47,6 +51,31 @@ const DisplayCards: React.FC = () => {
           >
             <Typography className="Navigation-Button-Text">Back</Typography>
           </Button>
+          <div className="Progress">
+            <Typography>
+              Completed: {progressMade.completed}/{progressMade.total}{" "}
+              (Required: 8)
+            </Typography>
+            <Progress
+              className="Progress-Bar"
+              strokeColor={
+                progressMade.completed >= 8
+                  ? {
+                      from: "#32C5FF",
+                      to: "#00D49B",
+                    }
+                  : {
+                      from: "#7491F2",
+                      to: "#32C5FF",
+                    }
+              }
+              trailColor="#C3C6D4"
+              status={progressMade.completed >= 8 ? "success" : "active"}
+              percent={(progressMade.completed / progressMade.total) * 100}
+              showInfo={false}
+              strokeWidth={20}
+            />
+          </div>
           <Button
             type="primary"
             className="NavigationButton"
