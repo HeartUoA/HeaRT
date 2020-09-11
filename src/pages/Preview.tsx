@@ -71,22 +71,22 @@ const Preview: React.FC = () => {
             <Dimension {...item} />
           ))}
         </Row>
-        <div className="Navigation">
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onBackClick}
-          >
-            <Typography className="Navigation-Button-Text">Back</Typography>
-          </Button>
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onSaveClick}
-          >
-            <Typography className="Navigation-Button-Text">Save</Typography>
-          </Button>
-        </div>
+      </div>
+      <div className="Navigation">
+        <Button
+          type="primary"
+          className="NavigationButton"
+          onClick={onBackClick}
+        >
+          <Typography className="Navigation-Button-Text">Back</Typography>
+        </Button>
+        <Button
+          type="primary"
+          className="NavigationButton"
+          onClick={onSaveClick}
+        >
+          <Typography className="Navigation-Button-Text">Save</Typography>
+        </Button>
       </div>
     </div>
   );

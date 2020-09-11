@@ -53,16 +53,15 @@
   margin: 0px;
 }
 
-
 .Progress {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  flex: 1;
   padding-bottom: 15px;
 }
 
 .Progress-Bar {
-  width: 65%;
+  width: 75%;
   margin: 5px 0px 0px;
 }

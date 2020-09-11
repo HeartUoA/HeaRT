@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Card, Button, Typography, Layout, Progress } from "antd";
+import { Card, Button, Typography, Progress } from "antd";
 import Header from "../components/Header";
 
 import "../styles/DisplayCards.css";
@@ -39,47 +39,47 @@ const DisplayCards: React.FC = () => {
             </Card>
           </div>
         </div>
-        <div className="Navigation">
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onBackClick}
-          >
-            <Typography className="Navigation-Button-Text">Back</Typography>
-          </Button>
-          <div className="Progress">
-            <Typography>
-              Completed: {progressMade.completed}/{progressMade.total}{" "}
-              (Required: 8)
-            </Typography>
-            <Progress
-              className="Progress-Bar"
-              strokeColor={
-                progressMade.completed >= 8
-                  ? {
-                      from: "#32C5FF",
-                      to: "#00D49B",
-                    }
-                  : {
-                      from: "#7491F2",
-                      to: "#32C5FF",
-                    }
-              }
-              trailColor="#C3C6D4"
-              status={progressMade.completed >= 8 ? "success" : "active"}
-              percent={(progressMade.completed / progressMade.total) * 100}
-              showInfo={false}
-              strokeWidth={20}
-            />
-          </div>
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onSkipClick}
-          >
-            <Typography className="Navigation-Button-Text">Skip</Typography>
-          </Button>
+      </div>
+      <div className="Navigation">
+        <Button
+          type="primary"
+          className="NavigationButton"
+          onClick={onBackClick}
+        >
+          <Typography className="Navigation-Button-Text">Back</Typography>
+        </Button>
+        <div className="Progress">
+          <Typography>
+            Completed: {progressMade.completed}/{progressMade.total} (Required:
+            8)
+          </Typography>
+          <Progress
+            className="Progress-Bar"
+            strokeColor={
+              progressMade.completed >= 8
+                ? {
+                    from: "#32C5FF",
+                    to: "#00D49B",
+                  }
+                : {
+                    from: "#7491F2",
+                    to: "#32C5FF",
+                  }
+            }
+            trailColor="#C3C6D4"
+            status={progressMade.completed >= 8 ? "success" : "active"}
+            percent={(progressMade.completed / progressMade.total) * 100}
+            showInfo={false}
+            strokeWidth={20}
+          />
         </div>
+        <Button
+          type="primary"
+          className="NavigationButton"
+          onClick={onSkipClick}
+        >
+          <Typography className="Navigation-Button-Text">Skip</Typography>
+        </Button>
       </div>
     </div>
   );
