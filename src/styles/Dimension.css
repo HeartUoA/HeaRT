@@ -1,0 +1,37 @@
+.Card-Dimension {
+  min-height: 350px;
+  width: 43%;
+  margin: 40px;
+  box-shadow: 4px 4px 10px #212121;
+}
+
+.Card-Text {
+  text-align: center;
+  font-size: 30px;
+  margin: 0px;
+}
+
+.Captions-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.User-Explanation {
+  margin-top: 5%;
+  font-size: 20px;
+}
+
+.Slider {
+  margin-top: 5%;
+}
+
+.Slider-Bar {
+  margin-top: 2%;
+}
+
+.Dimension-Row {
+  justify-content: space-evenly;
+  margin: 0px;
+}
