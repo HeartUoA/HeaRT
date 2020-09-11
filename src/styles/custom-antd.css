@@ -7590,7 +7590,7 @@ textarea.ant-picker-input > input {
 }
 .ant-dropdown-menu-dark,
 .ant-dropdown-menu-dark .ant-dropdown-menu {
-  background: #001529;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
 }
 .ant-dropdown-menu-dark .ant-dropdown-menu-item,
 .ant-dropdown-menu-dark .ant-dropdown-menu-submenu-title,
@@ -15166,7 +15166,7 @@ textarea.ant-input-number {
   padding: 0 50px;
   color: #212121;
   line-height: 64px;
-  background: #001529;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
 }
 .ant-layout-footer {
   padding: 24px 50px;
@@ -15183,7 +15183,7 @@ textarea.ant-input-number {
   position: relative;
   /* fix firefox can't set width smaller than content on flex item */
   min-width: 0;
-  background: #001529;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
   transition: all 0.2s;
 }
 .ant-layout-sider-children {
@@ -15223,7 +15223,7 @@ textarea.ant-input-number {
   font-size: 18px;
   line-height: 42px;
   text-align: center;
-  background: #001529;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
   border-radius: 0 20px 20px 0;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -16573,7 +16573,7 @@ textarea.ant-mentions {
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
   color: rgba(255, 255, 255, 0.65);
-  background: #001529;
+  background: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
 }
 .ant-menu.ant-menu-dark .ant-menu-submenu-title .ant-menu-submenu-arrow,
 .ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow,
@@ -16618,7 +16618,7 @@ textarea.ant-mentions {
   top: 0;
   margin-top: 0;
   padding: 0 20px;
-  border-color: #001529;
+  border-color: linear-gradient(to bottom right, #2e3458 0%, #212121 100%);
   border-bottom: 0;
 }
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {

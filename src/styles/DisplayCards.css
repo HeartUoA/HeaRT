@@ -7,6 +7,7 @@
 
 .Content {
   margin: 100px 0px 0px 0px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   height: 100%;
