@@ -20199,14 +20199,14 @@ span.ant-radio + * {
   position: absolute;
   width: 100%;
   height: 4px;
-  background-color: rgba(0, 21, 41, 0.2);
+  background-color: rgba(0, 29, 77, 0.2);
   border-radius: 20px;
   transition: background-color 0.3s;
 }
 .ant-slider-track {
   position: absolute;
   height: 4px;
-  background-color: #001529;
+  background-color: #001d4d;
   border-radius: 20px;
   transition: background-color 0.3s;
 }
@@ -20214,32 +20214,32 @@ span.ant-radio + * {
   position: absolute;
   width: 20px;
   height: 20px;
-  margin-top: -5px;
-  background-color: #ff9cb8;
-  border: solid 0px #ff9cb8;
+  margin-top: -7px;
+  background-color: #ef547f;
+  border: solid 2px #ef547f;
   border-radius: 50%;
-  box-shadow: 1;
+  box-shadow: 0;
   cursor: pointer;
   transition: border-color 0.3s, box-shadow 0.6s,
     transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 .ant-slider-handle-dragging.ant-slider-handle-dragging.ant-slider-handle-dragging {
   border-color: #ffb0c6;
-  box-shadow: 0 0 0 5px rgba(255, 156, 184, 0.12);
+  box-shadow: 0 0 0 5px rgba(239, 84, 127, 0.12);
 }
 .ant-slider-handle:focus {
   border-color: #ffb0c6;
   outline: none;
-  box-shadow: 0 0 0 5px rgba(255, 156, 184, 0.12);
+  box-shadow: 0 0 0 5px rgba(239, 84, 127, 0.12);
 }
 .ant-slider-handle.ant-tooltip-open {
   border-color: #ff9cb8;
 }
 .ant-slider:hover .ant-slider-rail {
-  background-color: rgba(0, 21, 41, 0.2);
+  background-color: rgba(0, 29, 77, 0.2);
 }
 .ant-slider:hover .ant-slider-track {
-  background-color: #001529;
+  background-color: #001d4d;
 }
 .ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
   border-color: #ff9cb8;
@@ -20287,7 +20287,7 @@ span.ant-radio + * {
   margin-left: -4px;
 }
 .ant-slider-dot-active {
-  border-color: #808a94;
+  border-color: #808ea6;
 }
 .ant-slider-disabled {
   cursor: not-allowed;
