@@ -102,19 +102,21 @@
 }
 
 .Edit,
-.Save {
+.Save,
+.Cancel {
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
+  height: 32px;
 }
 
 .Edit {
   height: 30px;
 }
 
-.Save {
-  height: 32px;
+.Cancel {
+  right: 50px;
 }
 
 .TextInput {

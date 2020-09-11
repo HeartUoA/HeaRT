@@ -5,6 +5,7 @@ import { Card, Button, Typography, Layout, Tooltip } from "antd";
 import logo from "../assets/images/logo.svg";
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
+import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 
 export enum CardSide {
@@ -40,12 +41,12 @@ const DisplayCards: React.FC = () => {
     // TODO: Write code here to redirect to instructions screen
   };
 
-  const onEditClick = (side: CardSide) => {
+  const onEditClick = (side: CardSide, cancel: boolean) => {
     let textElement;
     switch (side) {
       case CardSide.Left:
         textElement = document.getElementById("leftCardEdit");
-        if (!!textElement) {
+        if (!!textElement && !cancel) {
           setLeftState({
             text: textElement.innerText,
             isEditing: !leftState.isEditing,
@@ -56,7 +57,7 @@ const DisplayCards: React.FC = () => {
         break;
       case CardSide.Right:
         textElement = document.getElementById("rightCardEdit");
-        if (!!textElement) {
+        if (!!textElement && !cancel) {
           setRightState({
             text: textElement.innerText,
             isEditing: !rightState.isEditing,
@@ -94,18 +95,28 @@ const DisplayCards: React.FC = () => {
                   src={leftState.isEditing ? save : edit}
                   className={leftState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={() => onEditClick(CardSide.Left)}
+                  onClick={() => onEditClick(CardSide.Left, false)}
                 />
               </Tooltip>
               {leftState.isEditing ? (
-                <div
-                  id="leftCardEdit"
-                  className="TextInput"
-                  contentEditable="true"
-                  suppressContentEditableWarning={true}
-                >
-                  {leftState.text}
-                </div>
+                <>
+                  <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
+                    <img
+                      src={cancel}
+                      className="Cancel"
+                      alt="cancel"
+                      onClick={() => onEditClick(CardSide.Left, true)}
+                    />
+                  </Tooltip>
+                  <div
+                    id="leftCardEdit"
+                    className="TextInput"
+                    contentEditable="true"
+                    suppressContentEditableWarning={true}
+                  >
+                    {leftState.text}
+                  </div>
+                </>
               ) : (
                 <p className="Card-Text">{leftState.text}</p>
               )}
@@ -121,18 +132,28 @@ const DisplayCards: React.FC = () => {
                   src={rightState.isEditing ? save : edit}
                   className={rightState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={() => onEditClick(CardSide.Right)}
+                  onClick={() => onEditClick(CardSide.Right, false)}
                 />
               </Tooltip>
               {rightState.isEditing ? (
-                <div
-                  id="rightCardEdit"
-                  className="TextInput"
-                  contentEditable="true"
-                  suppressContentEditableWarning={true}
-                >
-                  {rightState.text}
-                </div>
+                <>
+                  <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
+                    <img
+                      src={cancel}
+                      className="Cancel"
+                      alt="cancel"
+                      onClick={() => onEditClick(CardSide.Right, true)}
+                    />
+                  </Tooltip>
+                  <div
+                    id="rightCardEdit"
+                    className="TextInput"
+                    contentEditable="true"
+                    suppressContentEditableWarning={true}
+                  >
+                    {rightState.text}
+                  </div>
+                </>
               ) : (
                 <p className="Card-Text">{rightState.text}</p>
               )}
