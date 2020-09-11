@@ -4,6 +4,7 @@ import { Card, Button, Typography, Layout, Progress } from "antd";
 import Header from "../components/Header";
 
 import "../styles/DisplayCards.css";
+import "../styles/Navigation.css";
 
 const initialValues = {
   text: "Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",

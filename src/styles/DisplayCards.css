@@ -7,11 +7,11 @@
 
 .Content {
   margin: 100px 0px 0px 0px;
-  padding: 50px;
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .Statement {
@@ -52,23 +52,6 @@
   margin: 0px;
 }
 
-.Navigation {
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  margin: 15px 30px;
-}
-
-.NavigationButton {
-  height: 80px;
-  width: 150px;
-  cursor: pointer;
-}
-
-.Navigation-Button-Text {
-  font-size: 30px;
-}
 
 .Progress {
   display: flex;

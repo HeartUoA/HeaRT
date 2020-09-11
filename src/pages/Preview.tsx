@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
 import "../styles/DisplayCards.css";
+import "../styles/Navigation.css";
 
 const tempValues = [
   {

@@ -1,0 +1,18 @@
+.Navigation {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 20px;
+  width: 90%;
+}
+
+.NavigationButton {
+  height: 80px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.Navigation-Button-Text {
+  font-size: 30px;
+}
