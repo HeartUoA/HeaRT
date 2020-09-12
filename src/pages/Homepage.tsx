@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
@@ -7,11 +8,13 @@ import "../styles/Homepage.css";
 import Modal from "antd/lib/modal/Modal";
 import Instructions from "../components/Instructions";
 
-const Homepage: React.FC = () => {
-  const [showInstructions, setShowInstructions] = useState(false);
+type RouterProps = RouteComponentProps;
+
+const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    props.history.push("/DisplayCards");
   };
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);
@@ -29,11 +32,9 @@ const Homepage: React.FC = () => {
         </Typography>
       </div>
       <div className="Buttons-Container">
-        <Link to="/DisplayCards">
-          <Button className="Button" onClick={onPlayClick}>
-            <Typography className="Button-Text">Play</Typography>
-          </Button>
-        </Link>
+        <Button className="Button" onClick={onPlayClick}>
+          <Typography className="Button-Text">Play</Typography>
+        </Button>
         <Button type="default" className="Button" onClick={onInstructionsClick}>
           <Typography className="Button-Text">Instructions</Typography>
         </Button>
@@ -46,4 +47,4 @@ const Homepage: React.FC = () => {
   );
 };
 
-export default Homepage;
+export default withRouter(Homepage);
