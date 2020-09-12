@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
