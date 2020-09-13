@@ -15,6 +15,7 @@
     "commitizen": "^4.2.1",
     "express": "^4.17.1",
     "less": "^3.12.2",
+    "lessc": "^1.0.2",
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
