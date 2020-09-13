@@ -7,11 +7,12 @@ interface DimensionProps {
   dimensionValue: string;
   scale: number;
   userExplanation: string;
+  isPreview: boolean;
 }
 
 const Dimension: React.FC<DimensionProps> = (props) => {
   return (
-    <Card className="Card-Dimension">
+    <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
       <p className="Card-Text">{props.dimensionValue}</p>
       <div className="Slider">
         <div className="Captions-Container">

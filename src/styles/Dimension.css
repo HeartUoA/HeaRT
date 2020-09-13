@@ -1,4 +1,11 @@
 .Card-Dimension {
+  min-height: 430px;
+  margin: 30px;
+  max-width: 97%;
+  box-shadow: 4px 4px 10px #212121;
+}
+
+.Card-Preview {
   min-height: 350px;
   width: 43%;
   margin: 40px;
