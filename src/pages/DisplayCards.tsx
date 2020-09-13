@@ -48,6 +48,10 @@ const DisplayCards: React.FC = () => {
     // TODO: Write code here to redirect to the next card or another incomplete card
   };
 
+  const onNextClick = () => {
+    // TODO: Write code here to redirect to the next card or another incomplete card
+  };
+
   const onCardClick = (side: CardSide) => {
     switch (side) {
       case CardSide.Left:
@@ -136,13 +140,23 @@ const DisplayCards: React.FC = () => {
             strokeWidth={20}
           />
         </div>
-        <Button
-          type="primary"
-          className="NavigationButton"
-          onClick={onSkipClick}
-        >
-          <Typography className="Navigation-Button-Text">Skip</Typography>
-        </Button>
+        {isCardSelected ? (
+          <Button
+            type="primary"
+            className="NavigationButton"
+            onClick={onNextClick}
+          >
+            <Typography className="Navigation-Button-Text">Next</Typography>
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            className="NavigationButton"
+            onClick={onSkipClick}
+          >
+            <Typography className="Navigation-Button-Text">Skip</Typography>
+          </Button>
+        )}
       </div>
     </div>
   );
