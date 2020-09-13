@@ -1,7 +1,23 @@
-.Image-Container {
-  margin-bottom: 1em;
+.Navigation-Container {
+  margin-bottom: 2em;
+  display: inline-block;
 }
 
+.Navigation-Button {
+  margin: 0 2em;
+  font-size: 3em;
+  color: #ff9cb8;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+.Navigation-Button:disabled {
+  color: grey;
+}
 .Instructions-Container {
   text-align: center;
+}
+
+.Instructions-Image {
+  padding: 2em;
 }
