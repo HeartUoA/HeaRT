@@ -1,4 +1,7 @@
 import React from "react";
+
+import { Button, Input, InputNumber, Layout, Typography } from "antd";
+
 import logo from "../assets/images/logo.svg";
 import "../styles/CourseInfo.css";
 
@@ -7,47 +10,68 @@ const CourseInfo: React.FC = () => {
     // TODO: Write code here to redirect to cards screen
   };
 
+  const onCancelClick = () => {
+    // TODO: Write code here to redirect back to homepage
+  };
+
   return (
     <div className="Course-Info">
-      <div className="Temp-Header">
+      <Layout.Header className="Temp-Header">
         <img src={logo} className="Logo" alt="logo" />
-        <p className="Logo-Title">HeaRT</p>
-      </div>
-      <div className="Main-Container">
-        <p className="Create-Chart-Text">Create Chart</p>
+        <Typography className="Logo-Title">HeaRT</Typography>
+      </Layout.Header>
+
+      <Layout.Content className="Main-Container">
+        <Typography className="Create-Chart-Text">Create Chart</Typography>
         <div className="Form-Container">
           <div>
-            <label>
-              <p className="Form-Text">Course Name</p>
-              <input className="Form-Input" type="text" name="courseName" />
-            </label>
-            <label>
-              <p className="Form-Text">Role in Course</p>
-              <input className="Form-Input" type="text" name="courseRole" />
-            </label>
+            <div>
+              <Typography className="Form-Text">Course Name</Typography>
+              <Input className="Form-Input" name="courseName" />
+            </div>
+            <div>
+              <Typography className="Form-Text">Role in Course</Typography>
+              <Input className="Form-Input" name="courseRole" />
+            </div>
           </div>
           <div className="Number-Form">
-            <label>
-              <p className="Form-Text">Course Age</p>
-              <input
+            <div>
+              <Typography className="Form-Text">Course Age</Typography>
+              <InputNumber
                 className="Form-Input Number-Input"
-                type="number"
                 name="courseName"
-                value="0"
+                min={0}
+                defaultValue={0}
               />
-            </label>
-            <label className="Cohort-Size-Label">
-              <p className="Form-Text">Cohort Size</p>
-              <input
-                className="Form-Input Number-Input"
-                type="number"
+            </div>
+            <div className="Cohort-Size-Label">
+              <Typography className="Form-Text">Cohort Size</Typography>
+              <InputNumber
+                className="Form-Input Number-Input Cohort-Size-Input"
                 name="courseName"
-                value="0"
+                min={0}
+                defaultValue={0}
               />
-            </label>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="Button-Container">
+          <Button
+            type="primary"
+            className="Navigation-Button"
+            onClick={onConfirmClick}
+          >
+            <Typography className="Button-Text">Confirm</Typography>
+          </Button>
+          <Button
+            type="primary"
+            className="Navigation-Button Cancel-Button"
+            onClick={onCancelClick}
+          >
+            <Typography className="Button-Text">Cancel</Typography>
+          </Button>
+        </div>
+      </Layout.Content>
     </div>
   );
 };
