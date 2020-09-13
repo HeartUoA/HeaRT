@@ -2,6 +2,7 @@ import React from "react";
 
 import { Button, Input, InputNumber, Layout, Typography } from "antd";
 
+import Header from "../components/Header";
 import logo from "../assets/images/logo.svg";
 import "../styles/CourseInfo.css";
 
@@ -16,10 +17,7 @@ const CourseInfo: React.FC = () => {
 
   return (
     <div className="Course-Info">
-      <Layout.Header className="Temp-Header">
-        <img src={logo} className="Logo" alt="logo" />
-        <Typography className="Logo-Title">HeaRT</Typography>
-      </Layout.Header>
+      <Header />
 
       <Layout.Content className="Main-Container">
         <Typography className="Create-Chart-Text">Create Chart</Typography>
