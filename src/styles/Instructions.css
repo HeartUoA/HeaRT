@@ -1,10 +1,10 @@
 .Navigation-Container {
   margin-bottom: 2em;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .Navigation-Button {
-  margin: 0 2em;
   font-size: 3em;
   color: #ff9cb8;
   background-color: transparent;
@@ -19,5 +19,5 @@
 }
 
 .Instructions-Image {
-  padding: 2em;
+  padding: 3em;
 }

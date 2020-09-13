@@ -38,10 +38,7 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
           <Typography className="Button-Text">Instructions</Typography>
         </Button>
       </div>
-      <Instructions
-        visible={showInstructions}
-        hide={onInstructionsClick}
-      ></Instructions>
+      <Instructions visible={showInstructions} hide={onInstructionsClick} />
     </div>
   );
 };
