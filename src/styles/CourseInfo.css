@@ -6,6 +6,11 @@
 }
 
 .Temp-Header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  display: flex;
   background: rgb(46, 52, 88);
   background: linear-gradient(
     to bottom right,
@@ -13,21 +18,18 @@
     rgba(33, 33, 33, 1) 100%
   );
   height: 15vh;
+  padding: 3vh 0px 0px 20px;
 }
 
 .Logo {
-  display: flex;
-  height: 10.95vh;
-  margin: 2.05vh 0px 0px 15px;
+  height: 30px;
 }
 
 .Logo-Title {
-  display: flex;
   font-family: "MyHappyEnding";
   color: white;
   font-size: 10vh;
   font-weight: normal;
-  margin: -10vh 0px 0px 18.33vh;
 }
 
 .Main-Container {
@@ -37,74 +39,95 @@
   justify-content: center;
   background: #f6f7fc;
   height: 85vh;
+  margin-top: 15vh;
 }
 
 .Create-Chart-Text {
   font-family: "ABeeZee";
   color: #1f1f1f;
-  font-size: 6.3vh;
+  font-size: 6vh;
   font-weight: normal;
   text-shadow: 0px 0.1vh 4px #808080;
+  margin: 0vh 0px 4vh 0px;
 }
 
 .Form-Container {
-  height: 43.583vh;
-  width: 33vw;
+  height: 41vh;
+  width: 41vw;
   background: white;
   text-align: left;
-  margin-bottom: 22.33vh;
   border-radius: 1.57vw;
   box-shadow: 0px 0.33vh 0.8vh #646464;
-  padding-top: 1%;
-  padding-left: 3%;
-  padding-right: 0.8%;
+  padding: 4vh 0.8% 0px 4%;
 }
 
 .Form-Text {
   font-family: "ABeeZee";
   color: #5b5b5b;
   font-size: 2.8vh;
-  margin-bottom: 0.2vh;
+  margin-bottom: -0.5vh;
 }
 
 .Form-Input {
   width: 90%;
-  line-height: 5.8vh;
-  border-radius: 1vw;
-  border-width: thin;
-  padding-left: 2%;
+  line-height: 4.5vh;
+  border-radius: 0.7vw;
+  padding-left: 1vw;
   font-family: "ABeeZee";
   font-size: 2vh;
+  border-color: #969696;
   color: #1f1f1f;
-  margin-bottom: -0.75vh;
-}
-
-.Form-Label:focus {
-  outline-width: 0;
-}
-
-.Number-Form-Container {
-  height: 15vh;
-  width: 40vw;
-  background: black;
+  margin-bottom: 2vh;
 }
 
 .Number-Form {
+  height: 12vh;
+  width: 90%;
   display: flex;
   flex-direction: row;
   position: relative;
   align-content: space-between;
-  width: 92.5%;
 }
 
 .Number-Input {
   width: 10vw;
   padding-left: 1vw;
+  border-color: #969696;
+  border-width: thin;
 }
 
 .Cohort-Size-Label {
   position: absolute;
   text-align-last: right;
-  margin-left: 10vw;
   right: 0;
+}
+
+.Cohort-Size-Input {
+  padding-right: 1vw;
+}
+
+.Button-Container {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  position: relative;
+  height: 16.3vh;
+  width: 41vw;
+  padding-top: 6vh;
+}
+
+.Navigation-Button {
+  height: 10vh;
+  width: 18vw;
+  box-shadow: 0px 0.33vh 0.8vh #646464;
+  text-align: center;
+}
+
+.Cancel-Button {
+  position: absolute;
+  right: 0;
+}
+
+.Button-Text {
+  font-size: 4vh;
 }
