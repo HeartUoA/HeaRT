@@ -5,6 +5,7 @@ import "../styles/Instructions.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 const stepOneImg = require("../assets/images/instructionsStart.JPG");
 const stepTwoImg = require("../assets/images/instructionsPickCard.JPG");
+const { Title } = Typography;
 
 interface InstructionsProps {
   visible: boolean;
@@ -12,12 +13,14 @@ interface InstructionsProps {
 }
 
 type Step = {
+  title: string;
   description: JSX.Element;
   image: string;
 };
 
 const instructionSteps: { [key: number]: Step } = {
   1: {
+    title: "Start the game",
     description: (
       <div>
         {" "}
@@ -28,6 +31,7 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepOneImg,
   },
   2: {
+    title: "Pick the card",
     description: (
       <div>
         You will be presented with the first pair of cards. If the statements on
@@ -41,6 +45,7 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepTwoImg,
   },
   3: {
+    title: "Select your course dimension",
     description: (
       <div>
         When you pick a statement you are presented with a dimension bar. You
@@ -54,6 +59,7 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepOneImg,
   },
   4: {
+    title: "Preview and edit your chart",
     description: (
       <div>
         Once you went through all teaching dimensions, you can preview and edit
@@ -63,6 +69,7 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepTwoImg,
   },
   5: {
+    title: "Save your chart",
     description: (
       <div>
         {" "}
@@ -97,6 +104,9 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
     >
       <div className="Instructions-Container">
         <Card bordered={false}>
+          <Title level={2}>
+            {instructionSteps[instructionsState.currentStep].title}
+          </Title>
           <div className="Navigation-Container">
             <button
               className="Navigation-Button"
@@ -122,9 +132,11 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
               <RightOutlined />
             </button>
           </div>
-          <Typography>
-            {instructionSteps[instructionsState.currentStep].description}
-          </Typography>
+          <span className="Instructions-Text">
+            <Typography>
+              {instructionSteps[instructionsState.currentStep].description}
+            </Typography>
+          </span>
         </Card>
         <Typography>
           {instructionsState.currentStep}/{Object.keys(instructionSteps).length}

@@ -1,5 +1,6 @@
 .Navigation-Container {
   margin-bottom: 2em;
+  margin-top: 2em;
   display: inline-block;
   white-space: nowrap;
 }
@@ -20,4 +21,8 @@
 
 .Instructions-Image {
   padding: 3em;
+}
+
+.Instructions-Text {
+  text-align: left;
 }
