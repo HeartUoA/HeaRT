@@ -24,8 +24,8 @@ const instructionSteps: { [key: number]: Step } = {
     description: (
       <div>
         {" "}
-        Press <b>Play</b> and fill in your course details. This should be the
-        course that you would like to evaluate! 📜
+        Press <b>Play</b> and fill in your course details.
+        <br /> This should be the course that you would like to evaluate! 📜
       </div>
     ),
     image: stepOneImg,
@@ -34,12 +34,12 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Pick the card",
     description: (
       <div>
-        You will be presented with the first pair of cards. If the statements on
-        the cards are applicable to your course, pick one that resonates with
-        you the most 💓 <br /> If the statements are not applicable, don't
-        worry, you can always skip to the next pair! ⏭️ <br /> Psst🤫...in the
-        future versions we will add the ability to edit statements, so you can
-        tailor the HeaRT game to your course.
+        You will be presented with the first pair of cards. <br /> If the
+        statements on the cards are applicable to your course, pick one that
+        resonates with you the most 💓 <br /> If the statements are not
+        applicable, don't worry, you can always skip to the next pair! ⏭️ <br />{" "}
+        Psst🤫...in the future versions we will add the ability to edit
+        statements, so you can tailor the HeaRT game to your course.
       </div>
     ),
     image: stepTwoImg,
@@ -50,8 +50,8 @@ const instructionSteps: { [key: number]: Step } = {
       <div>
         When you pick a statement you are presented with a dimension bar. You
         need to select your stance on the dimension: how much does your course
-        tend towards one card over the other. For example, is your course more
-        teacher-managed, or is it more student-managed? 🤔 <br />
+        tend towards one card over the other. <br /> For example, is your course
+        more teacher-managed, or is it more student-managed? 🤔 <br />
         In future versions, you will be able to explain your choice for each
         dimension in a text note.
       </div>
@@ -99,7 +99,8 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
       visible={props.visible}
       onOk={props.hide}
       onCancel={props.hide}
-      width={window.outerWidth * 0.5}
+      width={window.innerWidth * 0.5}
+      bodyStyle={{ height: window.innerHeight * 0.6, position: "relative" }}
       footer={null}
     >
       <div className="Instructions-Container">
@@ -138,9 +139,12 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
             </Typography>
           </span>
         </Card>
-        <Typography>
-          {instructionsState.currentStep}/{Object.keys(instructionSteps).length}
-        </Typography>
+        <span className="Instructions-Counter">
+          <Typography>
+            {instructionsState.currentStep}/
+            {Object.keys(instructionSteps).length}
+          </Typography>
+        </span>
       </div>
     </Modal>
   );

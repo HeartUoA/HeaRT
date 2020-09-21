@@ -25,4 +25,10 @@
 
 .Instructions-Text {
   text-align: left;
+  font-size: medium;
+}
+
+.Instructions-Counter {
+  position: absolute;
+  bottom: 2em;
 }
