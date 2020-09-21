@@ -1,12 +1,36 @@
 import { Schema, model } from "mongoose";
 
 const userSchemaDef = {
-  name: {
+  username: {
     type: String,
     unique: true,
     required: true,
   },
-  course: {
+  name: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  institution: {
+    type: String,
+    required: true,
+  },
+  department: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  passwordHash: {
     type: String,
     required: true,
   },
