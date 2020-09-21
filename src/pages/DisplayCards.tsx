@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
@@ -31,9 +31,41 @@ const initialRightCard: Card = {
   isEditing: false,
 };
 
+const CurrentDimension = 0;
+
 const DisplayCards: React.FC = () => {
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
+
+  useEffect(() => {
+    fetch("/api/cards")
+      .then((res) => res.json())
+      .then((res) =>
+        setLeftState({
+          text: res[CurrentDimension].Statement,
+          isEditing: false,
+        })
+      );
+
+    fetch("/api/cards")
+      .then((res) => res.json())
+      .then((res) =>
+        setRightState({
+          text: res[CurrentDimension + 1].Statement,
+          isEditing: false,
+        })
+      );
+  }, []);
+
+  // const getRightCards = () => {
+  //   fetch('/api/cards')
+  //     .then(res => res.json())
+  //     .then(res => setLeftState({
+  //       text: res[0].Statement,
+  //       isEditing: false,
+  //     }));
+  // };
+
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
   };
