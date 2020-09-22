@@ -57,15 +57,6 @@ const DisplayCards: React.FC = () => {
       );
   }, []);
 
-  // const getRightCards = () => {
-  //   fetch('/api/cards')
-  //     .then(res => res.json())
-  //     .then(res => setLeftState({
-  //       text: res[0].Statement,
-  //       isEditing: false,
-  //     }));
-  // };
-
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
   };
