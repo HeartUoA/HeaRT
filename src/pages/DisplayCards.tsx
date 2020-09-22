@@ -119,7 +119,9 @@ const DisplayCards: React.FC = () => {
       <div className="Content">
         <div>
           {isCardSelected ? (
-            ""
+            <Typography className="Statement">
+              Which statement describes SOFTENG761 best?
+            </Typography>
           ) : (
             <Typography className="Statement">Pick one statement</Typography>
           )}
