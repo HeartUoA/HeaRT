@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 
-import { Card, Button, Typography, Progress } from "antd";
+import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
+import edit from "../assets/images/edit.svg";
+import save from "../assets/images/save.png";
+import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Navigation.css";
 
@@ -15,18 +18,21 @@ export enum CardSide {
 type Card = {
   text: string;
   isSelected: boolean;
+  isEditing: boolean;
 };
 
 const initialLeftCard: Card = {
   text:
     "(Left Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
+  isEditing: false,
 };
 
 const initialRightCard: Card = {
   text:
     "(Right Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
+  isEditing: false,
 };
 
 const tempDimension = {
@@ -39,7 +45,6 @@ const tempDimension = {
 const DisplayCards: React.FC = () => {
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
-
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
   };
@@ -71,6 +76,38 @@ const DisplayCards: React.FC = () => {
     }
   };
 
+  const onEditClick = (side: CardSide, cancel: boolean) => {
+    let textElement;
+    switch (side) {
+      case CardSide.Left:
+        textElement = document.getElementById("leftCardEdit");
+        if (!!textElement && !cancel) {
+          setLeftState({
+            text: textElement.innerText,
+            isEditing: !leftState.isEditing,
+            isSelected: leftState.isSelected,
+          });
+        } else {
+          setLeftState({ ...leftState, isEditing: !leftState.isEditing });
+        }
+        break;
+      case CardSide.Right:
+        textElement = document.getElementById("rightCardEdit");
+        if (!!textElement && !cancel) {
+          setRightState({
+            text: textElement.innerText,
+            isEditing: !rightState.isEditing,
+            isSelected: rightState.isSelected,
+          });
+        } else {
+          setRightState({ ...rightState, isEditing: !rightState.isEditing });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   const progressMade = { completed: 8, total: 14 };
   const [dimension, setDimension] = useState(tempDimension);
   let isCardSelected = leftState.isSelected || rightState.isSelected;
@@ -93,7 +130,41 @@ const DisplayCards: React.FC = () => {
               }`}
               onClick={() => onCardClick(CardSide.Left)}
             >
-              <p className="Card-Text">{initialLeftCard.text}</p>
+              <Tooltip
+                title={
+                  leftState.isEditing ? "Save Edited Card" : "Edit Card Text"
+                }
+                mouseEnterDelay={0.05}
+              >
+                <img
+                  src={leftState.isEditing ? save : edit}
+                  className={leftState.isEditing ? "Save" : "Edit"}
+                  alt="edit"
+                  onClick={() => onEditClick(CardSide.Left, false)}
+                />
+              </Tooltip>
+              {leftState.isEditing ? (
+                <>
+                  <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
+                    <img
+                      src={cancel}
+                      className="Cancel"
+                      alt="cancel"
+                      onClick={() => onEditClick(CardSide.Left, true)}
+                    />
+                  </Tooltip>
+                  <div
+                    id="leftCardEdit"
+                    className="TextInput"
+                    contentEditable="true"
+                    suppressContentEditableWarning={true}
+                  >
+                    {leftState.text}
+                  </div>
+                </>
+              ) : (
+                <p className="Card-Text">{leftState.text}</p>
+              )}
             </Card>
             <Card
               className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
@@ -101,7 +172,41 @@ const DisplayCards: React.FC = () => {
               }`}
               onClick={() => onCardClick(CardSide.Right)}
             >
-              <p className="Card-Text">{initialRightCard.text}</p>
+              <Tooltip
+                title={
+                  rightState.isEditing ? "Save Edited Card" : "Edit Card Text"
+                }
+                mouseEnterDelay={0.05}
+              >
+                <img
+                  src={rightState.isEditing ? save : edit}
+                  className={rightState.isEditing ? "Save" : "Edit"}
+                  alt="edit"
+                  onClick={() => onEditClick(CardSide.Right, false)}
+                />
+              </Tooltip>
+              {rightState.isEditing ? (
+                <>
+                  <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
+                    <img
+                      src={cancel}
+                      className="Cancel"
+                      alt="cancel"
+                      onClick={() => onEditClick(CardSide.Right, true)}
+                    />
+                  </Tooltip>
+                  <div
+                    id="rightCardEdit"
+                    className="TextInput"
+                    contentEditable="true"
+                    suppressContentEditableWarning={true}
+                  >
+                    {rightState.text}
+                  </div>
+                </>
+              ) : (
+                <p className="Card-Text">{rightState.text}</p>
+              )}
             </Card>
           </div>
           {isCardSelected ? <Dimension {...dimension} /> : ""}

@@ -39,6 +39,7 @@
   justify-content: center;
   box-shadow: 4px 4px 10px #212121;
   cursor: pointer;
+  position: relative;
 }
 
 .Card-Clicked {
@@ -83,6 +84,34 @@
   justify-content: center;
   box-shadow: 4px 4px 10px #212121;
   cursor: pointer;
+}
+
+.Edit,
+.Save,
+.Cancel {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 32px;
+}
+
+.Edit {
+  height: 30px;
+}
+
+.Cancel {
+  right: 50px;
+}
+
+.TextInput {
+  font-family: "ABeeZee";
+  font-size: 30px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  cursor: text;
+  border: solid black;
 }
 
 .Progress {
