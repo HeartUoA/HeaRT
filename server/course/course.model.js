@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const courseSchemaDef = {
   name: {
@@ -20,9 +20,9 @@ const courseSchemaDef = {
   ageOfCourse: {
     type: Number,
     required: true,
-  }
+  },
 };
 
 const courseSchema = new Schema(courseSchemaDef);
 
-export default model('Course', courseSchema);
+export default model("Course", courseSchema);
