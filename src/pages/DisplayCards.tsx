@@ -35,6 +35,10 @@ const initialRightCard: Card = {
   isEditing: false,
 };
 
+const hi = (value: number) => {
+  console.log("HI");
+};
+
 const tempDimension = {
   dimensionValue: "Dimension",
   scale: 100,
@@ -58,6 +62,7 @@ const DisplayCards: React.FC = () => {
   };
 
   const onCardClick = (side: CardSide) => {
+    console.log("GHIHIHIHIHIHI");
     switch (side) {
       case CardSide.Left:
         setLeftState({ ...leftState, isSelected: true });
@@ -74,10 +79,6 @@ const DisplayCards: React.FC = () => {
       default:
         break;
     }
-  };
-
-  const onDimensionChange = (value: number) => {
-    setDimension({ ...dimension, scale: value });
   };
 
   const onEditClick = (side: CardSide, cancel: boolean) => {
@@ -115,6 +116,11 @@ const DisplayCards: React.FC = () => {
   const progressMade = { completed: 8, total: 14 };
   const [dimension, setDimension] = useState(tempDimension);
   let isCardSelected = leftState.isSelected || rightState.isSelected;
+
+  const onDimensionChange = (value: number) => {
+    console.log("UPDATING SLIDER");
+    setDimension({ ...dimension, scale: value });
+  };
 
   return (
     <div className="DisplayCards">
@@ -216,7 +222,9 @@ const DisplayCards: React.FC = () => {
             </Card>
           </div>
           {isCardSelected ? (
-            <Dimension {...dimension} onDimensionChange={onDimensionChange} />
+            <Dimension
+              {...{ dimension: dimension, sliderUpdate: onDimensionChange }}
+            />
           ) : (
             ""
           )}

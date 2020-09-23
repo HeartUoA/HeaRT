@@ -10,13 +10,17 @@ interface DimensionProps {
   isPreview: boolean;
 }
 
-const Dimension: React.FC<DimensionProps> = (
-  onDimensionChange,
-  props: DimensionProps
-) => {
+interface MainProps {
+  dimension: DimensionProps;
+  sliderUpdate: (value: number) => void;
+}
+
+const Dimension: React.FC<MainProps> = (props: MainProps) => {
   return (
-    <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
-      <p className="Card-Text">{props.dimensionValue}</p>
+    <Card
+      className={props.dimension.isPreview ? "Card-Preview" : "Card-Dimension"}
+    >
+      <p className="Card-Text">{props.dimension.dimensionValue}</p>
       <div className="Slider">
         <div className="Captions-Container">
           <Typography>Fixed</Typography>
@@ -24,12 +28,12 @@ const Dimension: React.FC<DimensionProps> = (
         </div>
         <Slider
           className="Slider-Bar"
-          value={props.scale}
-          onChange={onDimensionChange}
+          defaultValue={props.dimension.scale}
+          onChange={props.sliderUpdate}
         />
         <Typography className="User-Explanation">
-          {props.userExplanation.length > 0
-            ? '"' + props.userExplanation + '"'
+          {props.dimension.userExplanation.length > 0
+            ? '"' + props.dimension.userExplanation + '"'
             : ""}
         </Typography>
       </div>

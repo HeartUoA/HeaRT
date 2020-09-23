@@ -69,6 +69,10 @@ const Preview: React.FC = () => {
   const onSaveClick = () => {
     // TODO: Write code here to redirect to instructions screen
   };
+
+  const onDimensionChange = (value: number) => {
+    // what happens when someone drags slider
+  };
   return (
     <div className="Preview">
       <Header />
@@ -76,7 +80,9 @@ const Preview: React.FC = () => {
         <Typography className="Statement">Preview</Typography>
         <Row className="Dimension-Row">
           {dimensions.map((item) => (
-            <Dimension {...item} />
+            <Dimension
+              {...{ dimension: item, sliderUpdate: onDimensionChange }}
+            />
           ))}
         </Row>
       </div>
