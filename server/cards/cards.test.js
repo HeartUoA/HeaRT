@@ -22,13 +22,11 @@ describe("/api/cards tests", () => {
   });
 
   it("should post and get cards", async () => {
-    const postResponse = await request(app)
-      .post("/api/cards")
-      .send({
-        Dimension: "1",
-        Statement: "Learners can only do learning tasks in one way.",
-        Position: "0",
-      });
+    const postResponse = await request(app).post("/api/cards").send({
+      Dimension: "1",
+      Statement: "Learners can only do learning tasks in one way.",
+      Position: "0",
+    });
     expect(postResponse.status).toBe(200);
     expect(postResponse.body).toBe("Card created!");
 
