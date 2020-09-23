@@ -37,9 +37,10 @@ const instructionSteps: { [key: number]: Step } = {
         You will be presented with the first pair of cards. <br /> If the
         statements on the cards are applicable to your course, pick one that
         resonates with you the most 💓 <br /> If the statements are not
-        applicable, don't worry, you can always skip to the next pair! ⏭️ <br />{" "}
-        Psst🤫...in the future versions we will add the ability to edit
-        statements, so you can tailor the HeaRT game to your course.
+        applicable, don't worry, you can always skip to the next pair! ⏭️ You
+        must complete at least 8 pairs to finish the game. <br /> Psst🤫...in
+        the future versions we will add the ability to edit statements, so you
+        can tailor the HeaRT game to your course.
       </div>
     ),
     image: stepTwoImg,
@@ -99,7 +100,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
       visible={props.visible}
       onOk={props.hide}
       onCancel={props.hide}
-      width={window.innerWidth * 0.5}
+      width={window.innerWidth * 0.6}
       bodyStyle={{ height: window.innerHeight * 0.6, position: "relative" }}
       footer={null}
     >
