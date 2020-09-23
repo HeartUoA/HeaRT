@@ -14,9 +14,22 @@ router.route("/").post(bodyParser.json(), async (request, response) => {
   }
 });
 
-router.route("/").get(async (_, response) => {
-  const users = await User.find();
-  return response.status(200).json(users);
-});
+router
+  .route("/authenticate/:username")
+  .post(bodyParser.json(), async (request, response) => {
+    try {
+      const user = await User.findOne({ username: request.params.username });
+      if (user.passwordHash === request.body.passwordHash) {
+        return response.status(200).json(user);
+      }
+      return response
+        .status(403)
+        .send(
+          "Ensure that you've hashed the password using bcrypt before sending it to the server"
+        );
+    } catch (e) {
+      return response.status(403).send(e);
+    }
+  });
 
 export default router;

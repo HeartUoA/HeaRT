@@ -22,7 +22,16 @@ import { url } from "../server/config";
       console.log(chalk.yellow("Purging any pre-existing stale..."));
       await User.deleteMany({});
       await Course.deleteMany({});
-      const user = new User({ name: "John Doe", course: "SOFTENG 700" });
+      const user = new User({
+        name: "John Doe",
+        passwordHash: "aMoreSecureHashThanThisPlease",
+        email: "john@doe.com",
+        position: "Course Cordinator",
+        department: "Engineering",
+        institution: "The University Of Auckland",
+        createdAt: Date.now(),
+        username: "jdoe",
+      });
       await user.save();
       console.log(chalk.green("Sample user successfuly created!"));
       const newCourses = [
