@@ -40,6 +40,15 @@ const tempDimension = {
   scale: 100,
   userExplanation: "This is a user explanation.",
   isPreview: false,
+  marks: {
+    0: "Fixed",
+    100: {
+      style: {
+        color: "#ff9cb8",
+      },
+      label: <strong>Active</strong>,
+    },
+  },
 };
 
 const DisplayCards: React.FC = () => {

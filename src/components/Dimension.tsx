@@ -8,11 +8,21 @@ interface DimensionProps {
   scale: number;
   userExplanation: string;
   isPreview: boolean;
+  marks?: SliderMarks;
 }
 
 interface MainProps {
   dimension: DimensionProps;
   sliderUpdate: (value: number) => void;
+}
+
+interface SliderMarks {
+  [key: number]:
+    | React.ReactNode
+    | {
+        style: React.CSSProperties;
+        label: React.ReactNode;
+      };
 }
 
 const Dimension: React.FC<MainProps> = (props: MainProps) => {
@@ -30,6 +40,7 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
           className="Slider-Bar"
           value={props.dimension.scale}
           onChange={props.sliderUpdate}
+          marks={props.dimension.marks}
         />
         <Typography className="User-Explanation">
           {props.dimension.userExplanation.length > 0
