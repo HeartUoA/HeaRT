@@ -20,7 +20,6 @@
   color: #1f1f1f;
   font-size: 6vh;
   font-weight: normal;
-  text-shadow: 0px 0.1vh 4px #808080;
   margin: 0vh 0px 4vh 0px;
 }
 
@@ -53,7 +52,7 @@
   margin-bottom: 2vh;
 }
 
-.Dropdown-Form {
+.Select-Form {
   height: 12vh;
   width: 90%;
   display: flex;
@@ -68,22 +67,35 @@
   right: 0;
 }
 
-.Dropdown-Button {
-  display: flex;
-  flex-direction: row;
-  align-content: space-between;
-  width: 10vw;
+.Selector {
+  margin-top: 0.3vh;
+  width: 11vw;
   height: 5vh;
-  box-shadow: 0px 0px 0px;
-  border-width: thin;
-  border-color: #969696;
-  border-radius: 0.7vw;
 }
 
-.Dropdown-Text {
-  text-align: left;
-  color: #b8b8b8;
-  padding: 0px 0px 0px 0px;
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 100%;
+  border-radius: 0.7vw;
+  border-color: #969696;
+  font-size: 2vh;
+  padding: 1vh 1vw 0px 1vw;
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item,
+.ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 2.7vh;
+}
+
+.ant-select-arrow {
+  top: 49%;
+}
+
+.Selection-Text {
+  font-size: 1.5vh;
+}
+
+.Selection-Text-Right {
+  float: right;
 }
 
 .Down-Arrow-Right {

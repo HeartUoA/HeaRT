@@ -1,10 +1,12 @@
 import React from "react";
 
-import { Button, Dropdown, Input, Layout, Menu, Typography } from "antd";
+import { Button, Input, Layout, Menu, Select, Typography } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 import Header from "../components/Header";
 import "../styles/CourseInfo.css";
+
+const { Option } = Select;
 
 const CourseInfo: React.FC = () => {
   const onConfirmClick = () => {
@@ -14,31 +16,6 @@ const CourseInfo: React.FC = () => {
   const onCancelClick = () => {
     // TODO: Write code here to redirect back to homepage
   };
-
-  const courseAgeDropdown = (
-    <Menu>
-      <Menu.Item>New Course</Menu.Item>
-      <Menu.Item>3 years or less</Menu.Item>
-      <Menu.Item>More than 3 years</Menu.Item>
-    </Menu>
-  );
-
-  const cohortSizeDropdown = (
-    <Menu>
-      <Menu.Item>
-        <Typography className="Right-Menu-Item">Less than 20</Typography>
-      </Menu.Item>
-      <Menu.Item>
-        <Typography className="Right-Menu-Item">20-49</Typography>
-      </Menu.Item>
-      <Menu.Item>
-        <Typography className="Right-Menu-Item">50-100</Typography>
-      </Menu.Item>
-      <Menu.Item>
-        <Typography className="Right-Menu-Item">More than 100</Typography>
-      </Menu.Item>
-    </Menu>
-  );
 
   return (
     <div className="Course-Info">
@@ -65,28 +42,45 @@ const CourseInfo: React.FC = () => {
               />
             </div>
           </div>
-          <div className="Dropdown-Form">
+          <div className="Select-Form">
             <div>
               <Typography className="Form-Text">Course Age</Typography>
-              <Dropdown overlay={courseAgeDropdown} placement="bottomLeft">
-                <Button className="Dropdown-Button">
-                  <Typography className="Form-Input Dropdown-Text">
-                    Select{" "}
-                  </Typography>
-                  <DownOutlined className="Down-Arrow-Right" />
-                </Button>
-              </Dropdown>
+              <Select className="Selector" placeholder="Select">
+                <Option value="new">
+                  <span className="Selection-Text">New course</span>
+                </Option>
+                <Option value="three">
+                  <span className="Selection-Text">3 years or less</span>
+                </Option>
+                <Option value="more">
+                  <span className="Selection-Text">More than 3 years</span>
+                </Option>
+              </Select>
             </div>
             <div className="Cohort-Size-Label">
               <Typography className="Form-Text">Cohort Size</Typography>
-              <Dropdown overlay={cohortSizeDropdown} placement="bottomRight">
-                <Button className="Dropdown-Button">
-                  <Typography className="Form-Input Dropdown-Text">
-                    Select
-                  </Typography>
-                  <DownOutlined className="Down-Arrow-Left" />
-                </Button>
-              </Dropdown>
+              <Select className="Selector" placeholder="Select">
+                <Option value="less">
+                  <span className="Selection-Text Selection-Text-Right">
+                    Less than 20
+                  </span>
+                </Option>
+                <Option value="twenty">
+                  <span className="Selection-Text Selection-Text-Right">
+                    20-49
+                  </span>
+                </Option>
+                <Option value="fifty">
+                  <span className="Selection-Text Selection-Text-Right">
+                    50-100
+                  </span>
+                </Option>
+                <Option value="hundred">
+                  <span className="Selection-Text Selection-Text-Right">
+                    More than 100
+                  </span>
+                </Option>
+              </Select>
             </div>
           </div>
         </div>
