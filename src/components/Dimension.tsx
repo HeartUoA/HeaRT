@@ -28,7 +28,7 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
         </div>
         <Slider
           className="Slider-Bar"
-          defaultValue={props.dimension.scale}
+          value={props.dimension.scale}
           onChange={props.sliderUpdate}
         />
         <Typography className="User-Explanation">

@@ -35,10 +35,6 @@ const initialRightCard: Card = {
   isEditing: false,
 };
 
-const hi = (value: number) => {
-  console.log("HI");
-};
-
 const tempDimension = {
   dimensionValue: "Dimension",
   scale: 100,
@@ -62,18 +58,19 @@ const DisplayCards: React.FC = () => {
   };
 
   const onCardClick = (side: CardSide) => {
-    console.log("GHIHIHIHIHIHI");
     switch (side) {
       case CardSide.Left:
         setLeftState({ ...leftState, isSelected: true });
         setRightState({ ...rightState, isSelected: false });
-        setDimension({ ...dimension, scale: 0 });
+        onDimensionChange(0);
+        console.log(dimension);
         break;
 
       case CardSide.Right:
         setRightState({ ...rightState, isSelected: true });
         setLeftState({ ...leftState, isSelected: false });
-        setDimension({ ...dimension, scale: 100 });
+        onDimensionChange(100);
+        console.log(dimension);
         break;
 
       default:
@@ -118,8 +115,18 @@ const DisplayCards: React.FC = () => {
   let isCardSelected = leftState.isSelected || rightState.isSelected;
 
   const onDimensionChange = (value: number) => {
+    // Change selected card to reflect slider values
+    if (value < 50) {
+      setLeftState({ ...leftState, isSelected: true });
+      setRightState({ ...rightState, isSelected: false });
+    } else {
+      setRightState({ ...rightState, isSelected: true });
+      setLeftState({ ...leftState, isSelected: false });
+    }
+
     console.log("UPDATING SLIDER");
     setDimension({ ...dimension, scale: value });
+    console.log(dimension);
   };
 
   return (
