@@ -76,6 +76,10 @@ const DisplayCards: React.FC = () => {
     }
   };
 
+  const onDimensionChange = (value: number) => {
+    setDimension({ ...dimension, scale: value });
+  };
+
   const onEditClick = (side: CardSide, cancel: boolean) => {
     let textElement;
     switch (side) {
@@ -211,7 +215,11 @@ const DisplayCards: React.FC = () => {
               )}
             </Card>
           </div>
-          {isCardSelected ? <Dimension {...dimension} /> : ""}
+          {isCardSelected ? (
+            <Dimension {...dimension} onDimensionChange={onDimensionChange} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="Navigation">

@@ -10,7 +10,10 @@ interface DimensionProps {
   isPreview: boolean;
 }
 
-const Dimension: React.FC<DimensionProps> = (props) => {
+const Dimension: React.FC<DimensionProps> = (
+  onDimensionChange,
+  props: DimensionProps
+) => {
   return (
     <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
       <p className="Card-Text">{props.dimensionValue}</p>
@@ -19,7 +22,11 @@ const Dimension: React.FC<DimensionProps> = (props) => {
           <Typography>Fixed</Typography>
           <Typography>Active</Typography>
         </div>
-        <Slider className="Slider-Bar" defaultValue={props.scale} />
+        <Slider
+          className="Slider-Bar"
+          value={props.scale}
+          onChange={onDimensionChange}
+        />
         <Typography className="User-Explanation">
           {props.userExplanation.length > 0
             ? '"' + props.userExplanation + '"'
