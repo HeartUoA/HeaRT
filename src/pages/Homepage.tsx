@@ -5,8 +5,6 @@ import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
-type RouterProps = RouteComponentProps;
-
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
     props.history.push("/DisplayCards");
