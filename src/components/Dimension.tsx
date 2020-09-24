@@ -32,10 +32,6 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
     >
       <p className="Card-Text">{props.dimension.dimensionValue}</p>
       <div className="Slider">
-        <div className="Captions-Container">
-          <Typography>Fixed</Typography>
-          <Typography>Active</Typography>
-        </div>
         <Slider
           className="Slider-Bar"
           value={props.dimension.scale}
