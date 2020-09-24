@@ -45,16 +45,26 @@ const tempDimension = {
     30: "A 3rd dimension",
     100: {
       style: {
-        color: "#ff9cb8",
+        color: "#ef547f",
       },
       label: <strong>Active</strong>,
     },
   },
 };
 
+const tempColours = {
+  leftCardColour: "#FFFFFF",
+  rightCardColour: "#FFFFFF",
+};
+
 const DisplayCards: React.FC = () => {
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
+  const [colours, setColours] = useState(tempColours);
+  const [dimension, setDimension] = useState(tempDimension);
+  const progressMade = { completed: 8, total: 14 };
+  let isCardSelected = leftState.isSelected || rightState.isSelected;
+
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
   };
@@ -73,14 +83,12 @@ const DisplayCards: React.FC = () => {
         setLeftState({ ...leftState, isSelected: true });
         setRightState({ ...rightState, isSelected: false });
         onDimensionChange(0);
-        console.log(dimension);
         break;
 
       case CardSide.Right:
         setRightState({ ...rightState, isSelected: true });
         setLeftState({ ...leftState, isSelected: false });
         onDimensionChange(100);
-        console.log(dimension);
         break;
 
       default:
@@ -93,7 +101,6 @@ const DisplayCards: React.FC = () => {
     side: CardSide,
     cancel: boolean
   ) => {
-    console.log("Edit button clicked");
     event.stopPropagation();
 
     let textElement;
@@ -101,14 +108,12 @@ const DisplayCards: React.FC = () => {
       case CardSide.Left:
         textElement = document.getElementById("leftCardEdit");
         if (!!textElement && !cancel) {
-          console.log("Left clicked");
           setLeftState({
             text: textElement.innerText,
             isEditing: !leftState.isEditing,
             isSelected: leftState.isSelected,
           });
         } else {
-          console.log("Left clicked");
           setLeftState({ ...leftState, isEditing: !leftState.isEditing });
         }
         break;
@@ -129,10 +134,6 @@ const DisplayCards: React.FC = () => {
     }
   };
 
-  const progressMade = { completed: 8, total: 14 };
-  const [dimension, setDimension] = useState(tempDimension);
-  let isCardSelected = leftState.isSelected || rightState.isSelected;
-
   const onDimensionChange = (value: number) => {
     // Change selected card to reflect slider values
     if (value < 50) {
@@ -143,15 +144,30 @@ const DisplayCards: React.FC = () => {
       setLeftState({ ...leftState, isSelected: false });
     }
 
-    console.log("UPDATING SLIDER");
     setDimension({ ...dimension, scale: value });
-    console.log(dimension);
+    setColours({
+      leftCardColour: getLeftColour(value),
+      rightCardColour: getRightColour(value),
+    });
   };
+
+  function getLeftColour(value: number) {
+    var hue = 344.7;
+    var value = 87 + (13 / 100) * value;
+    console.log("left" + value);
+    return ["hsl(", hue, ",100%,", value, "%)"].join("");
+  }
+
+  function getRightColour(value: number) {
+    var hue = 344.7;
+    var value = 100 - (13 / 100) * value;
+    console.log("right" + value);
+    return ["hsl(", hue, ",100%,", value, "%)"].join("");
+  }
 
   return (
     <div className="DisplayCards">
       <Header />
-
       <div className="Content">
         <div>
           {isCardSelected ? (
@@ -167,6 +183,7 @@ const DisplayCards: React.FC = () => {
                 leftState.isSelected ? "Card-Selected" : ""
               }`}
               onClick={() => onCardClick(CardSide.Left)}
+              style={{ backgroundColor: colours.leftCardColour }}
             >
               <Tooltip
                 title={
@@ -211,6 +228,7 @@ const DisplayCards: React.FC = () => {
                 rightState.isSelected ? "Card-Selected" : ""
               }`}
               onClick={() => onCardClick(CardSide.Right)}
+              style={{ backgroundColor: colours.rightCardColour }}
             >
               <Tooltip
                 title={

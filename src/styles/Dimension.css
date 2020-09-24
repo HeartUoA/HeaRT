@@ -1,5 +1,5 @@
 .Card-Dimension {
-  min-height: 300px;
+  min-height: 250px;
   margin: 30px;
   max-width: 97%;
   box-shadow: 4px 4px 10px #212121;
@@ -26,7 +26,7 @@
 }
 
 .User-Explanation {
-  margin-top: 2%;
+  margin-top: 3%;
   font-size: 16px;
   margin-left: 2px;
 }
@@ -36,7 +36,7 @@
 }
 
 .Slider-Bar {
-  margin-top: 2%;
+  margin-top: %;
 }
 
 .Dimension-Row {

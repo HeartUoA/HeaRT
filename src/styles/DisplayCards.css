@@ -57,7 +57,7 @@
 }
 
 .Card:hover {
-  background-color: #ffc4d3;
+  background-color: #ffc4d3 !important;
   color: #212121;
   border: none;
 }
