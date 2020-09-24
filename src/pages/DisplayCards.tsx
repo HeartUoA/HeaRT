@@ -42,6 +42,7 @@ const tempDimension = {
   isPreview: false,
   marks: {
     0: "Fixed",
+    30: "A 3rd dimension",
     100: {
       style: {
         color: "#ff9cb8",
