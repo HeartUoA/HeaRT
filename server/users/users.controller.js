@@ -1,6 +1,8 @@
 import bodyParser from "body-parser";
 import { Router } from "express";
+import jwt from "jsonwebtoken";
 import User from "./user.model";
+import { jwtTokenSecret } from "../config";
 
 const router = Router();
 
@@ -20,7 +22,11 @@ router
     try {
       const user = await User.findOne({ username: request.params.username });
       if (user.passwordHash === request.body.passwordHash) {
-        return response.status(200).json(user);
+        const accessToken = jwt.sign(
+          { userID: user._id.toString() },
+          jwtTokenSecret
+        );
+        return response.status(200).json({ accessToken });
       }
       return response
         .status(403)

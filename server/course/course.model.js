@@ -21,6 +21,10 @@ const courseSchemaDef = {
     type: Number,
     required: true,
   },
+  createdByUserID: {
+    type: String,
+    required: true,
+  },
 };
 
 const courseSchema = new Schema(courseSchemaDef);

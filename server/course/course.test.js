@@ -30,11 +30,14 @@ describe("/api/course tests", () => {
       cohortSize: 200,
       role: "Course Cordinator",
       ageOfCourse: 5,
+      createdByUserID: "testID",
     });
     expect(postResponse.status).toBe(200);
-    expect(postResponse.body).toBe("Course saved!");
+    expect(postResponse.body).toBeDefined();
 
-    const getResponse = await request(app).get("/api/course");
+    const getResponse = await request(app).get(
+      "/api/course/" + postResponse.body._id
+    );
     expect(getResponse.status).toBe(200);
     expect(getResponse.body).toEqual([
       expect.objectContaining({
@@ -42,6 +45,7 @@ describe("/api/course tests", () => {
         cohortSize: 200,
         role: "Course Cordinator",
         ageOfCourse: 5,
+        createdByUserID: "testID",
       }),
     ]);
     // Need to check date seperately after casting to a Date object

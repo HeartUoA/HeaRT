@@ -1,5 +1,6 @@
 import express from "express";
 import { resolve } from "path";
+import bodyParser from "body-parser";
 import courseController from "./course/course.controller";
 import usersController from "./users/users.controller";
 
