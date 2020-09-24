@@ -88,18 +88,27 @@ const DisplayCards: React.FC = () => {
     }
   };
 
-  const onEditClick = (side: CardSide, cancel: boolean) => {
+  const onEditClick = (
+    event: React.MouseEvent,
+    side: CardSide,
+    cancel: boolean
+  ) => {
+    console.log("Edit button clicked");
+    event.stopPropagation();
+
     let textElement;
     switch (side) {
       case CardSide.Left:
         textElement = document.getElementById("leftCardEdit");
         if (!!textElement && !cancel) {
+          console.log("Left clicked");
           setLeftState({
             text: textElement.innerText,
             isEditing: !leftState.isEditing,
             isSelected: leftState.isSelected,
           });
         } else {
+          console.log("Left clicked");
           setLeftState({ ...leftState, isEditing: !leftState.isEditing });
         }
         break;
@@ -169,7 +178,7 @@ const DisplayCards: React.FC = () => {
                   src={leftState.isEditing ? save : edit}
                   className={leftState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={() => onEditClick(CardSide.Left, false)}
+                  onClick={(event) => onEditClick(event, CardSide.Left, false)}
                 />
               </Tooltip>
               {leftState.isEditing ? (
@@ -179,7 +188,9 @@ const DisplayCards: React.FC = () => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={() => onEditClick(CardSide.Left, true)}
+                      onClick={(event) =>
+                        onEditClick(event, CardSide.Left, true)
+                      }
                     />
                   </Tooltip>
                   <div
@@ -211,7 +222,7 @@ const DisplayCards: React.FC = () => {
                   src={rightState.isEditing ? save : edit}
                   className={rightState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={() => onEditClick(CardSide.Right, false)}
+                  onClick={(event) => onEditClick(event, CardSide.Right, false)}
                 />
               </Tooltip>
               {rightState.isEditing ? (
@@ -221,7 +232,9 @@ const DisplayCards: React.FC = () => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={() => onEditClick(CardSide.Right, true)}
+                      onClick={(event) =>
+                        onEditClick(event, CardSide.Right, true)
+                      }
                     />
                   </Tooltip>
                   <div
