@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
+import Modal from "antd/lib/modal/Modal";
+import Instructions from "../components/Instructions";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
     props.history.push("/DisplayCards");
   };
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const onInstructionsClick = () => {
-    // TODO: Change code here to redirect to instructions screen (add URL)
-    // props.history.push("URL-HERE");
+    setShowInstructions(!showInstructions);
   };
 
   return (
@@ -34,6 +36,7 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
           <Typography className="Button-Text">Instructions</Typography>
         </Button>
       </div>
+      <Instructions visible={showInstructions} hide={onInstructionsClick} />
     </div>
   );
 };
