@@ -5,7 +5,7 @@ const chartSchemaDef = {
     type: String,
     required: true,
   },
-  dateCreated: {
+  createdAt: {
     type: Date,
     required: true,
   },

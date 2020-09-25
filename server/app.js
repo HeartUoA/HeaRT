@@ -1,8 +1,8 @@
 import express from "express";
 import { resolve } from "path";
-import bodyParser from "body-parser";
 import courseController from "./course/course.controller";
 import usersController from "./users/users.controller";
+import dimensionsController from "./dimension/dimensions.controller";
 
 // Create the express application
 const app = express();
@@ -10,6 +10,7 @@ const app = express();
 // Assign controllers to routes
 app.use("/api/course", courseController);
 app.use("/api/users", usersController);
+app.use("/api/dimensions", dimensionsController);
 
 // Declare the path to frontend's static assets
 app.use(express.static(resolve("..", "build")));

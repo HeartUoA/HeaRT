@@ -5,7 +5,7 @@ const courseSchemaDef = {
     type: String,
     required: true,
   },
-  date: {
+  createdAt: {
     type: Date,
     required: true,
   },

@@ -9,6 +9,7 @@ const router = Router();
 router.route("/").post(bodyParser.json(), async (request, response) => {
   try {
     const user = new User(request.body);
+    user.createdAt = Date.now();
     await user.save();
     return response.status(200).json("User created!");
   } catch (error) {
