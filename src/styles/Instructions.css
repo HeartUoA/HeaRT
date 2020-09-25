@@ -1,0 +1,40 @@
+.Navigation-Container {
+  margin-bottom: 2em;
+  margin-top: 2em;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.Navigation-Button {
+  font-size: 4em;
+  color: #ff9cb8;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+.Navigation-Button:disabled {
+  color: grey;
+}
+.Instructions-Container {
+  text-align: center;
+  overflow: auto;
+  height: 100%;
+}
+
+.Instructions-Image {
+  padding: 3em;
+  height: auto;
+  width: auto;
+}
+
+.Instructions-Text {
+  text-align: left;
+  font-size: medium;
+  overflow: auto;
+}
+
+.Instructions-Counter {
+  background-color: white;
+  position: absolute;
+  bottom: 2em;
+}
