@@ -11,7 +11,7 @@ type RouterProps = RouteComponentProps;
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
-    props.history.push("/DisplayCards");
+    props.history.push("/CourseInfo");
   };
   const [showInstructions, setShowInstructions] = useState(false);
 

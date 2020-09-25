@@ -18,19 +18,24 @@
 .Create-Chart-Text {
   font-family: "ABeeZee";
   color: #1f1f1f;
-  font-size: 6vh;
+  font-size: 5vh;
   font-weight: normal;
-  margin: 0vh 0px 4vh 0px;
+  text-align: center;
+  margin-left: -2.6vw;
+  margin-top: -2vh;
+  margin-bottom: 2vh;
 }
 
 .Form-Container {
-  height: 41vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
   width: 41vw;
   background: white;
   text-align: left;
   border-radius: 1.57vw;
   box-shadow: 0px 0.33vh 0.8vh #646464;
-  padding: 4vh 0.8% 0px 4%;
+  padding: 3vh 0.8% 0px 4%;
 }
 
 .Form-Text {
@@ -69,7 +74,7 @@
 
 .Selector {
   margin-top: 0.3vh;
-  width: 11vw;
+  width: 15vw;
   height: 5vh;
 }
 
@@ -119,16 +124,17 @@
   flex-direction: row;
   align-content: space-between;
   position: relative;
-  height: 16.3vh;
-  width: 41vw;
-  padding-top: 6vh;
+  height: 13vh;
+  width: 90%;
+  padding-top: 1vh;
+  background-color: transparent;
 }
 
-.Navigation-Button {
-  height: 10vh;
-  width: 18vw;
-  box-shadow: 0px 0.33vh 0.8vh #646464;
+.Nav-Button {
+  height: 7vh;
+  width: 15vw;
   text-align: center;
+  box-shadow: 0px 0px 0px 0px;
 }
 
 .Cancel-Button {
@@ -136,6 +142,6 @@
   right: 0;
 }
 
-.Button-Text {
-  font-size: 4vh;
+.Button-Font {
+  font-size: 3.5vh;
 }
