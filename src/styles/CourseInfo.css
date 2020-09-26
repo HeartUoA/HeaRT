@@ -54,7 +54,6 @@
   font-size: 2vh;
   border-color: #969696;
   color: #1f1f1f;
-  margin-bottom: 2vh;
 }
 
 .Select-Form {
@@ -137,7 +136,7 @@
   box-shadow: 0px 0px 0px 0px;
 }
 
-.Cancel-Button {
+.Confirm-Button {
   position: absolute;
   right: 0;
 }
