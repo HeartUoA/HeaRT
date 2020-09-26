@@ -3,6 +3,7 @@ import Homepage from "./pages/Homepage";
 import DisplayCards from "./pages/DisplayCards";
 import Preview from "./pages/Preview";
 import CourseInfo from "./pages/CourseInfo";
+import Login from "./pages/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -11,6 +12,9 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/">
           <Homepage />
+        </Route>
+        <Route path="/Login">
+          <Login />
         </Route>
         <Route path="/CourseInfo">
           <CourseInfo />
