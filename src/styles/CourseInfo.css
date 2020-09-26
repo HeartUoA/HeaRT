@@ -45,7 +45,8 @@
   margin-bottom: -0.5vh;
 }
 
-.Form-Input {
+.Form-Input,
+.Form-PlayReason {
   width: 90%;
   line-height: 4.5vh;
   border-radius: 0.7vw;
@@ -54,6 +55,10 @@
   font-size: 2vh;
   border-color: #969696;
   color: #1f1f1f;
+}
+
+.Form-PlayReason {
+  margin-bottom: 2vh;
 }
 
 .Select-Form {

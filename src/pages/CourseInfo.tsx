@@ -5,6 +5,7 @@ import { Button, Input, Layout, Select, Typography, Form } from "antd";
 
 import Header from "../components/Header";
 import "../styles/CourseInfo.css";
+import TextArea from "antd/lib/input/TextArea";
 
 const { Option } = Select;
 
@@ -106,6 +107,14 @@ const CourseInfo: React.FC<RouteComponentProps> = (props) => {
                 </Select>
               </Form.Item>
             </div>
+          </div>
+          <div>
+            <Typography className="Form-Text">Reason for Playing</Typography>
+            <TextArea
+              className="Form-PlayReason"
+              rows={3}
+              placeholder="Why are you playing the HeaRT game?"
+            />
           </div>
           <div className="Button-Container">
             <Form.Item className="Confirm-Button">
