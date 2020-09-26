@@ -31,7 +31,6 @@ describe("/api/users tests", () => {
       position: "Course Cordinator",
       department: "Engineering",
       institution: "The University Of Auckland",
-      createdAt: dateNow,
       username: "jdoe",
     });
     expect(postResponse.status).toBe(200);
@@ -47,7 +46,6 @@ describe("/api/users tests", () => {
       position: "Course Cordinator",
       department: "Engineering",
       institution: "The University Of Auckland",
-      createdAt: dateNow,
       username: "jdoe",
     });
     expect(postResponse.status).toBe(200);
@@ -58,7 +56,7 @@ describe("/api/users tests", () => {
         passwordHash: "aMoreSecureHashThanThisPlease",
       });
     expect(authResponse.status).toBe(200);
-    expect(authResponse.body.username).toEqual("jdoe");
+    expect(authResponse.body.accessToken).toBeDefined();
   });
 
   it("should fail to authenticate a user if an incorrect password is provided", async () => {
@@ -82,7 +80,7 @@ describe("/api/users tests", () => {
         passwordHash: "WrongPasswordHash",
       });
     expect(authResponse.status).toBe(403);
-    expect(authResponse.body.username).toBeUndefined();
+    expect(authResponse.body.accessToken).toBeUndefined();
   });
 
   it("should fail to authenticate a user if they don't exist", async () => {
@@ -92,6 +90,6 @@ describe("/api/users tests", () => {
         passwordHash: "WrongPasswordHash",
       });
     expect(authResponse.status).toBe(403);
-    expect(authResponse.body.username).toBeUndefined();
+    expect(authResponse.body.accessToken).toBeUndefined();
   });
 });
