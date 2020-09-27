@@ -7,21 +7,40 @@ interface DimensionProps {
   dimensionValue: string;
   scale: number;
   userExplanation: string;
+  isPreview: boolean;
+  marks?: SliderMarks;
 }
 
-const Dimension: React.FC<DimensionProps> = (props) => {
+interface MainProps {
+  dimension: DimensionProps;
+  sliderUpdate: (value: number) => void;
+}
+
+interface SliderMarks {
+  [key: number]:
+    | React.ReactNode
+    | {
+        style: React.CSSProperties;
+        label: React.ReactNode;
+      };
+}
+
+const Dimension: React.FC<MainProps> = (props: MainProps) => {
   return (
-    <Card className="Card-Dimension">
-      <p className="Card-Text">{props.dimensionValue}</p>
+    <Card
+      className={props.dimension.isPreview ? "Card-Preview" : "Card-Dimension"}
+    >
+      <p className="Card-Text">{props.dimension.dimensionValue}</p>
       <div className="Slider">
-        <div className="Captions-Container">
-          <Typography>Fixed</Typography>
-          <Typography>Active</Typography>
-        </div>
-        <Slider className="Slider-Bar" defaultValue={props.scale} />
+        <Slider
+          className="Slider-Bar"
+          value={props.dimension.scale}
+          onChange={props.sliderUpdate}
+          marks={props.dimension.marks}
+        />
         <Typography className="User-Explanation">
-          {props.userExplanation.length > 0
-            ? '"' + props.userExplanation + '"'
+          {props.dimension.userExplanation.length > 0
+            ? '"' + props.dimension.userExplanation + '"'
             : ""}
         </Typography>
       </div>
