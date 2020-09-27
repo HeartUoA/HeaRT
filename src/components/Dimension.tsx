@@ -48,11 +48,11 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
           </Typography>
         ) : (
           <TextArea
-            className="User-Explanation"
+            className="User-Explanation-Edit"
             value={props.dimension.userExplanation}
             onChange={props.userExplanationUpdate}
             placeholder="Explain your position on the dimension here..."
-            rows={4}
+            rows={3}
           />
         )}
       </div>
