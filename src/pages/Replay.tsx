@@ -11,12 +11,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
     props.history.push("/DisplayCards");
   };
 
-  const playAgainForDifferentCourse = () => {
-    // TODO: Change URL here for course information page
-    // props.history.push("/DisplayCards");
-  };
-
-  const goToHomepage = () => {
+  const goToDashboard = () => {
     // TODO: Must check if user is logged in. If logged in, take user to dashboard. Else take user to homepage.
     props.history.push("/");
   };
@@ -29,18 +24,14 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
           <Typography className="Success-Text">
             Your chart has been saved!
           </Typography>
-          <Button className="Replay-Button" onClick={playAgainForSameCourse}>
-            Play again for this course
-          </Button>
-          <Button
-            className="Replay-Button"
-            onClick={playAgainForDifferentCourse}
-          >
-            Play again for another course
-          </Button>
-          <Button className="Replay-Button" onClick={goToHomepage}>
-            Return to home
-          </Button>
+          <div className="Replay-Buttons-Container">
+            <Button className="Replay-Button" onClick={playAgainForSameCourse}>
+              Play again for this course
+            </Button>
+            <Button className="Replay-Button" onClick={goToDashboard}>
+              Return to dashboard
+            </Button>
+          </div>
         </div>
       </div>
     </div>

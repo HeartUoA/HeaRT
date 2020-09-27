@@ -1,11 +1,12 @@
 .DisplayCards {
   display: flex;
   flex-direction: column;
-  min-height: 700px;
+  text-align: center;
   height: 100vh;
+  min-width: 1000px;
 }
 
-.Content {
+.Cards-Content {
   margin: 100px 0px 0px 0px;
   padding: 50px;
   display: flex;

@@ -8,7 +8,6 @@
 
 .Login-Content {
   display: flex;
-  background: #f6f7fc;
   height: calc(100% - 100px);
   justify-content: center;
   margin-top: 100px;

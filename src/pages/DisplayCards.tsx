@@ -8,7 +8,7 @@ import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
 import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
-import "../styles/Navigation.css";
+import "../styles/Footer.css";
 
 export enum CardSide {
   Left,
@@ -168,15 +168,11 @@ const DisplayCards: React.FC = () => {
   return (
     <div className="DisplayCards">
       <Header />
-      <div className="Content">
+      <div className="Cards-Content">
         <div>
-          {isCardSelected ? (
-            <Typography className="Statement">
-              Which statement describes SOFTENG761 best?
-            </Typography>
-          ) : (
-            <Typography className="Statement">Pick one statement</Typography>
-          )}
+          <Typography className="Statement">
+            Which statement best describes the course?
+          </Typography>
           <div className="Cards-Container">
             <Card
               className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
@@ -278,13 +274,13 @@ const DisplayCards: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="Navigation">
+      <div className="Footer">
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onBackClick}
         >
-          <Typography className="Navigation-Button-Text">Back</Typography>
+          Back
         </Button>
         <div className="Progress">
           <Typography>
@@ -311,23 +307,13 @@ const DisplayCards: React.FC = () => {
             strokeWidth={20}
           />
         </div>
-        {isCardSelected ? (
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onNextClick}
-          >
-            <Typography className="Navigation-Button-Text">Next</Typography>
-          </Button>
-        ) : (
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onSkipClick}
-          >
-            <Typography className="Navigation-Button-Text">Skip</Typography>
-          </Button>
-        )}
+        <Button
+          type="primary"
+          className="Footer-Button"
+          onClick={isCardSelected ? onNextClick : onSkipClick}
+        >
+          {isCardSelected ? "Next" : "Skip"}
+        </Button>
       </div>
     </div>
   );

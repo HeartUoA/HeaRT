@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
 import "../styles/DisplayCards.css";
-import "../styles/Navigation.css";
+import "../styles/Footer.css";
 
 const tempValues = [
   {
@@ -86,20 +86,20 @@ const Preview: React.FC = () => {
           ))}
         </Row>
       </div>
-      <div className="Navigation">
+      <div className="Footer">
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onBackClick}
         >
-          <Typography className="Navigation-Button-Text">Back</Typography>
+          Back
         </Button>
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onSaveClick}
         >
-          <Typography className="Navigation-Button-Text">Save</Typography>
+          Save
         </Button>
       </div>
     </div>
