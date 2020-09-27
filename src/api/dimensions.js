@@ -4,7 +4,7 @@
  * @param chartID the id of the chart
  * @returns the dimensions for the chart
  */
-export async function getDimension(chartID) {
+export async function getDimensions(chartID) {
   const response = await fetch("/api/dimensions/forchart/" + chartID);
   const dimensions = await response.json();
   return dimensions;
