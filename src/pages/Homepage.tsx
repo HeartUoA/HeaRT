@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
-import Modal from "antd/lib/modal/Modal";
 import Instructions from "../components/Instructions";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {

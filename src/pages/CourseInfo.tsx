@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Input, Layout, Menu, Select, Typography } from "antd";
+import { Button, Input, Layout, Select, Typography } from "antd";
 
 import Header from "../components/Header";
 import "../styles/CourseInfo.css";
