@@ -1,5 +1,5 @@
 .Header {
-  position: fixed;
+  position: fixed; /* Change to absolute and remove top and left for non-sticky header */
   width: 100vw;
   top: 0;
   left: 0;

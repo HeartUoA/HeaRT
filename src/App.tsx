@@ -3,8 +3,10 @@ import Homepage from "./pages/Homepage";
 import DisplayCards from "./pages/DisplayCards";
 import Preview from "./pages/Preview";
 import Replay from "./pages/Replay";
-import CourseInfo from "./pages/CourseInfo";
+import CreateCourse from "./pages/CreateCourse";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -17,8 +19,11 @@ const App: React.FC = () => {
         <Route path="/Login">
           <Login />
         </Route>
-        <Route path="/CourseInfo">
-          <CourseInfo />
+        <Route path="/Dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/CreateCourse">
+          <CreateCourse />
         </Route>
         <Route path="/DisplayCards">
           <DisplayCards />

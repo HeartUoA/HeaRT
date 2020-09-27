@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
-import Instructions from "../components/Instructions";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
-  const onPlayClick = () => {
-    props.history.push("/CourseInfo");
+  const onLoginClick = () => {
+    props.history.push("/Login");
   };
-  const [showInstructions, setShowInstructions] = useState(false);
 
-  const onInstructionsClick = () => {
-    setShowInstructions(!showInstructions);
-  };
+  const onSignUpClick = () => {
+    // TODO: Change line below and enter corresponding URL to redirect to Sign Up page
+    // props.history.push("/SignUp");
+  }
 
   return (
     <div className="Homepage">
@@ -27,14 +26,13 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
         </Typography>
       </div>
       <div className="Buttons-Container">
-        <Button className="Button" onClick={onPlayClick}>
-          <Typography className="Button-Text">Play</Typography>
+        <Button className="Button" onClick={onLoginClick}>
+          <Typography className="Button-Text">Login</Typography>
         </Button>
-        <Button type="default" className="Button" onClick={onInstructionsClick}>
-          <Typography className="Button-Text">Instructions</Typography>
+        <Button type="default" className="Button" onClick={onSignUpClick}>
+          <Typography className="Button-Text">Sign up</Typography>
         </Button>
       </div>
-      <Instructions visible={showInstructions} hide={onInstructionsClick} />
     </div>
   );
 };
