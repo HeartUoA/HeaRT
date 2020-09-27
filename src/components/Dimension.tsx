@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import { Card, Slider, Typography } from "antd";
 import "../styles/Dimension.css";
+import TextArea from "antd/lib/input/TextArea";
 
 interface DimensionProps {
   dimensionValue: string;
@@ -14,6 +15,7 @@ interface DimensionProps {
 interface MainProps {
   dimension: DimensionProps;
   sliderUpdate: (value: number) => void;
+  userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 interface SliderMarks {
@@ -38,11 +40,21 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
           onChange={props.sliderUpdate}
           marks={props.dimension.marks}
         />
-        <Typography className="User-Explanation">
-          {props.dimension.userExplanation.length > 0
-            ? '"' + props.dimension.userExplanation + '"'
-            : ""}
-        </Typography>
+        {props.dimension.isPreview ? (
+          <Typography className="User-Explanation">
+            {props.dimension.userExplanation.length > 0
+              ? '"' + props.dimension.userExplanation + '"'
+              : ""}
+          </Typography>
+        ) : (
+          <TextArea
+            className="User-Explanation"
+            value={props.dimension.userExplanation}
+            onChange={props.userExplanationUpdate}
+            placeholder="Explain your position on the dimension here..."
+            rows={4}
+          />
+        )}
       </div>
     </Card>
   );

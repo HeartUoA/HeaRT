@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
@@ -151,6 +151,10 @@ const DisplayCards: React.FC = () => {
     });
   };
 
+  const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDimension({ ...dimension, userExplanation: event.target.value });
+  };
+
   function getLeftColour(value: number) {
     var hue = 344.7;
     var value = 87 + (13 / 100) * value;
@@ -271,7 +275,11 @@ const DisplayCards: React.FC = () => {
           </div>
           {isCardSelected ? (
             <Dimension
-              {...{ dimension: dimension, sliderUpdate: onDimensionChange }}
+              {...{
+                dimension: dimension,
+                sliderUpdate: onDimensionChange,
+                userExplanationUpdate: onUserExplanationChange,
+              }}
             />
           ) : (
             ""
