@@ -19,8 +19,7 @@ const Login: React.FC = (props) => {
   return (
     <div className="Login">
       <Header />
-
-      <div className="Login-Container">
+      <div className="Login-Content">
         <div className="Login-Panel">
           <Typography className="Login-Header-Text">Login</Typography>
           <Typography className="Create-Account-Text">
@@ -46,7 +45,7 @@ const Login: React.FC = (props) => {
             className="Login-Button"
             onClick={onConfirmClick}
           >
-            <Typography className="Button-Font">Login</Typography>
+            Login
           </Button>
         </div>
       </div>

@@ -2,19 +2,15 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
   height: 100vh;
 }
 
-.Login-Container {
+.Login-Content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: #f6f7fc;
-  height: 100%;
-  margin: 100px 0px;
-  padding: 40px;
+  height: calc(100% - 100px);
+  justify-content: center;
+  margin-top: 100px;
 }
 
 .Login-Panel {
@@ -22,12 +18,14 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  width: 500px;
-  background: white;
   text-align: left;
-  border-radius: 20px;
+  background: white;
   box-shadow: 4px 4px 10px #212121;
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
   padding: 30px;
+  margin: 100px;
 }
 
 .Login-Header-Text {
@@ -46,6 +44,10 @@
   margin-left: 5px;
   color: #ff0059 !important;
   cursor: pointer;
+}
+
+.Link-Text:hover {
+  color: #ff9cb8 !important;
 }
 
 .Login-Input-Container {
@@ -75,4 +77,5 @@
   width: 100%;
   text-align: center;
   box-shadow: 0px 0px 0px 0px;
+  font-size: 24px;
 }
