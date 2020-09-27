@@ -5,8 +5,6 @@ import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 import Instructions from "../components/Instructions";
 
-type RouterProps = RouteComponentProps;
-
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
     props.history.push("/CourseInfo");
