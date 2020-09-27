@@ -20214,7 +20214,7 @@ span.ant-radio + * {
   position: absolute;
   width: 20px;
   height: 20px;
-  margin-top: -7px;
+  margin: -7px 0px 0px 4px;
   background-color: #ef547f;
   border: solid 2px #ef547f;
   border-radius: 50%;
@@ -20222,7 +20222,6 @@ span.ant-radio + * {
   cursor: pointer;
   transition: border-color 0.3s, box-shadow 0.6s,
     transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  transform: translateX(-25%) !important;
 }
 .ant-slider-handle-dragging.ant-slider-handle-dragging.ant-slider-handle-dragging {
   border-color: #ffb0c6;

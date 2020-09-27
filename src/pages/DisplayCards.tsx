@@ -47,12 +47,7 @@ const tempDimension = {
   marks: {
     0: "Fixed",
     50: "A 3rd dimension",
-    100: {
-      style: {
-        color: "#ef547f",
-      },
-      label: <strong>Active</strong>,
-    },
+    100: "Active",
   },
 };
 
@@ -141,6 +136,7 @@ const DisplayCards: React.FC = () => {
   };
 
   const onDimensionChange = (value: number) => {
+    console.log(value)
     // Change selected card to reflect slider values
     if (value < 50) {
       setLeftState({ ...leftState, isSelected: true });
@@ -158,16 +154,14 @@ const DisplayCards: React.FC = () => {
   };
 
   function getLeftColour(value: number) {
-    var hue = 344.7;
-    var value = 87 + (13 / 100) * value;
-    console.log("left" + value);
+    let hue = 344.7;
+    value = 87 + (13 / 100) * value;
     return ["hsl(", hue, ",100%,", value, "%)"].join("");
   }
 
   function getRightColour(value: number) {
-    var hue = 344.7;
-    var value = 100 - (13 / 100) * value;
-    console.log("right" + value);
+    let hue = 344.7;
+    value = 100 - (13 / 100) * value;
     return ["hsl(", hue, ",100%,", value, "%)"].join("");
   }
 
