@@ -36,6 +36,6 @@ export async function updateDimension(dimension) {
     },
     body: JSON.stringify(dimension),
   });
-  const dimension = await response.json();
-  return dimension;
+  const updatedDimension = await response.json();
+  return updatedDimension;
 }
