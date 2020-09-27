@@ -68,6 +68,7 @@ const DisplayCards: React.FC = () => {
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
+    updateDimension(dimension);
   };
 
   const onSkipClick = () => {
@@ -76,6 +77,7 @@ const DisplayCards: React.FC = () => {
 
   const onNextClick = () => {
     // TODO: Write code here to redirect to the next card or another incomplete card
+    updateDimension(dimension);
   };
 
   const onCardClick = (side: CardSide) => {
@@ -146,7 +148,6 @@ const DisplayCards: React.FC = () => {
     }
 
     setDimension({ ...dimension, scale: value });
-    updateDimension(dimension);
     setColours({
       leftCardColour: getLeftColour(value),
       rightCardColour: getRightColour(value),
@@ -155,7 +156,6 @@ const DisplayCards: React.FC = () => {
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDimension({ ...dimension, userExplanation: event.target.value });
-    updateDimension(dimension);
   };
 
   function getLeftColour(value: number) {
