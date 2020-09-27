@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Typography, Button } from "antd";
-import { Row } from "antd";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+
+import { Typography, Button, Row } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
-import "../styles/DisplayCards.css";
+import "../styles/Preview.css";
 import "../styles/Footer.css";
 
 const tempValues = [
@@ -60,14 +61,15 @@ const tempValues = [
   },
 ];
 
-const Preview: React.FC = () => {
+const Preview: React.FC<RouteComponentProps> = (props) => {
   const [dimensions, setDimensions] = useState(tempValues);
   const onBackClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    // TODO: Write code here to redirect to display cards screen with the last card
   };
 
   const onSaveClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    // TODO: Write code here to make API post request to save chart
+    props.history.push("/Replay")
   };
 
   const onDimensionChange = (value: number) => {
@@ -76,8 +78,8 @@ const Preview: React.FC = () => {
   return (
     <div className="Preview">
       <Header />
-      <div className="Content">
-        <Typography className="Statement">Preview</Typography>
+      <div className="Preview-Content">
+        <Typography className="Preview-Title">Preview</Typography>
         <Row className="Dimension-Row">
           {dimensions.map((item) => (
             <Dimension
@@ -106,4 +108,4 @@ const Preview: React.FC = () => {
   );
 };
 
-export default Preview;
+export default withRouter(Preview);

@@ -19,6 +19,7 @@ type Card = {
   text: string;
   isSelected: boolean;
   isEditing: boolean;
+  score: number;
 };
 
 const initialLeftCard: Card = {
@@ -26,6 +27,8 @@ const initialLeftCard: Card = {
     "(Left Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
   isEditing: false,
+  score: 0
+
 };
 
 const initialRightCard: Card = {
@@ -33,6 +36,7 @@ const initialRightCard: Card = {
     "(Right Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
   isEditing: false,
+  score: 100
 };
 
 const tempDimension = {
@@ -42,7 +46,7 @@ const tempDimension = {
   isPreview: false,
   marks: {
     0: "Fixed",
-    30: "A 3rd dimension",
+    50: "A 3rd dimension",
     100: {
       style: {
         color: "#ef547f",
@@ -52,7 +56,7 @@ const tempDimension = {
   },
 };
 
-const tempColours = {
+const initColours = {
   leftCardColour: "#FFFFFF",
   rightCardColour: "#FFFFFF",
 };
@@ -60,7 +64,7 @@ const tempColours = {
 const DisplayCards: React.FC = () => {
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
-  const [colours, setColours] = useState(tempColours);
+  const [colours, setColours] = useState(initColours);
   const [dimension, setDimension] = useState(tempDimension);
   const progressMade = { completed: 8, total: 14 };
   let isCardSelected = leftState.isSelected || rightState.isSelected;
@@ -82,13 +86,13 @@ const DisplayCards: React.FC = () => {
       case CardSide.Left:
         setLeftState({ ...leftState, isSelected: true });
         setRightState({ ...rightState, isSelected: false });
-        onDimensionChange(0);
+        onDimensionChange(leftState.score);
         break;
 
       case CardSide.Right:
         setRightState({ ...rightState, isSelected: true });
         setLeftState({ ...leftState, isSelected: false });
-        onDimensionChange(100);
+        onDimensionChange(rightState.score);
         break;
 
       default:
@@ -109,6 +113,7 @@ const DisplayCards: React.FC = () => {
         textElement = document.getElementById("leftCardEdit");
         if (!!textElement && !cancel) {
           setLeftState({
+            ...leftState,
             text: textElement.innerText,
             isEditing: !leftState.isEditing,
             isSelected: leftState.isSelected,
@@ -121,6 +126,7 @@ const DisplayCards: React.FC = () => {
         textElement = document.getElementById("rightCardEdit");
         if (!!textElement && !cancel) {
           setRightState({
+            ...rightState,
             text: textElement.innerText,
             isEditing: !rightState.isEditing,
             isSelected: rightState.isSelected,
@@ -175,9 +181,7 @@ const DisplayCards: React.FC = () => {
           </Typography>
           <div className="Cards-Container">
             <Card
-              className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
-                leftState.isSelected ? "Card-Selected" : ""
-              }`}
+              className={`Card ${leftState.isSelected && "Card-Selected"}`}
               onClick={() => onCardClick(CardSide.Left)}
               style={{ backgroundColor: colours.leftCardColour }}
             >
@@ -220,9 +224,7 @@ const DisplayCards: React.FC = () => {
               )}
             </Card>
             <Card
-              className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
-                rightState.isSelected ? "Card-Selected" : ""
-              }`}
+              className={`Card ${rightState.isSelected && "Card-Selected"}`}
               onClick={() => onCardClick(CardSide.Right)}
               style={{ backgroundColor: colours.rightCardColour }}
             >
