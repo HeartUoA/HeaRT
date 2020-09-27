@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom"
+import moment from "moment";
 
 import { Button, Input, Layout, InputNumber, Typography, DatePicker } from "antd";
 
@@ -7,6 +8,11 @@ import Header from "../components/Header";
 import "../styles/CreateCourse.css";
 
 const CreateCourse: React.FC<RouteComponentProps> = (props) => {
+  let [ courseName, setCourseName ] = useState("");
+  let [ role, setRole ] = useState("");
+  let [ startYear, setStartYear ] = useState<Number | undefined>(undefined);
+  let [ courseSize, setCourseSize ] = useState<String | Number | undefined>(undefined);
+
   const onConfirmClick = () => {
     // TODO: Write code here to create new course (post request)
     props.history.push("/Dashboard");
@@ -30,6 +36,8 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
                 className="Course-Input"
                 name="courseName"
                 placeholder="e.g SOFTENG 761"
+                value={courseName}
+                onChange={e => setCourseName(e.target.value)}
               />
             </div>
             <div>
@@ -38,16 +46,18 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
                 className="Course-Input"
                 name="courseRole"
                 placeholder="e.g Course Coordinator"
+                value={role}
+                onChange={e => setRole(e.target.value)}
               />
             </div>
             <div className="Numerical-Input-Container">
               <div className="Numerical-Input">
                 <Typography className="Course-Label-Text">Course start year</Typography>
-                <DatePicker className="Course-Input" picker="year" />
+                <DatePicker className="Course-Input" picker="year" value={startYear && moment().year(startYear.valueOf())} onChange={e => setStartYear(e?.year())} />
               </div>
               <div className="Numerical-Input">
                 <Typography className="Course-Label-Text">Cohort Size</Typography>
-                <InputNumber className="Course-Input Cohort-Size" type="number"/>
+                <InputNumber className="Course-Input Cohort-Size" type="number" value={courseSize && Number(courseSize)} onChange={e => setCourseSize(e)}/>
               </div>
             </div>
           </div>

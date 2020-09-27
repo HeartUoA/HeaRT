@@ -19,9 +19,11 @@
     "jsonwebtoken": "^8.5.1",
     "less": "^3.12.2",
     "lessc": "^1.0.2",
+    "moment": "^2.29.0",
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-tooltip": "^4.2.9"

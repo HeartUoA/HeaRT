@@ -12,8 +12,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
   };
 
   const goToDashboard = () => {
-    // TODO: Must check if user is logged in. If logged in, take user to dashboard. Else take user to homepage.
-    props.history.push("/");
+    props.history.push("/Dashboard");
   };
 
   return (

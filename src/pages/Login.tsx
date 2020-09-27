@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import { Button, Input, Typography } from "antd";
@@ -7,8 +7,20 @@ import Header from "../components/Header";
 import "../styles/Login.css";
 
 const Login: React.FC = (props) => {
+  let [ username, setUsername ] = useState("");
+  let [ password, setPassword ] = useState("");
+
   const onConfirmClick = () => {
     // TODO: Write code here to try logging in (if successful - dashboard, if error then display error)
+    const response = fetch(`https://localhost:9000/api/users/authenticate/${username}`, {
+      method: "POST",
+      body: JSON.stringify({passwordHash: password}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    response.then(res => console.log(res.json())).catch(e => console.log(e));
   };
 
   const onSignupClick = () => {
@@ -33,11 +45,11 @@ const Login: React.FC = (props) => {
               <Typography className="Login-Label-Text">
                 Username or email
               </Typography>
-              <Input className="Login-Input" name="usernameEmail" />
+              <Input className="Login-Input" name="usernameEmail" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
             <div>
               <Typography className="Login-Label-Text">Password</Typography>
-              <Input className="Login-Input" name="password" type="password" />
+              <Input className="Login-Input" name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </div>
           </div>
           <Button
