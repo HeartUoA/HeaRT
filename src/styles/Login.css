@@ -42,12 +42,12 @@
 }
 .Link-Text {
   margin-left: 5px;
-  color: #ff0059 !important;
+  color: #ff0059;
   cursor: pointer;
 }
 
 .Link-Text:hover {
-  color: #ff9cb8 !important;
+  color: #ff9cb8;
 }
 
 .Login-Input-Container {
