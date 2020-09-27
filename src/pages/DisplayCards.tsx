@@ -9,6 +9,7 @@ import save from "../assets/images/save.png";
 import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Navigation.css";
+import { updateDimension } from "../api/dimensions";
 
 export enum CardSide {
   Left,
@@ -145,6 +146,7 @@ const DisplayCards: React.FC = () => {
     }
 
     setDimension({ ...dimension, scale: value });
+    updateDimension(dimension);
     setColours({
       leftCardColour: getLeftColour(value),
       rightCardColour: getRightColour(value),
@@ -153,6 +155,7 @@ const DisplayCards: React.FC = () => {
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDimension({ ...dimension, userExplanation: event.target.value });
+    updateDimension(dimension);
   };
 
   function getLeftColour(value: number) {
