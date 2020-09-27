@@ -1,11 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const courseSchemaDef = {
   name: {
     type: String,
     required: true,
   },
-  date: {
+  createdAt: {
     type: Date,
     required: true,
   },
@@ -20,9 +20,13 @@ const courseSchemaDef = {
   ageOfCourse: {
     type: Number,
     required: true,
-  }
+  },
+  createdByUserID: {
+    type: String,
+    required: true,
+  },
 };
 
 const courseSchema = new Schema(courseSchemaDef);
 
-export default model('Course', courseSchema);
+export default model("Course", courseSchema);
