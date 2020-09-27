@@ -7,8 +7,6 @@ import "../styles/Homepage.css";
 import Modal from "antd/lib/modal/Modal";
 import Instructions from "../components/Instructions";
 
-type RouterProps = RouteComponentProps;
-
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const onPlayClick = () => {
     props.history.push("/CourseInfo");
