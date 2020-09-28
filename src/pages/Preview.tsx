@@ -70,7 +70,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     if (!cookies['accessToken']) {
       props.history.push("/Login");
     }
-  }, []);
+  }, [cookies]);
 
 
   const onBackClick = () => {

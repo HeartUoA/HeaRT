@@ -15,7 +15,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
     if (!cookies['accessToken']) {
       props.history.push("/Login");
     }
-  }, []);
+  }, [cookies]);
 
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);

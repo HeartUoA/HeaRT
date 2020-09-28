@@ -19,7 +19,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     if (cookies['accessToken']) {
       props.history.push("/Dashboard");
     }
-  }, []);
+  }, [cookies]);
 
   const onConfirmClick = async (): Promise<void> => {
     const hashedPassword = md5(password);
@@ -38,7 +38,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
       setError(false);
       props.history.push("/Dashboard");
     } else {
-      setError(!error);
+      setError(true);
     }
   };
 
@@ -62,9 +62,9 @@ const Login: React.FC<RouteComponentProps> = (props) => {
           <div className="Login-Input-Container">
             <div>
               <Typography className="Login-Label-Text">
-                Username or email
+                Username
               </Typography>
-              <Input className={`Login-Input ${error && "Error"}`} name="usernameEmail" value={username} onChange={e => setUsername(e.target.value)} />
+              <Input className={`Login-Input ${error && "Error"}`} name="username" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
             <div>
               <Typography className="Login-Label-Text">Password</Typography>

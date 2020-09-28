@@ -13,7 +13,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
     if (!cookies['accessToken']) {
       props.history.push("/Login");
     }
-  }, []);
+  }, [cookies]);
 
   const playAgainForSameCourse = () => {
     // TODO: Need to pass in the course/game ID to replay for the same course (or is it stored in Redux/Context API?)

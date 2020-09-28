@@ -13,7 +13,7 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
     if (cookies['accessToken']) {
       props.history.push("/Dashboard");
     }
-  }, []);
+  }, [cookies]);
 
   const onLoginClick = () => {
     props.history.push("/Login");

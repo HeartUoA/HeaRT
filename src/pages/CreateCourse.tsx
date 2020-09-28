@@ -19,7 +19,7 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
     if (!cookies['accessToken']) {
       props.history.push("/Login");
     }
-  }, []);
+  }, [cookies]);
 
   const onConfirmClick = () => {
     // TODO: Write code here to create new course (post request)
