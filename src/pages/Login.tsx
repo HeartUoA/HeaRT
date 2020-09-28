@@ -35,6 +35,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     const res = await response.json();
     if (res && res.accessToken) {
       setCookie('accessToken', res.accessToken);
+      setError(false);
       props.history.push("/Dashboard");
     } else {
       setError(!error);
