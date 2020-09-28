@@ -32,7 +32,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
       },
     });
 
-    const res = await response.json();
+    const res = await response.json().catch(e => setError(true));
     if (res && res.accessToken) {
       setCookie('accessToken', res.accessToken);
       setError(false);
@@ -75,6 +75,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
             type="primary"
             className="Login-Button"
             onClick={onConfirmClick}
+            disabled={!username || !password}
           >
             Login
           </Button>
