@@ -24,7 +24,7 @@ import { url } from "../server/config";
       await Course.deleteMany({});
       const user = new User({
         name: "John Doe",
-        passwordHash: "aMoreSecureHashThanThisPlease",
+        passwordHash: "5f4dcc3b5aa765d61d8327deb882cf99",
         email: "john@doe.com",
         position: "Course Cordinator",
         department: "Engineering",
@@ -32,6 +32,7 @@ import { url } from "../server/config";
         createdAt: Date.now(),
         username: "jdoe",
       });
+      let userid = user._id;
       await user.save();
       console.log(chalk.green("Sample user successfuly created!"));
       const newCourses = [
@@ -41,6 +42,8 @@ import { url } from "../server/config";
           cohortSize: 200,
           role: "Course Cordinator",
           ageOfCourse: 5,
+          createdByUserID: userid,
+          createdAt: Date.now(),
         },
         {
           name: "SOFTENG 750",
@@ -48,6 +51,8 @@ import { url } from "../server/config";
           cohortSize: 100,
           role: "Course Instructor",
           ageOfCourse: 4,
+          createdByUserID: userid,
+          createdAt: Date.now(),
         },
         {
           name: "COMPSCI 221",
@@ -55,6 +60,8 @@ import { url } from "../server/config";
           cohortSize: 263,
           role: "Course Cordinator",
           ageOfCourse: 3,
+          createdByUserID: userid,
+          createdAt: Date.now(),
         },
         {
           name: "BUSADMIN 350",
@@ -62,6 +69,8 @@ import { url } from "../server/config";
           cohortSize: 140,
           role: "Course Cordinator",
           ageOfCourse: 2,
+          createdByUserID: userid,
+          createdAt: Date.now(),
         },
       ];
       await Course.insertMany(newCourses);
