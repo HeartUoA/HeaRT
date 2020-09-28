@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Typography, Button } from "antd";
-import { Row } from "antd";
+import React, { useState, useEffect } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
+import { Typography, Button, Row } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
-import "../styles/DisplayCards.css";
-import "../styles/Navigation.css";
+import "../styles/Preview.css";
+import "../styles/Footer.css";
 
 const tempValues = [
   {
@@ -60,24 +62,35 @@ const tempValues = [
   },
 ];
 
-const Preview: React.FC = () => {
-  const [dimensions, setDimensions] = useState(tempValues);
+const Preview: React.FC<RouteComponentProps> = (props) => {
+  const [ cookies ] = useCookies(['accessToken']);
+  const [ dimensions, setDimensions ] = useState(tempValues);
+
+  useEffect(() => {
+    if (!cookies['accessToken']) {
+      props.history.push("/Login");
+    }
+  }, [cookies]);
+
+
   const onBackClick = () => {
-    // TODO: Write code here to redirect to course info screen
+    // TODO: Write code here to redirect to display cards screen with the last card
   };
 
   const onSaveClick = () => {
-    // TODO: Write code here to redirect to instructions screen
+    // TODO: Write code here to make API post request to save chart
+    props.history.push("/Replay")
   };
 
   const onDimensionChange = (value: number) => {
     // what happens when someone drags slider
   };
+
   return (
     <div className="Preview">
       <Header />
-      <div className="Content">
-        <Typography className="Statement">Preview</Typography>
+      <div className="Preview-Content">
+        <Typography className="Preview-Title">Preview</Typography>
         <Row className="Dimension-Row">
           {dimensions.map((item) => (
             <Dimension
@@ -86,24 +99,24 @@ const Preview: React.FC = () => {
           ))}
         </Row>
       </div>
-      <div className="Navigation">
+      <div className="Footer">
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onBackClick}
         >
-          <Typography className="Navigation-Button-Text">Back</Typography>
+          Back
         </Button>
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onSaveClick}
         >
-          <Typography className="Navigation-Button-Text">Save</Typography>
+          Save
         </Button>
       </div>
     </div>
   );
 };
 
-export default Preview;
+export default withRouter(Preview);

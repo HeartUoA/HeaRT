@@ -1,11 +1,14 @@
 .Header {
-  position: fixed;
+  position: fixed; /* Change to absolute and remove top and left for non-sticky header */
   width: 100vw;
   top: 0;
   left: 0;
   height: 100px;
   padding: 10px 15px;
   z-index: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .Logo-Container {
