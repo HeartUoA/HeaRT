@@ -9,6 +9,10 @@ import { API_DOMAIN } from "../config";
 import Header from "../components/Header";
 import "../styles/Login.css";
 
+const USERNAME_EMPTY = "Please enter your username.";
+const PASSWORD_EMPTY = "Please enter your password."
+const INCORRECT_LOGIN = "Username and/or password is incorrect.";
+
 const Login: React.FC<RouteComponentProps> = (props) => {
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -33,19 +37,19 @@ const Login: React.FC<RouteComponentProps> = (props) => {
         },
       });
 
-      const res = await response.json().catch(e => setError("Username and/or password is incorrect."));
+      const res = await response.json().catch(e => setError(INCORRECT_LOGIN));
       if (res && res.accessToken) {
         setCookie('accessToken', res.accessToken);
         setError("");
         props.history.push("/Dashboard");
       } else {
-        setError("Username and/or password is incorrect.");
+        setError(INCORRECT_LOGIN);
       }
     } else {
       if (!username) {
-        setError("Please enter your username.");
+        setError(USERNAME_EMPTY);
       } else {
-        setError("Please enter your password.");
+        setError(PASSWORD_EMPTY);
       }
     }
     
@@ -74,7 +78,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
                 Username
               </Typography>
               <Input 
-                className={`Login-Input ${error === "Please enter your username." && "Error"}`} 
+                className={`Login-Input ${(error === USERNAME_EMPTY || error === INCORRECT_LOGIN) && "Error"}`} 
                 name="username" value={username} 
                 onChange={e => setUsername(e.target.value)} 
               />
@@ -82,7 +86,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
             <div>
               <Typography className="Login-Label-Text">Password</Typography>
               <Input 
-                className={`Login-Input ${error === "Please enter your password." && "Error"}`} 
+                className={`Login-Input ${(error === PASSWORD_EMPTY || error === INCORRECT_LOGIN) && "Error"}`} 
                 name="password" 
                 type="password" 
                 value={password} 
