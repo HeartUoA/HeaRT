@@ -11,17 +11,17 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Statement 1.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Statement 2.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Academic/abstract",
           100: "Authentic/experimental",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -29,17 +29,17 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Learners can only do learning tasks in one way.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Learners can do learning tasks in a variety of ways.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "High/constrained",
           100: "Low/open",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -47,17 +47,17 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Learners can contribute to or change the content.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "The content is pre-prepared and fixed. Learners can’t contribute to or change the content.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Navigational",
           100: "Manipulative",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -65,18 +65,18 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Learners perform set learning tasks using information provided.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Learners explore the content and learning tasks in their own way.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Structured",
           50: "Guided",
           100: "Facilitated",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -84,17 +84,17 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Statement 1.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Statement 2.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Teacher-managed",
           100: "Student-managed",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -102,17 +102,17 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Statement 1.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Statement 2.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Reproduction",
           100: "Construction",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -120,18 +120,18 @@ const charts: Chart[] = [
         type: "Practice",
         leftCard: {
           statement: "Students receive predetermined feedback that is built into learning activities.",
-          sliderPosition: 50,
+          anchorSliderPos: 50,
         },
         rightCard: { 
           statement: "Students receive personalised feedback to guide their learning.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Minimal",
           50: "Fixed",
           100: "Responsive",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -139,17 +139,17 @@ const charts: Chart[] = [
         type: "Belief",
         leftCard: {
           statement: "Learning goals are clearly defined and can be linked to assessment clearly.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Learning goals are open to interpretation and are not easily assessable.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Sharply focused",
           100: "Unfocused",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -157,17 +157,17 @@ const charts: Chart[] = [
         type: "Belief",
         leftCard: {
           statement: "The curriculum or course content determines the learning goals of this course.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "Learners can determine (some or all of) the learning goals in this course.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Instructivist",
           100: "Constructivist",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
       {
@@ -175,17 +175,17 @@ const charts: Chart[] = [
         type: "Belief",
         leftCard: {
           statement: "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
-          sliderPosition: 0,
+          anchorSliderPos: 0,
         },
         rightCard: { 
           statement: "For learning to occur in this course, the learning needs to happen together, in a learning community.",
-          sliderPosition: 100,
+          anchorSliderPos: 100,
         },
         marks: {
           0: "Personal",
           100: "Social",
         },
-        position: -1,
+        userSelectedSliderPos: -1,
         note: undefined,
       },
     ],

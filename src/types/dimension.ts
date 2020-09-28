@@ -9,6 +9,6 @@ export type Dimension = {
   leftCard: Card;
   rightCard: Card;
   marks?: SliderMarks;
-  position: number;
+  userSelectedSliderPos: number;
   note?: string;
 }
