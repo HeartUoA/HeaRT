@@ -1,5 +1,7 @@
 import React from "react";
 
+import { SliderMarks } from "../types/sliderMarks";
+
 import { Card, Slider, Typography } from "antd";
 import "../styles/Dimension.css";
 
@@ -14,15 +16,6 @@ interface DimensionProps {
 interface MainProps {
   dimension: DimensionProps;
   sliderUpdate: (value: number) => void;
-}
-
-interface SliderMarks {
-  [key: number]:
-    | React.ReactNode
-    | {
-        style: React.CSSProperties;
-        label: React.ReactNode;
-      };
 }
 
 const Dimension: React.FC<MainProps> = (props: MainProps) => {
