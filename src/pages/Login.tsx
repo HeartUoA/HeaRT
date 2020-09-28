@@ -13,7 +13,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
   const [ cookies, setCookie ] = useCookies(['accessToken']);
-  const [ error, setError ] = useState(false);
+  const [ error, setError ] = useState("");
 
   useEffect(() => {
     if (cookies['accessToken']) {
@@ -22,24 +22,33 @@ const Login: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onConfirmClick = async (): Promise<void> => {
-    const hashedPassword = md5(password);
-    const response = await fetch(`${API_DOMAIN}users/authenticate/${username}`, {
-      method: "POST",
-      body: JSON.stringify({ passwordHash : hashedPassword }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    });
+    if (username && password) {
+      const hashedPassword = md5(password);
+      const response = await fetch(`${API_DOMAIN}users/authenticate/${username}`, {
+        method: "POST",
+        body: JSON.stringify({ passwordHash : hashedPassword }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      });
 
-    const res = await response.json().catch(e => setError(true));
-    if (res && res.accessToken) {
-      setCookie('accessToken', res.accessToken);
-      setError(false);
-      props.history.push("/Dashboard");
+      const res = await response.json().catch(e => setError("Username and/or password is incorrect."));
+      if (res && res.accessToken) {
+        setCookie('accessToken', res.accessToken);
+        setError("");
+        props.history.push("/Dashboard");
+      } else {
+        setError("Username and/or password is incorrect.");
+      }
     } else {
-      setError(true);
+      if (!username) {
+        setError("Please enter your username.");
+      } else {
+        setError("Please enter your password.");
+      }
     }
+    
   };
 
   const onSignupClick = () => {
@@ -64,24 +73,33 @@ const Login: React.FC<RouteComponentProps> = (props) => {
               <Typography className="Login-Label-Text">
                 Username
               </Typography>
-              <Input className={`Login-Input ${error && "Error"}`} name="username" value={username} onChange={e => setUsername(e.target.value)} />
+              <Input 
+                className={`Login-Input ${error === "Please enter your username." && "Error"}`} 
+                name="username" value={username} 
+                onChange={e => setUsername(e.target.value)} 
+              />
             </div>
             <div>
               <Typography className="Login-Label-Text">Password</Typography>
-              <Input className={`Login-Input ${error && "Error"}`} name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Input 
+                className={`Login-Input ${error === "Please enter your password." && "Error"}`} 
+                name="password" 
+                type="password" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+              />
             </div>
           </div>
           <Button
             type="primary"
             className="Login-Button"
             onClick={onConfirmClick}
-            disabled={!username || !password}
           >
             Login
           </Button>
           {error ?
             <Typography className="Error-Message-Text">
-              Username and/or password is incorrect.
+              {error}
             </Typography>
             : <div style={{height: 40}} />
             }
