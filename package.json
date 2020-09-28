@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
+    "@types/md5": "^2.2.0",
     "@types/react-router-dom": "^5.1.5",
     "antd": "^4.6.3",
     "axios": "^0.19.2",
@@ -22,6 +23,7 @@
     "moment": "^2.29.0",
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",

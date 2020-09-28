@@ -1,6 +1,7 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import { Card, Slider, Typography } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 import "../styles/Dimension.css";
 
 interface DimensionProps {
@@ -14,6 +15,7 @@ interface DimensionProps {
 interface MainProps {
   dimension: DimensionProps;
   sliderUpdate: (value: number) => void;
+  userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 interface SliderMarks {
@@ -39,11 +41,21 @@ const Dimension: React.FC<MainProps> = (props: MainProps) => {
           tooltipVisible={false}
           included={false}
         />
+        {props.dimension.isPreview ? (
         <Typography className="User-Explanation">
           {props.dimension.userExplanation.length > 0
             ? '"' + props.dimension.userExplanation + '"'
             : ""}
       </Typography>
+      ) : (
+        <TextArea
+          className="User-Explanation-Edit"
+          value={props.dimension.userExplanation}
+          onChange={props.userExplanationUpdate}
+          placeholder="Explain your reasoning for your stance here..."
+          rows={3}
+        />
+      )}
     </Card>
   );
 };

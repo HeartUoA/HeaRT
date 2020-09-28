@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import moment from "moment";
 
 import { Button, Input, Layout, InputNumber, Typography, DatePicker } from "antd";
@@ -8,10 +9,17 @@ import Header from "../components/Header";
 import "../styles/CreateCourse.css";
 
 const CreateCourse: React.FC<RouteComponentProps> = (props) => {
+  const [ cookies ] = useCookies(['accessToken']);
   let [ courseName, setCourseName ] = useState("");
   let [ role, setRole ] = useState("");
   let [ startYear, setStartYear ] = useState<Number | undefined>(undefined);
   let [ courseSize, setCourseSize ] = useState<String | Number | undefined>(undefined);
+
+  useEffect(() => {
+    if (!cookies['accessToken']) {
+      props.history.push("/Login");
+    }
+  }, []);
 
   const onConfirmClick = () => {
     // TODO: Write code here to create new course (post request)

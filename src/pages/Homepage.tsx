@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
+  const [ cookies ] = useCookies(['accessToken']);
+
+  useEffect(() => {
+    if (cookies['accessToken']) {
+      props.history.push("/Dashboard");
+    }
+  }, []);
+
   const onLoginClick = () => {
     props.history.push("/Login");
   };

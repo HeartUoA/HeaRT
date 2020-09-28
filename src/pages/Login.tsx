@@ -1,26 +1,44 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import md5 from "md5";
+import { useCookies } from "react-cookie";
 
 import { Button, Input, Typography } from "antd";
 
+import { API_DOMAIN } from "../config";
 import Header from "../components/Header";
 import "../styles/Login.css";
 
-const Login: React.FC = (props) => {
-  let [ username, setUsername ] = useState("");
-  let [ password, setPassword ] = useState("");
+const Login: React.FC<RouteComponentProps> = (props) => {
+  const [ username, setUsername ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [ error, setError ] = useState(false);
 
-  const onConfirmClick = () => {
-    // TODO: Write code here to try logging in (if successful - dashboard, if error then display error)
-    const response = fetch(`https://localhost:9000/api/users/authenticate/${username}`, {
+  useEffect(() => {
+    if (cookies['accessToken']) {
+      props.history.push("/Dashboard");
+    }
+  }, []);
+
+  const onConfirmClick = async (): Promise<void> => {
+    const hashedPassword = md5(password);
+    const response = await fetch(`${API_DOMAIN}users/authenticate/${username}`, {
       method: "POST",
-      body: JSON.stringify({passwordHash: password}),
+      body: JSON.stringify({ passwordHash : hashedPassword }),
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
 
-    response.then(res => console.log(res.json())).catch(e => console.log(e));
+    const res = await response.json();
+    if (res && res.accessToken) {
+      setCookie('accessToken', res.accessToken);
+      props.history.push("/Dashboard");
+    } else {
+      setError(!error);
+    }
   };
 
   const onSignupClick = () => {
@@ -45,11 +63,11 @@ const Login: React.FC = (props) => {
               <Typography className="Login-Label-Text">
                 Username or email
               </Typography>
-              <Input className="Login-Input" name="usernameEmail" value={username} onChange={e => setUsername(e.target.value)} />
+              <Input className={`Login-Input ${error && "Error"}`} name="usernameEmail" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
             <div>
               <Typography className="Login-Label-Text">Password</Typography>
-              <Input className="Login-Input" name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Input className={`Login-Input ${error && "Error"}`} name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </div>
           </div>
           <Button
@@ -59,6 +77,12 @@ const Login: React.FC = (props) => {
           >
             Login
           </Button>
+          {error ?
+            <Typography className="Error-Message-Text">
+              Username and/or password is incorrect.
+            </Typography>
+            : <div style={{height: 40}} />
+            }
         </div>
       </div>
     </div>

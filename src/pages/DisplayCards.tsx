@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { useCookies } from "react-cookie";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
@@ -56,13 +58,21 @@ const initColours = {
   rightCardColour: "#FFFFFF",
 };
 
-const DisplayCards: React.FC = () => {
+const DisplayCards: React.FC<RouteComponentProps> = (props) => {
+  const [ cookies ] = useCookies(['accessToken']);
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
   const [colours, setColours] = useState(initColours);
   const [dimension, setDimension] = useState(tempDimension);
   const progressMade = { completed: 8, total: 14 };
   let isCardSelected = leftState.isSelected || rightState.isSelected;
+
+  useEffect(() => {
+    if (!cookies['accessToken']) {
+      props.history.push("/Login");
+    }
+  }, []);
+
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
@@ -136,7 +146,6 @@ const DisplayCards: React.FC = () => {
   };
 
   const onDimensionChange = (value: number) => {
-    console.log(value)
     // Change selected card to reflect slider values
     if (value < 50) {
       setLeftState({ ...leftState, isSelected: true });
@@ -151,6 +160,10 @@ const DisplayCards: React.FC = () => {
       leftCardColour: getLeftColour(value),
       rightCardColour: getRightColour(value),
     });
+  };
+
+  const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDimension({ ...dimension, userExplanation: event.target.value });
   };
 
   function getLeftColour(value: number) {
@@ -263,7 +276,7 @@ const DisplayCards: React.FC = () => {
           </div>
           {isCardSelected ? (
             <Dimension
-              {...{ dimension: dimension, sliderUpdate: onDimensionChange }}
+              {...{ dimension: dimension, sliderUpdate: onDimensionChange, userExplanationUpdate: onUserExplanationChange }}
             />
           ) : (
             ""
@@ -315,4 +328,4 @@ const DisplayCards: React.FC = () => {
   );
 };
 
-export default DisplayCards;
+export default withRouter(DisplayCards);

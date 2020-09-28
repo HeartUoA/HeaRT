@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import { Typography, Button, Row } from "antd";
 import Header from "../components/Header";
@@ -62,7 +63,16 @@ const tempValues = [
 ];
 
 const Preview: React.FC<RouteComponentProps> = (props) => {
-  const [dimensions, setDimensions] = useState(tempValues);
+  const [ cookies ] = useCookies(['accessToken']);
+  const [ dimensions, setDimensions ] = useState(tempValues);
+
+  useEffect(() => {
+    if (!cookies['accessToken']) {
+      props.history.push("/Login");
+    }
+  }, []);
+
+
   const onBackClick = () => {
     // TODO: Write code here to redirect to display cards screen with the last card
   };
@@ -75,6 +85,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
   const onDimensionChange = (value: number) => {
     // what happens when someone drags slider
   };
+
   return (
     <div className="Preview">
       <Header />
