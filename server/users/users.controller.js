@@ -32,7 +32,7 @@ router
       return response
         .status(403)
         .send(
-          "Ensure that you've hashed the password using bcrypt before sending it to the server"
+          "Ensure that you've hashed the password using md5 before sending it to the server"
         );
     } catch (e) {
       return response.status(403).send(e);

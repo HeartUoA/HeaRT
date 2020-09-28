@@ -1,4 +1,4 @@
-.Login {
+.Create-Course {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -6,29 +6,29 @@
   min-width: 700px;
 }
 
-.Login-Content {
+.Create-Course-Content {
   display: flex;
   height: calc(100% - 100px);
   justify-content: center;
   margin-top: 100px;
 }
 
-.Login-Panel {
+.Form-Container {
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  text-align: left;
   background: white;
+  text-align: left;
   box-shadow: 4px 4px 10px #212121;
-  width: 500px;
-  height: 530px;
+  width: 600px;
+  height: 600px;
   border-radius: 20px;
   padding: 30px;
   margin: 100px;
 }
 
-.Login-Header-Text {
+.Create-Course-Title {
   font-family: "ABeeZee";
   color: #1f1f1f;
   font-size: 50px;
@@ -36,32 +36,19 @@
   text-align: center;
 }
 
-.Create-Account-Text {
-  text-align: center;
-  font-size: 15px;
-}
-.Link-Text {
-  margin-left: 5px;
-  color: #ff0059;
-  cursor: pointer;
-}
-
-.Link-Text:hover {
-  color: #ff9cb8;
-}
-
-.Login-Input-Container {
+.Course-Input-Container {
   margin: 25px 0px;
 }
 
-.Login-Label-Text {
+.Course-Label-Text {
   font-family: "ABeeZee";
   color: #5b5b5b;
   font-size: 24px;
 }
 
-.Login-Input {
+.Course-Input {
   width: 100%;
+  height: 50px;
   line-height: 40px;
   padding-left: 15px;
   font-family: "ABeeZee";
@@ -70,26 +57,40 @@
   color: #1f1f1f;
   margin-bottom: 15px;
   border-radius: 10px;
-  height: 50px;
 }
 
-.Error {
-  border: 1px solid #ff8800 !important;
-  box-shadow: 0px 0px 5px #ff8800 !important;
+.Numerical-Input-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.Error-Message-Text {
-  text-align: center;
-  margin-top: 15px;
-  color:#ff8800;
-  font-size: 16px;
-  font-weight: 500;
+.Numerical-Input {
+  width: 45%;
 }
 
-.Login-Button {
-  height: 60px;
+.ant-picker-input > input {
+  font-size: 20px;
+}
+
+.Cohort-Size {
+  line-height: 50px;
+  padding-left: 5px;
+}
+
+.Course-Button-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
+  background-color: transparent;
+}
+
+.Course-Button {
+  height: 60px;
+  width: 45%;
   text-align: center;
   box-shadow: 0px 0px 0px 0px;
   font-size: 24px;
 }
+

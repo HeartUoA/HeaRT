@@ -20214,7 +20214,7 @@ span.ant-radio + * {
   position: absolute;
   width: 20px;
   height: 20px;
-  margin-top: -7px;
+  margin: -7px 0px 0px 4px;
   background-color: #ef547f;
   border: solid 2px #ef547f;
   border-radius: 50%;

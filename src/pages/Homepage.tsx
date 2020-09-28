@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
 import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
-import Instructions from "../components/Instructions";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
-  const onPlayClick = () => {
-    props.history.push("/CourseInfo");
-  };
-  const [showInstructions, setShowInstructions] = useState(false);
+  const [ cookies ] = useCookies(['accessToken']);
 
-  const onInstructionsClick = () => {
-    setShowInstructions(!showInstructions);
+  useEffect(() => {
+    if (cookies['accessToken']) {
+      props.history.push("/Dashboard");
+    }
+  }, [cookies]);
+
+  const onLoginClick = () => {
+    props.history.push("/Login");
   };
+
+  const onSignUpClick = () => {
+    // TODO: Change line below and enter corresponding URL to redirect to Sign Up page
+    // props.history.push("/SignUp");
+  }
 
   return (
     <div className="Homepage">
@@ -27,14 +36,13 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
         </Typography>
       </div>
       <div className="Buttons-Container">
-        <Button className="Button" onClick={onPlayClick}>
-          <Typography className="Button-Text">Play</Typography>
+        <Button className="Button" onClick={onLoginClick}>
+          <Typography className="Button-Text">Login</Typography>
         </Button>
-        <Button type="default" className="Button" onClick={onInstructionsClick}>
-          <Typography className="Button-Text">Instructions</Typography>
+        <Button type="default" className="Button" onClick={onSignUpClick}>
+          <Typography className="Button-Text">Sign up</Typography>
         </Button>
       </div>
-      <Instructions visible={showInstructions} hide={onInstructionsClick} />
     </div>
   );
 };

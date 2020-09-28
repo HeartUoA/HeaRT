@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { useCookies } from "react-cookie";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
@@ -8,7 +10,7 @@ import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
 import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
-import "../styles/Navigation.css";
+import "../styles/Footer.css";
 
 export enum CardSide {
   Left,
@@ -19,6 +21,7 @@ type Card = {
   text: string;
   isSelected: boolean;
   isEditing: boolean;
+  score: number;
 };
 
 const initialLeftCard: Card = {
@@ -26,6 +29,8 @@ const initialLeftCard: Card = {
     "(Left Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
   isEditing: false,
+  score: 0
+
 };
 
 const initialRightCard: Card = {
@@ -33,6 +38,7 @@ const initialRightCard: Card = {
     "(Right Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
   isSelected: false,
   isEditing: false,
+  score: 100
 };
 
 const tempDimension = {
@@ -42,28 +48,31 @@ const tempDimension = {
   isPreview: false,
   marks: {
     0: "Fixed",
-    30: "A 3rd dimension",
-    100: {
-      style: {
-        color: "#ef547f",
-      },
-      label: <strong>Active</strong>,
-    },
+    50: "A 3rd dimension",
+    100: "Active",
   },
 };
 
-const tempColours = {
+const initColours = {
   leftCardColour: "#FFFFFF",
   rightCardColour: "#FFFFFF",
 };
 
-const DisplayCards: React.FC = () => {
+const DisplayCards: React.FC<RouteComponentProps> = (props) => {
+  const [ cookies ] = useCookies(['accessToken']);
   const [leftState, setLeftState] = useState(initialLeftCard);
   const [rightState, setRightState] = useState(initialRightCard);
-  const [colours, setColours] = useState(tempColours);
+  const [colours, setColours] = useState(initColours);
   const [dimension, setDimension] = useState(tempDimension);
   const progressMade = { completed: 8, total: 14 };
   let isCardSelected = leftState.isSelected || rightState.isSelected;
+
+  useEffect(() => {
+    if (!cookies['accessToken']) {
+      props.history.push("/Login");
+    }
+  }, [cookies]);
+
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to course info screen or to previous card
@@ -82,13 +91,13 @@ const DisplayCards: React.FC = () => {
       case CardSide.Left:
         setLeftState({ ...leftState, isSelected: true });
         setRightState({ ...rightState, isSelected: false });
-        onDimensionChange(0);
+        onDimensionChange(leftState.score);
         break;
 
       case CardSide.Right:
         setRightState({ ...rightState, isSelected: true });
         setLeftState({ ...leftState, isSelected: false });
-        onDimensionChange(100);
+        onDimensionChange(rightState.score);
         break;
 
       default:
@@ -109,6 +118,7 @@ const DisplayCards: React.FC = () => {
         textElement = document.getElementById("leftCardEdit");
         if (!!textElement && !cancel) {
           setLeftState({
+            ...leftState,
             text: textElement.innerText,
             isEditing: !leftState.isEditing,
             isSelected: leftState.isSelected,
@@ -121,6 +131,7 @@ const DisplayCards: React.FC = () => {
         textElement = document.getElementById("rightCardEdit");
         if (!!textElement && !cancel) {
           setRightState({
+            ...rightState,
             text: textElement.innerText,
             isEditing: !rightState.isEditing,
             isSelected: rightState.isSelected,
@@ -151,37 +162,33 @@ const DisplayCards: React.FC = () => {
     });
   };
 
+  const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDimension({ ...dimension, userExplanation: event.target.value });
+  };
+
   function getLeftColour(value: number) {
-    var hue = 344.7;
-    var value = 87 + (13 / 100) * value;
-    console.log("left" + value);
+    let hue = 344.7;
+    value = 87 + (13 / 100) * value;
     return ["hsl(", hue, ",100%,", value, "%)"].join("");
   }
 
   function getRightColour(value: number) {
-    var hue = 344.7;
-    var value = 100 - (13 / 100) * value;
-    console.log("right" + value);
+    let hue = 344.7;
+    value = 100 - (13 / 100) * value;
     return ["hsl(", hue, ",100%,", value, "%)"].join("");
   }
 
   return (
     <div className="DisplayCards">
       <Header />
-      <div className="Content">
+      <div className="Cards-Content">
         <div>
-          {isCardSelected ? (
-            <Typography className="Statement">
-              Which statement describes SOFTENG761 best?
-            </Typography>
-          ) : (
-            <Typography className="Statement">Pick one statement</Typography>
-          )}
+          <Typography className="Statement">
+            Which statement best describes the course?
+          </Typography>
           <div className="Cards-Container">
             <Card
-              className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
-                leftState.isSelected ? "Card-Selected" : ""
-              }`}
+              className={`Card ${leftState.isSelected && "Card-Selected"}`}
               onClick={() => onCardClick(CardSide.Left)}
               style={{ backgroundColor: colours.leftCardColour }}
             >
@@ -224,9 +231,7 @@ const DisplayCards: React.FC = () => {
               )}
             </Card>
             <Card
-              className={`${isCardSelected ? "Card-Clicked" : "Card"} ${
-                rightState.isSelected ? "Card-Selected" : ""
-              }`}
+              className={`Card ${rightState.isSelected && "Card-Selected"}`}
               onClick={() => onCardClick(CardSide.Right)}
               style={{ backgroundColor: colours.rightCardColour }}
             >
@@ -271,20 +276,20 @@ const DisplayCards: React.FC = () => {
           </div>
           {isCardSelected ? (
             <Dimension
-              {...{ dimension: dimension, sliderUpdate: onDimensionChange }}
+              {...{ dimension: dimension, sliderUpdate: onDimensionChange, userExplanationUpdate: onUserExplanationChange }}
             />
           ) : (
             ""
           )}
         </div>
       </div>
-      <div className="Navigation">
+      <div className="Footer">
         <Button
           type="primary"
-          className="NavigationButton"
+          className="Footer-Button"
           onClick={onBackClick}
         >
-          <Typography className="Navigation-Button-Text">Back</Typography>
+          Back
         </Button>
         <div className="Progress">
           <Typography>
@@ -311,26 +316,16 @@ const DisplayCards: React.FC = () => {
             strokeWidth={20}
           />
         </div>
-        {isCardSelected ? (
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onNextClick}
-          >
-            <Typography className="Navigation-Button-Text">Next</Typography>
-          </Button>
-        ) : (
-          <Button
-            type="primary"
-            className="NavigationButton"
-            onClick={onSkipClick}
-          >
-            <Typography className="Navigation-Button-Text">Skip</Typography>
-          </Button>
-        )}
+        <Button
+          type="primary"
+          className="Footer-Button"
+          onClick={isCardSelected ? onNextClick : onSkipClick}
+        >
+          {isCardSelected ? "Next" : "Skip"}
+        </Button>
       </div>
     </div>
   );
 };
 
-export default DisplayCards;
+export default withRouter(DisplayCards);
