@@ -1,65 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Input, Typography } from "antd";
-
 import Header from "../components/Header";
 import "../styles/PrintCards.css";
 
 const PrintCards: React.FC = (props) => {
-  const onConfirmClick = () => {
-    // TODO: Write code here to try logging in (if successful - dashboard, if error then display error)
-  };
-
-  const onSignupClick = () => {
+  const onBackClick = () => {
     // TODO: Write code here to redirect back to create account page
     // props.history.push("URL-HERE")
   };
-
   return (
     <div className="PrintCards">
-      <Header></Header>
-      <div className="PrintCardsContent">
-        <div className="rectangle">
-          <p>1</p>
-        </div>
-        <div className="rectangle">
-          <p>2</p>
-        </div>
-        <div className="rectangle">
-          <p>3</p>
-        </div>
-        <div className="rectangle">
-          <p>4</p>
+      <div className="Header">
+        <Header></Header>
+      </div>
+      <div className="PrintCardsContainer">
+        <div className="PrintCardsContent">
+          <div className="rectangle">
+            <p>1</p>
+          </div>
+          <div className="rectangle">
+            <p>2</p>
+          </div>
+          <div className="rectangle">
+            <p>3</p>
+          </div>
+          <div className="rectangle">
+            <p>4</p>
+          </div>
+          <div className="rectangle">
+            <p>5</p>
+          </div>
+          <div className="rectangle">
+            <p>6</p>
+          </div>
+          <div className="rectangle">
+            <p>7</p>
+          </div>
+          <div className="rectangle">
+            <p>8</p>
+          </div>
+          <div className="rectangle">
+            <p>9</p>
+          </div>
+          <div className="rectangle">
+            <p>10</p>
+          </div>
+          <div className="rectangle">
+            <p>11</p>
+          </div>
+          <div className="rectangle">
+            <p>12</p>
+          </div>
+          <div className="rectangle">
+            <p>13</p>
+          </div>
+          <div className="rectangle">
+            <p>14</p>
+          </div>
         </div>
       </div>
-      <div className="PrintCardsContentRight">
-        <div className="rectangle">
-          <p>5</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
-        <div className="rectangle">
-          <p>6</p>
-        </div>
+      <div className="BackButtonDiv">
+        <Button type="primary" className="Back-Button" onClick={onBackClick}>
+          Login
+        </Button>
       </div>
     </div>
   );

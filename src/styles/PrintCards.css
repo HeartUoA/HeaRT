@@ -1,29 +1,73 @@
 .PrintCards {
-  display: flex;
+  display: grid;
   min-height: 700px;
   height: 100vh;
 }
+.PrintCardsContainer {
+  /* width: 100%;
+    margin: 100px 0px 0px 0px;
+    padding-top: 8vh;
+    padding-left: 20vw;*/
+  align-self: center;
+  padding-top: 110px;
+  width: 600px;
+  min-width: 50%;
+  max-width: 100%;
+  margin: auto;
+}
 .PrintCardsContent {
-  /*margin: 100px 0px 0px 0px;*/
-  padding: 50px;
-  display: table;
-  height: 100%;
-  float: left;
-  page-break-inside: avoid;
+  /* display: table;
+    height: 100%;
+    float:left;
+    page-break-inside: avoid;
+    flex-wrap: wrap;*/
+  display: flex;
+  flex-wrap: wrap;
 }
-.PrintCardsContentRight {
-  /* margin: 100px 0px 0px 0px;*/
-  padding: 50px;
-  display: table;
-  height: 100%;
-  page-break-inside: avoid;
-  float: left;
-}
+
 .rectangle {
-  display: block;
+  /*display: block;
+    width: 50%;
+    border-style: solid;
+    border-color: coral;
+    page-break-inside: avoid;*/
+  width: 50%;
   height: 200px;
-  width: 400px;
+  min-width: 200px;
+  background: red;
   border-style: solid;
   border-color: coral;
   page-break-inside: avoid;
+}
+
+.BackButtonDiv {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto;
+}
+@media print {
+  .Header {
+    opacity: 0;
+    page-break-inside: avoid;
+  }
+  .PrintCardsContent {
+    /*margin: 100px 0px 0px 0px;*/
+    height: 100%;
+    page-break-inside: avoid;
+  }
+  .PrintCardsContainer {
+    width: 100%;
+    page-break-inside: avoid;
+  }
+  .rectangle {
+    display: block;
+    height: 175px;
+    width: 50%;
+    border-style: solid;
+    border-color: coral;
+    page-break-inside: avoid;
+  }
+  .BackButtonDiv {
+    opacity: 0;
+  }
 }
