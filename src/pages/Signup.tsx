@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import md5 from "md5";
@@ -27,6 +27,12 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
   const [position, setPosition] = useState("");
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (cookies["accessToken"]) {
+      props.history.push("/Dashboard");
+    }
+  }, [cookies]);
 
   const onCreateClick = async (): Promise<void> => {
     if (
