@@ -9,69 +9,19 @@ import Dimension from "../components/Dimension";
 import "../styles/Preview.css";
 import "../styles/Footer.css";
 
-const tempValues = [
-  {
-    dimensionValue: "Dimension1",
-    scale: 100,
-    userExplanation: "This is a user explanation.",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension2",
-    scale: 50,
-    userExplanation:
-      "Perhaps we should also point out the fact that the negative impact of the benefits of data integrity any rash or contextual approach the system mechanism and The Decision of...",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension3",
-    scale: 0,
-    userExplanation: "",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension4",
-    scale: 0,
-    userExplanation: "This is a user explanation.",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension5",
-    scale: 100,
-    userExplanation: "This is a user explanation.",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension6",
-    scale: 20,
-    userExplanation:
-      "Perhaps we should also point out the fact that the negative impact of the benefits of data integrity any rash or contextual approach the system mechanism and The Decision of...",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension7",
-    scale: 0,
-    userExplanation: "",
-    isPreview: true,
-  },
-  {
-    dimensionValue: "Dimension8",
-    scale: 90,
-    userExplanation: "This is a user explanation.",
-    isPreview: true,
-  },
-];
+import charts from "../dummyData/charts";
 
 const Preview: React.FC<RouteComponentProps> = (props) => {
-  const [ cookies ] = useCookies(['accessToken']);
-  const [ dimensions, setDimensions ] = useState(tempValues);
+  const [cookies] = useCookies(["accessToken"]);
+
+  // TODO: Need to change this to grab data from backend
+  const [dimensions] = useState(charts[0].dimensions);
 
   useEffect(() => {
-    if (!cookies['accessToken']) {
+    if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
-
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to display cards screen with the last card
@@ -79,7 +29,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
 
   const onSaveClick = () => {
     // TODO: Write code here to make API post request to save chart
-    props.history.push("/Replay")
+    props.history.push("/Replay");
   };
 
   const onDimensionChange = (value: number) => {
@@ -92,26 +42,28 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       <div className="Preview-Content">
         <Typography className="Preview-Title">Preview</Typography>
         <Row className="Dimension-Row">
-          {dimensions.map((item) => (
-            <Dimension
-              {...{ dimension: item, sliderUpdate: onDimensionChange }}
-            />
-          ))}
+          {dimensions.map((item) => {
+            if (item.userSelectedSliderPos !== -1) {
+              return (
+                <Dimension
+                  {...{
+                    dimension: item,
+                    sliderUpdate: onDimensionChange,
+                    isPreview: true,
+                    key: item.name,
+                  }}
+                />
+              );
+            }
+            return undefined;
+          })}
         </Row>
       </div>
       <div className="Footer">
-        <Button
-          type="primary"
-          className="Footer-Button"
-          onClick={onBackClick}
-        >
+        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
           Back
         </Button>
-        <Button
-          type="primary"
-          className="Footer-Button"
-          onClick={onSaveClick}
-        >
+        <Button type="primary" className="Footer-Button" onClick={onSaveClick}>
           Save
         </Button>
       </div>

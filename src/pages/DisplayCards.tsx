@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
+import { Dimension as DimensionType } from "../types/dimension";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -12,184 +13,174 @@ import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 
+import charts from "../dummyData/charts";
+
 export enum CardSide {
   Left,
   Right,
 }
 
-type Card = {
-  text: string;
-  isSelected: boolean;
-  isEditing: boolean;
-  score: number;
-};
-
-const initialLeftCard: Card = {
-  text:
-    "(Left Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
-  isSelected: false,
-  isEditing: false,
-  score: 0
-
-};
-
-const initialRightCard: Card = {
-  text:
-    "(Right Card) Lorem ipsm dolor sit amet, consectetuer adipiscing elit, sed diam",
-  isSelected: false,
-  isEditing: false,
-  score: 100
-};
-
-const tempDimension = {
-  dimensionValue: "Dimension",
-  scale: 100,
-  userExplanation: "This is a user explanation.",
-  isPreview: false,
-  marks: {
-    0: "Fixed",
-    50: "A 3rd dimension",
-    100: "Active",
-  },
-};
-
-const initColours = {
+const defaultColours = {
   leftCardColour: "#FFFFFF",
   rightCardColour: "#FFFFFF",
 };
 
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
-  const [ cookies ] = useCookies(['accessToken']);
-  const [leftState, setLeftState] = useState(initialLeftCard);
-  const [rightState, setRightState] = useState(initialRightCard);
-  const [colours, setColours] = useState(initColours);
-  const [dimension, setDimension] = useState(tempDimension);
-  const progressMade = { completed: 8, total: 14 };
-  let isCardSelected = leftState.isSelected || rightState.isSelected;
+  const [cookies] = useCookies(["accessToken"]);
+
+  // TODO: This needs to be changed later to use data from the backend
+  const allDimensions = charts[0].dimensions;
+
+  const [dimensionIndex, setDimensionIndex] = useState(0);
+  const [currentDimension, setDimension] = useState<DimensionType>(
+    allDimensions[dimensionIndex]
+  );
+
+  const [leftState, setLeftState] = useState(currentDimension.leftCard);
+  const [rightState, setRightState] = useState(currentDimension.rightCard);
+  const [colours, setColours] = useState(
+    currentDimension.userSelectedSliderPos === -1
+      ? defaultColours
+      : getColours(currentDimension.userSelectedSliderPos)
+  );
+  const [progress, setProgress] = useState({
+    completed: allDimensions.filter((dim) => dim.userSelectedSliderPos !== -1)
+      .length,
+    total: allDimensions.length,
+  });
+  const isCardSelected = currentDimension.userSelectedSliderPos !== -1;
 
   useEffect(() => {
-    if (!cookies['accessToken']) {
+    if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
-
-  const onBackClick = () => {
-    // TODO: Write code here to redirect to course info screen or to previous card
+  const saveCurrentDimension = () => {
+    // TODO: Need to change this to individual POST request for each dimension?
+    allDimensions[dimensionIndex] = {
+      ...currentDimension,
+      leftCard: leftState,
+      rightCard: rightState,
+    };
   };
 
-  const onSkipClick = () => {
-    // TODO: Write code here to redirect to the next card or another incomplete card
+  const setNewDimension = (newIndex: number) => {
+    setDimensionIndex(newIndex);
+    setDimension(allDimensions[newIndex]);
+    setLeftState(allDimensions[newIndex].leftCard);
+    setRightState(allDimensions[newIndex].rightCard);
+    setColours(
+      allDimensions[newIndex].userSelectedSliderPos === -1
+        ? defaultColours
+        : getColours(allDimensions[newIndex].userSelectedSliderPos)
+    );
+  };
+
+  function getColours(value: number) {
+    const hue = 344.7;
+    const leftValue = 87 + (13 / 100) * value;
+    const leftColour = ["hsl(", hue, ",100%,", leftValue, "%)"].join("");
+
+    const rightValue = 100 - (13 / 100) * value;
+    const rightColour = ["hsl(", hue, ",100%,", rightValue, "%)"].join("");
+
+    return {
+      leftCardColour: leftColour,
+      rightCardColour: rightColour,
+    };
+  }
+
+  const onBackClick = () => {
+    if (dimensionIndex > 0) {
+      saveCurrentDimension();
+      setNewDimension(dimensionIndex - 1);
+    }
   };
 
   const onNextClick = () => {
-    // TODO: Write code here to redirect to the next card or another incomplete card
+    saveCurrentDimension();
+    if (dimensionIndex < allDimensions.length - 1) {
+      setNewDimension(dimensionIndex + 1);
+    } else if (dimensionIndex === allDimensions.length - 1) {
+      if (progress.completed >= 8) {
+        props.history.push("/Preview");
+      } else {
+        // Display modal to say at least 8 dimensions must be completed
+      }
+    }
   };
 
   const onCardClick = (side: CardSide) => {
-    switch (side) {
-      case CardSide.Left:
-        setLeftState({ ...leftState, isSelected: true });
-        setRightState({ ...rightState, isSelected: false });
-        onDimensionChange(leftState.score);
-        break;
-
-      case CardSide.Right:
-        setRightState({ ...rightState, isSelected: true });
-        setLeftState({ ...leftState, isSelected: false });
-        onDimensionChange(rightState.score);
-        break;
-
-      default:
-        break;
+    if (side === CardSide.Left) {
+      onSliderPosChange(leftState.anchorSliderPos);
+    } else if (side === CardSide.Right) {
+      onSliderPosChange(rightState.anchorSliderPos);
     }
+    setProgress({ ...progress, completed: progress.completed + 1 });
   };
 
-  const onEditClick = (
-    event: React.MouseEvent,
-    side: CardSide,
-    cancel: boolean
-  ) => {
+  const onEditClick = (event: React.MouseEvent, side: CardSide) => {
     event.stopPropagation();
-
-    let textElement;
-    switch (side) {
-      case CardSide.Left:
-        textElement = document.getElementById("leftCardEdit");
-        if (!!textElement && !cancel) {
-          setLeftState({
-            ...leftState,
-            text: textElement.innerText,
-            isEditing: !leftState.isEditing,
-            isSelected: leftState.isSelected,
-          });
-        } else {
-          setLeftState({ ...leftState, isEditing: !leftState.isEditing });
-        }
-        break;
-      case CardSide.Right:
-        textElement = document.getElementById("rightCardEdit");
-        if (!!textElement && !cancel) {
-          setRightState({
-            ...rightState,
-            text: textElement.innerText,
-            isEditing: !rightState.isEditing,
-            isSelected: rightState.isSelected,
-          });
-        } else {
-          setRightState({ ...rightState, isEditing: !rightState.isEditing });
-        }
-        break;
-      default:
-        break;
+    if (side === CardSide.Left) {
+      setLeftState({ ...leftState, isEditing: true });
+    } else if (side === CardSide.Right) {
+      setRightState({ ...rightState, isEditing: true });
     }
   };
 
-  const onDimensionChange = (value: number) => {
-    // Change selected card to reflect slider values
-    if (value < 50) {
-      setLeftState({ ...leftState, isSelected: true });
-      setRightState({ ...rightState, isSelected: false });
-    } else {
-      setRightState({ ...rightState, isSelected: true });
-      setLeftState({ ...leftState, isSelected: false });
+  const onCancelClick = (event: React.MouseEvent, side: CardSide) => {
+    if (side === CardSide.Left) {
+      setLeftState({ ...leftState, isEditing: false });
+    } else if (side === CardSide.Right) {
+      setRightState({ ...rightState, isEditing: false });
     }
+  };
 
-    setDimension({ ...dimension, scale: value });
-    setColours({
-      leftCardColour: getLeftColour(value),
-      rightCardColour: getRightColour(value),
-    });
+  const onSaveClick = (event: React.MouseEvent, side: CardSide) => {
+    let textElement = document.getElementById(
+      side === CardSide.Left ? "leftCardEdit" : "rightCardEdit"
+    );
+    if (textElement && side === CardSide.Left) {
+      setLeftState({
+        ...leftState,
+        statement: textElement.innerText,
+        isEditing: false,
+      });
+    } else if (textElement && side === CardSide.Right) {
+      setRightState({
+        ...rightState,
+        statement: textElement.innerText,
+        isEditing: false,
+      });
+    }
+  };
+
+  const onSliderPosChange = (value: number) => {
+    setDimension({ ...currentDimension, userSelectedSliderPos: value });
+    setColours(getColours(value));
   };
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDimension({ ...dimension, userExplanation: event.target.value });
+    setDimension({ ...currentDimension, userExplanation: event.target.value });
   };
-
-  function getLeftColour(value: number) {
-    let hue = 344.7;
-    value = 87 + (13 / 100) * value;
-    return ["hsl(", hue, ",100%,", value, "%)"].join("");
-  }
-
-  function getRightColour(value: number) {
-    let hue = 344.7;
-    value = 100 - (13 / 100) * value;
-    return ["hsl(", hue, ",100%,", value, "%)"].join("");
-  }
 
   return (
     <div className="DisplayCards">
       <Header />
       <div className="Cards-Content">
-        <div>
+        <div style={{ width: "100%" }}>
           <Typography className="Statement">
             Which statement best describes the course?
           </Typography>
           <div className="Cards-Container">
             <Card
-              className={`Card ${leftState.isSelected && "Card-Selected"}`}
-              onClick={() => onCardClick(CardSide.Left)}
+              className="Card"
+              onClick={() => {
+                if (!leftState.isEditing) {
+                  onCardClick(CardSide.Left);
+                }
+              }}
               style={{ backgroundColor: colours.leftCardColour }}
             >
               <Tooltip
@@ -202,7 +193,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                   src={leftState.isEditing ? save : edit}
                   className={leftState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={(event) => onEditClick(event, CardSide.Left, false)}
+                  onClick={(event) =>
+                    leftState.isEditing
+                      ? onSaveClick(event, CardSide.Left)
+                      : onEditClick(event, CardSide.Left)
+                  }
                 />
               </Tooltip>
               {leftState.isEditing ? (
@@ -212,9 +207,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={(event) =>
-                        onEditClick(event, CardSide.Left, true)
-                      }
+                      onClick={(event) => onCancelClick(event, CardSide.Left)}
                     />
                   </Tooltip>
                   <div
@@ -223,16 +216,20 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                     contentEditable="true"
                     suppressContentEditableWarning={true}
                   >
-                    {leftState.text}
+                    {leftState.statement}
                   </div>
                 </>
               ) : (
-                <p className="Card-Text">{leftState.text}</p>
+                <p className="Card-Text">{leftState.statement}</p>
               )}
             </Card>
             <Card
-              className={`Card ${rightState.isSelected && "Card-Selected"}`}
-              onClick={() => onCardClick(CardSide.Right)}
+              className="Card"
+              onClick={() => {
+                if (!rightState.isEditing) {
+                  onCardClick(CardSide.Right);
+                }
+              }}
               style={{ backgroundColor: colours.rightCardColour }}
             >
               <Tooltip
@@ -245,7 +242,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                   src={rightState.isEditing ? save : edit}
                   className={rightState.isEditing ? "Save" : "Edit"}
                   alt="edit"
-                  onClick={(event) => onEditClick(event, CardSide.Right, false)}
+                  onClick={(event) =>
+                    rightState.isEditing
+                      ? onSaveClick(event, CardSide.Right)
+                      : onEditClick(event, CardSide.Right)
+                  }
                 />
               </Tooltip>
               {rightState.isEditing ? (
@@ -255,9 +256,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={(event) =>
-                        onEditClick(event, CardSide.Right, true)
-                      }
+                      onClick={(event) => onCancelClick(event, CardSide.Right)}
                     />
                   </Tooltip>
                   <div
@@ -266,17 +265,22 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                     contentEditable="true"
                     suppressContentEditableWarning={true}
                   >
-                    {rightState.text}
+                    {rightState.statement}
                   </div>
                 </>
               ) : (
-                <p className="Card-Text">{rightState.text}</p>
+                <p className="Card-Text">{rightState.statement}</p>
               )}
             </Card>
           </div>
           {isCardSelected ? (
             <Dimension
-              {...{ dimension: dimension, sliderUpdate: onDimensionChange, userExplanationUpdate: onUserExplanationChange }}
+              {...{
+                dimension: currentDimension,
+                sliderUpdate: onSliderPosChange,
+                userExplanationUpdate: onUserExplanationChange,
+                isPreview: false,
+              }}
             />
           ) : (
             ""
@@ -288,18 +292,18 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           type="primary"
           className="Footer-Button"
           onClick={onBackClick}
+          disabled={dimensionIndex <= 0}
         >
           Back
         </Button>
         <div className="Progress">
           <Typography>
-            Completed: {progressMade.completed}/{progressMade.total} (Required:
-            8)
+            Completed: {progress.completed}/{progress.total} (Required: 8)
           </Typography>
           <Progress
             className="Progress-Bar"
             strokeColor={
-              progressMade.completed >= 8
+              progress.completed >= 8
                 ? {
                     from: "#32C5FF",
                     to: "#00D49B",
@@ -310,17 +314,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                   }
             }
             trailColor="#C3C6D4"
-            status={progressMade.completed >= 8 ? "success" : "active"}
-            percent={(progressMade.completed / progressMade.total) * 100}
+            status={progress.completed >= 8 ? "success" : "active"}
+            percent={(progress.completed / progress.total) * 100}
             showInfo={false}
             strokeWidth={20}
           />
         </div>
-        <Button
-          type="primary"
-          className="Footer-Button"
-          onClick={isCardSelected ? onNextClick : onSkipClick}
-        >
+        <Button type="primary" className="Footer-Button" onClick={onNextClick}>
           {isCardSelected ? "Next" : "Skip"}
         </Button>
       </div>
