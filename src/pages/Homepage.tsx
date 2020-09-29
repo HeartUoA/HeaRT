@@ -20,9 +20,8 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onSignUpClick = () => {
-    // TODO: Change line below and enter corresponding URL to redirect to Sign Up page
-    // props.history.push("/SignUp");
-  }
+    props.history.push("/SignUp");
+  };
 
   return (
     <div className="Homepage">

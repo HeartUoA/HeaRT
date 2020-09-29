@@ -12,8 +12,12 @@ router.route("/").post(bodyParser.json(), async (request, response) => {
     user.createdAt = Date.now();
     await user.save();
     return response.status(200).json("User created!");
-  } catch (error) {
-    return response.status(400).send(error);
+  } catch (e) {
+    console.log(e);
+    if (e.name === "MongoError" && e.code === 11000) {
+      return response.status(409).send("Username already exists.");
+    }
+    return response.status(400).send(e);
   }
 });
 
