@@ -5,6 +5,7 @@ import Preview from "./pages/Preview";
 import Replay from "./pages/Replay";
 import CreateCourse from "./pages/CreateCourse";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import { CookiesProvider } from "react-cookie";
 
@@ -35,6 +36,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/Replay">
             <Replay />
+          </Route>
+          <Route path="/SignUp">
+            <Signup />
           </Route>
         </Switch>
       </Router>
