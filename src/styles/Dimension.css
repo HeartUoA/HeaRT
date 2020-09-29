@@ -19,12 +19,16 @@
   padding: 30px;
 }
 
-@media (max-width: 1420px){
-  .Card-Preview{width: 70vw;}
+@media (max-width: 1420px) {
+  .Card-Preview {
+    width: 70vw;
+  }
 }
 
-@media (max-width: 1000px){
-  .Card-Preview{width: 700px;}
+@media (max-width: 1000px) {
+  .Card-Preview {
+    width: 700px;
+  }
 }
 
 .ant-card-body {
@@ -50,7 +54,7 @@
 
 .Slider {
   margin: 15px 0px;
-  width: 95%;
+  width: 85%;
 }
 
 .Dimension-Row {

@@ -10,5 +10,5 @@ export type Dimension = {
   rightCard: Card;
   marks?: SliderMarks;
   userSelectedSliderPos: number;
-  note?: string;
-}
+  userExplanation?: string;
+};

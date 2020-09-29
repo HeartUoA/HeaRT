@@ -1,45 +1,36 @@
 import React, { ChangeEvent } from "react";
 
-import { SliderMarks } from "../types/sliderMarks";
-
 import { Card, Slider, Typography } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import "../styles/Dimension.css";
 
-interface DimensionProps {
-  dimensionValue: string;
-  scale: number;
-  userExplanation: string;
-  isPreview: boolean;
-  marks?: SliderMarks;
-}
+import { Dimension as DimensionType } from "../types/dimension";
 
-interface MainProps {
-  dimension: DimensionProps;
+interface DimensionProps {
+  dimension: DimensionType;
   sliderUpdate: (value: number) => void;
   userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  isPreview: boolean;
 }
 
-const Dimension: React.FC<MainProps> = (props: MainProps) => {
+const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
   return (
-    <Card
-      className={props.dimension.isPreview ? "Card-Preview" : "Card-Dimension"}
-    >
-      <p className="Dimension-Name-Text">{props.dimension.dimensionValue}</p>
-        <Slider
-          className="Slider"
-          value={props.dimension.scale}
-          onChange={props.sliderUpdate}
-          marks={props.dimension.marks}
-          tooltipVisible={false}
-          included={false}
-        />
-        {props.dimension.isPreview ? (
+    <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
+      <p className="Dimension-Name-Text">{props.dimension.name}</p>
+      <Slider
+        className="Slider"
+        value={props.dimension.userSelectedSliderPos}
+        onChange={props.sliderUpdate}
+        marks={props.dimension.marks}
+        tooltipVisible={false}
+        included={false}
+      />
+      {props.isPreview ? (
         <Typography className="User-Explanation">
-          {props.dimension.userExplanation.length > 0
+          {props.dimension.userExplanation
             ? '"' + props.dimension.userExplanation + '"'
             : ""}
-      </Typography>
+        </Typography>
       ) : (
         <TextArea
           className="User-Explanation-Edit"

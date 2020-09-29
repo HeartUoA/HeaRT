@@ -22,8 +22,10 @@
   text-align: center;
 }
 
-@media (max-width: 1150px){
-  .Statement{font-size: 40px;}
+@media (max-width: 1150px) {
+  .Statement {
+    font-size: 40px;
+  }
 }
 
 .Cards-Container {
@@ -44,16 +46,11 @@
   box-shadow: 4px 4px 10px #212121;
   cursor: pointer;
   padding: 20px;
+  border: none;
 }
 
 .Card:hover {
   background-color: #ffc4d3 !important;
-  color: #212121;
-  border: none;
-}
-
-.Card-Selected {
-  background-color: #ffc4d3;
   color: #212121;
   border: none;
 }
@@ -96,7 +93,7 @@
 
 .TextInput {
   font-family: "ABeeZee";
-  font-size: 30px;
+  font-size: 24px;
   display: table-cell;
   vertical-align: middle;
   text-align: center;
