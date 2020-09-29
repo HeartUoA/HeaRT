@@ -93,6 +93,10 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  const onLoginClick = () => {
+    props.history.push("/Login");
+  };
+
   return (
     <div className="Account">
       <Header />
@@ -100,6 +104,14 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
       <Layout.Content className="Account-Content">
         <div className="Account-Panel">
           <Typography className="Account-Title">Sign up</Typography>
+          <Typography className="Create-Account-Text">
+            Already a member?
+            <span className="Link-Text" onClick={onLoginClick}>
+              Log in!
+            </span>
+          </Typography>
+
+          <Typography className="Account-Sub-Label">Login details</Typography>
 
           <div>
             <Typography className="Account-Label-Text">
@@ -156,6 +168,10 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
           )}
 
           <Divider></Divider>
+
+          <Typography className="Account-Sub-Label">
+            General information
+          </Typography>
 
           <div>
             <Typography className="Account-Label-Text">Full name</Typography>

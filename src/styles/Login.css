@@ -21,10 +21,10 @@
   text-align: left;
   background: white;
   box-shadow: 4px 4px 10px #212121;
-  width: 500px;
+  width: 600px;
   height: 530px;
   border-radius: 20px;
-  padding: 30px;
+  padding: 60px;
   margin: 100px;
 }
 
@@ -81,7 +81,7 @@
 .Error-Message-Text {
   text-align: center;
   margin-top: 15px;
-  color:#ff8800;
+  color: #ff8800;
   font-size: 16px;
   font-weight: 500;
 }

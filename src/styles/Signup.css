@@ -22,7 +22,7 @@
   background: white;
   box-shadow: 4px 4px 10px #212121;
   width: 600px;
-  height: 1150px;
+  height: 1360px;
   border-radius: 20px;
   padding: 60px;
   margin: 100px;
@@ -44,6 +44,15 @@
   font-family: "ABeeZee";
   color: #5b5b5b;
   font-size: 24px;
+}
+
+.Account-Sub-Label {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-family: "ABeeZee";
+  color: #1f1f1f;
+  font-weight: normal;
+  font-size: 30px;
 }
 
 .Account-Input {
