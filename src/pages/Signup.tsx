@@ -10,7 +10,9 @@ import { Button, Input, Layout, Divider, Typography } from "antd";
 import Header from "../components/Header";
 import "../styles/Signup.css";
 
+const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
 const PASSWORD_MATCH = "Password should match.";
+const UNAVAILABLE_USERNAME = "Username is taken. Please enter a new one.";
 
 const Signup: React.FC<RouteComponentProps> = (props) => {
   const [cookies, setCookie] = useCookies(["accessToken"]);
@@ -27,7 +29,68 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
   const [error, setError] = useState("");
 
   const onCreateClick = async (): Promise<void> => {
-    // TODO
+    if (
+      !username &&
+      !password &&
+      !password &&
+      !fullName &&
+      !institution &&
+      !dept &&
+      !position
+    ) {
+      setError(ALL_FIELDS_SET);
+      return;
+    } else if (password !== confirmPassword) {
+      return;
+    }
+
+    const hashedPassword = md5(password);
+    const user = {
+      username: username,
+      name: fullName,
+      createdAt: Date.now(),
+      institution: institution,
+      department: dept,
+      position: position,
+      email: email,
+      passwordHash: hashedPassword,
+    };
+
+    const responseSignup = await fetch(`${API_DOMAIN}users/`, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    if (responseSignup.status === 409) {
+      //duplicate username
+      setError(UNAVAILABLE_USERNAME);
+      return;
+    } else if (responseSignup.status !== 200) {
+      return;
+    }
+
+    const responseLogin = await fetch(
+      `${API_DOMAIN}users/authenticate/${username}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ passwordHash: hashedPassword }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const res = await responseLogin.json().catch((e) => setError(e));
+    if (res && res.accessToken) {
+      setCookie("accessToken", res.accessToken);
+      setError("");
+      props.history.push("/Dashboard");
+    }
   };
 
   return (
