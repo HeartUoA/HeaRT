@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from "react";
 
+import { SliderMarks } from "../types/sliderMarks";
+
 import { Card, Slider, Typography } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import "../styles/Dimension.css";
@@ -16,15 +18,6 @@ interface MainProps {
   dimension: DimensionProps;
   sliderUpdate: (value: number) => void;
   userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-}
-
-interface SliderMarks {
-  [key: number]:
-    | React.ReactNode
-    | {
-        style: React.CSSProperties;
-        label: React.ReactNode;
-      };
 }
 
 const Dimension: React.FC<MainProps> = (props: MainProps) => {
