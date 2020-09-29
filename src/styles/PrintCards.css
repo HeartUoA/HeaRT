@@ -1,0 +1,29 @@
+.PrintCards {
+  display: flex;
+  min-height: 700px;
+  height: 100vh;
+}
+.PrintCardsContent {
+  /*margin: 100px 0px 0px 0px;*/
+  padding: 50px;
+  display: table;
+  height: 100%;
+  float: left;
+  page-break-inside: avoid;
+}
+.PrintCardsContentRight {
+  /* margin: 100px 0px 0px 0px;*/
+  padding: 50px;
+  display: table;
+  height: 100%;
+  page-break-inside: avoid;
+  float: left;
+}
+.rectangle {
+  display: block;
+  height: 200px;
+  width: 400px;
+  border-style: solid;
+  border-color: coral;
+  page-break-inside: avoid;
+}
