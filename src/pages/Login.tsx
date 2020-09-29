@@ -56,8 +56,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onSignupClick = () => {
-    // TODO: Write code here to redirect back to create account page
-    // props.history.push("URL-HERE")
+    props.history.push("/SignUp");
   };
 
   return (
