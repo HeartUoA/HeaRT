@@ -20259,7 +20259,9 @@ span.ant-radio + * {
   word-break: keep-all;
   cursor: pointer;
   user-select: none;
-  font-size: 20px;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-top: 5px;
 }
 .ant-slider-mark-text-active {
   color: #212121;
