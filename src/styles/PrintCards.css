@@ -4,10 +4,6 @@
   height: 100vh;
 }
 .PrintCardsContainer {
-  /* width: 100%;
-    margin: 100px 0px 0px 0px;
-    padding-top: 8vh;
-    padding-left: 20vw;*/
   align-self: center;
   padding-top: 110px;
   width: 600px;
@@ -16,58 +12,71 @@
   margin: auto;
 }
 .PrintCardsContent {
-  /* display: table;
-    height: 100%;
-    float:left;
-    page-break-inside: avoid;
-    flex-wrap: wrap;*/
   display: flex;
   flex-wrap: wrap;
 }
-
-.rectangle {
-  /*display: block;
-    width: 50%;
-    border-style: solid;
-    border-color: coral;
-    page-break-inside: avoid;*/
+.PrintingCards {
+  min-width: 200px;
+  background: #f6f7fc;
+  border-style: solid;
+  border-width: thin;
+  border-color: rgb(0, 0, 0);
   width: 50%;
   height: 200px;
-  min-width: 200px;
-  background: red;
-  border-style: solid;
-  border-color: coral;
-  page-break-inside: avoid;
+  display: inline-block;
+  text-align: center;
 }
-
 .BackButtonDiv {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto;
 }
+.Print-Card-Text {
+  font-size: 20px;
+  display: table-cell;
+  vertical-align: middle;
+  height: inherit;
+}
 @media print {
   .Header {
     opacity: 0;
-    page-break-inside: avoid;
-  }
-  .PrintCardsContent {
-    /*margin: 100px 0px 0px 0px;*/
-    height: 100%;
-    page-break-inside: avoid;
   }
   .PrintCardsContainer {
-    width: 100%;
-    page-break-inside: avoid;
-  }
-  .rectangle {
     display: block;
-    height: 175px;
-    width: 50%;
+    align-self: center;
+    padding-top: 110px;
+    width: 600px;
+    min-width: 50%;
+    max-width: 100%;
+    margin: auto;
+    page-break-inside: avoid !important;
+  }
+  .PrintCardsContent {
+    display: block;
+    page-break-inside: avoid !important;
+  }
+  .PrintingCards {
+    page-break-inside: avoid !important;
+    background: #f6f7fc;
     border-style: solid;
-    border-color: coral;
+    border-width: thin;
+    border-color: rgb(0, 0, 0);
     page-break-inside: avoid;
+    float: left;
+    width: 50%;
+    height: 150px;
+  }
+  .PrintCardsContent:after {
+    page-break-inside: avoid !important;
+    display: table;
+    clear: both;
   }
   .BackButtonDiv {
     opacity: 0;
+  }
+  .Print-Card-Text {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
   }
 }

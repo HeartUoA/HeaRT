@@ -1,8 +1,9 @@
 export const defaultDimensionData = [
   {
     definition: "Default definition 1",
-    leftCardStatement: "left definition",
-    rightCardStatement: "right definition",
+    leftCardStatement: "Learners can only do learning tasks in one way.",
+    rightCardStatement:
+      "Learners can do the learning tasks in a variety of ways.",
   },
   {
     definition: "Default definition 2",
