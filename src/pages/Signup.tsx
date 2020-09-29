@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import "../styles/Signup.css";
 
 const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
-const PASSWORD_MATCH = "Password should match.";
+const PASSWORD_MATCH = "Passwords should match.";
 const UNAVAILABLE_USERNAME = "Username is taken. Please enter a new one.";
 
 const Signup: React.FC<RouteComponentProps> = (props) => {
@@ -35,18 +35,19 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onCreateClick = async (): Promise<void> => {
-    if (
-      !username &&
-      !password &&
-      !password &&
-      !fullName &&
-      !institution &&
-      !dept &&
+    if (password !== confirmPassword) {
+      setError(PASSWORD_MATCH);
+      return;
+    } else if (
+      !username ||
+      !password ||
+      !password ||
+      !fullName ||
+      !institution ||
+      !dept ||
       !position
     ) {
       setError(ALL_FIELDS_SET);
-      return;
-    } else if (password !== confirmPassword) {
       return;
     }
 
@@ -124,7 +125,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
               Email address
             </Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !email && "Error"
+              }`}
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -134,7 +137,11 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
           <div>
             <Typography className="Account-Label-Text">Username</Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                ((error === ALL_FIELDS_SET && !username) ||
+                  error === UNAVAILABLE_USERNAME) &&
+                "Error"
+              }`}
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -144,7 +151,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
           <div>
             <Typography className="Account-Label-Text">Password</Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !password && "Error"
+              }`}
               name="password"
               type="password"
               value={password}
@@ -157,21 +166,17 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
               Re-type password
             </Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                ((error === ALL_FIELDS_SET && !confirmPassword) ||
+                  password !== confirmPassword) &&
+                "Error"
+              }`}
               name="confirmPassword"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-
-          {confirmPassword !== password ? (
-            <Typography className="Error-Message-Text">
-              {PASSWORD_MATCH}
-            </Typography>
-          ) : (
-            <div style={{ height: 40 }} />
-          )}
 
           <Divider></Divider>
 
@@ -182,7 +187,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
           <div>
             <Typography className="Account-Label-Text">Full name</Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !fullName && "Error"
+              }`}
               name="fullName"
               value={fullName}
               onChange={(e) => setFullname(e.target.value)}
@@ -194,7 +201,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
               Educational institution
             </Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !institution && "Error"
+              }`}
               name="username"
               value={institution}
               onChange={(e) => setInstitution(e.target.value)}
@@ -204,7 +213,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
           <div>
             <Typography className="Account-Label-Text">Department</Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !dept && "Error"
+              }`}
               name="dept"
               value={dept}
               onChange={(e) => setDept(e.target.value)}
@@ -216,7 +227,9 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
               Position/Role
             </Typography>
             <Input
-              className="Account-Input"
+              className={`Account-Input ${
+                error === ALL_FIELDS_SET && !position && "Error"
+              }`}
               name="position"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
@@ -231,8 +244,10 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
             Create account
           </Button>
 
-          {error ? (
-            <Typography className="Error-Message-Text">{error}</Typography>
+          {error || password !== confirmPassword ? (
+            <Typography className="Error-Message-Text">
+              {!error ? PASSWORD_MATCH : error}
+            </Typography>
           ) : (
             <div style={{ height: 40 }} />
           )}
