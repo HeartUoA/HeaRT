@@ -112,12 +112,15 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onCardClick = (side: CardSide) => {
+    if (currentDimension.userSelectedSliderPos === -1) {
+      setProgress({ ...progress, completed: progress.completed + 1 });
+    }
+
     if (side === CardSide.Left) {
       onSliderPosChange(leftState.anchorSliderPos);
     } else if (side === CardSide.Right) {
       onSliderPosChange(rightState.anchorSliderPos);
     }
-    setProgress({ ...progress, completed: progress.completed + 1 });
   };
 
   const onEditClick = (event: React.MouseEvent, side: CardSide) => {
