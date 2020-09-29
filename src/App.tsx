@@ -5,6 +5,7 @@ import Preview from "./pages/Preview";
 import Replay from "./pages/Replay";
 import CourseInfo from "./pages/CourseInfo";
 import Login from "./pages/Login";
+import PrintCards from "./pages/PrintCards";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -28,6 +29,9 @@ const App: React.FC = () => {
         </Route>
         <Route path="/Replay">
           <Replay />
+        </Route>
+        <Route path="/PrintCards">
+          <PrintCards />
         </Route>
       </Switch>
     </Router>
