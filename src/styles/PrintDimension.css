@@ -1,0 +1,32 @@
+.printDimensionText{
+    text-align: left;
+    display: block;
+    margin: 10px 0 0 10px;
+}
+.printTitleText{
+    text-align: left;
+    display: block;
+    margin: 0 0 0 10px;
+}
+.printContinuumText{
+    text-align: left;
+    display: block;
+    margin: 10px 0 0 10px;
+}
+.ContiuumStatements{
+    display: flex;
+    justify-content: space-between;
+}
+.printSliderText{
+    text-align: left;
+    display: block;
+    margin: 10px 0 0 10px;
+}
+.printStatementText{
+    text-align: left;
+    display: block;
+    margin: 20px 0 0 10px;
+}
+.printSlider {
+    width:93%;
+}
