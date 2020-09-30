@@ -38,39 +38,39 @@ import { url } from "../server/config";
       const newCourses = [
         {
           name: "SOFTENG 700",
-          date: new Date(),
           cohortSize: 200,
           role: "Course Cordinator",
           ageOfCourse: 5,
           createdByUserID: userid,
           createdAt: Date.now(),
+          startYear: Date.now(),
         },
         {
           name: "SOFTENG 750",
-          date: new Date(),
           cohortSize: 100,
           role: "Course Instructor",
           ageOfCourse: 4,
           createdByUserID: userid,
           createdAt: Date.now(),
+          startYear: Date.now(),
         },
         {
           name: "COMPSCI 221",
-          date: new Date(),
           cohortSize: 263,
           role: "Course Cordinator",
           ageOfCourse: 3,
           createdByUserID: userid,
           createdAt: Date.now(),
+          startYear: Date.now(),
         },
         {
           name: "BUSADMIN 350",
-          date: new Date(),
           cohortSize: 140,
           role: "Course Cordinator",
           ageOfCourse: 2,
           createdByUserID: userid,
           createdAt: Date.now(),
+          startYear: Date.now(),
         },
       ];
       await Course.insertMany(newCourses);
