@@ -57,7 +57,7 @@ describe("/api/course tests", () => {
         name: "SOFTENG 700",
         cohortSize: 200,
         role: "Course Cordinator",
-        ageOfCourse: 5,
+        startYear: Date.now(),
       });
 
     expect(postResponse.status).toBe(200);
@@ -72,7 +72,6 @@ describe("/api/course tests", () => {
         name: "SOFTENG 700",
         cohortSize: 200,
         role: "Course Cordinator",
-        ageOfCourse: 5,
       }),
     ]);
     expect(getResponse.body[0]).toHaveProperty("_id");

@@ -79,11 +79,9 @@ router
         dimensions.push(dimension);
       }
 
-      const reducedArray = dimensions.reduce((a, c) => ({ ...a, ...c }), {});
-
       response.status(200).json({
         chartID: chart._id,
-        dateCreated: chart.dateCreated,
+        createdAt: chart.createdAt,
         dimensions: dimensions,
       });
     } catch (error) {
