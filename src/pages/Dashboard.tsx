@@ -14,6 +14,9 @@ import plus from "../assets/images/plus.png";
 const Dashboard: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [dashboardCardsMargin, setMargin] = useState(
+    (window.innerWidth % 490) / 2
+  );
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
@@ -21,12 +24,23 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);
   };
 
   const createNewCourse = () => {
     props.history.push("/CreateCourse");
+  };
+
+  const handleResize = () => {
+    setMargin((window.innerWidth % 490) / 2);
   };
 
   return (
@@ -44,7 +58,13 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
         </Button>
       </div>
       <div className="Dashboard-Cards">
-        <Row className="Course-Row">
+        <Row
+          className="Course-Row"
+          style={{
+            marginLeft: dashboardCardsMargin,
+            marginRight: dashboardCardsMargin,
+          }}
+        >
           {courses.map((item) => {
             return (
               <Course

@@ -1,8 +1,6 @@
 .Course-Row {
-  justify-content: center;
-  margin: 0px;
-  margin-bottom: 50px;
-  margin-top: 40px;
+  justify-content: flex-start;
+  margin: 40px 0px 50px 0px;
 }
 
 .Course-Card {
