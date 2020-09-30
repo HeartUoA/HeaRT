@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Slider, Switch } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/PrintDimension.css";
@@ -55,6 +56,8 @@ const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
 
 export default PrintDimension;
 =======
+=======
+>>>>>>> 0b3a141... npm bugging out
 import { Slider, Switch } from 'antd';
 import React from 'react';
 import { useCookies } from 'react-cookie';
@@ -80,5 +83,9 @@ const PrintDimension: React.FC = () => {
   
 }
 
+<<<<<<< HEAD
 export default PrintDimension;
 >>>>>>> ad928bc... npm bugging out
+=======
+export default PrintDimension;
+>>>>>>> 0b3a141... npm bugging out

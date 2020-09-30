@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 .printDimensionText {
   text-align: left;
   display: block;
@@ -48,6 +49,8 @@
   }
 }
 =======
+=======
+>>>>>>> 0b3a141... npm bugging out
 .printDimensionText{
     text-align: left;
     display: block;
@@ -79,5 +82,9 @@
 }
 .printSlider {
     width:93%;
+<<<<<<< HEAD
 }
 >>>>>>> ad928bc... npm bugging out
+=======
+}
+>>>>>>> 0b3a141... npm bugging out
