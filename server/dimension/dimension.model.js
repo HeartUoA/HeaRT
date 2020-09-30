@@ -5,6 +5,10 @@ const dimensionSchemaDef = {
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
   score: {
     type: Number,
     required: true,
@@ -20,6 +24,20 @@ const dimensionSchemaDef = {
   },
   rightCardStatement: {
     type: String,
+    required: true,
+  },
+  leftCardDefaultSliderPosition: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  rightCardDefaultSliderPosition: {
+    type: Number,
+    required: true,
+    default: 100,
+  },
+  marks: {
+    type: [{ position: Number, label: String }],
     required: true,
   },
   note: {
