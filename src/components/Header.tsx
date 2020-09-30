@@ -53,6 +53,7 @@ const Header: React.FC<RouteComponentProps> = (props) => {
       )}
       <Modal
         title="Leave Game"
+        centered
         visible={showExitModal}
         onOk={handleOk}
         onCancel={handleCancel}
