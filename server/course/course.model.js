@@ -17,9 +17,9 @@ const courseSchemaDef = {
     type: String,
     required: true,
   },
-  ageOfCourse: {
+  startYear: {
     type: Number,
-    required: true,
+    required: Date,
   },
   createdByUserID: {
     type: String,
