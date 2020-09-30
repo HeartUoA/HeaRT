@@ -3,10 +3,48 @@
   flex-direction: column;
   text-align: center;
   height: 100vh;
+  position: relative;
 }
 
 .Dashboard-Content {
-  display: flex;
-  height: calc(100% - 100px);
-  margin-top: 100px;
+  margin-top: 140px;
+  position: relative;
+}
+
+.Courses-Heading {
+  font-size: 50px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Instructions-Button {
+  height: 50px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 0px 0px;
+  border-radius: 10px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 45px;
+}
+
+.Dashboard-Cards {
+  margin-left: 25px;
+}
+
+.Create-Course-Button {
+  min-height: 250px;
+  width: 450px;
+  min-width: 400px;
+  margin: 20px;
+  box-shadow: 4px 4px 10px #212121;
+  padding: 30px;
+  cursor: pointer;
+  font-size: 30px;
 }
