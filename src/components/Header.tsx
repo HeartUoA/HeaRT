@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { Typography, Layout, Button } from "antd";
+import { Typography, Layout, Button, Modal } from "antd";
 
 import logo from "../assets/images/logo.svg";
 import "../styles/Header.css";
@@ -9,6 +9,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 const Header: React.FC<RouteComponentProps> = (props) => {
   const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [showExitModal, setShowExitModal] = useState(false);
 
   const onLogoutClick = () => {
     setCookie("accessToken", "");
@@ -21,9 +22,18 @@ const Header: React.FC<RouteComponentProps> = (props) => {
     if (!cookies["accessToken"]) {
       props.history.push("/");
     } else {
-      // If the user is logged in, it should redirect them to the dashboard
-      props.history.push("/Dashboard");
+      // If the user is logged in, it should show a confirmation dialog and redirect them to the dashboard
+      setShowExitModal(true);
     }
+  };
+
+  const handleOk = () => {
+    setShowExitModal(false);
+    props.history.push("/Dashboard");
+  };
+
+  const handleCancel = () => {
+    setShowExitModal(false);
   };
 
   return (
@@ -35,6 +45,14 @@ const Header: React.FC<RouteComponentProps> = (props) => {
       {!!cookies["accessToken"] && (
         <Button onClick={onLogoutClick}>Logout</Button>
       )}
+      <Modal
+        title="Leave Game"
+        visible={showExitModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Are you sure you want to return to the dashboard?</p>
+      </Modal>
     </Layout.Header>
   );
 };
