@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Button, Row, Card, Typography } from "antd";
+import { Button, Row, Typography } from "antd";
 
 import Header from "../components/Header";
 import Instructions from "../components/Instructions";
