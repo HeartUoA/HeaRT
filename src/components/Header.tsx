@@ -22,8 +22,14 @@ const Header: React.FC<RouteComponentProps> = (props) => {
     if (!cookies["accessToken"]) {
       props.history.push("/");
     } else {
-      // If the user is logged in, it should show a confirmation dialog and redirect them to the dashboard
-      setShowExitModal(true);
+      // If the user is logged in and playing a game, it should show a confirmation dialog
+      console.log("Help");
+      console.log(props.match.path);
+      if (props.match.path == "/DisplayCards") {
+        setShowExitModal(true);
+      } else {
+        props.history.push("/Dashboard");
+      }
     }
   };
 
