@@ -65,6 +65,10 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
             marginRight: dashboardCardsMargin,
           }}
         >
+          <Button className="Create-Course-Button" onClick={createNewCourse}>
+            <img src={plus} alt="plus" />
+            <Typography>Create New Course</Typography>
+          </Button>
           {courses.map((item) => {
             return (
               <Course
@@ -74,10 +78,6 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
               />
             );
           })}
-          <Button className="Create-Course-Button" onClick={createNewCourse}>
-            <img src={plus} alt="plus" />
-            <Typography>Create New Course</Typography>
-          </Button>
         </Row>
       </div>
     </div>
