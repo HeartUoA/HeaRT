@@ -115,8 +115,12 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
         <Button type="primary" className="Footer-Button" onClick={onBackClick}>
           {selectedDimension ? "Cancel" : "Back"}
         </Button>
-        <Button type="primary" className="Footer-Button" onClick={onSaveClick}>
-          Save
+        <Button
+          type="primary"
+          className="Footer-Button Wider-Button"
+          onClick={onSaveClick}
+        >
+          {selectedDimension ? "Save Dimension" : "Save Chart"}
         </Button>
       </div>
     </div>
