@@ -1,0 +1,31 @@
+.Course-Row {
+  justify-content: flex-start;
+  margin: 40px 0px 50px 0px;
+}
+
+.Course-Card {
+  min-height: 250px;
+  width: 450px;
+  min-width: 450px;
+  margin: 20px;
+  box-shadow: 4px 4px 10px #212121;
+  cursor: pointer;
+  background: #ff9cb8;
+  border: none;
+}
+
+.Course-Card:hover {
+  background: #ffc4d3;
+}
+
+.Course-Card:hover .Course-Title {
+  background: #f1f1f1;
+}
+
+.Course-Title {
+  font-size: 30px;
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px 20px 0px 0px;
+}

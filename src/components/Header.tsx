@@ -8,12 +8,12 @@ import "../styles/Header.css";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 const Header: React.FC<RouteComponentProps> = (props) => {
-  const [ cookies, setCookie ] = useCookies(['accessToken']);
+  const [cookies, setCookie] = useCookies(["accessToken"]);
 
   const onLogoutClick = () => {
-    setCookie('accessToken', '');
+    setCookie("accessToken", "");
     props.history.push("/");
-  }
+  };
 
   return (
     <Layout.Header className="Header">
@@ -21,13 +21,9 @@ const Header: React.FC<RouteComponentProps> = (props) => {
         <img src={logo} className="Logo" alt="logo" />
         <Typography className="Logo-Title-Header">HeaRT</Typography>
       </div>
-      {!!cookies['accessToken'] && 
-        <Button
-          onClick={onLogoutClick}
-        >
-          Logout
-        </Button>
-      }
+      {!!cookies["accessToken"] && (
+        <Button onClick={onLogoutClick}>Logout</Button>
+      )}
     </Layout.Header>
   );
 };

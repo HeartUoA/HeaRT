@@ -7,4 +7,4 @@ export type SliderMarks = {
         style: React.CSSProperties;
         label: React.ReactNode;
       };
-}
+};
