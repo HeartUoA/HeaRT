@@ -65,7 +65,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
             marginRight: dashboardCardsMargin,
           }}
         >
-          <Button className="Create-Course-Button" onClick={createNewCourse}>
+          <Button className="Create-Button" onClick={createNewCourse}>
             <img src={plus} className="Plus-Image" alt="plus" />
             <Typography>Create New Course</Typography>
           </Button>
