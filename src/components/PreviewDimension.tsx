@@ -50,6 +50,19 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   }, [props.saveDimensionClicked]);
 
+  useEffect(() => {
+    if (!props.fullDimensionView) {
+      setDimension(props.dimension);
+      setLeftState(props.dimension.leftCard);
+      setRightState(props.dimension.rightCard);
+      setColours(
+        currentDimension.userSelectedSliderPos === -1
+          ? defaultColours
+          : getColours(currentDimension.userSelectedSliderPos)
+      );
+    }
+  }, [props.fullDimensionView]);
+
   function getColours(value: number) {
     const hue = 344.7;
     const leftValue = 87 + (13 / 100) * value;
