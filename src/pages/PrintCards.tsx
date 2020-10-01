@@ -22,6 +22,7 @@ class ComponentToPrint extends React.Component {
         {allDimensions.map((currElement, index) => (
           <>
             <div className="PrintingCards">
+              <span className="Print-Card-Text-TopLeft">{index}</span>
               <span className="Print-Card-Text">
                 {index % 2
                   ? allDimensions[index].rightCard.statement
@@ -32,6 +33,7 @@ class ComponentToPrint extends React.Component {
               <Dimension dimensionVallue={index} />
             </div>
             <div className="PrintingCards">
+              <span className="Print-Card-Text-TopLeft">{index}</span>
               <span className="Print-Card-Text">
                 {index % 2
                   ? allDimensions[index].leftCard.statement
