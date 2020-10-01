@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import { CookiesProvider } from "react-cookie";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CompareCharts from "./pages/CompareCharts";
 
 const App: React.FC = () => {
   return (
@@ -39,6 +40,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/SignUp">
             <Signup />
+          </Route>
+          <Route path="/CompareCharts">
+            <CompareCharts />
           </Route>
         </Switch>
       </Router>

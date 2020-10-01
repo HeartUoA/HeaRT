@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { withRouter, RouteComponentProps} from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Button } from "antd";
 
 import Header from "../components/Header";
-import Instructions from "../components/Instructions"
+import Instructions from "../components/Instructions";
 import "../styles/Dashboard.css";
 
 const Dashboard: React.FC<RouteComponentProps> = (props) => {
-  const [ cookies ] = useCookies(['accessToken']);
+  const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
 
   useEffect(() => {
-    if (!cookies['accessToken']) {
+    if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
@@ -23,7 +23,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
 
   const createNewCourse = () => {
     props.history.push("/CreateCourse");
-  }
+  };
 
   return (
     <div className="Dashboard">
