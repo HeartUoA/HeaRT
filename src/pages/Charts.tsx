@@ -24,6 +24,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     (window.innerWidth % 500) / 2
   );
   const { courseID } = useParams<ParamTypes>();
+  const [selectedCharts, setCharts] = useState<string[]>([]);
 
   // TODO change this to get coursename from backend
   let course = courses.find((item) => item.id === courseID);
@@ -33,9 +34,6 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   } else {
     courseName = "Coursename not found";
   }
-
-  let selectedCharts: string[];
-  selectedCharts = [];
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
@@ -55,7 +53,8 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const createChart = () => {
-    props.history.push("/DisplayCards/" + courseID);
+    //props.history.push("/DisplayCards/" + courseID);
+    //Need to go to play reason page then this one ^
   };
 
   const handleResize = () => {
@@ -68,17 +67,20 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
 
   const onCompare = () => {
     // TODO Compare charts (ID's stored in selectedCharts array)
+    console.log(selectedCharts);
   };
 
   const onChartSelected = (chartID: string, isSelected: boolean) => {
+    let tempCharts = Object.assign([], selectedCharts);
     if (isSelected) {
-      selectedCharts.push(chartID);
+      tempCharts.push(chartID);
     } else {
-      const index = selectedCharts.indexOf(chartID, 0);
+      const index = tempCharts.indexOf(chartID, 0);
       if (index > -1) {
-        selectedCharts.splice(index, 1);
+        tempCharts.splice(index, 1);
       }
     }
+    setCharts({ ...tempCharts });
   };
 
   return (
@@ -129,7 +131,12 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
         <Button type="primary" className="Footer-Button" onClick={onBackClick}>
           Back
         </Button>
-        <Button type="primary" className="Footer-Button" onClick={onCompare}>
+        <Button
+          type="primary"
+          className="Footer-Button"
+          onClick={onCompare}
+          disabled={Object.assign([], selectedCharts).length < 2}
+        >
           Compare
         </Button>
       </div>

@@ -14,7 +14,7 @@ interface ChartProps {
 }
 
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
-  const [chartProps, setChartProps] = useState(props);
+  const [isSelected, setIsSelected] = useState(props.isSelected);
 
   const dateOptions = {
     day: "numeric",
@@ -25,20 +25,19 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   };
 
   const onClick = () => {
-    let isSelected = !chartProps.isSelected;
-    setChartProps({ ...chartProps, isSelected: isSelected });
-    chartProps.onChange(chartProps.chartID, isSelected);
+    setIsSelected(!isSelected);
+    props.onChange(props.chartID, !isSelected);
   };
 
   return (
     <Card className="Chart-Card" onClick={onClick}>
       <img
         className="Checkbox"
-        src={chartProps.isSelected ? checkbox : emptyCheckbox}
+        src={isSelected ? checkbox : emptyCheckbox}
         alt="checkbox"
       />
       <Typography>
-        {chartProps.createdAt.toLocaleDateString("en-NZ", dateOptions)}
+        {props.createdAt.toLocaleDateString("en-NZ", dateOptions)}
       </Typography>
     </Card>
   );

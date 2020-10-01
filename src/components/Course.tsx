@@ -13,7 +13,7 @@ const Course: React.FC<CourseProps> = (props: CourseProps) => {
   let history = useHistory();
 
   const onClick = () => {
-    history.push("/Course/" + props.courseID);
+    history.push(`/Course/${props.courseID}`);
   };
 
   return (
