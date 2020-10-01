@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
@@ -27,11 +27,14 @@ const defaultColours = {
 
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
+  const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
   // TODO: This needs to be changed later to use data from the backend
   const allDimensions = charts[0].dimensions;
 
-  const [dimensionIndex, setDimensionIndex] = useState(0);
+  const [dimensionIndex, setDimensionIndex] = useState(
+    isPrevPagePreview ? allDimensions.length - 1 : 0
+  );
   const [currentDimension, setDimension] = useState<DimensionType>(
     allDimensions[dimensionIndex]
   );

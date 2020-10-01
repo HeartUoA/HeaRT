@@ -36,7 +36,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     if (selectedDimension) {
       onSelectDimension(undefined);
     } else {
-      props.history.push("/DisplayCards");
+      props.history.push("/DisplayCards", { prevPage: "Preview" });
     }
   };
 
