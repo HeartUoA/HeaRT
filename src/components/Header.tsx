@@ -46,7 +46,11 @@ const Header: React.FC<RouteComponentProps> = (props) => {
         <Typography className="Logo-Title-Header">HeaRT</Typography>
       </div>
       {cookies["accessToken"] && (
-        <Button onClick={onLogoutClick}>Logout</Button>
+        <div className="Logout">
+          <Button className="Logout-Button" onClick={onLogoutClick}>
+            Logout
+          </Button>
+        </div>
       )}
       <Modal
         title="Leave Game"
