@@ -1,15 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { Card, Typography } from "antd";
 import "../styles/Course.css";
 
 interface CourseProps {
   courseName: string;
+  courseID: string;
 }
 
-const Dimension: React.FC<CourseProps> = (props: CourseProps) => {
+const Course: React.FC<CourseProps> = (props: CourseProps) => {
+  let history = useHistory();
+
   const onClick = () => {
-    // TODO: Redirect to appropriate course page
+    history.push("/Course/" + props.courseID);
   };
 
   return (
@@ -19,4 +23,4 @@ const Dimension: React.FC<CourseProps> = (props: CourseProps) => {
   );
 };
 
-export default Dimension;
+export default Course;
