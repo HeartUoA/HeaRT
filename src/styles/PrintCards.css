@@ -1,6 +1,4 @@
 .PrintCards {
-<<<<<<< HEAD
-<<<<<<< HEAD
   display: grid;
   min-height: 700px;
   height: 100vh;
@@ -39,16 +37,11 @@
 }
 .Print-Card-Text {
   font-size: 20px;
-  display: table-cell;
+  /* display: table-cell; */
   vertical-align: middle;
   height: inherit;
 }
-.Print-Card-Text-TopLeft {
-  font-size: 20px;
-  display: table-cell;
-  vertical-align: top;
-  height: inherit;
-}
+
 @page {
   size: auto;
   margin: 20mm;
@@ -69,105 +62,3 @@
     float: left;
   }
 }
-=======
-=======
->>>>>>> 0b3a141... npm bugging out
-    display: grid;
-    min-height: 700px;
-    height: 100vh;
-  }
-  .PrintCardsContainer {
-    align-self: center;
-    padding-top: 110px;
-    width: 600px;
-    min-width: 50%;
-    max-width: 100%;
-    margin: auto;
-  }
-  .PrintCardsContent {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .PrintingCards {
-    min-width: 200px;
-    background: #f6f7fc;
-    border-style: solid;
-    border-width: thin;
-    border-color: rgb(0, 0, 0);
-    width: 50%;
-    height: 200px;
-    display: inline-block;
-    text-align: center;
-  } 
-  .BackButtonDiv {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: auto;
-  }
-  .Print-Card-Text {
-    font-size: 20px;
-    display: table-cell;
-    vertical-align: middle;
-    height: inherit;
-  }
-
-
- @media print {
-    .Header {
-      opacity: 0;
-    }
-    .BackButtonDiv {
-      opacity: 0;
-    }
-    .PrintCardsContainer{
-      width: 100%;
-    }
-    .PrintingCards {
-      margin-bottom: 150px;
-    }
-  }/*
-    .PrintCardsContainer {
-      display: block;
-      align-self: center;
-      padding-top: 110px;
-      width: 100%;
-      min-width: 50%;
-      max-width: 100%;
-      page-break-inside: avoid !important;
-    }
-    .PrintCardsContent {
-      display: block;
-      page-break-inside: avoid !important;
-    }
-    .PrintingCards {
-      page-break-inside: avoid !important;
-      background: #f6f7fc;
-      border-style: solid;
-      border-width: thin;
-      border-color: rgb(0, 0, 0);
-      page-break-inside: avoid;
-      float: left;
-      width: 50%;
-      height: 200px;
-    }
-    .PrintCardsContent:after {
-      page-break-inside: avoid !important;
-      display: table;
-      clear: both;
-    }
-    .BackButtonDiv {
-      opacity: 0;
-    }
-    .Print-Card-Text {
-      text-align: center;
-      font-size: 20px;
-      margin: 0px;
-    }
-    
-  }*/
-<<<<<<< HEAD
-  
->>>>>>> ad928bc... npm bugging out
-=======
-  
->>>>>>> 0b3a141... npm bugging out
