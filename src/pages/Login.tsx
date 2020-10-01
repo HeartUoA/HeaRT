@@ -10,17 +10,17 @@ import Header from "../components/Header";
 import "../styles/Login.css";
 
 const USERNAME_EMPTY = "Please enter your username.";
-const PASSWORD_EMPTY = "Please enter your password."
+const PASSWORD_EMPTY = "Please enter your password.";
 const INCORRECT_LOGIN = "Username and/or password is incorrect.";
 
 const Login: React.FC<RouteComponentProps> = (props) => {
-  const [ username, setUsername ] = useState("");
-  const [ password, setPassword ] = useState("");
-  const [ cookies, setCookie ] = useCookies(['accessToken']);
-  const [ error, setError ] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (cookies['accessToken']) {
+    if (cookies["accessToken"]) {
       props.history.push("/Dashboard");
     }
   }, [cookies]);
@@ -28,18 +28,21 @@ const Login: React.FC<RouteComponentProps> = (props) => {
   const onConfirmClick = async (): Promise<void> => {
     if (username && password) {
       const hashedPassword = md5(password);
-      const response = await fetch(`${API_DOMAIN}users/authenticate/${username}`, {
-        method: "POST",
-        body: JSON.stringify({ passwordHash : hashedPassword }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `${API_DOMAIN}users/authenticate/${username}`,
+        {
+          method: "POST",
+          body: JSON.stringify({ passwordHash: hashedPassword }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
-      const res = await response.json().catch(e => setError(INCORRECT_LOGIN));
+      const res = await response.json().catch((e) => setError(INCORRECT_LOGIN));
       if (res && res.accessToken) {
-        setCookie('accessToken', res.accessToken);
+        setCookie("accessToken", res.accessToken);
         setError("");
         props.history.push("/Dashboard");
       } else {
@@ -52,7 +55,6 @@ const Login: React.FC<RouteComponentProps> = (props) => {
         setError(PASSWORD_EMPTY);
       }
     }
-    
   };
 
   const onSignupClick = () => {
@@ -73,23 +75,28 @@ const Login: React.FC<RouteComponentProps> = (props) => {
           </Typography>
           <div className="Login-Input-Container">
             <div>
-              <Typography className="Login-Label-Text">
-                Username
-              </Typography>
-              <Input 
-                className={`Login-Input ${(error === USERNAME_EMPTY || error === INCORRECT_LOGIN) && "Error"}`} 
-                name="username" value={username} 
-                onChange={e => setUsername(e.target.value)} 
+              <Typography className="Login-Label-Text">Username</Typography>
+              <Input
+                className={`Login-Input ${
+                  (error === USERNAME_EMPTY || error === INCORRECT_LOGIN) &&
+                  "Error"
+                }`}
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
               <Typography className="Login-Label-Text">Password</Typography>
-              <Input 
-                className={`Login-Input ${(error === PASSWORD_EMPTY || error === INCORRECT_LOGIN) && "Error"}`} 
-                name="password" 
-                type="password" 
-                value={password} 
-                onChange={e => setPassword(e.target.value)} 
+              <Input
+                className={`Login-Input ${
+                  (error === PASSWORD_EMPTY || error === INCORRECT_LOGIN) &&
+                  "Error"
+                }`}
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -100,12 +107,11 @@ const Login: React.FC<RouteComponentProps> = (props) => {
           >
             Login
           </Button>
-          {error ?
-            <Typography className="Error-Message-Text">
-              {error}
-            </Typography>
-            : <div style={{height: 40}} />
-            }
+          {error ? (
+            <Typography className="Error-Message-Text">{error}</Typography>
+          ) : (
+            <div style={{ height: 40 }} />
+          )}
         </div>
       </div>
     </div>
