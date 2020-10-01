@@ -28,7 +28,7 @@ const App: React.FC = () => {
           <Route path="/CreateCourse">
             <CreateCourse />
           </Route>
-          <Route path="/DisplayCards">
+          <Route path="/DisplayCards/:courseID">
             <DisplayCards />
           </Route>
           <Route path="/Preview">

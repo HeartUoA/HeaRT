@@ -1,11 +1,14 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+
+import { API_DOMAIN } from "../config";
 
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 import { Dimension as DimensionType } from "../types/dimension";
+import { createChart } from "../types/chart";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -14,6 +17,10 @@ import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 
 import charts from "../dummyData/charts";
+
+interface ParamTypes {
+  courseID: string;
+}
 
 export enum CardSide {
   Left,
@@ -27,8 +34,37 @@ const defaultColours = {
 
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
+  const { courseID } = useParams<ParamTypes>();
 
   // TODO: This needs to be changed later to use data from the backend
+  const fetchDimensions = async (): Promise<any> => {
+    const responseChart = await fetch(
+      `${API_DOMAIN}course/` + courseID + `/chart`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${cookies["accessToken"]}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
+      .then((responseChart) => responseChart.json())
+      .then((data) => {
+        return data;
+      });
+
+    console.log(responseChart);
+
+    return responseChart.dimensions;
+  };
+
+  fetchDimensions();
+
+  // (async () => {
+  //   console.log(await fetchDimensions());
+  // })()
+
   const allDimensions = charts[0].dimensions;
 
   const [dimensionIndex, setDimensionIndex] = useState(0);
@@ -44,8 +80,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       : getColours(currentDimension.userSelectedSliderPos)
   );
   const [progress, setProgress] = useState({
-    completed: allDimensions.filter((dim) => dim.userSelectedSliderPos !== -1)
-      .length,
+    completed: allDimensions.filter(
+      (dim: { userSelectedSliderPos: number }) =>
+        dim.userSelectedSliderPos !== -1
+    ).length,
     total: allDimensions.length,
   });
   const isCardSelected = currentDimension.userSelectedSliderPos !== -1;
