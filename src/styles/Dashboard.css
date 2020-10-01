@@ -4,6 +4,7 @@
   text-align: center;
   height: 100vh;
   position: relative;
+  min-width: 600px;
 }
 
 .Dashboard-Content {

@@ -15,7 +15,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
   const [dashboardCardsMargin, setMargin] = useState(
-    (window.innerWidth % 490) / 2
+    (window.innerWidth % 500) / 2
   );
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
   };
 
   const handleResize = () => {
-    setMargin((window.innerWidth % 490) / 2);
+    setMargin((window.innerWidth % 500) / 2);
   };
 
   return (
