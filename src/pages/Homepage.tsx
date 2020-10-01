@@ -7,10 +7,10 @@ import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
 const Homepage: React.FC<RouteComponentProps> = (props) => {
-  const [ cookies ] = useCookies(['accessToken']);
+  const [cookies] = useCookies(["accessToken"]);
 
   useEffect(() => {
-    if (cookies['accessToken']) {
+    if (cookies["accessToken"]) {
       props.history.push("/Dashboard");
     }
   }, [cookies]);
