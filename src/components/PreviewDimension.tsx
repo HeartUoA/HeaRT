@@ -3,6 +3,8 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import { Card, Typography, Tooltip } from "antd";
 import Dimension from "../components/Dimension";
 import { Dimension as DimensionType } from "../types/dimension";
+import { CardSide } from "../types/card";
+import { DEFAULT_COLOURS, getColours } from "../utils/cards";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -18,16 +20,6 @@ interface PreviewDimensionProps {
   saveDimensionClicked: boolean;
 }
 
-export enum CardSide {
-  Left,
-  Right,
-}
-
-const defaultColours = {
-  leftCardColour: "#FFFFFF",
-  rightCardColour: "#FFFFFF",
-};
-
 const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
   const [currentDimension, setDimension] = useState<DimensionType>(
     props.dimension
@@ -36,7 +28,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
   const [rightState, setRightState] = useState(currentDimension.rightCard);
   const [colours, setColours] = useState(
     currentDimension.userSelectedSliderPos === -1
-      ? defaultColours
+      ? DEFAULT_COLOURS
       : getColours(currentDimension.userSelectedSliderPos)
   );
 
@@ -57,25 +49,11 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
       setRightState(props.dimension.rightCard);
       setColours(
         currentDimension.userSelectedSliderPos === -1
-          ? defaultColours
+          ? DEFAULT_COLOURS
           : getColours(currentDimension.userSelectedSliderPos)
       );
     }
   }, [props.fullDimensionView]);
-
-  function getColours(value: number) {
-    const hue = 344.7;
-    const leftValue = 87 + (13 / 100) * value;
-    const leftColour = ["hsl(", hue, ",100%,", leftValue, "%)"].join("");
-
-    const rightValue = 100 - (13 / 100) * value;
-    const rightColour = ["hsl(", hue, ",100%,", rightValue, "%)"].join("");
-
-    return {
-      leftCardColour: leftColour,
-      rightCardColour: rightColour,
-    };
-  }
 
   const onCardClick = (side: CardSide) => {
     if (side === CardSide.Left) {

@@ -6,6 +6,8 @@ import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 import { Dimension as DimensionType } from "../types/dimension";
+import { CardSide } from "../types/card";
+import { DEFAULT_COLOURS, getColours } from "../utils/cards";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -14,16 +16,6 @@ import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 
 import charts from "../dummyData/charts";
-
-export enum CardSide {
-  Left,
-  Right,
-}
-
-const defaultColours = {
-  leftCardColour: "#FFFFFF",
-  rightCardColour: "#FFFFFF",
-};
 
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
@@ -43,7 +35,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [rightState, setRightState] = useState(currentDimension.rightCard);
   const [colours, setColours] = useState(
     currentDimension.userSelectedSliderPos === -1
-      ? defaultColours
+      ? DEFAULT_COLOURS
       : getColours(currentDimension.userSelectedSliderPos)
   );
   const [progress, setProgress] = useState({
@@ -75,24 +67,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     setRightState(allDimensions[newIndex].rightCard);
     setColours(
       allDimensions[newIndex].userSelectedSliderPos === -1
-        ? defaultColours
+        ? DEFAULT_COLOURS
         : getColours(allDimensions[newIndex].userSelectedSliderPos)
     );
   };
-
-  function getColours(value: number) {
-    const hue = 344.7;
-    const leftValue = 87 + (13 / 100) * value;
-    const leftColour = ["hsl(", hue, ",100%,", leftValue, "%)"].join("");
-
-    const rightValue = 100 - (13 / 100) * value;
-    const rightColour = ["hsl(", hue, ",100%,", rightValue, "%)"].join("");
-
-    return {
-      leftCardColour: leftColour,
-      rightCardColour: rightColour,
-    };
-  }
 
   const onBackClick = () => {
     if (dimensionIndex > 0) {
@@ -135,7 +113,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
-  const onCancelClick = (event: React.MouseEvent, side: CardSide) => {
+  const onCancelClick = (side: CardSide) => {
     if (side === CardSide.Left) {
       setLeftState({ ...leftState, isEditing: false });
     } else if (side === CardSide.Right) {
@@ -143,7 +121,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
-  const onSaveClick = (event: React.MouseEvent, side: CardSide) => {
+  const onSaveClick = (side: CardSide) => {
     let textElement = document.getElementById(
       side === CardSide.Left ? "leftCardEdit" : "rightCardEdit"
     );
@@ -201,7 +179,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                   alt="edit"
                   onClick={(event) =>
                     leftState.isEditing
-                      ? onSaveClick(event, CardSide.Left)
+                      ? onSaveClick(CardSide.Left)
                       : onEditClick(event, CardSide.Left)
                   }
                 />
@@ -213,7 +191,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={(event) => onCancelClick(event, CardSide.Left)}
+                      onClick={(event) => onCancelClick(CardSide.Left)}
                     />
                   </Tooltip>
                   <div
@@ -250,7 +228,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                   alt="edit"
                   onClick={(event) =>
                     rightState.isEditing
-                      ? onSaveClick(event, CardSide.Right)
+                      ? onSaveClick(CardSide.Right)
                       : onEditClick(event, CardSide.Right)
                   }
                 />
@@ -262,7 +240,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       src={cancel}
                       className="Cancel"
                       alt="cancel"
-                      onClick={(event) => onCancelClick(event, CardSide.Right)}
+                      onClick={(event) => onCancelClick(CardSide.Right)}
                     />
                   </Tooltip>
                   <div
