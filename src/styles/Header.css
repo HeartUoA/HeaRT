@@ -38,18 +38,27 @@
   margin: 15px 15px 0px 0px;
 }
 
-
 .Modal-Button {
   box-shadow: 0px 0px 0px 0px;
 }
 
 .Logout {
   display: flex;
-  margin-right: 50px;
+  margin-right: 25px;
   align-items: center;
   justify-content: center;
 }
 
-.Logout button {
-  font-size: large;
+.Logout-Button {
+  font-size: 20px;
+  background-color: #f6f7fc;
+  border-radius: 10px;
+  height: 50px;
+  width: 150px;
+}
+
+.Logout-Button:hover {
+  border: 1px solid #f6f7fc;
+  color: #f6f7fc;
+  background-color: rgba(0, 0, 0, 0);
 }
