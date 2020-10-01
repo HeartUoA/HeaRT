@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 
 import { Typography, Button, Col } from "antd";
 import Header from "../components/Header";
-import Dimension from "../components/Dimension";
+import DimensionComparator from "../components/DimensionComparator";
 
 import "../styles/Preview.css";
 import "../styles/Footer.css";
@@ -18,12 +18,11 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   // TODO: Need to change this to grab data from backend
   const chartsToCompare = [charts[1], charts[2], charts[3]];
   const course = courses.find((course) => course.id === charts[1].courseID);
-
-  useEffect(() => {
-    if (!cookies["accessToken"]) {
-      props.history.push("/Login");
-    }
-  }, [cookies]);
+  // useEffect(() => {
+  //   if (!cookies["accessToken"]) {
+  //     props.history.push("/Login");
+  //   }
+  // }, [cookies]);
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to display cards screen with the last card
@@ -35,12 +34,15 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
       <div className="Preview-Content">
         <Typography className="Preview-Title">{course!.name}</Typography>
         <Col className="Dimension-Row">
-          {chartsToCompare[0].dimensions.map((item) => {
+          {chartsToCompare[0].dimensions.map((item, index) => {
             if (item.userSelectedSliderPos !== -1) {
               return (
-                <Dimension
+                <DimensionComparator
                   {...{
-                    dimension: item,
+                    dimensions: chartsToCompare.map(
+                      (chart) => chart.dimensions[index]
+                    ),
+                    dates: chartsToCompare.map((chart) => chart.createdAt),
                     isPreview: true,
                     key: item.name,
                   }}
