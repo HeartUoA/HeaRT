@@ -4,6 +4,7 @@ const courseSchemaDef = {
   name: {
     type: String,
     required: true,
+    unique: false,
   },
   createdAt: {
     type: Date,
@@ -12,18 +13,22 @@ const courseSchemaDef = {
   cohortSize: {
     type: Number,
     required: true,
+    unique: false,
   },
   role: {
     type: String,
     required: true,
+    unique: false,
   },
   startYear: {
     type: Date,
     required: true,
+    unique: false,
   },
   createdByUserID: {
     type: String,
     required: true,
+    unique: false,
   },
 };
 
