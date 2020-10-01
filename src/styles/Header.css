@@ -38,9 +38,9 @@
   margin: 15px 15px 0px 0px;
 }
 
-
 .Modal-Button {
   box-shadow: 0px 0px 0px 0px;
+  border-radius: 10px;
 }
 
 .Logout {
