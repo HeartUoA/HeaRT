@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 .printDimensionText {
   text-align: left;
   display: block;
   margin: 10px 0 0 10px;
 }
-.TypeofDimension{
+.TypeofDimension {
   font-weight: bold;
   float: right;
   margin-right: 10px;
@@ -40,7 +38,7 @@
   width: 55%;
   font-size: 10px;
 }
-.StatementReflection{
+.StatementReflection {
   font-weight: bold;
 }
 @media print {
@@ -48,43 +46,3 @@
     margin-right: 80px;
   }
 }
-=======
-=======
->>>>>>> 0b3a141... npm bugging out
-.printDimensionText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
-}
-.printTitleText{
-    text-align: left;
-    display: block;
-    margin: 0 0 0 10px;
-}
-.printContinuumText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
-}
-.ContiuumStatements{
-    display: flex;
-    justify-content: space-between;
-}
-.printSliderText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
-}
-.printStatementText{
-    text-align: left;
-    display: block;
-    margin: 20px 0 0 10px;
-}
-.printSlider {
-    width:93%;
-<<<<<<< HEAD
-}
->>>>>>> ad928bc... npm bugging out
-=======
-}
->>>>>>> 0b3a141... npm bugging out
