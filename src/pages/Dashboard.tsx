@@ -74,6 +74,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
               <Course
                 {...{
                   courseName: item.name,
+                  key: item.id,
                 }}
               />
             );
