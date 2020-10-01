@@ -9,12 +9,11 @@ import checkbox from "../assets/images/checkbox.png";
 interface ChartProps {
   createdAt: Date;
   chartID: string;
-  isSelected: boolean;
   onChange: Function;
 }
 
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
-  const [isSelected, setIsSelected] = useState(props.isSelected);
+  const [isSelected, setIsSelected] = useState(false);
 
   const dateOptions = {
     day: "numeric",

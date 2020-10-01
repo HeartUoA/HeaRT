@@ -116,7 +116,6 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
                   {...{
                     createdAt: item.createdAt,
                     chartID: item.id,
-                    isSelected: false,
                     onChange: onChartSelected,
                     key: item.id,
                   }}
@@ -133,11 +132,11 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
         </Button>
         <Button
           type="primary"
-          className="Footer-Button"
+          className="Footer-Button Wider-Button"
           onClick={onCompare}
           disabled={Object.assign([], selectedCharts).length < 2}
         >
-          Compare
+          Compare Charts
         </Button>
       </div>
     </div>
