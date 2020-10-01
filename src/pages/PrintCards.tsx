@@ -1,47 +1,77 @@
-import React, { constructor, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Button, Input, Row, Typography } from "antd";
+import ReactToPrint from "react-to-print";
+import { useReactToPrint } from "react-to-print";
+import { Button } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/PrintDimension";
 import "../styles/PrintCards.css";
+import "../styles/Footer.css";
 import { API_DOMAIN } from "../config";
 
 import charts from "../dummyData/charts";
 
-const chartID = "5f73b99d5d6eec214825e006";
+const chartID = "";
 
-//dummy data
-type DimensionCard = {
-  dimensionName: string;
-  leftContinuum: string;
-  rightContinuum: string;
-  statementReflection: string;
-};
+class ComponentToPrint extends React.Component {
+  render() {
+    const allDimensions = charts[0].dimensions;
+    return (
+      <div>
+        {allDimensions.map((currElement, index) => (
+          <>
+            <div className="PrintingCards">
+              <span className="Print-Card-Text">
+                {index % 2
+                  ? allDimensions[index].rightCard.statement
+                  : allDimensions[index].leftCard.statement}
+              </span>
+            </div>
+            <div className="PrintingCards">
+              <Dimension dimensionVallue={index} />
+            </div>
+            <div className="PrintingCards">
+              <span className="Print-Card-Text">
+                {index % 2
+                  ? allDimensions[index].leftCard.statement
+                  : allDimensions[index].rightCard.statement}
+              </span>
+            </div>
+            <div className="PrintingCards">
+              <Dimension dimensionVallue={index} />
+            </div>
+          </>
+        ))}
+      </div>
+    );
+  }
+}
 
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
-  const [leftState, setLeftState] = useState();
-  const [dimensions, setDimensions] = useState(charts[0].dimensions);
-  const allDimensions = charts[0].dimensions;
-  let numberthis = 0;
+
+  const componentRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
 
+    //Set up later to get data not from dummy
     fetch(`${API_DOMAIN}dimensions/forchart/${chartID}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI1ZjcxODRjOThhYWQ1MzUxOTg1ZDJkMzAiLCJpYXQiOjE2MDEyNzUxMDh9.0MN9vV7WRSc-m5hpt3t8mJakVNElJHe4a2fuc1-aFcs",
+        Authorization: "",
       },
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res[0].score);
+        //Get data and set it to Dimensions
       })
       .catch((e) => console.log(e));
   }, [cookies]);
@@ -57,37 +87,22 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
       </div>
       <div className="PrintCardsContainer">
         <div className="PrintCardsContent">
-          <Row>
-            {dimensions.map((currElement, index) => (
-              <>
-                <div className="PrintingCards">
-                  <span className="Print-Card-Text">
-                    {index % 2
-                      ? allDimensions[index].rightCard.statement
-                      : allDimensions[index].leftCard.statement}
-                  </span>
-                </div>
-                <div className="PrintingCards">
-                  <Dimension dimensionVallue={index} />
-                </div>
-                <div className="PrintingCards">
-                  <span className="Print-Card-Text">
-                    {index % 2
-                      ? allDimensions[index].leftCard.statement
-                      : allDimensions[index].rightCard.statement}
-                  </span>
-                </div>
-                <div className="PrintingCards">
-                  <Dimension dimensionVallue={index} />
-                </div>
-              </>
-            ))}
-          </Row>
+          <ComponentToPrint ref={componentRef} />
         </div>
       </div>
-      <div className="BackButtonDiv">
-        <Button type="primary" className="Back-Button" onClick={onBackClick}>
+      <div className="Footer">
+        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
           Back
+        </Button>
+        <Button type="primary" className="Footer-Button">
+          <ReactToPrint
+            trigger={() => {
+              // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+              // to the root node of the returned component as it will be overwritten.
+              return <a href="#">Print</a>;
+            }}
+            content={() => componentRef.current}
+          />
         </Button>
       </div>
     </div>

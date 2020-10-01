@@ -1,19 +1,36 @@
 import { Slider, Switch } from "antd";
-import React, { useState } from "react";
-import { useCookies } from "react-cookie";
-import { RouteComponentProps } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/PrintDimension.css";
 import charts from "../dummyData/charts";
+
+import { API_DOMAIN } from "../config";
 
 interface PrintDimensionProps {
   dimensionVallue: number;
 }
+const chartID = "";
 
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   props
 ) => {
+  useEffect(() => {
+    fetch(`${API_DOMAIN}dimensions/forchart/${chartID}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        //Get data and set it to Dimensions
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   const allDimensions = charts[0].dimensions;
-  const low = 0;
+  const something = allDimensions[props.dimensionVallue];
+
   return (
     <>
       <span className="printDimensionText">Pedagogical Dimension:</span>
@@ -28,9 +45,8 @@ const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
         disabled={true}
         marks={allDimensions[props.dimensionVallue].marks}
       />
-      {/* Below isn't added in the backend */}
       <span className="printStatementText">
-        Statement reflects 'Academic/abstract'{} purpose
+        Statement reflects '{something.marks && something.marks[100]}' purpose
       </span>
     </>
   );
