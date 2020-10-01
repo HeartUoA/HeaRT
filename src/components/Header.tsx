@@ -52,8 +52,24 @@ const Header: React.FC<RouteComponentProps> = (props) => {
         title="Leave Game"
         centered
         visible={showExitModal}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        footer={[
+          <Button
+            key="cancel"
+            type="primary"
+            onClick={handleCancel}
+            className="Modal-Button"
+          >
+            Cancel
+          </Button>,
+          <Button
+            key="ok"
+            type="primary"
+            onClick={handleOk}
+            className="Modal-Button"
+          >
+            Ok
+          </Button>,
+        ]}
       >
         <p>Are you sure you want to return to the dashboard?</p>
       </Modal>
