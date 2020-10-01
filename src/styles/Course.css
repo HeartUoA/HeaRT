@@ -14,6 +14,14 @@
   border: none;
 }
 
+.Course-Card:hover {
+  background: #ffc4d3;
+}
+
+.Course-Card:hover .Course-Title {
+  background: #f1f1f1;
+}
+
 .Course-Title {
   font-size: 30px;
   background-color: white;

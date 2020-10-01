@@ -15,7 +15,6 @@ const Dimension: React.FC<CourseProps> = (props: CourseProps) => {
   return (
     <Card className="Course-Card" onClick={onClick}>
       <Typography className="Course-Title">{props.courseName}</Typography>
-      <div className="Course-Card-Bottom" />
     </Card>
   );
 };
