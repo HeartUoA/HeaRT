@@ -81,3 +81,7 @@
 .Clickable {
   cursor: pointer;
 }
+
+.Clickable:hover {
+  color: #ff9cb8;
+}
