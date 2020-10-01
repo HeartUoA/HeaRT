@@ -1,32 +1,34 @@
-.printDimensionText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
+.printDimensionText {
+  text-align: left;
+  display: block;
+  margin: 10px 0 0 10px;
 }
-.printTitleText{
-    text-align: left;
-    display: block;
-    margin: 0 0 0 10px;
+.printTitleText {
+  text-align: left;
+  display: block;
+  margin: 0 0 0 10px;
 }
-.printContinuumText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
+.printContinuumText {
+  text-align: left;
+  display: block;
+  margin: 10px 0 0 10px;
 }
-.ContiuumStatements{
-    display: flex;
-    justify-content: space-between;
+.ContiuumStatements {
+  display: flex;
+  justify-content: space-between;
 }
-.printSliderText{
-    text-align: left;
-    display: block;
-    margin: 10px 0 0 10px;
+.printSliderText {
+  text-align: left;
+  display: block;
+  margin: 10px 0 0 10px;
 }
-.printStatementText{
-    text-align: left;
-    display: block;
-    margin: 20px 0 0 10px;
+.printStatementText {
+  text-align: left;
+  display: block;
+  margin: 50px 0 0 10px;
 }
 .printSlider {
-    width:93%;
+  margin: auto;
+  width: 60%;
+  font-size: 10px;
 }
