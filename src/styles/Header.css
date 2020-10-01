@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.Logo-Container:hover {
+  cursor: pointer;
+}
+
 .Logo {
   height: 65px;
   pointer-events: none;

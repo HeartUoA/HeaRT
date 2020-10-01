@@ -17,15 +17,12 @@ const Header: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onLogoClick = () => {
-    console.log("Click");
     // If the user is NOT logged in, it should redirect them to the homepage
     if (!cookies["accessToken"]) {
       props.history.push("/");
     } else {
       // If the user is logged in and playing a game, it should show a confirmation dialog
-      console.log("Help");
-      console.log(props.match.path);
-      if (props.match.path == "/DisplayCards") {
+      if (props.match.path === "/DisplayCards") {
         setShowExitModal(true);
       } else {
         props.history.push("/Dashboard");
@@ -48,7 +45,7 @@ const Header: React.FC<RouteComponentProps> = (props) => {
         <img src={logo} className="Logo" alt="logo" />
         <Typography className="Logo-Title-Header">HeaRT</Typography>
       </div>
-      {!!cookies["accessToken"] && (
+      {cookies["accessToken"] && (
         <Button onClick={onLogoutClick}>Logout</Button>
       )}
       <Modal
