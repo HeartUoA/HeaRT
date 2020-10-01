@@ -1,0 +1,28 @@
+.Card-Compare-Preview {
+  min-height: 350px;
+  width: 40vw;
+  min-width: 600px;
+  margin: 30px;
+  box-shadow: 4px 4px 10px #212121;
+  padding: 30px;
+  position: relative;
+}
+
+@media (max-width: 1420px) {
+  .Card-Compare-Preview {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Card-Compare-Preview {
+    width: 700px;
+  }
+}
+
+.Card-Compare-Slider {
+  position: absolute;
+  margin: 15px 0px;
+  margin-top: 6em;
+  width: 85%;
+}
