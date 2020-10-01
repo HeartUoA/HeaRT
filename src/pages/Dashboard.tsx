@@ -44,11 +44,11 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
   };
 
   return (
-    <div className="Dashboard">
+    <div className="Courses-Dashboard">
       <Header />
       <Instructions visible={showInstructions} hide={onInstructionsClick} />
       <div className="Dashboard-Content">
-        <Typography className="Courses-Heading">Courses</Typography>
+        <Typography className="Heading">Courses</Typography>
         <Button
           type="primary"
           className="Instructions-Button"
@@ -74,6 +74,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
               <Course
                 {...{
                   courseName: item.name,
+                  courseID: item.id,
                   key: item.id,
                 }}
               />
