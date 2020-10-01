@@ -1,4 +1,5 @@
-.Dashboard {
+.Courses-Dashboard,
+.Charts-Dashboard {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -7,12 +8,16 @@
   min-width: 600px;
 }
 
+.Charts-Dashboard {
+  min-width: 800px;
+}
+
 .Dashboard-Content {
   margin-top: 140px;
   position: relative;
 }
 
-.Courses-Heading {
+.Heading {
   font-size: 50px;
   position: absolute;
   margin: auto;
@@ -36,7 +41,7 @@
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06);
 }
 
-.Create-Course-Button {
+.Create-Button {
   min-height: 250px;
   width: 450px;
   min-width: 400px;
@@ -50,6 +55,10 @@
   font-size: 30px;
 }
 
-.Create-Course-Button:hover {
+.Create-Button:hover {
   background: #f1f1f1;
+}
+
+.Dashboard-Cards {
+  margin-bottom: 100px;
 }
