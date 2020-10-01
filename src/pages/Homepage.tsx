@@ -36,10 +36,10 @@ const Homepage: React.FC<RouteComponentProps> = (props) => {
       </div>
       <div className="Buttons-Container">
         <Button className="Button" onClick={onLoginClick}>
-          <Typography className="Button-Text">Login</Typography>
+          Login
         </Button>
-        <Button type="default" className="Button" onClick={onSignUpClick}>
-          <Typography className="Button-Text">Sign up</Typography>
+        <Button className="Button" onClick={onSignUpClick}>
+          Sign up
         </Button>
       </div>
     </div>
