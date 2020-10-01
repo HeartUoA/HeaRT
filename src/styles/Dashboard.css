@@ -55,7 +55,14 @@
   font-size: 30px;
 }
 
-.Create-Button:hover {
+.Plus-Image {
+  width: 80px;
+  height: 80px;
+  margin: 20px 0px 20px 0px;
+  filter: brightness(21%);
+}
+
+.Create-Course-Button:hover {
   background: #f1f1f1;
 }
 

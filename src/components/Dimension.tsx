@@ -11,16 +11,28 @@ interface DimensionProps {
   sliderUpdate: (value: number) => void;
   userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isPreview: boolean;
+  openSingleDimension?: (key: string) => void;
 }
 
 const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
+  const redirectToFullDimensionView = () => {
+    if (props.openSingleDimension) {
+      props.openSingleDimension(props.dimension.name); // TODO: Change this to ID
+    }
+  };
+
   return (
     <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
-      <p className="Dimension-Name-Text">{props.dimension.name}</p>
+      <p
+        className={`Dimension-Name-Text ${props.isPreview && "Clickable"}`}
+        onClick={props.isPreview ? redirectToFullDimensionView : undefined}
+      >
+        {props.dimension.name}
+      </p>
       <Slider
         className="Slider"
         value={props.dimension.userSelectedSliderPos}
-        onChange={props.sliderUpdate}
+        onChange={(value: number) => props.sliderUpdate(value)}
         marks={props.dimension.marks}
         tooltipVisible={false}
         included={false}

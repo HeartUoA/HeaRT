@@ -22,7 +22,10 @@ const Header: React.FC<RouteComponentProps> = (props) => {
       props.history.push("/");
     } else {
       // If the user is logged in and playing a game, it should show a confirmation dialog
-      if (props.match.path === "/DisplayCards") {
+      if (
+        props.match.path === "/DisplayCards" ||
+        props.match.path === "/Preview"
+      ) {
         setShowExitModal(true);
       } else {
         props.history.push("/Dashboard");
@@ -71,11 +74,15 @@ const Header: React.FC<RouteComponentProps> = (props) => {
             onClick={handleOk}
             className="Modal-Button"
           >
-            Ok
+            Continue
           </Button>,
         ]}
       >
-        <p>Are you sure you want to return to the dashboard?</p>
+        <p>
+          Are you sure you want to return to the dashboard?{" "}
+          {props.match.path === "/Preview" &&
+            "Any changes made in preview will be lost."}
+        </p>
       </Modal>
     </Layout.Header>
   );
