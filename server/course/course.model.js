@@ -18,8 +18,8 @@ const courseSchemaDef = {
     required: true,
   },
   startYear: {
-    type: Number,
-    required: Date,
+    type: Date,
+    required: true,
   },
   createdByUserID: {
     type: String,
