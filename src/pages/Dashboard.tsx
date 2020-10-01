@@ -66,7 +66,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
           }}
         >
           <Button className="Create-Course-Button" onClick={createNewCourse}>
-            <img src={plus} alt="plus" />
+            <img src={plus} className="Plus-Image" alt="plus" />
             <Typography>Create New Course</Typography>
           </Button>
           {courses.map((item) => {

@@ -59,8 +59,8 @@
 
 .Dimension-Row {
   justify-content: space-evenly;
-  margin: 0px;
-  margin-bottom: 100px;
+  margin: 0px 0px 100px 0px;
+  width: 100%;
 }
 
 .User-Explanation-Edit {

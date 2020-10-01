@@ -8,30 +8,31 @@ import { Dimension as DimensionType } from "../types/dimension";
 
 interface DimensionProps {
   dimension: DimensionType;
-  sliderUpdate: (value: number, dimensionKey: string) => void;
+  sliderUpdate: (value: number) => void;
   userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isPreview: boolean;
+  openSingleDimension?: (key: string) => void;
 }
 
 const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
-  const redirectToDimension = () => {
-    // Redirect user to dimension
+  const redirectToFullDimensionView = () => {
+    if (props.openSingleDimension) {
+      props.openSingleDimension(props.dimension.name); // TODO: Change this to ID
+    }
   };
 
   return (
     <Card className={props.isPreview ? "Card-Preview" : "Card-Dimension"}>
       <p
         className={`Dimension-Name-Text ${props.isPreview && "Clickable"}`}
-        onClick={props.isPreview ? redirectToDimension : undefined}
+        onClick={props.isPreview ? redirectToFullDimensionView : undefined}
       >
         {props.dimension.name}
       </p>
       <Slider
         className="Slider"
         value={props.dimension.userSelectedSliderPos}
-        onChange={(value: number) =>
-          props.sliderUpdate(value, props.dimension.name)
-        }
+        onChange={(value: number) => props.sliderUpdate(value)}
         marks={props.dimension.marks}
         tooltipVisible={false}
         included={false}
