@@ -15,7 +15,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
 
   // TODO: Need to change this to grab data from backend
-  const [dimensions] = useState(charts[0].dimensions);
+  const [dimensions, updateDimensions] = useState(charts[0].dimensions);
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
@@ -24,16 +24,29 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onBackClick = () => {
-    // TODO: Write code here to redirect to display cards screen with the last card
+    props.history.push("/DisplayCards");
   };
 
   const onSaveClick = () => {
     // TODO: Write code here to make API post request to save chart
+    charts[0].dimensions = dimensions;
+
     props.history.push("/Replay");
   };
 
-  const onDimensionChange = (value: number) => {
-    // what happens when someone drags slider
+  const onDimensionChange = (value: number, dimensionKey: string) => {
+    updateDimensions(
+      dimensions.map((item) => {
+        if (item.name === dimensionKey) {
+          return {
+            ...item,
+            userSelectedSliderPos: value,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
   };
 
   return (
