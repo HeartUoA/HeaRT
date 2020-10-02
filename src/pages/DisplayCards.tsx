@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
 import { API_DOMAIN } from "../config";
 
-import { Card, Button, Typography, Tooltip, Progress } from "antd";
+import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 import { Chart, createChart } from "../types/chart";
@@ -15,6 +15,7 @@ import save from "../assets/images/save.png";
 import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
+import { createBackendDimension } from "../types/dimension";
 
 const DEFAULT_PROGRESS = {
   completed: 0,
@@ -37,7 +38,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const [colours, setColours] = useState(
     chart && chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1
-      ? getColours(chart.dimensions[dimensionIndex].userSelectedSliderPos)
+      ? getColours(
+          chart.dimensions[dimensionIndex].userSelectedSliderPos,
+          chart.dimensions[dimensionIndex].type
+        )
       : DEFAULT_COLOURS
   );
   const [progress, setProgress] = useState(
@@ -63,7 +67,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setDimensionIndex(isPrevPagePreview ? chart.dimensions.length - 1 : 0);
       setColours(
         chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1
-          ? getColours(chart.dimensions[dimensionIndex].userSelectedSliderPos)
+          ? getColours(
+              chart.dimensions[dimensionIndex].userSelectedSliderPos,
+              chart.dimensions[dimensionIndex].type
+            )
           : DEFAULT_COLOURS
       );
       setProgress({
@@ -76,7 +83,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [chart]);
 
-  // TODO: This needs to be changed later to use data from the backend
   const fetchDimensions = async (): Promise<any> => {
     const responseChart = await fetch(
       `${API_DOMAIN}course/` + courseID + `/chart`,
@@ -103,8 +109,26 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
-  const saveCurrentDimension = () => {
-    // TODO: Need to change this to individual POST request for each dimension?
+  const saveCurrentDimension = async (): Promise<void> => {
+    // TODO: Need to change this to individual PUT request for each dimension?
+    if (chart) {
+      const dimension = createBackendDimension(
+        chart.dimensions[dimensionIndex]
+      );
+
+      const response = await fetch(
+        `${API_DOMAIN}dimensions/` + chart.dimensions[dimensionIndex].id,
+        {
+          method: "PUT",
+          body: JSON.stringify(dimension),
+          headers: {
+            Authorization: `Bearer ${cookies["accessToken"]}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+    }
   };
 
   const setNewDimension = (newIndex: number) => {
@@ -113,7 +137,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setColours(
         chart.dimensions[newIndex].userSelectedSliderPos === -1
           ? DEFAULT_COLOURS
-          : getColours(chart.dimensions[newIndex].userSelectedSliderPos)
+          : getColours(
+              chart.dimensions[newIndex].userSelectedSliderPos,
+              chart.dimensions[dimensionIndex].type
+            )
       );
     }
   };
@@ -294,8 +321,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           }
         }),
       });
+      setColours(getColours(value, chart.dimensions[dimensionIndex].type));
     }
-    setColours(getColours(value));
   };
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -508,7 +535,14 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   } else {
     // TODO: Loading page
-    return <div>Hi</div>;
+    return (
+      <div className="DisplayCards">
+        <Header />
+        <div className="Loading-Spinner">
+          <Spin size="large" />
+        </div>
+      </div>
+    );
   }
 };
 

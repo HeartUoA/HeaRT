@@ -124,3 +124,9 @@
   width: 75%;
   margin: 5px 0px 0px;
 }
+
+.Loading-Spinner {
+  margin: 50vh 0px 0px 0px;
+  width: 100vw;
+  height: 100vh;
+}
