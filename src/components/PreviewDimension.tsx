@@ -29,7 +29,10 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
   const [colours, setColours] = useState(
     currentDimension.userSelectedSliderPos === -1
       ? DEFAULT_COLOURS
-      : getColours(currentDimension.userSelectedSliderPos)
+      : getColours(
+          currentDimension.userSelectedSliderPos,
+          currentDimension.type
+        )
   );
 
   useEffect(() => {
@@ -50,7 +53,10 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
       setColours(
         currentDimension.userSelectedSliderPos === -1
           ? DEFAULT_COLOURS
-          : getColours(currentDimension.userSelectedSliderPos)
+          : getColours(
+              currentDimension.userSelectedSliderPos,
+              currentDimension.type
+            )
       );
     }
   }, [props.fullDimensionView]);
@@ -104,7 +110,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
       props.previewSliderPosChange(value, props.dimension.name);
     }
     setDimension({ ...currentDimension, userSelectedSliderPos: value });
-    setColours(getColours(value));
+    setColours(getColours(value, currentDimension.type));
   };
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

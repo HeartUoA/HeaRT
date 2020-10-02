@@ -51,9 +51,16 @@
 }
 
 .Card:hover {
-  background-color: #ffc4d3 !important;
   color: #212121;
   border: none;
+}
+
+.Blue:hover {
+  background-color: #c4ddff !important;
+}
+
+.Pink:hover {
+  background-color: #ffc4d3 !important;
 }
 
 .Card-Text {

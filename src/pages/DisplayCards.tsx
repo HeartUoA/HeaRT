@@ -36,7 +36,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [colours, setColours] = useState(
     currentDimension.userSelectedSliderPos === -1
       ? DEFAULT_COLOURS
-      : getColours(currentDimension.userSelectedSliderPos)
+      : getColours(
+          currentDimension.userSelectedSliderPos,
+          currentDimension.type
+        )
   );
   const [progress, setProgress] = useState({
     completed: allDimensions.filter((dim) => dim.userSelectedSliderPos !== -1)
@@ -68,7 +71,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     setColours(
       allDimensions[newIndex].userSelectedSliderPos === -1
         ? DEFAULT_COLOURS
-        : getColours(allDimensions[newIndex].userSelectedSliderPos)
+        : getColours(
+            allDimensions[newIndex].userSelectedSliderPos,
+            allDimensions[newIndex].type
+          )
     );
   };
 
@@ -142,7 +148,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const onSliderPosChange = (value: number) => {
     setDimension({ ...currentDimension, userSelectedSliderPos: value });
-    setColours(getColours(value));
+    setColours(getColours(value, currentDimension.type));
   };
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -159,7 +165,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           </Typography>
           <div className="Cards-Container">
             <Card
-              className="Card"
+              className={`Card ${
+                currentDimension.type === "Practice" ? "Pink" : "Blue"
+              }`}
               onClick={() => {
                 if (!leftState.isEditing) {
                   onCardClick(CardSide.Left);
@@ -208,7 +216,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
               )}
             </Card>
             <Card
-              className="Card"
+              className={`Card ${
+                currentDimension.type === "Practice" ? "Pink" : "Blue"
+              }`}
               onClick={() => {
                 if (!rightState.isEditing) {
                   onCardClick(CardSide.Right);
