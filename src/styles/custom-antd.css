@@ -17121,7 +17121,7 @@ textarea.ant-mentions {
   background-color: #ffffff;
   background-clip: padding-box;
   border: 0;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
@@ -17172,8 +17172,11 @@ textarea.ant-mentions {
   word-wrap: break-word;
 }
 .ant-modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px 16px;
-  text-align: right;
+  /* text-align: right; */
   background: transparent;
   border-top: 1px solid #f0f0f0;
   border-radius: 0 0 20px 20px;

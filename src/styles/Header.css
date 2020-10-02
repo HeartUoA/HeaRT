@@ -9,12 +9,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072);
 }
 
 .Logo-Container {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.Logo-Container:hover {
+  cursor: pointer;
 }
 
 .Logo {
@@ -30,4 +36,30 @@
   font-size: 100px;
   font-weight: normal;
   margin: 15px 15px 0px 0px;
+}
+
+.Modal-Button {
+  box-shadow: 0px 0px 0px 0px;
+  border-radius: 10px;
+}
+
+.Logout {
+  display: flex;
+  margin-right: 25px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Logout-Button {
+  font-size: 20px;
+  background-color: #f6f7fc;
+  border-radius: 10px;
+  height: 50px;
+  width: 150px;
+}
+
+.Logout-Button:hover {
+  border: 1px solid #f6f7fc;
+  color: #f6f7fc;
+  background-color: rgba(0, 0, 0, 0);
 }

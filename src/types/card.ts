@@ -1,7 +1,12 @@
-export interface Card {
+export type Card = {
   statement: string;
   anchorSliderPos: number;
   isEditing: boolean;
+};
+
+export enum CardSide {
+  Left,
+  Right,
 }
 
 export const createCard = (cardStatement: string, cardAnchor: number) => {
