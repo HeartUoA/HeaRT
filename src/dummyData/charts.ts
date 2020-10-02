@@ -234,7 +234,7 @@ const charts: Chart[] = [
         id: "8",
         chartID: "1",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -266,7 +266,7 @@ const charts: Chart[] = [
         id: "9",
         chartID: "1",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -298,7 +298,7 @@ const charts: Chart[] = [
         id: "10",
         chartID: "1",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
@@ -561,7 +561,7 @@ const charts: Chart[] = [
         id: "18",
         chartID: "2",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -593,7 +593,7 @@ const charts: Chart[] = [
         id: "19",
         chartID: "2",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -625,7 +625,7 @@ const charts: Chart[] = [
         id: "20",
         chartID: "2",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
@@ -888,7 +888,7 @@ const charts: Chart[] = [
         id: "28",
         chartID: "3",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -920,7 +920,7 @@ const charts: Chart[] = [
         id: "29",
         chartID: "3",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -952,7 +952,7 @@ const charts: Chart[] = [
         id: "30",
         chartID: "3",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",

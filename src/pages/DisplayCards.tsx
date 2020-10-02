@@ -31,6 +31,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const { courseID } = useParams<ParamTypes>();
   const [chart, setChart] = useState<Chart | undefined>(undefined);
+  const [retrievedResults, setRetrieved] = useState(false);
 
   const [dimensionIndex, setDimensionIndex] = useState(
     isPrevPagePreview && chart ? chart.dimensions.length - 1 : 0
@@ -63,7 +64,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    if (chart) {
+    if (retrievedResults && chart) {
       setDimensionIndex(isPrevPagePreview ? chart.dimensions.length - 1 : 0);
       setColours(
         chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1
@@ -80,8 +81,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         ).length,
         total: chart.dimensions.length,
       });
+      setRetrieved(false);
     }
-  }, [chart]);
+  }, [retrievedResults]);
 
   const fetchDimensions = async (): Promise<any> => {
     const responseChart = await fetch(
@@ -101,6 +103,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       });
 
     setChart(createChart(responseChart));
+    setRetrieved(true);
   };
 
   useEffect(() => {
@@ -354,7 +357,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             </Typography>
             <div className="Cards-Container">
               <Card
-                className="Card"
+                className={`Card ${
+                  chart.dimensions[dimensionIndex].type === "Practice"
+                    ? "Pink"
+                    : "Blue"
+                }`}
                 onClick={() => {
                   if (!chart.dimensions[dimensionIndex].leftCard.isEditing) {
                     onCardClick(CardSide.Left);
@@ -415,7 +422,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                 )}
               </Card>
               <Card
-                className="Card"
+                className={`Card ${
+                  chart.dimensions[dimensionIndex].type === "Practice"
+                    ? "Pink"
+                    : "Blue"
+                }`}
                 onClick={() => {
                   if (!chart.dimensions[dimensionIndex].rightCard.isEditing) {
                     onCardClick(CardSide.Right);
@@ -534,7 +545,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       </div>
     );
   } else {
-    // TODO: Loading page
     return (
       <div className="DisplayCards">
         <Header />
