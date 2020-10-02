@@ -97,11 +97,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         disabled={true}
       />
       <Typography className="Card-Compare-Tab-Title">Chart Notes</Typography>
-      <Tabs
-        className={"Cards-Compare-Tab"}
-        defaultActiveKey="1"
-        centered={true}
-      >
+      <Tabs style={{ marginLeft: "1em" }} defaultActiveKey="1" centered={true}>
         {props.dimensions.map((dimension, index) => {
           return (
             <TabPane

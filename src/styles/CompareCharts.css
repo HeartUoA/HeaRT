@@ -1,3 +1,23 @@
+.Charts-Compare-Container {
+  text-align: center;
+  height: 100vh;
+  min-width: 1000px;
+}
+
+.Charts-Compare-Content {
+  margin: 100px 0px 0px 0px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Charts-Compare-Row {
+  justify-content: space-evenly;
+  margin: 0px 0px 100px 0px;
+}
 .Card-Compare-Preview {
   min-height: 350px;
   width: 60vw;
@@ -24,10 +44,6 @@
   font-size: 1.5em;
   text-align: center;
   margin-right: 20px;
-}
-
-.Card-Compare-Tab {
-  margin-top: 4em !important;
 }
 
 .Card-Compare-Slider {
