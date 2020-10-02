@@ -40,13 +40,13 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         label: (
           <span style={{ position: "relative" }}>
             <div
-              className="Card-Compare-Circle"
+              className="Card-Compare-Circle-Double"
               style={{
                 backgroundColor: Object.values(colours)[index],
               }}
             />{" "}
             {/* If more than one chart has marker at the same spot, their dates are displayed together */}
-            <span style={{ paddingLeft: "1em" }}>
+            <span style={{ marginRight: "25px" }}>
               {moment(labeled[mark].value).format("DD.MM") +
                 ", " +
                 moment(props.dates[index]).format("DD.MM")}

@@ -65,11 +65,21 @@
 }
 
 .Card-Compare-Circle {
-  font-size: "2em";
-  position: "absolute";
-  bottom: "0.8em";
-  right: "25px";
-  border-radius: "50%";
-  width: "20px";
-  height: "20px";
+  font-size: 2em;
+  position: absolute;
+  bottom: 0.8em;
+  right: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.Card-Compare-Circle-Double {
+  font-size: 2em;
+  position: absolute;
+  bottom: 0.8em;
+  right: 30px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
 }
