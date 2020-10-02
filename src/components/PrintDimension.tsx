@@ -7,6 +7,7 @@ import { API_DOMAIN } from "../config";
 
 interface PrintDimensionProps {
   dimensionValue: number;
+  SecondStatement: boolean;
 }
 
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
@@ -31,7 +32,7 @@ const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   const initDimensionProps = allDimensions[props.dimensionValue];
 
   const pinpoint =
-    props.dimensionValue % 2
+    props.SecondStatement !== true
       ? allDimensions[props.dimensionValue].leftCard.anchorSliderPos
       : allDimensions[props.dimensionValue].rightCard.anchorSliderPos;
 

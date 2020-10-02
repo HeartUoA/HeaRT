@@ -37,7 +37,7 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionValue={index} />
+              <Dimension dimensionValue={index} SecondStatement={false} />
             </div>
             <div
               className="PrintingCards"
@@ -55,7 +55,7 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionValue={index} />
+              <Dimension dimensionValue={index} SecondStatement={true} />
             </div>
           </>
         ))}
