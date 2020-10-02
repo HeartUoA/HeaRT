@@ -8,7 +8,7 @@ import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 import { Dimension as DimensionType } from "../types/dimension";
-import { createChart } from "../types/chart";
+import { Chart, createChart } from "../types/chart";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -35,35 +35,7 @@ const defaultColours = {
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const { courseID } = useParams<ParamTypes>();
-
-  // TODO: This needs to be changed later to use data from the backend
-  const fetchDimensions = async (): Promise<any> => {
-    const responseChart = await fetch(
-      `${API_DOMAIN}course/` + courseID + `/chart`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${cookies["accessToken"]}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    )
-      .then((responseChart) => responseChart.json())
-      .then((data) => {
-        return data;
-      });
-
-    console.log(responseChart);
-
-    return responseChart.dimensions;
-  };
-
-  fetchDimensions();
-
-  // (async () => {
-  //   console.log(await fetchDimensions());
-  // })()
+  const [chart, setChart] = useState<Chart | undefined>();
 
   const allDimensions = charts[0].dimensions;
 
@@ -87,6 +59,31 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     total: allDimensions.length,
   });
   const isCardSelected = currentDimension.userSelectedSliderPos !== -1;
+
+  useEffect(() => {
+    fetchDimensions();
+  }, []);
+
+  // TODO: This needs to be changed later to use data from the backend
+  const fetchDimensions = async (): Promise<any> => {
+    const responseChart = await fetch(
+      `${API_DOMAIN}course/` + courseID + `/chart`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${cookies["accessToken"]}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
+      .then((responseChart) => responseChart.json())
+      .then((data) => {
+        return data;
+      });
+
+    return createChart(responseChart);
+  };
 
   useEffect(() => {
     if (!cookies["accessToken"]) {

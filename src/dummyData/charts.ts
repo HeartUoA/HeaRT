@@ -3,10 +3,11 @@ import { Chart } from "../types/chart";
 const charts: Chart[] = [
   {
     id: "1",
-    courseID: "1",
     createdAt: new Date(),
     dimensions: [
       {
+        id: "1",
+        chartID: "1",
         name: "Nature and purpose of learning tasks",
         type: "Practice",
         leftCard: {
@@ -27,6 +28,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "2",
+        chartID: "1",
         name: "Degree of structure of learning tasks",
         type: "Practice",
         leftCard: {
@@ -47,6 +50,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "3",
+        chartID: "1",
         name: "Interactivity",
         type: "Practice",
         leftCard: {
@@ -68,6 +73,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "4",
+        chartID: "1",
         name: "Learning framework",
         type: "Practice",
         leftCard: {
@@ -91,6 +98,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "5",
+        chartID: "1",
         name: "Learning control",
         type: "Practice",
         leftCard: {
@@ -111,6 +120,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "6",
+        chartID: "1",
         name: "Learning process",
         type: "Practice",
         leftCard: {
@@ -131,6 +142,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "7",
+        chartID: "1",
         name: "Feedback",
         type: "Practice",
         leftCard: {
@@ -154,6 +167,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "8",
+        chartID: "1",
         name: "Learning goals (Curriculum beliefs)",
         type: "Belief",
         leftCard: {
@@ -176,6 +191,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "9",
+        chartID: "1",
         name: "Dimension 10",
         type: "Belief",
         leftCard: {
@@ -198,6 +215,8 @@ const charts: Chart[] = [
         userExplanation: undefined,
       },
       {
+        id: "10",
+        chartID: "1",
         name: "Dimension 14",
         type: "Belief",
         leftCard: {
