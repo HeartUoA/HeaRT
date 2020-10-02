@@ -17,7 +17,7 @@
   flex-wrap: wrap;
 }
 .PrintingCards {
-  min-width: 200px;
+  min-width: 300px;
   background: #f6f7fc;
   border-style: solid;
   border-width: thin;
@@ -26,6 +26,7 @@
   height: 200px;
   text-align: center;
   float: left;
+  border-radius: 10px;
 }
 
 .BackButtonDiv {
@@ -40,12 +41,15 @@
   display: table-cell;
   vertical-align: middle;
   height: inherit;
+  width: 100%;
+  padding-right: 2%;
 }
 .Print-Card-Text-TopLeft {
   font-size: 20px;
   display: table-cell;
   vertical-align: top;
   height: inherit;
+  padding-left: 1%;
 }
 @page {
   size: auto;

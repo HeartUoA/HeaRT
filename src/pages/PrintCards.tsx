@@ -12,8 +12,8 @@ import { API_DOMAIN } from "../config";
 
 import charts from "../dummyData/charts";
 
-const chartID = "";
-
+const PracticeBGColour = "#b7dee8";
+const BeliefBGColour = "#fac090";
 class ComponentToPrint extends React.Component {
   render() {
     const allDimensions = charts[0].dimensions;
@@ -21,8 +21,15 @@ class ComponentToPrint extends React.Component {
       <div>
         {allDimensions.map((currElement, index) => (
           <>
-            <div className="PrintingCards">
-              <span className="Print-Card-Text-TopLeft">{index}</span>
+            <div
+              className="PrintingCards"
+              style={
+                allDimensions[index].type === "Practice"
+                  ? { backgroundColor: PracticeBGColour }
+                  : { backgroundColor: BeliefBGColour }
+              }
+            >
+              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
               <span className="Print-Card-Text">
                 {index % 2
                   ? allDimensions[index].rightCard.statement
@@ -30,10 +37,17 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionVallue={index} />
+              <Dimension dimensionValue={index} />
             </div>
-            <div className="PrintingCards">
-              <span className="Print-Card-Text-TopLeft">{index}</span>
+            <div
+              className="PrintingCards"
+              style={
+                allDimensions[index].type === "Practice"
+                  ? { backgroundColor: PracticeBGColour }
+                  : { backgroundColor: BeliefBGColour }
+              }
+            >
+              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
               <span className="Print-Card-Text">
                 {index % 2
                   ? allDimensions[index].leftCard.statement
@@ -41,7 +55,7 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionVallue={index} />
+              <Dimension dimensionValue={index} />
             </div>
           </>
         ))}
@@ -64,7 +78,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
     }
 
     //Set up later to get data not from dummy
-    fetch(`${API_DOMAIN}dimensions/forchart/${chartID}`, {
+    fetch(`${API_DOMAIN}dimensions/forchart/${""}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
