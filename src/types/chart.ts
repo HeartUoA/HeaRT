@@ -16,3 +16,11 @@ export const createChart = (chart: any) => {
   };
   return result;
 };
+
+export const createBackendChart = (chart: Chart, courseID: string) => {
+  const result: any = {
+    courseID: courseID,
+    createdAt: chart.createdAt,
+  };
+  return result;
+};

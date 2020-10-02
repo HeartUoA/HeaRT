@@ -8,6 +8,12 @@ export type SliderMarks = {
       };
 };
 
+export type BackendMarks = {
+  _id: string;
+  position: number;
+  label: string;
+};
+
 export const createSliderMarks = (marks: any[]) => {
   const result: SliderMarks = {};
   marks.forEach((mark) => {
@@ -17,5 +23,19 @@ export const createSliderMarks = (marks: any[]) => {
       id: mark._id,
     };
   });
+  return result;
+};
+
+export const createBackendSliderMarks = (marks: SliderMarks) => {
+  const result: BackendMarks[] = [];
+
+  for (const key of Object.keys(marks)) {
+    const position = !!Number(key) & Number(key);
+    result.push({
+      _id: marks[position].id,
+      position: key,
+      label: value.label,
+    });
+  }
   return result;
 };

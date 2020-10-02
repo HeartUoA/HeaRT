@@ -1,4 +1,8 @@
-import { SliderMarks, createSliderMarks } from "./sliderMarks";
+import {
+  SliderMarks,
+  createSliderMarks,
+  createBackendSliderMarks,
+} from "./sliderMarks";
 import { Card, createCard } from "./card";
 
 export type Dimension = {
@@ -29,7 +33,25 @@ export const createDimension = (dimension: any) => {
     ),
     marks: createSliderMarks(dimension.marks),
     userSelectedSliderPos: dimension.score,
-    userExplanation: undefined, // TODO: Change this to (dimension.note or undefined). Does the backend return a note variable? Could not find it
+    userExplanation: dimension.note ? dimension.note : undefined,
+  };
+  return result;
+};
+
+export const createBackendDimension = (dimension: Dimension) => {
+  const result: any = {
+    chartID: dimension.chartID,
+    type: dimension.type,
+    score: dimension.userSelectedSliderPos,
+    definition: dimension.name,
+    leftCardStatement: dimension.leftCard.statement,
+    rightCardStatement: dimension.rightCard.statement,
+    leftCardDefaultSliderPosition: dimension.leftCard.anchorSliderPos,
+    rightCardDefaultSliderPosition: dimension.rightCard.anchorSliderPos,
+    marks: dimension.marks
+      ? createBackendSliderMarks(dimension.marks)
+      : undefined,
+    note: dimension.userExplanation ? dimension.userExplanation : undefined,
   };
   return result;
 };

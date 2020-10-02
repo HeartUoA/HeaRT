@@ -6,7 +6,10 @@ import { API_DOMAIN } from "../config";
 import { Card, Button, Typography, Tooltip, Progress } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
-import { Dimension as DimensionType } from "../types/dimension";
+import {
+  createBackendDimension,
+  Dimension as DimensionType,
+} from "../types/dimension";
 import { Chart, createChart } from "../types/chart";
 import { CardSide } from "../types/card";
 import { DEFAULT_COLOURS, getColours } from "../utils/cards";
@@ -76,7 +79,10 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         return data;
       });
 
-    return createChart(responseChart);
+    // console.log(responseChart);
+
+    const chart = createChart(responseChart);
+    const dimesnion = createBackendDimension(chart.dimensions[0]);
   };
 
   useEffect(() => {
