@@ -19,7 +19,7 @@ interface labeledMarks {
   [key: number]: any;
 }
 
-// Add more colours to compare more charts
+// Add more colours to compare more charts (current limit is 3)
 const colours = {
   0: "#F25555",
   1: "#499DF2",
