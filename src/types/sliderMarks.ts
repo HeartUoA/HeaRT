@@ -1,11 +1,9 @@
 export type SliderMarks = {
-  [key: number]:
-    | React.ReactNode
-    | {
-        style: React.CSSProperties;
-        label: React.ReactNode;
-        id: string;
-      };
+  [key: number]: {
+    style: string;
+    label: string;
+    id: string;
+  };
 };
 
 export type BackendMarks = {
@@ -28,14 +26,19 @@ export const createSliderMarks = (marks: any[]) => {
 
 export const createBackendSliderMarks = (marks: SliderMarks) => {
   const result: BackendMarks[] = [];
-
   for (const key of Object.keys(marks)) {
-    const position = !!Number(key) & Number(key);
-    result.push({
-      _id: marks[position].id,
-      position: key,
-      label: value.label,
-    });
+    const position = Number(key);
+    if (position !== undefined && position !== null) {
+      let object: BackendMarks;
+      if (typeof marks[position] === "object") {
+        object = {
+          _id: marks[position].id,
+          position: position,
+          label: marks[position].label,
+        };
+        result.push(object);
+      }
+    }
   }
   return result;
 };
