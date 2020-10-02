@@ -3,8 +3,8 @@ export const DEFAULT_COLOURS = {
   rightCardColour: "#FFFFFF",
 };
 
-export const getColours = (value: number) => {
-  const hue = 344.7;
+export const getColours = (value: number, dimensionType: string) => {
+  const hue = dimensionType === "Practice" ? 344.7 : 215.7;
   const leftValue = 87 + (13 / 100) * value;
   const leftColour = ["hsl(", hue, ",100%,", leftValue, "%)"].join("");
 

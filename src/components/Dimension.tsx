@@ -52,6 +52,9 @@ const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
           rows={3}
         />
       )}
+      <Typography className="Dimension-Type-Text">
+        Type: {props.dimension.type}
+      </Typography>
     </Card>
   );
 };
