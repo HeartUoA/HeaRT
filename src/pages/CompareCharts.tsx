@@ -29,11 +29,11 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   };
 
   return (
-    <div className="Preview">
+    <div className="Charts-Compare-Container">
       <Header />
-      <div className="Preview-Content">
+      <div className="Charts-Compare-Content">
         <Typography className="Preview-Title">{course!.name}</Typography>
-        <Col className="Dimension-Row">
+        <Col className="Charts-Compare-Row">
           {chartsToCompare[0].dimensions.map((item, index) => {
             if (item.userSelectedSliderPos !== -1) {
               return (

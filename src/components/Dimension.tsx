@@ -8,7 +8,7 @@ import { Dimension as DimensionType } from "../types/dimension";
 
 interface DimensionProps {
   dimension: DimensionType;
-  sliderUpdate?: (value: number) => void;
+  sliderUpdate: (value: number) => void;
   userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isPreview: boolean;
   openSingleDimension?: (key: string) => void;

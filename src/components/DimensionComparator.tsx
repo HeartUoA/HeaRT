@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Slider, Typography, Tabs } from "antd";
 import "../styles/Dimension.css";
 import "../styles/CompareCharts.css";
-import { FontSizeOutlined, SmileFilled } from "@ant-design/icons";
 import moment from "moment";
 
 import { Dimension as DimensionType } from "../types/dimension";
-import Dimension from "./Dimension";
 const { TabPane } = Tabs;
 
 interface DimensionComparatorProps {
