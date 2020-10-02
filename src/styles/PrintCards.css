@@ -1,0 +1,73 @@
+.PrintCards {
+  display: grid;
+  min-height: 700px;
+  height: 100vh;
+}
+.PrintCardsContainer {
+  align-self: center;
+  padding-top: 110px;
+  width: 600px;
+  min-width: 50%;
+  max-width: 100%;
+  margin: auto;
+  margin-bottom: 150px;
+}
+.PrintCardsContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+.PrintingCards {
+  min-width: 300px;
+  background: #ffffff;
+  border-style: solid;
+  border-width: thin;
+  border-color: rgb(0, 0, 0);
+  width: 50%;
+  height: 200px;
+  text-align: center;
+  float: left;
+  border-radius: 10px;
+}
+
+.BackButtonDiv {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto;
+  align-self: center;
+  position: absolute;
+}
+.Print-Card-Text {
+  font-size: 20px;
+  display: table-cell;
+  vertical-align: middle;
+  height: inherit;
+  width: 100%;
+  padding-right: 2%;
+}
+.Print-Card-Text-TopLeft {
+  font-size: 20px;
+  display: table-cell;
+  vertical-align: top;
+  height: inherit;
+  padding-left: 1%;
+}
+@page {
+  size: auto;
+  margin: 20mm;
+}
+@media print {
+  .Header {
+    opacity: 0;
+  }
+  .BackButtonDiv {
+    opacity: 0;
+  }
+  .PrintCardsContainer {
+    width: 100%;
+  }
+  .PrintingCards {
+    page-break-inside: avoid !important;
+    display: inline-block;
+    float: left;
+  }
+}
