@@ -224,7 +224,7 @@ const charts: Chart[] = [
   {
     id: "2",
     courseID: "2",
-    createdAt: new Date(),
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)),
     dimensions: [
       {
         name: "Nature and purpose of learning tasks",
@@ -244,7 +244,8 @@ const charts: Chart[] = [
           100: "Authentic/experimental",
         },
         userSelectedSliderPos: 20,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Degree of structure of learning tasks",
@@ -264,7 +265,8 @@ const charts: Chart[] = [
           100: "Low/open",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Interactivity",
@@ -285,7 +287,8 @@ const charts: Chart[] = [
           100: "Manipulative",
         },
         userSelectedSliderPos: 40,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Learning framework",
@@ -308,7 +311,8 @@ const charts: Chart[] = [
           100: "Facilitated",
         },
         userSelectedSliderPos: 50,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Learning control",
@@ -328,7 +332,8 @@ const charts: Chart[] = [
           100: "Student-managed",
         },
         userSelectedSliderPos: 60,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Learning process",
@@ -348,7 +353,8 @@ const charts: Chart[] = [
           100: "Construction",
         },
         userSelectedSliderPos: 70,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Feedback",
@@ -371,7 +377,8 @@ const charts: Chart[] = [
           100: "Responsive",
         },
         userSelectedSliderPos: 20,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Learning goals (Curriculum beliefs)",
@@ -393,7 +400,8 @@ const charts: Chart[] = [
           100: "Unfocused",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Dimension 10",
@@ -415,7 +423,8 @@ const charts: Chart[] = [
           100: "Constructivist",
         },
         userSelectedSliderPos: 40,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
       {
         name: "Dimension 14",
@@ -437,7 +446,8 @@ const charts: Chart[] = [
           100: "Social",
         },
         userSelectedSliderPos: 50,
-        userExplanation: undefined,
+        userExplanation:
+          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
       },
     ],
   },
@@ -464,7 +474,8 @@ const charts: Chart[] = [
           100: "Authentic/experimental",
         },
         userSelectedSliderPos: 10,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Degree of structure of learning tasks",
@@ -484,7 +495,8 @@ const charts: Chart[] = [
           100: "Low/open",
         },
         userSelectedSliderPos: 20,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Interactivity",
@@ -505,7 +517,8 @@ const charts: Chart[] = [
           100: "Manipulative",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Learning framework",
@@ -528,7 +541,8 @@ const charts: Chart[] = [
           100: "Facilitated",
         },
         userSelectedSliderPos: 40,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Learning control",
@@ -548,7 +562,8 @@ const charts: Chart[] = [
           100: "Student-managed",
         },
         userSelectedSliderPos: 50,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Learning process",
@@ -568,7 +583,8 @@ const charts: Chart[] = [
           100: "Construction",
         },
         userSelectedSliderPos: 60,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Feedback",
@@ -591,7 +607,8 @@ const charts: Chart[] = [
           100: "Responsive",
         },
         userSelectedSliderPos: 70,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Learning goals (Curriculum beliefs)",
@@ -613,7 +630,8 @@ const charts: Chart[] = [
           100: "Unfocused",
         },
         userSelectedSliderPos: 80,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Dimension 10",
@@ -635,7 +653,8 @@ const charts: Chart[] = [
           100: "Constructivist",
         },
         userSelectedSliderPos: 90,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
       {
         name: "Dimension 14",
@@ -657,14 +676,15 @@ const charts: Chart[] = [
           100: "Social",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
       },
     ],
   },
   {
     id: "4",
     courseID: "2",
-    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)),
+    createdAt: new Date(),
     dimensions: [
       {
         name: "Nature and purpose of learning tasks",
@@ -684,7 +704,8 @@ const charts: Chart[] = [
           100: "Authentic/experimental",
         },
         userSelectedSliderPos: 10,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Degree of structure of learning tasks",
@@ -704,7 +725,8 @@ const charts: Chart[] = [
           100: "Low/open",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Interactivity",
@@ -725,7 +747,8 @@ const charts: Chart[] = [
           100: "Manipulative",
         },
         userSelectedSliderPos: 20,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Learning framework",
@@ -748,7 +771,8 @@ const charts: Chart[] = [
           100: "Facilitated",
         },
         userSelectedSliderPos: 60,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Learning control",
@@ -768,7 +792,8 @@ const charts: Chart[] = [
           100: "Student-managed",
         },
         userSelectedSliderPos: 40,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Learning process",
@@ -788,7 +813,8 @@ const charts: Chart[] = [
           100: "Construction",
         },
         userSelectedSliderPos: 60,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Feedback",
@@ -811,7 +837,8 @@ const charts: Chart[] = [
           100: "Responsive",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Learning goals (Curriculum beliefs)",
@@ -833,7 +860,8 @@ const charts: Chart[] = [
           100: "Unfocused",
         },
         userSelectedSliderPos: 90,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Dimension 10",
@@ -855,7 +883,8 @@ const charts: Chart[] = [
           100: "Constructivist",
         },
         userSelectedSliderPos: 20,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
       {
         name: "Dimension 14",
@@ -877,7 +906,8 @@ const charts: Chart[] = [
           100: "Social",
         },
         userSelectedSliderPos: 30,
-        userExplanation: undefined,
+        userExplanation:
+          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
       },
     ],
   },

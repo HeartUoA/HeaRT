@@ -1,62 +1,92 @@
-import React, { ChangeEvent, JSXElementConstructor } from "react";
-
-import { Card, Slider, Typography } from "antd";
+import React, { useState } from "react";
+import { Card, Slider, Typography, Tabs } from "antd";
 import "../styles/Dimension.css";
-import "../styles/DimensionComparator.css";
+import "../styles/CompareCharts.css";
 
 import moment from "moment";
 
 import { Dimension as DimensionType } from "../types/dimension";
+import Dimension from "./Dimension";
+const { TabPane } = Tabs;
 
 interface DimensionComparatorProps {
   dimensions: DimensionType[];
   dates: Date[];
   isPreview: boolean;
-  selectedDimension?: number;
 }
 
 interface labeledMarks {
   [key: number]: any;
 }
+const colours = {
+  0: "#F25555",
+  1: "#499DF2",
+  2: "#51C240",
+};
 const DimensionComparator: React.FC<DimensionComparatorProps> = (
   props: DimensionComparatorProps
 ) => {
+  const initialMarks = props.dimensions[0].marks;
   const marks = props.dimensions.map(
     (dimension) => dimension.userSelectedSliderPos
   );
   const labeled: labeledMarks = {};
   marks.forEach((mark, index) => {
+    let entry = {};
     if (labeled[mark] !== undefined) {
-      labeled[mark] =
-        labeled[mark] + ", " + moment(props.dates[index]).format("DD.MM");
+      entry = {
+        style: labeled[mark].style,
+        label:
+          labeled[mark].label +
+          ", " +
+          moment(props.dates[index]).format("DD.MM"),
+      };
     } else {
-      labeled[mark] = moment(props.dates[index]).format("DD.MM");
+      entry = {
+        style: { color: Object.values(colours)[index], fontSize: "0.8em" },
+        label: moment(props.dates[index]).format("DD.MM"),
+      };
     }
+    labeled[mark] = entry;
   });
+  labeled[0] = {
+    label: props.dimensions[0].marks![0],
+    style: { marginTop: "1em" },
+  };
+  labeled[100] = {
+    label: props.dimensions[0].marks![100],
+    style: { marginTop: "1em" },
+  };
 
-  console.log("These are the marks " + JSON.stringify(labeled));
   return (
     <Card className={"Card-Compare-Preview"}>
-      <p className="Dimension-Name-Text">{props.dimensions[0].name}</p>
-      {props.dimensions.map((dimension) => {
-        return (
-          <Slider
-            className="Slider Card-Compare-Slider"
-            value={dimension.userSelectedSliderPos}
-            tooltipVisible={false}
-            included={false}
-            disabled={false}
-          />
-        );
-      })}
+      <p className="Card-Compare-Title">{props.dimensions[0].name}</p>
       <Slider
-        className="Slider Card-Compare-Slider"
+        className="Card-Compare-Slider"
         marks={labeled}
-        value={marks[0]}
         tooltipVisible={false}
         included={false}
-        disabled={false}
+        disabled={true}
       />
+      <Typography className="Card-Compare-Tab-Title">Chart Notes</Typography>
+      <Tabs
+        className={"Cards-Compare-Tab"}
+        defaultActiveKey="1"
+        centered={true}
+      >
+        {props.dimensions.map((dimension, index) => {
+          return (
+            <TabPane
+              tab={moment(props.dates[index]).format("DD.MM")}
+              key={index}
+            >
+              <Typography className="Card-Compare-Explanation">
+                {dimension.userExplanation}
+              </Typography>
+            </TabPane>
+          );
+        })}
+      </Tabs>
     </Card>
   );
 };
