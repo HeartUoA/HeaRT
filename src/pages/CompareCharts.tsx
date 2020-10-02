@@ -25,7 +25,7 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onBackClick = () => {
-    // TODO: Write code here to redirect to display cards screen with the last card
+    props.history.push("/Dashboard");
   };
 
   return (
