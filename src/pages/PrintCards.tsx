@@ -12,8 +12,8 @@ import { API_DOMAIN } from "../config";
 
 import charts from "../dummyData/charts";
 
-const PracticeBGColour = "#b7dee8";
-const BeliefBGColour = "#fac090";
+const PracticeBGColour = "#ffc4d3";
+const BeliefBGColour = "#c4ddff";
 class ComponentToPrint extends React.Component {
   render() {
     const allDimensions = charts[0].dimensions;
