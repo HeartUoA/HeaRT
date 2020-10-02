@@ -1,6 +1,6 @@
 .Card-Dimension {
-  min-height: 300px;
-  height: 35vh;
+  min-height: 315px;
+  height: 36.5vh;
   padding: 30px;
   margin: 10px 30px 150px 30px;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -14,7 +14,7 @@
 }
 
 .Card-Preview {
-  min-height: 350px;
+  min-height: 250px;
   width: 40vw;
   min-width: 600px;
   margin: 30px;
@@ -84,4 +84,10 @@
 
 .Clickable:hover {
   color: #ff9cb8;
+}
+
+.Dimension-Type-Text {
+  margin: 15px 0px;
+  font-size: 16px;
+  font-weight: 500;
 }
