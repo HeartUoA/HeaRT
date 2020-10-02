@@ -19,10 +19,9 @@ export type Dimension = {
 
 export const createDimension = (dimension: any) => {
   const result: Dimension = {
+    ...dimension,
     id: dimension._id,
-    chartID: dimension.chartID,
     name: dimension.definition,
-    type: dimension.type,
     leftCard: createCard(
       dimension.leftCardStatement,
       dimension.leftCardDefaultSliderPosition
@@ -33,15 +32,14 @@ export const createDimension = (dimension: any) => {
     ),
     marks: createSliderMarks(dimension.marks),
     userSelectedSliderPos: dimension.score,
-    userExplanation: dimension.note ? dimension.note : undefined,
+    userExplanation: dimension.note,
   };
   return result;
 };
 
 export const createBackendDimension = (dimension: Dimension) => {
   const result: any = {
-    chartID: dimension.chartID,
-    type: dimension.type,
+    ...dimension,
     score: dimension.userSelectedSliderPos,
     definition: dimension.name,
     leftCardStatement: dimension.leftCard.statement,
@@ -51,7 +49,7 @@ export const createBackendDimension = (dimension: Dimension) => {
     marks: dimension.marks
       ? createBackendSliderMarks(dimension.marks)
       : undefined,
-    note: dimension.userExplanation ? dimension.userExplanation : undefined,
+    note: dimension.userExplanation,
   };
   return result;
 };
