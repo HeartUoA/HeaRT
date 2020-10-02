@@ -18,11 +18,11 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   // TODO: Need to change this to grab data from backend
   const chartsToCompare = [charts[1], charts[2], charts[3]];
   const course = courses.find((course) => course.id === charts[1].courseID);
-  // useEffect(() => {
-  //   if (!cookies["accessToken"]) {
-  //     props.history.push("/Login");
-  //   }
-  // }, [cookies]);
+  useEffect(() => {
+    if (!cookies["accessToken"]) {
+      props.history.push("/Login");
+    }
+  }, [cookies]);
 
   const onBackClick = () => {
     // TODO: Write code here to redirect to display cards screen with the last card
