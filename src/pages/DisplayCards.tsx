@@ -22,6 +22,8 @@ import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 
+import charts from "../dummyData/charts";
+import { updateDimension } from "../api/dimension";
 const DEFAULT_PROGRESS = {
   completed: 0,
   total: 0,
@@ -118,6 +120,15 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
+  const saveCurrentDimension = () => {
+    // Send PUT request for each dimension
+    updateDimension(currentDimension);
+
+    allDimensions[dimensionIndex] = {
+      ...currentDimension,
+      leftCard: leftState,
+      rightCard: rightState,
+    };
   const saveCurrentDimension = async (): Promise<void> => {
     // TODO: Fix this PUT request
     // const dimension = createBackendDimension(
