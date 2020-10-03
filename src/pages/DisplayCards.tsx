@@ -34,7 +34,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
   const { chartID } = useParams<ParamTypes>();
-  //const [chart, setChart] = useState<Chart | undefined>(undefined);
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
