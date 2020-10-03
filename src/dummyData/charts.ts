@@ -32,7 +32,7 @@ const charts: Chart[] = [
             id: "1",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 32,
         userExplanation: undefined,
       },
       {
@@ -62,7 +62,7 @@ const charts: Chart[] = [
             id: "2",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 68,
         userExplanation: undefined,
       },
       {
@@ -93,7 +93,7 @@ const charts: Chart[] = [
             id: "3",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 18,
         userExplanation: undefined,
       },
       {
@@ -130,7 +130,7 @@ const charts: Chart[] = [
             id: "4",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 96,
         userExplanation: undefined,
       },
       {
@@ -160,7 +160,7 @@ const charts: Chart[] = [
             id: "5",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 28,
         userExplanation: undefined,
       },
       {
@@ -190,7 +190,7 @@ const charts: Chart[] = [
             id: "6",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 85,
         userExplanation: undefined,
       },
       {
@@ -227,7 +227,7 @@ const charts: Chart[] = [
             id: "7",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 27,
         userExplanation: undefined,
       },
       {
@@ -259,7 +259,7 @@ const charts: Chart[] = [
             id: "8",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 64,
         userExplanation: undefined,
       },
       {
@@ -291,7 +291,7 @@ const charts: Chart[] = [
             id: "9",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 50,
         userExplanation: undefined,
       },
       {
@@ -323,7 +323,7 @@ const charts: Chart[] = [
             id: "10",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 38,
         userExplanation: undefined,
       },
     ],
@@ -359,7 +359,7 @@ const charts: Chart[] = [
             id: "11",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 82,
         userExplanation: undefined,
       },
       {
@@ -389,7 +389,7 @@ const charts: Chart[] = [
             id: "12",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 83,
         userExplanation: undefined,
       },
       {
@@ -420,7 +420,7 @@ const charts: Chart[] = [
             id: "13",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 86,
         userExplanation: undefined,
       },
       {
@@ -457,7 +457,7 @@ const charts: Chart[] = [
             id: "14",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 27,
         userExplanation: undefined,
       },
       {
@@ -487,7 +487,7 @@ const charts: Chart[] = [
             id: "15",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 27,
         userExplanation: undefined,
       },
       {
@@ -517,7 +517,7 @@ const charts: Chart[] = [
             id: "16",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 58,
         userExplanation: undefined,
       },
       {
@@ -554,7 +554,7 @@ const charts: Chart[] = [
             id: "17",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 100,
         userExplanation: undefined,
       },
       {
@@ -586,7 +586,7 @@ const charts: Chart[] = [
             id: "18",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 100,
         userExplanation: undefined,
       },
       {
@@ -618,7 +618,7 @@ const charts: Chart[] = [
             id: "19",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 100,
         userExplanation: undefined,
       },
       {
@@ -650,7 +650,7 @@ const charts: Chart[] = [
             id: "20",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 10,
         userExplanation: undefined,
       },
     ],
@@ -686,7 +686,7 @@ const charts: Chart[] = [
             id: "21",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 10,
         userExplanation: undefined,
       },
       {
@@ -716,7 +716,7 @@ const charts: Chart[] = [
             id: "22",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 5,
         userExplanation: undefined,
       },
       {
@@ -747,7 +747,7 @@ const charts: Chart[] = [
             id: "23",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 85,
         userExplanation: undefined,
       },
       {
@@ -784,7 +784,7 @@ const charts: Chart[] = [
             id: "24",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 37,
         userExplanation: undefined,
       },
       {
@@ -814,7 +814,7 @@ const charts: Chart[] = [
             id: "25",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 29,
         userExplanation: undefined,
       },
       {
@@ -844,7 +844,7 @@ const charts: Chart[] = [
             id: "26",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 29,
         userExplanation: undefined,
       },
       {
@@ -881,7 +881,7 @@ const charts: Chart[] = [
             id: "27",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 18,
         userExplanation: undefined,
       },
       {
@@ -913,7 +913,7 @@ const charts: Chart[] = [
             id: "28",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 18,
         userExplanation: undefined,
       },
       {
@@ -945,7 +945,7 @@ const charts: Chart[] = [
             id: "29",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 18,
         userExplanation: undefined,
       },
       {
@@ -977,7 +977,7 @@ const charts: Chart[] = [
             id: "30",
           },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 10,
         userExplanation: undefined,
       },
     ],

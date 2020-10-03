@@ -6,7 +6,6 @@ import { API_DOMAIN } from "../config";
 import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
-import { Chart, createChart } from "../types/chart";
 import { CardSide } from "../types/card";
 import { DEFAULT_COLOURS, getColours } from "../utils/cards";
 
@@ -17,7 +16,6 @@ import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 import {
   Dimension as DimensionType,
-  createBackendDimension,
   createDimension,
 } from "../types/dimension";
 

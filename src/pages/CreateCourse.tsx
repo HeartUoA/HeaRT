@@ -58,7 +58,7 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
       },
     });
 
-    if (responseSignup.status == 200) {
+    if (responseSignup.status === 200) {
       setError("");
       props.history.push("/Dashboard");
     }
