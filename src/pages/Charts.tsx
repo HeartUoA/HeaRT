@@ -110,19 +110,16 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
             <Typography>New Chart</Typography>
           </Button>
           {charts.map((item) => {
-            if (item.courseID === courseID) {
-              return (
-                <Chart
-                  {...{
-                    createdAt: item.createdAt,
-                    chartID: item.id,
-                    onChange: onChartSelected,
-                    key: item.id,
-                  }}
-                />
-              );
-            }
-            return null;
+            return (
+              <Chart
+                {...{
+                  createdAt: item.createdAt,
+                  chartID: item.id,
+                  onChange: onChartSelected,
+                  key: item.id,
+                }}
+              />
+            );
           })}
         </Row>
       </div>
