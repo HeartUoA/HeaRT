@@ -15,7 +15,11 @@ import save from "../assets/images/save.png";
 import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
-import { createBackendDimension } from "../types/dimension";
+import {
+  Dimension as DimensionType,
+  createBackendDimension,
+  createDimension,
+} from "../types/dimension";
 
 const DEFAULT_PROGRESS = {
   completed: 0,
@@ -23,73 +27,76 @@ const DEFAULT_PROGRESS = {
 };
 
 interface ParamTypes {
-  courseID: string;
+  chartID: string;
 }
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
-  const { courseID } = useParams<ParamTypes>();
-  const [chart, setChart] = useState<Chart | undefined>(undefined);
+  const { chartID } = useParams<ParamTypes>();
+  //const [chart, setChart] = useState<Chart | undefined>(undefined);
+  const [allDimensions, setAllDimensions] = useState<
+    DimensionType[] | undefined
+  >(undefined);
   const [retrievedResults, setRetrieved] = useState(false);
 
   const [dimensionIndex, setDimensionIndex] = useState(
-    isPrevPagePreview && chart ? chart.dimensions.length - 1 : 0
+    isPrevPagePreview && allDimensions ? allDimensions.length - 1 : 0
   );
 
   const [colours, setColours] = useState(
-    chart && chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1
+    allDimensions && allDimensions[dimensionIndex].userSelectedSliderPos !== -1
       ? getColours(
-          chart.dimensions[dimensionIndex].userSelectedSliderPos,
-          chart.dimensions[dimensionIndex].type
+          allDimensions[dimensionIndex].userSelectedSliderPos,
+          allDimensions[dimensionIndex].type
         )
       : DEFAULT_COLOURS
   );
   const [progress, setProgress] = useState(
-    chart
+    allDimensions
       ? {
-          completed: chart.dimensions.filter(
+          completed: allDimensions.filter(
             (dim: { userSelectedSliderPos: number }) =>
               dim.userSelectedSliderPos !== -1
           ).length,
-          total: chart.dimensions.length,
+          total: allDimensions.length,
         }
       : DEFAULT_PROGRESS
   );
   const isCardSelected =
-    chart && chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1;
+    allDimensions && allDimensions[dimensionIndex].userSelectedSliderPos !== -1;
 
   useEffect(() => {
     fetchDimensions();
   }, []);
 
   useEffect(() => {
-    if (retrievedResults && chart) {
-      setDimensionIndex(isPrevPagePreview ? chart.dimensions.length - 1 : 0);
+    if (retrievedResults && allDimensions) {
+      setDimensionIndex(isPrevPagePreview ? allDimensions.length - 1 : 0);
       setColours(
-        chart.dimensions[dimensionIndex].userSelectedSliderPos !== -1
+        allDimensions[dimensionIndex].userSelectedSliderPos !== -1
           ? getColours(
-              chart.dimensions[dimensionIndex].userSelectedSliderPos,
-              chart.dimensions[dimensionIndex].type
+              allDimensions[dimensionIndex].userSelectedSliderPos,
+              allDimensions[dimensionIndex].type
             )
           : DEFAULT_COLOURS
       );
       setProgress({
-        completed: chart.dimensions.filter(
+        completed: allDimensions.filter(
           (dim: { userSelectedSliderPos: number }) =>
             dim.userSelectedSliderPos !== -1
         ).length,
-        total: chart.dimensions.length,
+        total: allDimensions.length,
       });
       setRetrieved(false);
     }
   }, [retrievedResults]);
 
   const fetchDimensions = async (): Promise<any> => {
-    const responseChart = await fetch(
-      `${API_DOMAIN}course/` + courseID + `/chart`,
+    const responseDimensions = await fetch(
+      `${API_DOMAIN}dimensions/forchart/` + chartID,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${cookies["accessToken"]}`,
           "Content-Type": "application/json",
@@ -102,7 +109,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         return data;
       });
 
-    setChart(createChart(responseChart));
+    setAllDimensions(
+      responseDimensions.map((dimension: any) => {
+        return createDimension(dimension);
+      })
+    );
+
     setRetrieved(true);
   };
 
@@ -113,88 +125,77 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const saveCurrentDimension = async (): Promise<void> => {
-    // TODO: Need to change this to individual PUT request for each dimension?
-    if (chart) {
-      const dimension = createBackendDimension(
-        chart.dimensions[dimensionIndex]
-      );
-
-      const response = await fetch(
-        `${API_DOMAIN}dimensions/` + chart.dimensions[dimensionIndex].id,
-        {
-          method: "PUT",
-          body: JSON.stringify(dimension),
-          headers: {
-            Authorization: `Bearer ${cookies["accessToken"]}`,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
-    }
+    // TODO: Fix this PUT request
+    // const dimension = createBackendDimension(
+    //   chart!.dimensions[dimensionIndex]
+    // );
+    // const response = await fetch(
+    //   `${API_DOMAIN}dimensions/` + chart!.dimensions[dimensionIndex].id,
+    //   {
+    //     method: "PUT",
+    //     body: JSON.stringify(dimension),
+    //     headers: {
+    //       Authorization: `Bearer ${cookies["accessToken"]}`,
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //     },
+    //   }
+    // );
   };
 
   const setNewDimension = (newIndex: number) => {
-    if (chart) {
-      setDimensionIndex(newIndex);
-      setColours(
-        chart.dimensions[newIndex].userSelectedSliderPos === -1
-          ? DEFAULT_COLOURS
-          : getColours(
-              chart.dimensions[newIndex].userSelectedSliderPos,
-              chart.dimensions[dimensionIndex].type
-            )
-      );
-    }
+    setDimensionIndex(newIndex);
+    setColours(
+      allDimensions![newIndex].userSelectedSliderPos === -1
+        ? DEFAULT_COLOURS
+        : getColours(
+            allDimensions![newIndex].userSelectedSliderPos,
+            allDimensions![dimensionIndex].type
+          )
+    );
   };
 
   const onBackClick = () => {
-    if (chart && dimensionIndex > 0) {
+    if (dimensionIndex > 0) {
       saveCurrentDimension();
       setNewDimension(dimensionIndex - 1);
     }
   };
 
   const onNextClick = () => {
-    if (chart) {
-      saveCurrentDimension();
-      if (dimensionIndex < chart.dimensions.length - 1) {
-        setNewDimension(dimensionIndex + 1);
-      } else if (dimensionIndex === chart.dimensions.length - 1) {
-        if (progress.completed >= 8) {
-          props.history.push("/Preview");
-        } else {
-          // Display modal to say at least 8 dimensions must be completed
-        }
+    saveCurrentDimension();
+    if (dimensionIndex < allDimensions!.length - 1) {
+      setNewDimension(dimensionIndex + 1);
+    } else if (dimensionIndex === allDimensions!.length - 1) {
+      if (progress.completed >= 8) {
+        props.history.push("/Preview");
+      } else {
+        // Display modal to say at least 8 dimensions must be completed
       }
     }
   };
 
   const onCardClick = (side: CardSide) => {
-    if (
-      chart &&
-      chart.dimensions[dimensionIndex].userSelectedSliderPos === -1
-    ) {
+    if (allDimensions![dimensionIndex].userSelectedSliderPos === -1) {
       setProgress({ ...progress, completed: progress.completed + 1 });
     }
 
-    if (chart && side === CardSide.Left) {
+    if (side === CardSide.Left) {
       onSliderPosChange(
-        chart.dimensions[dimensionIndex].leftCard.anchorSliderPos
+        allDimensions![dimensionIndex].leftCard.anchorSliderPos
       );
-    } else if (chart && side === CardSide.Right) {
+    } else if (side === CardSide.Right) {
       onSliderPosChange(
-        chart.dimensions[dimensionIndex].rightCard.anchorSliderPos
+        allDimensions![dimensionIndex].rightCard.anchorSliderPos
       );
     }
   };
 
   const onEditClick = (event: React.MouseEvent, side: CardSide) => {
     event.stopPropagation();
-    if (chart && side === CardSide.Left) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+    if (side === CardSide.Left) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex) {
             return {
               ...dimension,
@@ -206,12 +207,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           } else {
             return dimension;
           }
-        }),
-      });
-    } else if (chart && side === CardSide.Right) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+        })
+      );
+    } else if (side === CardSide.Right) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex) {
             return {
               ...dimension,
@@ -223,16 +223,15 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           } else {
             return dimension;
           }
-        }),
-      });
+        })
+      );
     }
   };
 
   const onCancelClick = (side: CardSide) => {
-    if (chart && side === CardSide.Left) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+    if (side === CardSide.Left) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex) {
             return {
               ...dimension,
@@ -244,25 +243,24 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           } else {
             return dimension;
           }
-        }),
-      });
-    } else if (chart && side === CardSide.Right) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+        })
+      );
+    } else if (side === CardSide.Right) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex) {
             return {
               ...dimension,
               rightCard: {
                 ...dimension.rightCard,
-                isEditing: false,
+                isEditing: true,
               },
             };
           } else {
             return dimension;
           }
-        }),
-      });
+        })
+      );
     }
   };
 
@@ -270,10 +268,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     let textElement = document.getElementById(
       side === CardSide.Left ? "leftCardEdit" : "rightCardEdit"
     );
-    if (chart && side === CardSide.Left) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+    if (side === CardSide.Left) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex && textElement) {
             return {
               ...dimension,
@@ -286,12 +283,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           } else {
             return dimension;
           }
-        }),
-      });
-    } else if (chart && side === CardSide.Right) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
+        })
+      );
+    } else if (side === CardSide.Right) {
+      setAllDimensions(
+        allDimensions!.map((dimension, index) => {
           if (index === dimensionIndex && textElement) {
             return {
               ...dimension,
@@ -304,49 +300,43 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           } else {
             return dimension;
           }
-        }),
-      });
+        })
+      );
     }
   };
 
   const onSliderPosChange = (value: number) => {
-    if (chart) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
-          if (index === dimensionIndex) {
-            return {
-              ...dimension,
-              userSelectedSliderPos: value,
-            };
-          } else {
-            return dimension;
-          }
-        }),
-      });
-      setColours(getColours(value, chart.dimensions[dimensionIndex].type));
-    }
+    setAllDimensions(
+      allDimensions!.map((dimension, index) => {
+        if (index === dimensionIndex) {
+          return {
+            ...dimension,
+            userSelectedSliderPos: value,
+          };
+        } else {
+          return dimension;
+        }
+      })
+    );
+    setColours(getColours(value, allDimensions![dimensionIndex].type));
   };
 
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    if (chart) {
-      setChart({
-        ...chart,
-        dimensions: chart.dimensions.map((dimension, index) => {
-          if (index === dimensionIndex) {
-            return {
-              ...dimension,
-              userExplanation: event.target.value,
-            };
-          } else {
-            return dimension;
-          }
-        }),
-      });
-    }
+    setAllDimensions(
+      allDimensions!.map((dimension, index) => {
+        if (index === dimensionIndex) {
+          return {
+            ...dimension,
+            serExplanation: event.target.value,
+          };
+        } else {
+          return dimension;
+        }
+      })
+    );
   };
 
-  if (chart) {
+  if (allDimensions) {
     return (
       <div className="DisplayCards">
         <Header />
@@ -358,12 +348,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             <div className="Cards-Container">
               <Card
                 className={`Card ${
-                  chart.dimensions[dimensionIndex].type === "Practice"
+                  allDimensions[dimensionIndex].type === "Practice"
                     ? "Pink"
                     : "Blue"
                 }`}
                 onClick={() => {
-                  if (!chart.dimensions[dimensionIndex].leftCard.isEditing) {
+                  if (!allDimensions[dimensionIndex].leftCard.isEditing) {
                     onCardClick(CardSide.Left);
                   }
                 }}
@@ -371,7 +361,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
               >
                 <Tooltip
                   title={
-                    chart.dimensions[dimensionIndex].leftCard.isEditing
+                    allDimensions[dimensionIndex].leftCard.isEditing
                       ? "Save Edited Card"
                       : "Edit Card Text"
                   }
@@ -379,24 +369,24 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                 >
                   <img
                     src={
-                      chart.dimensions[dimensionIndex].leftCard.isEditing
+                      allDimensions[dimensionIndex].leftCard.isEditing
                         ? save
                         : edit
                     }
                     className={
-                      chart.dimensions[dimensionIndex].leftCard.isEditing
+                      allDimensions[dimensionIndex].leftCard.isEditing
                         ? "Save"
                         : "Edit"
                     }
                     alt="edit"
                     onClick={(event) =>
-                      chart.dimensions[dimensionIndex].leftCard.isEditing
+                      allDimensions[dimensionIndex].leftCard.isEditing
                         ? onSaveClick(CardSide.Left)
                         : onEditClick(event, CardSide.Left)
                     }
                   />
                 </Tooltip>
-                {chart.dimensions[dimensionIndex].leftCard.isEditing ? (
+                {allDimensions[dimensionIndex].leftCard.isEditing ? (
                   <>
                     <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
                       <img
@@ -412,23 +402,23 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       contentEditable="true"
                       suppressContentEditableWarning={true}
                     >
-                      {chart.dimensions[dimensionIndex].leftCard.statement}
+                      {allDimensions[dimensionIndex].leftCard.statement}
                     </div>
                   </>
                 ) : (
                   <p className="Card-Text">
-                    {chart.dimensions[dimensionIndex].leftCard.statement}
+                    {allDimensions[dimensionIndex].leftCard.statement}
                   </p>
                 )}
               </Card>
               <Card
                 className={`Card ${
-                  chart.dimensions[dimensionIndex].type === "Practice"
+                  allDimensions[dimensionIndex].type === "Practice"
                     ? "Pink"
                     : "Blue"
                 }`}
                 onClick={() => {
-                  if (!chart.dimensions[dimensionIndex].rightCard.isEditing) {
+                  if (!allDimensions[dimensionIndex].rightCard.isEditing) {
                     onCardClick(CardSide.Right);
                   }
                 }}
@@ -436,7 +426,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
               >
                 <Tooltip
                   title={
-                    chart.dimensions[dimensionIndex].rightCard.isEditing
+                    allDimensions[dimensionIndex].rightCard.isEditing
                       ? "Save Edited Card"
                       : "Edit Card Text"
                   }
@@ -444,24 +434,24 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                 >
                   <img
                     src={
-                      chart.dimensions[dimensionIndex].rightCard.isEditing
+                      allDimensions[dimensionIndex].rightCard.isEditing
                         ? save
                         : edit
                     }
                     className={
-                      chart.dimensions[dimensionIndex].rightCard.isEditing
+                      allDimensions[dimensionIndex].rightCard.isEditing
                         ? "Save"
                         : "Edit"
                     }
                     alt="edit"
                     onClick={(event) =>
-                      chart.dimensions[dimensionIndex].rightCard.isEditing
+                      allDimensions[dimensionIndex].rightCard.isEditing
                         ? onSaveClick(CardSide.Right)
                         : onEditClick(event, CardSide.Right)
                     }
                   />
                 </Tooltip>
-                {chart.dimensions[dimensionIndex].rightCard.isEditing ? (
+                {allDimensions[dimensionIndex].rightCard.isEditing ? (
                   <>
                     <Tooltip title={"Cancel Editing"} mouseEnterDelay={0.05}>
                       <img
@@ -477,12 +467,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                       contentEditable="true"
                       suppressContentEditableWarning={true}
                     >
-                      {chart.dimensions[dimensionIndex].rightCard.statement}
+                      {allDimensions[dimensionIndex].rightCard.statement}
                     </div>
                   </>
                 ) : (
                   <p className="Card-Text">
-                    {chart.dimensions[dimensionIndex].rightCard.statement}
+                    {allDimensions[dimensionIndex].rightCard.statement}
                   </p>
                 )}
               </Card>
@@ -490,7 +480,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             {isCardSelected ? (
               <Dimension
                 {...{
-                  dimension: chart.dimensions[dimensionIndex],
+                  dimension: allDimensions[dimensionIndex],
                   sliderUpdate: onSliderPosChange,
                   userExplanationUpdate: onUserExplanationChange,
                   isPreview: false,
