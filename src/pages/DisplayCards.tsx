@@ -120,9 +120,20 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
-  const saveCurrentDimension = () => {
+  const saveCurrentDimension = async () => {
     // Send PUT request for each dimension
-    updateDimension(currentDimension);
+    const response = await fetch(`/api/dimensions/${currentDimension.id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(currentDimension),
+    });
+
+    const updatedDimension = await response.json();
+    console.log(updatedDimension);
 
     allDimensions[dimensionIndex] = {
       ...currentDimension,

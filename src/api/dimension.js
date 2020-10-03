@@ -1,7 +1,7 @@
 import { API_DOMAIN } from "../config";
 import { useCookies } from "react-cookie";
 
-const [cookies] = useCookies(["accessToken"]);
+// const [cookies] = useCookies(["accessToken"]);
 
 /**
  * Returns dimensions for a chart
@@ -37,24 +37,4 @@ export async function getDimension(dimensionID) {
   });
   const dimension = await response.json();
   return dimension;
-}
-
-/**
- * Updates the dimension with the given dimension ID
- *
- * @param dimension the item to update
- * @returns the dimension that was updated on the server, which should be the same
- */
-export async function updateDimension(dimension) {
-  const response = await fetch(`/api/dimensions/${dimension._id}`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${cookies["accessToken"]}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(dimension),
-  });
-  const updatedDimension = await response.json();
-  return updatedDimension;
 }
