@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Charts from "./pages/Charts";
 import PrintCards from "./pages/PrintCards";
+import PlayReason from "./pages/PlayReason";
 import { CookiesProvider } from "react-cookie";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -44,6 +45,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/Course/:courseID">
             <Charts />
+          </Route>
+          <Route path="/PlayReason/:chartID">
+            <PlayReason />
           </Route>
           <Route path="/PrintCards">
             <PrintCards />

@@ -28,7 +28,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
 
   // TODO change this to get coursename from backend
   let course = courses.find((item) => item.id === courseID);
-  let courseName;
+  let courseName: string;
   if (course) {
     courseName = course.name;
   } else {
@@ -53,8 +53,12 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const createChart = () => {
-    //props.history.push("/DisplayCards/" + courseID);
-    //Need to go to play reason page then this one ^
+    // TODO create chart with POST request & get returned chartID
+    const chartID = "5f790aaaf7a24a2b90cb426e";
+    props.history.push(`/PlayReason/${chartID}`, {
+      prevPage: props.history.location.pathname,
+      courseName: courseName,
+    });
   };
 
   const handleResize = () => {

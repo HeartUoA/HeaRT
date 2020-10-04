@@ -1,0 +1,86 @@
+.Course-Info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.Main-Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f6f7fc;
+  height: 75vh;
+  margin-top: 12vh;
+}
+
+.Form-Container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 41vw;
+  background: white;
+  text-align: left;
+  border-radius: 1.57vw;
+  box-shadow: 0px 0.33vh 0.8vh #646464;
+  padding: 3vh 0.8% 0px 4%;
+}
+
+.Heading-Text {
+  font-family: "ABeeZee";
+  color: #1f1f1f;
+  font-size: 5vh;
+  font-weight: normal;
+  text-align: center;
+  margin-left: -2.6vw;
+  margin-top: -2vh;
+  margin-bottom: 2vh;
+}
+
+.Subheading-Text {
+  font-family: "ABeeZee";
+  color: #5b5b5b;
+  font-size: 2.8vh;
+}
+
+.Play-Reason {
+  width: 90%;
+  line-height: 4.5vh;
+  border-radius: 0.7vw;
+  padding-left: 1vw;
+  font-family: "ABeeZee";
+  font-size: 2vh;
+  border-color: #969696;
+  color: #1f1f1f;
+  margin-bottom: 2vh;
+  resize: none;
+}
+
+.Button-Container {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  position: relative;
+  height: 13vh;
+  width: 90%;
+  padding-top: 1vh;
+  background-color: transparent;
+}
+
+.Cancel-Button,
+.Confirm-Button {
+  height: 7vh;
+  width: 15vw;
+  text-align: center;
+  box-shadow: 0px 0px 0px 0px;
+}
+
+.Confirm-Button {
+  position: absolute;
+  right: 0;
+}
+
+.Button-Font {
+  font-size: 3.5vh;
+}
