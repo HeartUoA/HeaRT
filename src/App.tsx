@@ -45,7 +45,7 @@ const App: React.FC = () => {
           <Route path="/Course/:courseID">
             <Charts />
           </Route>
-          <Route path="/PrintCards">
+          <Route path="/PrintCards/:chartID">
             <PrintCards />
           </Route>
         </Switch>

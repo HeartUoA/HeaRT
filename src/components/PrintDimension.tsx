@@ -1,52 +1,33 @@
 import { Slider } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/PrintDimension.css";
-import charts from "../dummyData/charts";
 
-import { API_DOMAIN } from "../config";
+import { Dimension as DimensionType } from "../types/dimension";
 
 interface PrintDimensionProps {
   dimensionValue: number;
-  SecondStatement: boolean;
+  secondStatement: boolean;
+  allDimensions: DimensionType;
 }
 
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   props
 ) => {
-  useEffect(() => {
-    fetch(`${API_DOMAIN}dimensions/forchart/${""}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: "",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        //Get data and set it to Dimensions
-      })
-      .catch((e) => console.log(e));
-  }, []);
-
-  const allDimensions = charts[0].dimensions;
-  const initDimensionProps = allDimensions[props.dimensionValue];
-
+  // const allDimensions = charts[0].dimensions;
+  const initDimensionProps = props.allDimensions;
+  console.log(props.allDimensions.marks + "PRINTCARDS");
   const pinpoint =
-    props.SecondStatement !== true
-      ? allDimensions[props.dimensionValue].leftCard.anchorSliderPos
-      : allDimensions[props.dimensionValue].rightCard.anchorSliderPos;
+    props.secondStatement !== true
+      ? props.allDimensions.leftCard.anchorSliderPos
+      : props.allDimensions.rightCard.anchorSliderPos;
 
   return (
     <>
       <span className="printDimensionText">
         Pedagogical Dimension:
-        <span className="TypeofDimension">
-          [{allDimensions[props.dimensionValue].type}]
-        </span>
+        <span className="TypeofDimension">[{props.allDimensions.type}]</span>
       </span>
-      <span className="printTitleText">
-        {allDimensions[props.dimensionValue].name}
-      </span>
+      <span className="printTitleText">{props.allDimensions.name}</span>
       <span className="printContinuumText">Continuum:</span>
       <Slider
         className="printSlider"
@@ -54,12 +35,12 @@ const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
         dots={false}
         tooltipVisible={false}
         included={false}
-        marks={allDimensions[props.dimensionValue].marks}
+        marks={props.allDimensions.marks}
       />
       <span className="printStatementText">
         Statement reflects '
         <span className="StatementReflection">
-          {initDimensionProps.marks && initDimensionProps.marks[pinpoint]}
+          {initDimensionProps.marks && initDimensionProps.marks[pinpoint].label}
         </span>
         ' purpose
       </span>
