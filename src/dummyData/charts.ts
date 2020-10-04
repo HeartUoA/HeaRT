@@ -3,10 +3,11 @@ import { Chart } from "../types/chart";
 const charts: Chart[] = [
   {
     id: "1",
-    courseID: "1",
     createdAt: new Date(),
     dimensions: [
       {
+        id: "1",
+        chartID: "1",
         name: "Nature and purpose of learning tasks",
         type: "Practice",
         leftCard: {
@@ -20,13 +21,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Academic/abstract",
-          100: "Authentic/experimental",
+          0: {
+            style: { color: "#212121" },
+            label: "Academic/abstract",
+            id: "1",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Authentic/experimental",
+            id: "1",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 32,
         userExplanation: undefined,
       },
       {
+        id: "2",
+        chartID: "1",
         name: "Degree of structure of learning tasks",
         type: "Practice",
         leftCard: {
@@ -40,13 +51,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "High/constrained",
-          100: "Low/open",
+          0: {
+            style: { color: "#212121" },
+            label: "High/constrained",
+            id: "2",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Low/open",
+            id: "2",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 68,
         userExplanation: undefined,
       },
       {
+        id: "3",
+        chartID: "1",
         name: "Interactivity",
         type: "Practice",
         leftCard: {
@@ -61,13 +82,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Navigational",
-          100: "Manipulative",
+          0: {
+            style: { color: "#212121" },
+            label: "Navigational",
+            id: "3",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Manipulative",
+            id: "3",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 18,
         userExplanation: undefined,
       },
       {
+        id: "4",
+        chartID: "1",
         name: "Learning framework",
         type: "Practice",
         leftCard: {
@@ -83,14 +114,28 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Structured",
-          50: "Guided",
-          100: "Facilitated",
+          0: {
+            style: { color: "#212121" },
+            label: "Structured",
+            id: "4",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Guided",
+            id: "4",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Facilitated",
+            id: "4",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 96,
         userExplanation: undefined,
       },
       {
+        id: "5",
+        chartID: "1",
         name: "Learning control",
         type: "Practice",
         leftCard: {
@@ -104,13 +149,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Teacher-managed",
-          100: "Student-managed",
+          0: {
+            style: { color: "#212121" },
+            label: "Teacher-managed",
+            id: "5",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Student-managed",
+            id: "5",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 28,
         userExplanation: undefined,
       },
       {
+        id: "6",
+        chartID: "1",
         name: "Learning process",
         type: "Practice",
         leftCard: {
@@ -124,13 +179,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Reproduction",
-          100: "Construction",
+          0: {
+            style: { color: "#212121" },
+            label: "Reproduction",
+            id: "6",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Construction",
+            id: "6",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 85,
         userExplanation: undefined,
       },
       {
+        id: "7",
+        chartID: "1",
         name: "Feedback",
         type: "Practice",
         leftCard: {
@@ -146,16 +211,30 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Minimal",
-          50: "Fixed",
-          100: "Responsive",
+          0: {
+            style: { color: "#212121" },
+            label: "Minimal",
+            id: "7",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Fixed",
+            id: "7",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Responsive",
+            id: "7",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 27,
         userExplanation: undefined,
       },
       {
+        id: "8",
+        chartID: "1",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -169,15 +248,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Sharply focused",
-          100: "Unfocused",
+          0: {
+            style: { color: "#212121" },
+            label: "Sharply focused",
+            id: "8",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Unfocused",
+            id: "8",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 64,
         userExplanation: undefined,
       },
       {
+        id: "9",
+        chartID: "1",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -191,15 +280,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Instructivist",
-          100: "Constructivist",
+          0: {
+            style: { color: "#212121" },
+            label: "Instructivist",
+            id: "9",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Constructivist",
+            id: "9",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 50,
         userExplanation: undefined,
       },
       {
+        id: "10",
+        chartID: "1",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
@@ -213,20 +312,29 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Personal",
-          100: "Social",
+          0: {
+            style: { color: "#212121" },
+            label: "Personal",
+            id: "10",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Social",
+            id: "10",
+          },
         },
-        userSelectedSliderPos: -1,
+        userSelectedSliderPos: 38,
         userExplanation: undefined,
       },
     ],
   },
   {
     id: "2",
-    courseID: "2",
-    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)),
+    createdAt: new Date(),
     dimensions: [
       {
+        id: "11",
+        chartID: "2",
         name: "Nature and purpose of learning tasks",
         type: "Practice",
         leftCard: {
@@ -240,14 +348,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Academic/abstract",
-          100: "Authentic/experimental",
+          0: {
+            style: { color: "#212121" },
+            label: "Academic/abstract",
+            id: "11",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Authentic/experimental",
+            id: "11",
+          },
         },
-        userSelectedSliderPos: 20,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 82,
+        userExplanation: undefined,
       },
       {
+        id: "12",
+        chartID: "2",
         name: "Degree of structure of learning tasks",
         type: "Practice",
         leftCard: {
@@ -261,14 +378,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "High/constrained",
-          100: "Low/open",
+          0: {
+            style: { color: "#212121" },
+            label: "High/constrained",
+            id: "12",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Low/open",
+            id: "12",
+          },
         },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 83,
+        userExplanation: undefined,
       },
       {
+        id: "13",
+        chartID: "2",
         name: "Interactivity",
         type: "Practice",
         leftCard: {
@@ -283,14 +409,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Navigational",
-          100: "Manipulative",
+          0: {
+            style: { color: "#212121" },
+            label: "Navigational",
+            id: "13",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Manipulative",
+            id: "13",
+          },
         },
-        userSelectedSliderPos: 40,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 86,
+        userExplanation: undefined,
       },
       {
+        id: "14",
+        chartID: "2",
         name: "Learning framework",
         type: "Practice",
         leftCard: {
@@ -306,15 +441,28 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Structured",
-          50: "Guided",
-          100: "Facilitated",
+          0: {
+            style: { color: "#212121" },
+            label: "Structured",
+            id: "14",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Guided",
+            id: "14",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Facilitated",
+            id: "14",
+          },
         },
-        userSelectedSliderPos: 50,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 27,
+        userExplanation: undefined,
       },
       {
+        id: "15",
+        chartID: "2",
         name: "Learning control",
         type: "Practice",
         leftCard: {
@@ -328,14 +476,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Teacher-managed",
-          100: "Student-managed",
+          0: {
+            style: { color: "#212121" },
+            label: "Teacher-managed",
+            id: "15",
+          },
+          10: {
+            style: { color: "#212121" },
+            label: "Student-managed",
+            id: "15",
+          },
         },
-        userSelectedSliderPos: 60,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 27,
+        userExplanation: undefined,
       },
       {
+        id: "16",
+        chartID: "2",
         name: "Learning process",
         type: "Practice",
         leftCard: {
@@ -349,14 +506,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Reproduction",
-          100: "Construction",
+          0: {
+            style: { color: "#212121" },
+            label: "Reproduction",
+            id: "16",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Construction",
+            id: "16",
+          },
         },
-        userSelectedSliderPos: 70,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 58,
+        userExplanation: undefined,
       },
       {
+        id: "17",
+        chartID: "2",
         name: "Feedback",
         type: "Practice",
         leftCard: {
@@ -372,17 +538,30 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Minimal",
-          50: "Fixed",
-          100: "Responsive",
+          0: {
+            style: { color: "#212121" },
+            label: "Minimal",
+            id: "17",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Fixed",
+            id: "17",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Responsive",
+            id: "17",
+          },
         },
-        userSelectedSliderPos: 20,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 100,
+        userExplanation: undefined,
       },
       {
+        id: "18",
+        chartID: "2",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -396,16 +575,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Sharply focused",
-          100: "Unfocused",
+          0: {
+            style: { color: "#212121" },
+            label: "Sharply focused",
+            id: "18",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Unfocused",
+            id: "18",
+          },
         },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 100,
+        userExplanation: undefined,
       },
       {
+        id: "19",
+        chartID: "2",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -419,16 +607,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Instructivist",
-          100: "Constructivist",
+          0: {
+            style: { color: "#212121" },
+            label: "Instructivist",
+            id: "19",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Constructivist",
+            id: "19",
+          },
         },
-        userSelectedSliderPos: 40,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 100,
+        userExplanation: undefined,
       },
       {
+        id: "20",
+        chartID: "2",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
@@ -442,251 +639,29 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Personal",
-          100: "Social",
+          0: {
+            style: { color: "#212121" },
+            label: "Personal",
+            id: "20",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Social",
+            id: "20",
+          },
         },
-        userSelectedSliderPos: 50,
-        userExplanation:
-          "Monocle ipsum dolor sit amet charming Marylebone bulletin cutting-edge hub intricate bureaux St Moritz. Classic craftsmanship Marylebone boutique, cosy concierge Ettinger hand-crafted Zürich sophisticated Toto bulletin emerging. Marylebone quality of life Airbus A380 remarkable cutting-edge punctual alluring Beams eclectic. St Moritz exclusive Gaggenau carefully curated Sunspel cutting-edge intricate.",
+        userSelectedSliderPos: 10,
+        userExplanation: undefined,
       },
     ],
   },
   {
     id: "3",
-    courseID: "2",
-    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
-    dimensions: [
-      {
-        name: "Nature and purpose of learning tasks",
-        type: "Practice",
-        leftCard: {
-          statement: "Statement 1.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement: "Statement 2.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Academic/abstract",
-          100: "Authentic/experimental",
-        },
-        userSelectedSliderPos: 10,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Degree of structure of learning tasks",
-        type: "Practice",
-        leftCard: {
-          statement: "Learners can only do learning tasks in one way.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement: "Learners can do learning tasks in a variety of ways.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "High/constrained",
-          100: "Low/open",
-        },
-        userSelectedSliderPos: 20,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Interactivity",
-        type: "Practice",
-        leftCard: {
-          statement: "Learners can contribute to or change the content.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "The content is pre-prepared and fixed. Learners can’t contribute to or change the content.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Navigational",
-          100: "Manipulative",
-        },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Learning framework",
-        type: "Practice",
-        leftCard: {
-          statement:
-            "Learners perform set learning tasks using information provided.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "Learners explore the content and learning tasks in their own way.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Structured",
-          50: "Guided",
-          100: "Facilitated",
-        },
-        userSelectedSliderPos: 40,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Learning control",
-        type: "Practice",
-        leftCard: {
-          statement: "Statement 1.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement: "Statement 2.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Teacher-managed",
-          100: "Student-managed",
-        },
-        userSelectedSliderPos: 50,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Learning process",
-        type: "Practice",
-        leftCard: {
-          statement: "Statement 1.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement: "Statement 2.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Reproduction",
-          100: "Construction",
-        },
-        userSelectedSliderPos: 60,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Feedback",
-        type: "Practice",
-        leftCard: {
-          statement:
-            "Students receive predetermined feedback that is built into learning activities.",
-          anchorSliderPos: 50,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "Students receive personalised feedback to guide their learning.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Minimal",
-          50: "Fixed",
-          100: "Responsive",
-        },
-        userSelectedSliderPos: 70,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
-        leftCard: {
-          statement:
-            "Learning goals are clearly defined and can be linked to assessment clearly.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "Learning goals are open to interpretation and are not easily assessable.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Sharply focused",
-          100: "Unfocused",
-        },
-        userSelectedSliderPos: 80,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Dimension 10",
-        type: "Belief",
-        leftCard: {
-          statement:
-            "The curriculum or course content determines the learning goals of this course.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "Learners can determine (some or all of) the learning goals in this course.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Instructivist",
-          100: "Constructivist",
-        },
-        userSelectedSliderPos: 90,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-      {
-        name: "Dimension 14",
-        type: "Belief",
-        leftCard: {
-          statement:
-            "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
-          anchorSliderPos: 0,
-          isEditing: false,
-        },
-        rightCard: {
-          statement:
-            "For learning to occur in this course, the learning needs to happen together, in a learning community.",
-          anchorSliderPos: 100,
-          isEditing: false,
-        },
-        marks: {
-          0: "Personal",
-          100: "Social",
-        },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "Parallel parking video games playing my guitar snowboarding. Mountain biking Family Guy local sports teams exploring the city local sports teams, not looking for a penpal making lasagna from scratch Portlandia road trips I don't really like talking about myself. My goofy smile whatever topic is on NPR On The Road fixing my scooter Doctor Who long-term dating.",
-      },
-    ],
-  },
-  {
-    id: "4",
-    courseID: "2",
     createdAt: new Date(),
     dimensions: [
       {
+        id: "21",
+        chartID: "3",
         name: "Nature and purpose of learning tasks",
         type: "Practice",
         leftCard: {
@@ -700,14 +675,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Academic/abstract",
-          100: "Authentic/experimental",
+          0: {
+            style: { color: "#212121" },
+            label: "Academic/abstract",
+            id: "21",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Authentic/experimental",
+            id: "21",
+          },
         },
         userSelectedSliderPos: 10,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userExplanation: undefined,
       },
       {
+        id: "22",
+        chartID: "3",
         name: "Degree of structure of learning tasks",
         type: "Practice",
         leftCard: {
@@ -721,14 +705,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "High/constrained",
-          100: "Low/open",
+          0: {
+            style: { color: "#212121" },
+            label: "High/constrained",
+            id: "22",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Low/open",
+            id: "22",
+          },
         },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 5,
+        userExplanation: undefined,
       },
       {
+        id: "23",
+        chartID: "3",
         name: "Interactivity",
         type: "Practice",
         leftCard: {
@@ -743,14 +736,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Navigational",
-          100: "Manipulative",
+          0: {
+            style: { color: "#212121" },
+            label: "Navigational",
+            id: "23",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Manipulative",
+            id: "23",
+          },
         },
-        userSelectedSliderPos: 20,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 85,
+        userExplanation: undefined,
       },
       {
+        id: "24",
+        chartID: "3",
         name: "Learning framework",
         type: "Practice",
         leftCard: {
@@ -766,15 +768,28 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Structured",
-          50: "Guided",
-          100: "Facilitated",
+          0: {
+            style: { color: "#212121" },
+            label: "Structured",
+            id: "24",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Guided",
+            id: "24",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Facilitated",
+            id: "24",
+          },
         },
-        userSelectedSliderPos: 60,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 37,
+        userExplanation: undefined,
       },
       {
+        id: "25",
+        chartID: "3",
         name: "Learning control",
         type: "Practice",
         leftCard: {
@@ -788,14 +803,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Teacher-managed",
-          100: "Student-managed",
+          0: {
+            style: { color: "#212121" },
+            label: "Teacher-managed",
+            id: "25",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Student-managed",
+            id: "25",
+          },
         },
-        userSelectedSliderPos: 40,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 29,
+        userExplanation: undefined,
       },
       {
+        id: "26",
+        chartID: "3",
         name: "Learning process",
         type: "Practice",
         leftCard: {
@@ -809,14 +833,23 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Reproduction",
-          100: "Construction",
+          0: {
+            style: { color: "#212121" },
+            label: "Reproduction",
+            id: "26",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Construction",
+            id: "26",
+          },
         },
-        userSelectedSliderPos: 60,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 29,
+        userExplanation: undefined,
       },
       {
+        id: "27",
+        chartID: "3",
         name: "Feedback",
         type: "Practice",
         leftCard: {
@@ -832,17 +865,30 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Minimal",
-          50: "Fixed",
-          100: "Responsive",
+          0: {
+            style: { color: "#212121" },
+            label: "Minimal",
+            id: "27",
+          },
+          50: {
+            style: { color: "#212121" },
+            label: "Fixed",
+            id: "27",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Responsive",
+            id: "27",
+          },
         },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 18,
+        userExplanation: undefined,
       },
       {
+        id: "28",
+        chartID: "3",
         name: "Learning goals (Curriculum beliefs)",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "Learning goals are clearly defined and can be linked to assessment clearly.",
@@ -856,16 +902,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Sharply focused",
-          100: "Unfocused",
+          0: {
+            style: { color: "#212121" },
+            label: "Sharply focused",
+            id: "28",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Unfocused",
+            id: "28",
+          },
         },
-        userSelectedSliderPos: 90,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 18,
+        userExplanation: undefined,
       },
       {
+        id: "29",
+        chartID: "3",
         name: "Dimension 10",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "The curriculum or course content determines the learning goals of this course.",
@@ -879,16 +934,25 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Instructivist",
-          100: "Constructivist",
+          0: {
+            style: { color: "#212121" },
+            label: "Instructivist",
+            id: "29",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Constructivist",
+            id: "29",
+          },
         },
-        userSelectedSliderPos: 20,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 18,
+        userExplanation: undefined,
       },
       {
+        id: "30",
+        chartID: "3",
         name: "Dimension 14",
-        type: "Belief",
+        type: "Beliefs",
         leftCard: {
           statement:
             "For learning to occur in this course, the learning needs to happen ‘solo’, in private.",
@@ -902,12 +966,19 @@ const charts: Chart[] = [
           isEditing: false,
         },
         marks: {
-          0: "Personal",
-          100: "Social",
+          0: {
+            style: { color: "#212121" },
+            label: "Personal",
+            id: "30",
+          },
+          100: {
+            style: { color: "#212121" },
+            label: "Social",
+            id: "30",
+          },
         },
-        userSelectedSliderPos: 30,
-        userExplanation:
-          "No borders, no limits… go ahead, touch the Cornballer… you know best? Let's make Ann the backup, okay? Very good way to think about her, as a backup. If you're suggesting I play favorites, you're wrong. I love all of my children equally. I don't care for Gob. No, I was ashamed to be SEEN with you. I like being WITH you. After all, why should you go to jail for a crime somebody else noticed? I guess you can say I'm buy-curious. ",
+        userSelectedSliderPos: 10,
+        userExplanation: undefined,
       },
     ],
   },
