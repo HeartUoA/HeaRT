@@ -45,21 +45,23 @@ router
         return response.status(404).send();
       }
 
-      dimension.score =
+      const updatedDimension = {};
+
+      updatedDimension.score =
         request.body.score !== undefined ? request.body.score : dimension.score;
-      dimension.definition =
+      updatedDimension.definition =
         request.body.definition !== undefined
           ? request.body.definition
           : dimension.definition;
-      dimension.leftCardStatement =
+      updatedDimension.leftCardStatement =
         request.body.leftCardStatement !== undefined
           ? request.body.leftCardStatement
           : dimension.leftCardStatement;
-      dimension.rightCardStatement =
+      updatedDimension.rightCardStatement =
         request.body.rightCardStatement !== undefined
           ? request.body.rightCardStatement
           : dimension.rightCardStatement;
-      dimension.note =
+      updatedDimension.note =
         request.body.note !== undefined ? request.body.note : dimension.note;
 
       const referenceChart = await Chart.findOne({ _id: dimension.chartID });
@@ -71,11 +73,11 @@ router
         return response.status(403).send();
       }
 
-      await Dimension.findOneAndUpdate(
-        { chartID: referenceChart._id },
-        dimension
+      await Dimension.findByIdAndUpdate(
+        { _id: request.params.dimensionID },
+        updatedDimension
       );
-      return response.status(200).json(dimension);
+      return response.status(200).json(updatedDimension);
     } catch (error) {
       return response.status(400).send(error);
     }
