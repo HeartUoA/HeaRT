@@ -1,73 +1,110 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { useReactToPrint } from "react-to-print";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/PrintDimension";
 import "../styles/PrintCards.css";
 import "../styles/Footer.css";
 import { API_DOMAIN } from "../config";
-
-import charts from "../dummyData/charts";
+import {
+  Dimension as DimensionType,
+  createDimension,
+} from "../types/dimension";
 
 const PracticeBGColour = "#ffc4d3";
 const BeliefBGColour = "#c4ddff";
-class ComponentToPrint extends React.Component {
+
+interface ParamTypes {
+  chartID: string;
+}
+
+interface DimensionProps {
+  passAllDimensions: DimensionType[] | undefined;
+}
+
+class ComponentToPrint extends React.Component<DimensionProps> {
   render() {
-    const allDimensions = charts[0].dimensions;
-    return (
-      <div>
-        {allDimensions.map((currElement, index) => (
-          <>
-            <div
-              className="PrintingCards"
-              style={
-                allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PracticeBGColour }
-                  : { backgroundColor: BeliefBGColour }
-              }
-            >
-              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-              <span className="Print-Card-Text">
-                {index % 2
-                  ? allDimensions[index].rightCard.statement
-                  : allDimensions[index].leftCard.statement}
-              </span>
-            </div>
-            <div className="PrintingCards">
-              <Dimension dimensionValue={index} SecondStatement={false} />
-            </div>
-            <div
-              className="PrintingCards"
-              style={
-                allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PracticeBGColour }
-                  : { backgroundColor: BeliefBGColour }
-              }
-            >
-              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-              <span className="Print-Card-Text">
-                {index % 2
-                  ? allDimensions[index].leftCard.statement
-                  : allDimensions[index].rightCard.statement}
-              </span>
-            </div>
-            <div className="PrintingCards">
-              <Dimension dimensionValue={index} SecondStatement={true} />
-            </div>
-          </>
-        ))}
-      </div>
-    );
+    const allDimensions =
+      this.props.passAllDimensions && this.props.passAllDimensions;
+    console.log(allDimensions && allDimensions[0].leftCard);
+    if (allDimensions) {
+      return (
+        <div>
+          {allDimensions.map((currElement: any, index: number) => (
+            <>
+              <div
+                className="PrintingCards"
+                style={
+                  allDimensions[index].type === "Practice"
+                    ? { backgroundColor: PracticeBGColour }
+                    : { backgroundColor: BeliefBGColour }
+                }
+              >
+                <span className="Print-Card-Text-TopLeft">{index + 1}</span>
+                <span className="Print-Card-Text">
+                  {index % 2
+                    ? allDimensions[index].rightCard.statement
+                    : allDimensions[index].leftCard.statement}
+                </span>
+              </div>
+              <div className="PrintingCards">
+                <Dimension
+                  dimensionValue={index}
+                  secondStatement={false}
+                  allDimensions={allDimensions[index]}
+                />
+              </div>
+              <div
+                className="PrintingCards"
+                style={
+                  allDimensions && allDimensions[index].type === "Practice"
+                    ? { backgroundColor: PracticeBGColour }
+                    : { backgroundColor: BeliefBGColour }
+                }
+              >
+                <span className="Print-Card-Text-TopLeft">{index + 1}</span>
+                <span className="Print-Card-Text">
+                  {index % 2
+                    ? allDimensions[index].leftCard.statement
+                    : allDimensions[index].rightCard.statement}
+                </span>
+              </div>
+              <div className="PrintingCards">
+                <Dimension
+                  dimensionValue={index}
+                  secondStatement={true}
+                  allDimensions={allDimensions[index]}
+                />
+              </div>
+            </>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div className="DisplayCards">
+          <Header />
+          <div className="Loading-Spinner">
+            <Spin size="large" />
+          </div>
+        </div>
+      );
+    }
   }
 }
 
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
+  const { chartID } = useParams<ParamTypes>();
+  const [allDimensions, setAllDimensions] = useState<
+    DimensionType[] | undefined
+  >(undefined);
 
   const componentRef = useRef(null);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -76,18 +113,22 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
-
-    //Set up later to get data not from dummy
-    fetch(`${API_DOMAIN}dimensions/forchart/${""}`, {
+    console.log(chartID);
+    fetch(`${API_DOMAIN}dimensions/forchart/` + chartID, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: "",
       },
     })
       .then((res) => res.json())
       .then((res) => {
-        //Get data and set it to Dimensions
+        setAllDimensions(
+          res.map((dimension: any) => {
+            return createDimension(dimension);
+          })
+        );
       })
       .catch((e) => console.log(e));
   }, [cookies]);
@@ -103,7 +144,10 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
       </div>
       <div className="PrintCardsContainer">
         <div className="PrintCardsContent">
-          <ComponentToPrint ref={componentRef} />
+          <ComponentToPrint
+            ref={componentRef}
+            passAllDimensions={allDimensions}
+          />
         </div>
       </div>
       <div className="Footer">
