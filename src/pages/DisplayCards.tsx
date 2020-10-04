@@ -2,23 +2,26 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
 import * as QueryString from "query-string";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { API_DOMAIN } from "../config";
 
 import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
-import { CardSide } from "../types/card";
-import { DEFAULT_COLOURS, getColours } from "../utils/cards";
 
-import edit from "../assets/images/edit.svg";
-import save from "../assets/images/save.png";
-import cancel from "../assets/images/cancel.png";
-import "../styles/DisplayCards.css";
-import "../styles/Footer.css";
+import { CardSide } from "../types/card";
 import {
   Dimension as DimensionType,
   createDimension,
 } from "../types/dimension";
+
+import { DEFAULT_COLOURS, getColours } from "../utils/cards";
+import { API_DOMAIN } from "../config";
+
+import edit from "../assets/images/edit.svg";
+import save from "../assets/images/save.png";
+import cancel from "../assets/images/cancel.png";
+
+import "../styles/DisplayCards.css";
+import "../styles/Footer.css";
 
 const DEFAULT_PROGRESS = {
   completed: 0,
@@ -30,7 +33,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
   const params = QueryString.parse(props.location.search);
-  console.log(params);
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
@@ -90,29 +92,23 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   }, [retrievedResults]);
 
   const fetchDimensions = async (): Promise<any> => {
-    const responseDimensions = await fetch(
-      `${API_DOMAIN}dimensions/forchart/${params.chartID}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${cookies["accessToken"]}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    )
+    await fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((responseChart) => responseChart.json())
       .then((data) => {
-        return data;
+        setAllDimensions(
+          data.map((dimension: any) => {
+            return createDimension(dimension);
+          })
+        );
+        setRetrieved(true);
       });
-
-    setAllDimensions(
-      responseDimensions.map((dimension: any) => {
-        return createDimension(dimension);
-      })
-    );
-
-    setRetrieved(true);
   };
 
   useEffect(() => {
@@ -156,6 +152,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     if (dimensionIndex > 0) {
       saveCurrentDimension();
       setNewDimension(dimensionIndex - 1);
+    } else {
+      // TODO: Redirect back to reason of play field once implemented
+      props.history.push(`/Course/${params.courseID}`);
     }
   };
 
@@ -495,7 +494,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             type="primary"
             className="Footer-Button"
             onClick={onBackClick}
-            disabled={dimensionIndex <= 0}
           >
             Back
           </Button>
