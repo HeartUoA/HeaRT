@@ -32,3 +32,10 @@
   height: 35px;
   filter: brightness(50%);
 }
+.Printbox {
+  position: absolute;
+  top: 15px;
+  right: 70px;
+  height: 35px;
+  filter: brightness(50%);
+}

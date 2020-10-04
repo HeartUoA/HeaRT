@@ -121,10 +121,6 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     props.history.push("/Dashboard");
   };
 
-  const onPrintClick = () => {
-    props.history.push(`/PrintCards?chartID=${selectedCharts[0]}`);
-  };
-
   const onCompare = () => {
     // TODO Compare charts (ID's stored in selectedCharts array)
     console.log(selectedCharts);
@@ -178,6 +174,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
               return (
                 <Chart
                   {...{
+                    history: props.history,
                     createdAt: item.createdAt,
                     chartID: item.id,
                     onChange: onChartSelected,
@@ -196,17 +193,6 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
             onClick={onBackClick}
           >
             Back
-          </Button>
-          <Button
-            type="primary"
-            className="Footer-Button Wider-Button"
-            onClick={onPrintClick}
-            disabled={
-              Object.assign([], selectedCharts).length < 1 ||
-              Object.assign([], selectedCharts).length > 1
-            }
-          >
-            Print
           </Button>
           <Button
             type="primary"
