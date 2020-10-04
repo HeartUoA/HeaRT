@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import * as QueryString from "query-string";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
 import Header from "../components/Header";
@@ -27,14 +28,11 @@ const DEFAULT_PROGRESS = {
   total: 0,
 };
 
-interface ParamTypes {
-  chartID: string;
-}
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
-  const { chartID } = useParams<ParamTypes>();
+  const params = QueryString.parse(props.location.search);
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
@@ -72,12 +70,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   useEffect(() => {
     if (retrievedResults && allDimensions) {
-      setDimensionIndex(isPrevPagePreview ? allDimensions.length - 1 : 0);
+      const newIndex = isPrevPagePreview ? allDimensions.length - 1 : 0;
+      setDimensionIndex(newIndex);
       setColours(
-        allDimensions[dimensionIndex].userSelectedSliderPos !== -1
+        allDimensions[newIndex].userSelectedSliderPos !== -1
           ? getColours(
-              allDimensions[dimensionIndex].userSelectedSliderPos,
-              allDimensions[dimensionIndex].type
+              allDimensions[newIndex].userSelectedSliderPos,
+              allDimensions[newIndex].type
             )
           : DEFAULT_COLOURS
       );
@@ -93,7 +92,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   }, [retrievedResults]);
 
   const fetchDimensions = async (): Promise<any> => {
-    await fetch(`${API_DOMAIN}dimensions/forchart/` + chartID, {
+    await fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies["accessToken"]}`,
@@ -154,7 +153,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       saveCurrentDimension();
       setNewDimension(dimensionIndex - 1);
     } else {
-      // TODO: Redirect back to Course dashboard (or reason of play field once implemented)
+      // TODO: Redirect back to reason of play field once implemented
+      props.history.push(`/Course/${params.courseID}`);
     }
   };
 
@@ -164,7 +164,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setNewDimension(dimensionIndex + 1);
     } else if (dimensionIndex === allDimensions!.length - 1) {
       if (progress.completed >= 8) {
-        props.history.push("/Preview");
+        props.history.push(
+          `/Preview?courseID=${params.courseID}&chartID=${params.chartID}`
+        );
       } else {
         // Display modal to say at least 8 dimensions must be completed
       }
@@ -492,7 +494,6 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             type="primary"
             className="Footer-Button"
             onClick={onBackClick}
-            disabled={dimensionIndex <= 0}
           >
             Back
           </Button>

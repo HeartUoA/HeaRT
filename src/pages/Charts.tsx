@@ -107,7 +107,9 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
       })
       .then((data) => {
         // TODO: Change this to redirect to reason of play field first once reason of play screen is implemented
-        props.history.push(`/DisplayCards/${data.chartID}`);
+        props.history.push(
+          `/DisplayCards?courseID=${courseID}&chartID=${data.chartID}`
+        );
       });
   };
 
@@ -135,6 +137,10 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
       }
     }
     setSelectedCharts({ ...tempCharts });
+  };
+
+  const onChartClick = (chartID: string) => {
+    props.history.push(`/DisplayCards?courseID=${courseID}&chartID=${chartID}`);
   };
 
   if (charts && courseName) {
@@ -172,6 +178,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
                     chartID: item.id,
                     onChange: onChartSelected,
                     key: item.id,
+                    onCardClick: onChartClick,
                   }}
                 />
               );
