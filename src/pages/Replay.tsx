@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import * as QueryString from "query-string";
 
 import Header from "../components/Header";
 import { Button, Typography } from "antd";
 import "../styles/Replay.css";
+import { API_DOMAIN } from "../config";
 
 const Replay: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
+  const params = QueryString.parse(props.location.search);
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
@@ -15,9 +18,45 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
-  const playAgainForSameCourse = () => {
-    // TODO: Need to pass in the course/game ID to replay for the same course (or is it stored in Redux/Context API?)
-    props.history.push("/DisplayCards");
+  useEffect(() => {
+    checkCourseExists();
+  }, []);
+
+  const checkCourseExists = async (): Promise<any> => {
+    await fetch(`${API_DOMAIN}course/${params.courseID}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 200) {
+        props.history.push("/Dashboard");
+      }
+    });
+  };
+
+  const playAgainForSameCourse = async (): Promise<any> => {
+    // TODO: Need to redirect to Reason of Play once that is done
+    await fetch(`${API_DOMAIN}course/${params.courseID}/chart`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        props.history.push(
+          `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`
+        );
+      });
   };
 
   const goToDashboard = () => {

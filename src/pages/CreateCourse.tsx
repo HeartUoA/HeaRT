@@ -135,16 +135,16 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
             <Button
               type="primary"
               className="Course-Button"
-              onClick={onConfirmClick}
+              onClick={onCancelClick}
             >
-              Confirm
+              Cancel
             </Button>
             <Button
               type="primary"
               className="Course-Button"
-              onClick={onCancelClick}
+              onClick={onConfirmClick}
             >
-              Cancel
+              Confirm
             </Button>
           </div>
           {error ? (
