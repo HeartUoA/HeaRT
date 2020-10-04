@@ -16,7 +16,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const playAgainForSameCourse = () => {
-    // TODO: Need to pass in the course/game ID to replay for the same course (or is it stored in Redux/Context API?)
+    // TODO: Need to create a new chart and redirect to Display Cards (or Reason of Play once that is done)
     props.history.push("/DisplayCards");
   };
 

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Button, Row, Typography } from "antd";
 
+import { Button, Row, Typography, Spin } from "antd";
 import Header from "../components/Header";
 import Instructions from "../components/Instructions";
 import Chart from "../components/Chart";
+
+import { StubChart, createStubChart } from "../types/chart";
+import { createCourse } from "../types/course";
+import { API_DOMAIN } from "../config";
+
 import "../styles/Dashboard.css";
 import "../styles/Footer.css";
 
-import charts from "../dummyData/charts";
-import courses from "../dummyData/courses";
 import plus from "../assets/images/plus.png";
 
 interface ParamTypes {
@@ -24,16 +27,9 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     (window.innerWidth % 500) / 2
   );
   const { courseID } = useParams<ParamTypes>();
-  const [selectedCharts, setCharts] = useState<string[]>([]);
-
-  // TODO change this to get coursename from backend
-  let course = courses.find((item) => item.id === courseID);
-  let courseName;
-  if (course) {
-    courseName = course.name;
-  } else {
-    courseName = "Coursename not found";
-  }
+  const [charts, setCharts] = useState<StubChart[] | undefined>(undefined);
+  const [courseName, setCourseName] = useState<string | undefined>(undefined);
+  const [selectedCharts, setSelectedCharts] = useState<string[]>([]);
 
   useEffect(() => {
     if (!cookies["accessToken"]) {
@@ -48,13 +44,71 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    fetchCharts();
+  }, []);
+
+  const fetchCharts = async (): Promise<any> => {
+    await fetch(`${API_DOMAIN}course/${courseID}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCourseName(createCourse(data[0]).name);
+      });
+
+    await fetch(`${API_DOMAIN}course/${courseID}/chart`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 404) {
+          setCharts([]);
+        } else if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        data &&
+          setCharts(
+            data.map((chart: any) => {
+              return createStubChart(chart);
+            })
+          );
+      });
+  };
+
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);
   };
 
-  const createChart = () => {
-    //props.history.push("/DisplayCards/" + courseID);
-    //Need to go to play reason page then this one ^
+  const createChart = async (): Promise<any> => {
+    await fetch(`${API_DOMAIN}course/${courseID}/chart`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        // TODO: Change this to redirect to reason of play field first once reason of play screen is implemented
+        props.history.push(`/DisplayCards/${data.chartID}`);
+      });
   };
 
   const handleResize = () => {
@@ -80,64 +134,79 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
         tempCharts.splice(index, 1);
       }
     }
-    setCharts({ ...tempCharts });
+    setSelectedCharts({ ...tempCharts });
   };
 
-  return (
-    <div className="Charts-Dashboard">
-      <Header />
-      <Instructions visible={showInstructions} hide={onInstructionsClick} />
-      <div className="Dashboard-Content">
-        <Typography className="Heading">{courseName + " Charts"}</Typography>
-        <Button
-          type="primary"
-          className="Instructions-Button"
-          onClick={onInstructionsClick}
-        >
-          How to play
-        </Button>
-      </div>
-      <div className="Dashboard-Cards">
-        <Row
-          className="Chart-Row"
-          style={{
-            marginLeft: dashboardCardsMargin,
-            marginRight: dashboardCardsMargin,
-          }}
-        >
-          <Button className="Create-Button" onClick={createChart}>
-            <img src={plus} className="Plus-Image" alt="plus" />
-            <Typography>New Chart</Typography>
+  if (charts && courseName) {
+    return (
+      <div className="Charts-Dashboard">
+        <Header />
+        <Instructions visible={showInstructions} hide={onInstructionsClick} />
+        <div className="Dashboard-Content">
+          <Typography className="Heading">{courseName + " Charts"}</Typography>
+          <Button
+            type="primary"
+            className="Instructions-Button"
+            onClick={onInstructionsClick}
+          >
+            How to play
           </Button>
-          {charts.map((item) => {
-            return (
-              <Chart
-                {...{
-                  createdAt: item.createdAt,
-                  chartID: item.id,
-                  onChange: onChartSelected,
-                  key: item.id,
-                }}
-              />
-            );
-          })}
-        </Row>
+        </div>
+        <div className="Dashboard-Cards">
+          <Row
+            className="Chart-Row"
+            style={{
+              marginLeft: dashboardCardsMargin,
+              marginRight: dashboardCardsMargin,
+            }}
+          >
+            <Button className="Create-Button" onClick={createChart}>
+              <img src={plus} className="Plus-Image" alt="plus" />
+              <Typography>New Chart</Typography>
+            </Button>
+            {charts.map((item) => {
+              return (
+                <Chart
+                  {...{
+                    createdAt: item.createdAt,
+                    chartID: item.id,
+                    onChange: onChartSelected,
+                    key: item.id,
+                  }}
+                />
+              );
+            })}
+          </Row>
+        </div>
+        <div className="Footer">
+          <Button
+            type="primary"
+            className="Footer-Button"
+            onClick={onBackClick}
+          >
+            Back
+          </Button>
+          <Button
+            type="primary"
+            className="Footer-Button Wider-Button"
+            onClick={onCompare}
+            disabled={Object.assign([], selectedCharts).length < 2}
+          >
+            Compare Charts
+          </Button>
+        </div>
       </div>
-      <div className="Footer">
-        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
-          Back
-        </Button>
-        <Button
-          type="primary"
-          className="Footer-Button Wider-Button"
-          onClick={onCompare}
-          disabled={Object.assign([], selectedCharts).length < 2}
-        >
-          Compare Charts
-        </Button>
+    );
+  } else {
+    return (
+      <div className="Charts-Dashboard">
+        <Header />
+        <div className="Loading-Spinner">
+          <Spin size="large" />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default withRouter(Charts);

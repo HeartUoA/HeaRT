@@ -6,6 +6,12 @@ export type Chart = {
   dimensions: Dimension[];
 };
 
+export type StubChart = {
+  id: string;
+  courseID: string;
+  createdAt: Date;
+};
+
 export const createChart = (chart: any) => {
   const result: Chart = {
     id: chart.chartID,
@@ -15,6 +21,14 @@ export const createChart = (chart: any) => {
     }),
   };
   return result;
+};
+
+export const createStubChart = (chart: any) => {
+  return {
+    ...chart,
+    id: chart._id,
+    createdAt: new Date(chart.createdAt),
+  };
 };
 
 export const createBackendChart = (chart: Chart, courseID: string) => {
