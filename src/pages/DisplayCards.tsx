@@ -11,6 +11,7 @@ import { CardSide } from "../types/card";
 import {
   Dimension as DimensionType,
   createDimension,
+  createBackendDimension,
 } from "../types/dimension";
 
 import { DEFAULT_COLOURS, getColours } from "../utils/cards";
@@ -119,21 +120,19 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const saveCurrentDimension = async (): Promise<void> => {
     // TODO: Fix this PUT request
-    // const dimension = createBackendDimension(
-    //   chart!.dimensions[dimensionIndex]
-    // );
-    // const response = await fetch(
-    //   `${API_DOMAIN}dimensions/` + chart!.dimensions[dimensionIndex].id,
-    //   {
-    //     method: "PUT",
-    //     body: JSON.stringify(dimension),
-    //     headers: {
-    //       Authorization: `Bearer ${cookies["accessToken"]}`,
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //     },
-    //   }
-    // );
+    const dimension = createBackendDimension(allDimensions![dimensionIndex]);
+    await fetch(
+      `${API_DOMAIN}dimensions/` + allDimensions![dimensionIndex].id,
+      {
+        method: "PUT",
+        body: JSON.stringify(dimension),
+        headers: {
+          Authorization: `Bearer ${cookies["accessToken"]}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
   };
 
   const setNewDimension = (newIndex: number) => {
@@ -325,7 +324,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         if (index === dimensionIndex) {
           return {
             ...dimension,
-            serExplanation: event.target.value,
+            userExplanation: event.target.value,
           };
         } else {
           return dimension;
