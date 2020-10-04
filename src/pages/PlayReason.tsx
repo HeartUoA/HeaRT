@@ -11,11 +11,16 @@ interface ParamTypes {
   chartID: string;
 }
 
+const NONE_SELECTED = "A reason for playing the HeaRT Game must be selected";
+const NO_TEXT = "Please type in a reason for playing the HeaRT Game";
+
 const PlayReason: React.FC<RouteComponentProps> = (props) => {
+  //TODO: Change to query params after Gargi's PR
   const { chartID } = useParams<ParamTypes>();
   const courseName = window.history.state?.state?.courseName;
   const [state, setState] = useState("");
   const [reason, setReason] = useState("");
+  const [error, setError] = useState("");
 
   const radioStyle = {
     display: "block",
@@ -23,36 +28,20 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     lineHeight: "30px",
   };
 
+  // TODO: Change options
   const radioOptions = ["Option 1", "Option 2", "Option 3", "Other"];
 
   const onConfirmClick = () => {
-    // if (password !== confirmPassword) {
-    //   setError(PASSWORD_MATCH);
-    //   return;
-    // } else if (
-    //   !username ||
-    //   !password ||
-    //   !password ||
-    //   !fullName ||
-    //   !institution ||
-    //   !dept ||
-    //   !position
-    // ) {
-    //   setError(ALL_FIELDS_SET);
-    //   return;
-    // }
-    // If option "Other" is selected, a reason should be entered (checks for non-whitespace)
     if (state === "") {
-      console.log("No option selected");
+      setError(NONE_SELECTED);
     } else if (
       state === radioOptions[radioOptions.length - 1] &&
       !/\S/.test(reason)
     ) {
-      console.log("Text field empty");
+      setError(NO_TEXT);
+    } else {
+      props.history.push(`/DisplayCards/${chartID}`);
     }
-    console.log(state);
-    // Redirect to cards screen
-    //props.history.push(`/DisplayCards/${chartID}`);
   };
 
   const onCancelClick = () => {
@@ -74,7 +63,10 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
               Why are you playing the HeaRT game?
             </Typography>
             <Radio.Group
-              onChange={(e) => setState(e.target.value)}
+              onChange={(e) => {
+                setState(e.target.value);
+                setError("");
+              }}
               value={state}
             >
               <Radio style={radioStyle} value={radioOptions[0]}>
@@ -95,7 +87,10 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
                 className="Play-Reason"
                 rows={3}
                 placeholder="Enter reason here..."
-                onChange={(e) => setReason(e.target.value)}
+                onChange={(e) => {
+                  setReason(e.target.value);
+                  setError("");
+                }}
               />
             ) : null}
           </div>
@@ -103,18 +98,23 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
           <div className="Button-Container">
             <Button
               type="primary"
-              className="Confirm-Button"
-              onClick={onConfirmClick}
-            >
-              <Typography className="Button-Font">Confirm</Typography>
-            </Button>
-            <Button
-              type="primary"
-              className="Cancel-Button"
+              className="Nav-Button"
               onClick={onCancelClick}
             >
               <Typography className="Button-Font">Cancel</Typography>
             </Button>
+            <Button
+              type="primary"
+              className="Nav-Button"
+              onClick={onConfirmClick}
+            >
+              <Typography className="Button-Font">Confirm</Typography>
+            </Button>
+            {error ? (
+              <Typography className="Error-Message-Text">{error}</Typography>
+            ) : (
+              <div style={{ height: 40 }} />
+            )}
           </div>
         </div>
       </Layout.Content>
