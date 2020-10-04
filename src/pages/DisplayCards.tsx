@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import * as QueryString from "query-string";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { API_DOMAIN } from "../config";
 
 import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
@@ -24,14 +25,12 @@ const DEFAULT_PROGRESS = {
   total: 0,
 };
 
-interface ParamTypes {
-  chartID: string;
-}
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
-  const { chartID } = useParams<ParamTypes>();
+  const params = QueryString.parse(props.location.search);
+  console.log(params);
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
@@ -92,7 +91,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const fetchDimensions = async (): Promise<any> => {
     const responseDimensions = await fetch(
-      `${API_DOMAIN}dimensions/forchart/` + chartID,
+      `${API_DOMAIN}dimensions/forchart/${params.chartID}`,
       {
         method: "GET",
         headers: {
@@ -166,7 +165,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setNewDimension(dimensionIndex + 1);
     } else if (dimensionIndex === allDimensions!.length - 1) {
       if (progress.completed >= 8) {
-        props.history.push(`/Preview/${chartID}`);
+        props.history.push(
+          `/Preview/courseID=${params.courseID}&chartID=${params.chartID}`
+        );
       } else {
         // Display modal to say at least 8 dimensions must be completed
       }

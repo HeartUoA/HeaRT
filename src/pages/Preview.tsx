@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import * as QueryString from "query-string";
 import { useCookies } from "react-cookie";
 
 import { Typography, Button, Row, Spin } from "antd";
@@ -12,12 +13,8 @@ import "../styles/Footer.css";
 import { createDimension, Dimension } from "../types/dimension";
 import { API_DOMAIN } from "../config";
 
-interface ParamTypes {
-  chartID: string;
-}
-
 const Preview: React.FC<RouteComponentProps> = (props) => {
-  const { chartID } = useParams<ParamTypes>();
+  const params = QueryString.parse(props.location.search);
   const [cookies] = useCookies(["accessToken"]);
   const [selectedDimension, setSelectedDimension] = useState<
     string | undefined
@@ -40,7 +37,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
   }, []);
 
   const fetchDimensions = async (): Promise<any> => {
-    await fetch(`${API_DOMAIN}dimensions/forchart/` + chartID, {
+    await fetch(`${API_DOMAIN}dimensions/forchart/` + params.chartID, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies["accessToken"]}`,
@@ -66,7 +63,10 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     if (selectedDimension) {
       onSelectDimension(undefined);
     } else {
-      props.history.push(`/DisplayCards/${chartID}`, { prevPage: "Preview" });
+      props.history.push(
+        `/DisplayCards/courseID=${params.courseID}&chartID=${params.chartID}`,
+        { prevPage: "Preview" }
+      );
     }
   };
 

@@ -30,10 +30,10 @@ const App: React.FC = () => {
           <Route path="/CreateCourse">
             <CreateCourse />
           </Route>
-          <Route path="/DisplayCards/:chartID">
+          <Route path="/DisplayCards">
             <DisplayCards />
           </Route>
-          <Route path="/Preview/:chartID">
+          <Route path="/Preview">
             <Preview />
           </Route>
           <Route path="/Replay">
