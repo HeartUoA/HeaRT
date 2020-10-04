@@ -13,9 +13,8 @@ interface PrintDimensionProps {
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   props
 ) => {
-  // const allDimensions = charts[0].dimensions;
   const initDimensionProps = props.allDimensions;
-  console.log(props.allDimensions.marks + "PRINTCARDS");
+
   const pinpoint =
     props.secondStatement !== true
       ? props.allDimensions.leftCard.anchorSliderPos

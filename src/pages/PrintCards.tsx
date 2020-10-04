@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import Dimension from "../components/PrintDimension";
 import "../styles/PrintCards.css";
 import "../styles/Footer.css";
+import * as QueryString from "query-string";
 import { API_DOMAIN } from "../config";
 import {
   Dimension as DimensionType,
@@ -29,7 +30,6 @@ class ComponentToPrint extends React.Component<DimensionProps> {
   render() {
     const allDimensions =
       this.props.passAllDimensions && this.props.passAllDimensions;
-    console.log(allDimensions && allDimensions[0].leftCard);
     if (allDimensions) {
       return (
         <div>
@@ -103,6 +103,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
     DimensionType[] | undefined
   >(undefined);
 
+  const params = QueryString.parse(props.location.search);
   const componentRef = useRef(null);
 
   const handlePrint = useReactToPrint({
@@ -114,7 +115,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
       props.history.push("/Login");
     }
     console.log(chartID);
-    fetch(`${API_DOMAIN}dimensions/forchart/` + chartID, {
+    fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies["accessToken"]}`,

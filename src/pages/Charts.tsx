@@ -122,8 +122,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onPrintClick = () => {
-    console.log(selectedCharts);
-    props.history.push("/PrintCards/" + selectedCharts[0]);
+    props.history.push(`/PrintCards?chartID=${selectedCharts[0]}`);
   };
 
   const onCompare = () => {
@@ -202,7 +201,10 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
             type="primary"
             className="Footer-Button Wider-Button"
             onClick={onPrintClick}
-            disabled={Object.assign([], selectedCharts).length < 1}
+            disabled={
+              Object.assign([], selectedCharts).length < 1 ||
+              Object.assign([], selectedCharts).length > 1
+            }
           >
             Print
           </Button>
