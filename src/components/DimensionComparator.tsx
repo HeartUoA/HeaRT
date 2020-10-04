@@ -85,11 +85,11 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
 
   // Add markers for the left and right sides of the slider
   labeled[-0.1] = {
-    label: props.dimensions[0].marks![0],
+    label: props.dimensions[0].marks![0].label,
     style: { marginTop: "1em" },
   };
   labeled[100.1] = {
-    label: props.dimensions[0].marks![100],
+    label: props.dimensions[0].marks![100].label,
     style: { marginTop: "1em" },
   };
   console.log(labeled);

@@ -16,8 +16,8 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
 
   // TODO: Need to change this to grab data from backend
-  const chartsToCompare = [charts[1], charts[2], charts[3]];
-  const course = courses.find((course) => course.id === charts[1].courseID);
+  const chartsToCompare = [charts[0], charts[1], charts[2]];
+
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
@@ -32,7 +32,7 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
     <div className="Charts-Compare-Container">
       <Header />
       <div className="Charts-Compare-Content">
-        <Typography className="Preview-Title">{course!.name}</Typography>
+        <Typography className="Preview-Title">{courses[0].name}</Typography>
         <Col className="Charts-Compare-Row">
           {chartsToCompare[0].dimensions.map((item, index) => {
             if (item.userSelectedSliderPos !== -1) {
