@@ -107,7 +107,9 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
       })
       .then((data) => {
         // TODO: Change this to redirect to reason of play field first once reason of play screen is implemented
-        props.history.push(`/DisplayCards/${data.chartID}`);
+        props.history.push(
+          `/DisplayCards?courseID=${courseID}&chartID=${data.chartID}`
+        );
       });
   };
 

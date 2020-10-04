@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import * as QueryString from "query-string";
 
 import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
 import Header from "../components/Header";
@@ -27,14 +28,11 @@ const DEFAULT_PROGRESS = {
   total: 0,
 };
 
-interface ParamTypes {
-  chartID: string;
-}
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
 
-  const { chartID } = useParams<ParamTypes>();
+  const params = QueryString.parse(props.location.search);
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
@@ -93,7 +91,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   }, [retrievedResults]);
 
   const fetchDimensions = async (): Promise<any> => {
-    await fetch(`${API_DOMAIN}dimensions/forchart/` + chartID, {
+    await fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies["accessToken"]}`,
@@ -154,7 +152,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       saveCurrentDimension();
       setNewDimension(dimensionIndex - 1);
     } else {
-      // TODO: Redirect back to Course dashboard (or reason of play field once implemented)
+      // TODO: Redirect back to reason of play field once implemented
+      props.history.push(`/Course/${params.courseID}`);
     }
   };
 
