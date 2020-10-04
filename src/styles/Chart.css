@@ -13,7 +13,7 @@
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  background: #ff9cb8;
+  background: linear-gradient(to bottom right, #ffe4ec 0%, #ff9cb8 100%);
   border: none;
   font-size: 30px;
   display: flex;
@@ -22,7 +22,7 @@
 }
 
 .Chart-Card:hover {
-  background: #ffc4d3;
+  filter: brightness(90%);
 }
 
 .Checkbox {
@@ -30,4 +30,5 @@
   top: 15px;
   right: 15px;
   height: 35px;
+  filter: brightness(50%);
 }

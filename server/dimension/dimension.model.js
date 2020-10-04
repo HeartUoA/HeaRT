@@ -7,6 +7,7 @@ const dimensionSchemaDef = {
   },
   type: {
     type: String,
+    enum: ["Practice", "Beliefs"],
     required: true,
   },
   score: {

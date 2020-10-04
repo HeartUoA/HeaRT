@@ -10,30 +10,37 @@ interface ChartProps {
   createdAt: Date;
   chartID: string;
   onChange: Function;
+  onCardClick: (chartID: string) => void;
 }
 
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const dateOptions = {
+    weekday: "short",
     day: "numeric",
-    month: "long",
+    month: "short",
     year: "numeric",
     hour: "numeric",
     minute: "numeric",
   };
 
-  const onClick = () => {
+  const onCheckboxClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsSelected(!isSelected);
     props.onChange(props.chartID, !isSelected);
   };
 
   return (
-    <Card className="Chart-Card" onClick={onClick}>
+    <Card
+      className="Chart-Card"
+      onClick={() => props.onCardClick(props.chartID)}
+    >
       <img
         className="Checkbox"
         src={isSelected ? checkbox : emptyCheckbox}
         alt="checkbox"
+        onClick={(event) => onCheckboxClick(event)}
       />
       <Typography>
         {props.createdAt.toLocaleDateString("en-NZ", dateOptions)}
