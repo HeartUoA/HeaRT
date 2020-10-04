@@ -50,7 +50,9 @@
   margin: 15px 0px;
   width: 85%;
 }
-
+.Card-Compare-Slider .ant-slider-handle {
+  visibility: hidden;
+}
 .Card-Compare-Title {
   text-align: center;
   font-size: min(100vw, 30px);
@@ -67,18 +69,8 @@
 .Card-Compare-Circle {
   font-size: 2em;
   position: absolute;
-  bottom: 0.8em;
-  right: 5px;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-}
-
-.Card-Compare-Circle-Double {
-  font-size: 2em;
-  position: absolute;
-  bottom: 0.8em;
-  right: 30px;
+  bottom: 0.2em;
+  right: -15px;
   border-radius: 50%;
   width: 20px;
   height: 20px;

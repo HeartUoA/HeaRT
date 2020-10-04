@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Slider, Typography, Tabs } from "antd";
+import { Card, Slider, Typography, Tabs, Tooltip, Badge } from "antd";
 import "../styles/Dimension.css";
 import "../styles/CompareCharts.css";
 import moment from "moment";
@@ -23,6 +23,7 @@ const colours = {
   1: "#499DF2",
   2: "#51C240",
 };
+
 const DimensionComparator: React.FC<DimensionComparatorProps> = (
   props: DimensionComparatorProps
 ) => {
@@ -38,54 +39,60 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
       entry = {
         style: { color: Object.values(colours)[index], fontSize: "0.8em" },
         label: (
-          <span style={{ position: "relative" }}>
-            <div
-              className="Card-Compare-Circle-Double"
-              style={{
-                backgroundColor: Object.values(colours)[index],
-              }}
-            />{" "}
-            {/* If more than one chart has marker at the same spot, their dates are displayed together */}
-            <span style={{ marginRight: "25px" }}>
-              {moment(labeled[mark].value).format("DD.MM") +
-                ", " +
-                moment(props.dates[index]).format("DD.MM")}
-            </span>
-          </span>
-        ),
-      };
-    } else {
-      entry = {
-        style: { color: Object.values(colours)[index], fontSize: "0.8em" },
-        label: (
-          <span style={{ position: "relative" }}>
+          <Tooltip
+            title={
+              moment(labeled[mark].value).format("DD.MM") +
+              ", " +
+              moment(props.dates[index]).format("DD.MM")
+            }
+            style={{ position: "relative" }}
+            color={Object.values(colours)[index]}
+          >
             <div
               className="Card-Compare-Circle"
               style={{
                 backgroundColor: Object.values(colours)[index],
               }}
             />{" "}
-            <span style={{ paddingLeft: "1em" }}>
-              {moment(props.dates[index]).format("DD.MM")}
-            </span>
-          </span>
+          </Tooltip>
+        ),
+        value: [labeled[mark].value, props.dates[index]],
+        color: Object.values(colours)[index],
+      };
+    } else {
+      entry = {
+        style: { color: Object.values(colours)[index], fontSize: "0.8em" },
+        label: (
+          <Tooltip
+            style={{ position: "relative" }}
+            title={moment(props.dates[index]).format("DD.MM")}
+            color={Object.values(colours)[index]}
+          >
+            <div
+              className="Card-Compare-Circle"
+              style={{
+                backgroundColor: Object.values(colours)[index],
+              }}
+            />
+          </Tooltip>
         ),
         value: props.dates[index],
+        color: Object.values(colours)[index],
       };
     }
     labeled[mark] = entry;
   });
 
   // Add markers for the left and right sides of the slider
-  labeled[0] = {
+  labeled[-0.1] = {
     label: props.dimensions[0].marks![0],
     style: { marginTop: "1em" },
   };
-  labeled[100] = {
+  labeled[100.1] = {
     label: props.dimensions[0].marks![100],
     style: { marginTop: "1em" },
   };
-
+  console.log(labeled);
   return (
     <Card className={"Card-Compare-Preview"}>
       <p className="Card-Compare-Title">{props.dimensions[0].name}</p>
@@ -94,14 +101,21 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         marks={labeled}
         tooltipVisible={false}
         included={false}
-        disabled={true}
       />
       <Typography className="Card-Compare-Tab-Title">Chart Notes</Typography>
       <Tabs style={{ marginLeft: "1em" }} defaultActiveKey="1" centered={true}>
         {props.dimensions.map((dimension, index) => {
           return (
             <TabPane
-              tab={moment(props.dates[index]).format("DD.MM")}
+              tab={
+                <span
+                  style={{
+                    color: labeled[dimension.userSelectedSliderPos].color,
+                  }}
+                >
+                  {moment(props.dates[index]).format("DD.MM")}
+                </span>
+              }
               key={index}
             >
               <Typography className="Card-Compare-Explanation">
