@@ -16,8 +16,9 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const dateOptions = {
+    weekday: "short",
     day: "numeric",
-    month: "long",
+    month: "short",
     year: "numeric",
     hour: "numeric",
     minute: "numeric",
