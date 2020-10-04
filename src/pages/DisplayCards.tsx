@@ -22,8 +22,6 @@ import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 import "../styles/Footer.css";
 
-import charts from "../dummyData/charts";
-import { updateDimension } from "../api/dimension";
 const DEFAULT_PROGRESS = {
   completed: 0,
   total: 0,
@@ -120,43 +118,20 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
-  const saveCurrentDimension = async () => {
-    // Send PUT request for each dimension
-    const response = await fetch(`/api/dimensions/${currentDimension.id}`, {
+  const saveCurrentDimension = async (): Promise<void> => {
+    const dimension = allDimensions![dimensionIndex];
+    const response = await fetch(`/api/dimensions/${dimension.id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${cookies["accessToken"]}`,
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(currentDimension),
+      body: JSON.stringify(dimension),
     });
 
     const updatedDimension = await response.json();
     console.log(updatedDimension);
-
-    allDimensions[dimensionIndex] = {
-      ...currentDimension,
-      leftCard: leftState,
-      rightCard: rightState,
-    };
-  const saveCurrentDimension = async (): Promise<void> => {
-    // TODO: Fix this PUT request
-    // const dimension = createBackendDimension(
-    //   chart!.dimensions[dimensionIndex]
-    // );
-    // const response = await fetch(
-    //   `${API_DOMAIN}dimensions/` + chart!.dimensions[dimensionIndex].id,
-    //   {
-    //     method: "PUT",
-    //     body: JSON.stringify(dimension),
-    //     headers: {
-    //       Authorization: `Bearer ${cookies["accessToken"]}`,
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //     },
-    //   }
-    // );
   };
 
   const setNewDimension = (newIndex: number) => {
