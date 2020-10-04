@@ -20,7 +20,6 @@ const NONE_SELECTED = "A reason for playing the HeaRT Game must be selected";
 const NO_TEXT = "Please type in a reason for playing the HeaRT Game";
 
 const PlayReason: React.FC<RouteComponentProps> = (props) => {
-  //TODO: Change to query params after Gargi's PR
   const [cookies] = useCookies(["accessToken"]);
   const { chartID } = useParams<ParamTypes>();
   const [state, setState] = useState("");
@@ -30,10 +29,10 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   const params = QueryString.parse(props.location.search);
 
   useEffect(() => {
-    fetchCharts();
+    fetchCourse();
   }, []);
 
-  const fetchCharts = async (): Promise<any> => {
+  const fetchCourse = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}course/${params.courseID}`, {
       method: "GET",
       headers: {
@@ -66,7 +65,9 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     ) {
       setError(NO_TEXT);
     } else {
-      props.history.push(`/DisplayCards/${chartID}`);
+      props.history.push(
+        `/DisplayCards?courseID=${params.courseID}&chartID=${params.chartID}`
+      );
     }
   };
 
