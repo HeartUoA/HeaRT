@@ -69,12 +69,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   useEffect(() => {
     if (retrievedResults && allDimensions) {
-      setDimensionIndex(isPrevPagePreview ? allDimensions.length - 1 : 0);
+      const newIndex = isPrevPagePreview ? allDimensions.length - 1 : 0;
+      setDimensionIndex(newIndex);
       setColours(
-        allDimensions[dimensionIndex].userSelectedSliderPos !== -1
+        allDimensions[newIndex].userSelectedSliderPos !== -1
           ? getColours(
-              allDimensions[dimensionIndex].userSelectedSliderPos,
-              allDimensions[dimensionIndex].type
+              allDimensions[newIndex].userSelectedSliderPos,
+              allDimensions[newIndex].type
             )
           : DEFAULT_COLOURS
       );
@@ -165,7 +166,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setNewDimension(dimensionIndex + 1);
     } else if (dimensionIndex === allDimensions!.length - 1) {
       if (progress.completed >= 8) {
-        props.history.push("/Preview");
+        props.history.push(`/Preview/${chartID}`);
       } else {
         // Display modal to say at least 8 dimensions must be completed
       }

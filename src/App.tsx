@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <Route path="/DisplayCards/:chartID">
             <DisplayCards />
           </Route>
-          <Route path="/Preview">
+          <Route path="/Preview/:chartID">
             <Preview />
           </Route>
           <Route path="/Replay">
