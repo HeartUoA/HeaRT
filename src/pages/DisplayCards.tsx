@@ -166,7 +166,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     } else if (dimensionIndex === allDimensions!.length - 1) {
       if (progress.completed >= 8) {
         props.history.push(
-          `/Preview/courseID=${params.courseID}&chartID=${params.chartID}`
+          `/Preview?courseID=${params.courseID}&chartID=${params.chartID}`
         );
       } else {
         // Display modal to say at least 8 dimensions must be completed

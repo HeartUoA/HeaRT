@@ -64,7 +64,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       onSelectDimension(undefined);
     } else {
       props.history.push(
-        `/DisplayCards/courseID=${params.courseID}&chartID=${params.chartID}`,
+        `/DisplayCards?courseID=${params.courseID}&chartID=${params.chartID}`,
         { prevPage: "Preview" }
       );
     }
