@@ -153,9 +153,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setNewDimension(dimensionIndex - 1);
     } else {
       // Redirect back to reason of play field
-      props.history.push(
-        `/PlayReason?courseID=${params.courseID}&chartID=${params.chartID}`
-      );
+      props.history.goBack();
     }
   };
 
