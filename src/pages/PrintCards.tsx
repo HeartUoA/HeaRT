@@ -20,6 +20,7 @@ const BeliefBGColour = "#c4ddff";
 
 interface ParamTypes {
   chartID: string;
+  courseID: string;
 }
 
 interface DimensionProps {
@@ -85,9 +86,8 @@ class ComponentToPrint extends React.Component<DimensionProps> {
       );
     } else {
       return (
-        <div className="DisplayCards">
-          <Header />
-          <div className="Loading-Spinner">
+        <div className="SpinnerClass">
+          <div className="Print-Cards-Loading-Spinner">
             <Spin size="large" />
           </div>
         </div>
@@ -135,7 +135,9 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onBackClick = async (): Promise<void> => {
-    props.history.push("/Dashboard");
+    //Once queries are implemented in courses page
+    // props.history.push(`/Course?chartID=${params.chartID}`);
+    props.history.push(`/Course/${params.courseID}`);
   };
 
   return (

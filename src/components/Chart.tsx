@@ -11,6 +11,7 @@ interface ChartProps {
   history: any;
   createdAt: Date;
   chartID: string;
+  courseID: string;
   onChange: Function;
   onCardClick: (chartID: string) => void;
 }
@@ -35,7 +36,9 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
 
   const onPrintClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    props.history.push(`/PrintCards?chartID=${props.chartID}`);
+    props.history.push(
+      `/PrintCards?courseID=${props.courseID}&chartID=${props.chartID}`
+    );
   };
 
   return (
