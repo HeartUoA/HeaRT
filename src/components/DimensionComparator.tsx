@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Slider, Typography, Tabs, Tooltip, Badge } from "antd";
+import { Card, Slider, Typography, Tabs, Tooltip } from "antd";
 import "../styles/Dimension.css";
 import "../styles/CompareCharts.css";
 import moment from "moment";

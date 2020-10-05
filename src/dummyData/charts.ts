@@ -3,7 +3,7 @@ import { Chart } from "../types/chart";
 const charts: Chart[] = [
   {
     id: "1",
-    createdAt: new Date(),
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)),
     dimensions: [
       {
         id: "1",
@@ -340,7 +340,7 @@ const charts: Chart[] = [
   },
   {
     id: "2",
-    createdAt: new Date(),
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
     dimensions: [
       {
         id: "11",
