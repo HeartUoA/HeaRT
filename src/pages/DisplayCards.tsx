@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import * as QueryString from "query-string";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
-import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
+import { Card, Button, Typography, Tooltip, Progress, Spin, Modal } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
@@ -32,6 +32,7 @@ const DEFAULT_PROGRESS = {
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
+  const [showIncompleteModal, setShowIncompleteModal] = useState(false);
 
   const params = QueryString.parse(props.location.search);
   const [allDimensions, setAllDimensions] = useState<
@@ -177,8 +178,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         );
       } else {
         // Display modal to say at least 8 dimensions must be completed
+        setShowIncompleteModal(true);
       }
     }
+  };
+
+  const handleOk = () => {
+    setShowIncompleteModal(false);
   };
 
   const onCardClick = (side: CardSide) => {
@@ -342,10 +348,36 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   };
 
+  const toCompleteDimensions = () => {
+    let toComplete = 8 - progress.completed;
+    return toComplete;
+  };
+
   if (allDimensions) {
     return (
       <div className="DisplayCards">
         <Header />
+        <Modal
+          title="Incomplete Chart"
+          centered
+          visible={showIncompleteModal}
+          footer={[
+            <Button
+              key="ok"
+              type="primary"
+              onClick={handleOk}
+              className="Modal-Button"
+            >
+              Ok
+            </Button>,
+          ]}
+        >
+          <p>
+            You must complete at least 8 dimensions to save your chart.
+            <br />
+            Please complete {toCompleteDimensions()} more dimensions.
+          </p>
+        </Modal>
         <div className="Cards-Content">
           <div style={{ width: "100%" }}>
             <Typography className="Statement">
