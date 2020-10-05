@@ -140,7 +140,10 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onChartClick = (chartID: string) => {
-    props.history.push(`/DisplayCards?courseID=${courseID}&chartID=${chartID}`);
+    props.history.push(
+      `/DisplayCards?courseID=${courseID}&chartID=${chartID}`,
+      { from: "Charts" }
+    );
   };
 
   if (charts && courseName) {

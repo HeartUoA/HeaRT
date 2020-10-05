@@ -53,8 +53,11 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     lineHeight: "30px",
   };
 
-  // TODO: Change options
-  const radioOptions = ["Option 1", "Option 2", "Option 3", "Other"];
+  const radioOptions = [
+    "Designing the course",
+    "Reviewing the course's structure",
+    "Other",
+  ];
 
   const onConfirmClick = () => {
     if (state === "") {
@@ -66,7 +69,8 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       setError(NO_TEXT);
     } else {
       props.history.push(
-        `/DisplayCards?courseID=${params.courseID}&chartID=${params.chartID}`
+        `/DisplayCards?courseID=${params.courseID}&chartID=${params.chartID}`,
+        { from: "PlayReason" }
       );
     }
   };
@@ -104,9 +108,6 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
               </Radio>
               <Radio style={radioStyle} value={radioOptions[2]}>
                 {radioOptions[2]}
-              </Radio>
-              <Radio style={radioStyle} value={radioOptions[3]}>
-                {radioOptions[3]}
               </Radio>
             </Radio.Group>
             {state === radioOptions[radioOptions.length - 1] ? (
