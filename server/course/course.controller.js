@@ -43,6 +43,7 @@ router
     try {
       const course = new Course(request.body);
       course.createdByUserID = request.user.userID;
+      course.reasonOfPlay = request.params.reasonOfPlay;
       course.createdAt = Date.now();
       await course.save();
       return response.status(200).send(course);
@@ -65,6 +66,7 @@ router
       }
       const chart = new Chart();
       chart.courseID = request.params.courseID;
+      chart.reasonOfPlay = request.params.reasonOfPlay;
       chart.createdAt = Date.now();
       await chart.save();
 
@@ -82,6 +84,7 @@ router
       response.status(200).json({
         chartID: chart._id,
         createdAt: chart.createdAt,
+        reasonOfPlay: chart.reasonOfPlay,
         dimensions: dimensions,
       });
     } catch (error) {
