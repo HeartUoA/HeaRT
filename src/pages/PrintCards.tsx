@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { useReactToPrint } from "react-to-print";
 import { Button, Spin } from "antd";
@@ -15,76 +15,69 @@ import {
   createDimension,
 } from "../types/dimension";
 
-const PracticeBGColour = "#ffc4d3";
-const BeliefBGColour = "#c4ddff";
-
-interface ParamTypes {
-  chartID: string;
-  courseID: string;
-}
+const PRACTICE_BG_COLOUR = "#ffc4d3";
+const BELIEF_BG_COLOUR = "#c4ddff";
 
 interface DimensionProps {
-  passAllDimensions: DimensionType[] | undefined;
+  passAllDimensions: DimensionType[];
 }
 
 class ComponentToPrint extends React.Component<DimensionProps> {
   render() {
     const allDimensions =
       this.props.passAllDimensions && this.props.passAllDimensions;
-    if (allDimensions) {
-      return (
-        <div>
-          {allDimensions.map((currElement: any, index: number) => (
-            <>
-              <div
-                className="PrintingCards"
-                style={
-                  allDimensions[index].type === "Practice"
-                    ? { backgroundColor: PracticeBGColour }
-                    : { backgroundColor: BeliefBGColour }
-                }
-              >
-                <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-                <span className="Print-Card-Text">
-                  {index % 2
-                    ? allDimensions[index].rightCard.statement
-                    : allDimensions[index].leftCard.statement}
-                </span>
-              </div>
-              <div className="PrintingCards">
-                <Dimension
-                  dimensionValue={index}
-                  secondStatement={false}
-                  allDimensions={allDimensions[index]}
-                />
-              </div>
-              <div
-                className="PrintingCards"
-                style={
-                  allDimensions && allDimensions[index].type === "Practice"
-                    ? { backgroundColor: PracticeBGColour }
-                    : { backgroundColor: BeliefBGColour }
-                }
-              >
-                <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-                <span className="Print-Card-Text">
-                  {index % 2
-                    ? allDimensions[index].leftCard.statement
-                    : allDimensions[index].rightCard.statement}
-                </span>
-              </div>
-              <div className="PrintingCards">
-                <Dimension
-                  dimensionValue={index}
-                  secondStatement={true}
-                  allDimensions={allDimensions[index]}
-                />
-              </div>
-            </>
-          ))}
-        </div>
-      );
-    }
+    return (
+      <div>
+        {allDimensions.map((currElement: any, index: number) => (
+          <>
+            <div
+              className="PrintingCards"
+              style={
+                allDimensions[index].type === "Practice"
+                  ? { backgroundColor: PRACTICE_BG_COLOUR }
+                  : { backgroundColor: BELIEF_BG_COLOUR }
+              }
+            >
+              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
+              <span className="Print-Card-Text">
+                {index % 2
+                  ? allDimensions[index].rightCard.statement
+                  : allDimensions[index].leftCard.statement}
+              </span>
+            </div>
+            <div className="PrintingCards">
+              <Dimension
+                dimensionValue={index}
+                secondStatement={false}
+                allDimensions={allDimensions[index]}
+              />
+            </div>
+            <div
+              className="PrintingCards"
+              style={
+                allDimensions && allDimensions[index].type === "Practice"
+                  ? { backgroundColor: PRACTICE_BG_COLOUR }
+                  : { backgroundColor: BELIEF_BG_COLOUR }
+              }
+            >
+              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
+              <span className="Print-Card-Text">
+                {index % 2
+                  ? allDimensions[index].leftCard.statement
+                  : allDimensions[index].rightCard.statement}
+              </span>
+            </div>
+            <div className="PrintingCards">
+              <Dimension
+                dimensionValue={index}
+                secondStatement={true}
+                allDimensions={allDimensions[index]}
+              />
+            </div>
+          </>
+        ))}
+      </div>
+    );
   }
 }
 

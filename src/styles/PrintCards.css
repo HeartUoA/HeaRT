@@ -52,10 +52,7 @@
   padding-left: 1%;
 }
 .Print-Cards-Loading-Spinner {
-  margin: 50vh 0px 0px 0px;
-  width: auto;
-  height: auto;
-  margin-left: 47%;
+  margin: auto;
 }
 @page {
   size: auto;
