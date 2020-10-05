@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import * as QueryString from "query-string";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
-import { Card, Button, Typography, Tooltip, Progress, Spin } from "antd";
+import { Card, Button, Typography, Tooltip, Progress, Spin, Modal } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/Dimension";
 
@@ -11,6 +11,7 @@ import { CardSide } from "../types/card";
 import {
   Dimension as DimensionType,
   createDimension,
+  createBackendDimension,
 } from "../types/dimension";
 
 import { DEFAULT_COLOURS, getColours } from "../utils/cards";
@@ -31,6 +32,7 @@ const DEFAULT_PROGRESS = {
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
+  const [showIncompleteModal, setShowIncompleteModal] = useState(false);
 
   const params = QueryString.parse(props.location.search);
   const [allDimensions, setAllDimensions] = useState<
@@ -119,21 +121,19 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
 
   const saveCurrentDimension = async (): Promise<void> => {
     // TODO: Fix this PUT request
-    // const dimension = createBackendDimension(
-    //   chart!.dimensions[dimensionIndex]
-    // );
-    // const response = await fetch(
-    //   `${API_DOMAIN}dimensions/` + chart!.dimensions[dimensionIndex].id,
-    //   {
-    //     method: "PUT",
-    //     body: JSON.stringify(dimension),
-    //     headers: {
-    //       Authorization: `Bearer ${cookies["accessToken"]}`,
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //     },
-    //   }
-    // );
+    const dimension = createBackendDimension(allDimensions![dimensionIndex]);
+    await fetch(
+      `${API_DOMAIN}dimensions/` + allDimensions![dimensionIndex].id,
+      {
+        method: "PUT",
+        body: JSON.stringify(dimension),
+        headers: {
+          Authorization: `Bearer ${cookies["accessToken"]}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
   };
 
   const setNewDimension = (newIndex: number) => {
@@ -169,8 +169,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         );
       } else {
         // Display modal to say at least 8 dimensions must be completed
+        setShowIncompleteModal(true);
       }
     }
+  };
+
+  const handleOk = () => {
+    setShowIncompleteModal(false);
   };
 
   const onCardClick = (side: CardSide) => {
@@ -325,7 +330,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         if (index === dimensionIndex) {
           return {
             ...dimension,
-            serExplanation: event.target.value,
+            userExplanation: event.target.value,
           };
         } else {
           return dimension;
@@ -334,10 +339,36 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   };
 
+  const toCompleteDimensions = () => {
+    let toComplete = 8 - progress.completed;
+    return toComplete;
+  };
+
   if (allDimensions) {
     return (
       <div className="DisplayCards">
         <Header />
+        <Modal
+          title="Incomplete Chart"
+          centered
+          visible={showIncompleteModal}
+          footer={[
+            <Button
+              key="ok"
+              type="primary"
+              onClick={handleOk}
+              className="Modal-Button"
+            >
+              Ok
+            </Button>,
+          ]}
+        >
+          <p>
+            You must complete at least 8 dimensions to save your chart.
+            <br />
+            Please complete {toCompleteDimensions()} more dimensions.
+          </p>
+        </Modal>
         <div className="Cards-Content">
           <div style={{ width: "100%" }}>
             <Typography className="Statement">

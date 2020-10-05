@@ -75,8 +75,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       setSave(true);
     } else {
       // TODO: Write code here to make API post request to save chart
-
-      props.history.push("/Replay");
+      props.history.push(`/Replay?courseID=${params.courseID}`);
     }
   };
 
