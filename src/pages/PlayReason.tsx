@@ -47,12 +47,6 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       });
   };
 
-  const radioStyle = {
-    display: "block",
-    height: "30px",
-    lineHeight: "30px",
-  };
-
   const radioOptions = [
     "Designing the course",
     "Reviewing the course's structure",
@@ -100,27 +94,26 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
               }}
               value={state}
             >
-              <Radio style={radioStyle} value={radioOptions[0]}>
+              <Radio className="Radio" value={radioOptions[0]}>
                 {radioOptions[0]}
               </Radio>
-              <Radio style={radioStyle} value={radioOptions[1]}>
+              <Radio className="Radio" value={radioOptions[1]}>
                 {radioOptions[1]}
               </Radio>
-              <Radio style={radioStyle} value={radioOptions[2]}>
+              <Radio className="Radio" value={radioOptions[2]}>
                 {radioOptions[2]}
               </Radio>
             </Radio.Group>
-            {state === radioOptions[radioOptions.length - 1] ? (
-              <TextArea
-                className="Play-Reason"
-                rows={3}
-                placeholder="Enter reason here..."
-                onChange={(e) => {
-                  setReason(e.target.value);
-                  setError("");
-                }}
-              />
-            ) : null}
+            <TextArea
+              className="Play-Reason"
+              rows={3}
+              placeholder="Enter reason here..."
+              onChange={(e) => {
+                setReason(e.target.value);
+                setError("");
+              }}
+              disabled={state !== radioOptions[radioOptions.length - 1]}
+            />
           </div>
 
           <div className="Button-Container">
