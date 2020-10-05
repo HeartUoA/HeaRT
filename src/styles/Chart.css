@@ -37,5 +37,6 @@
   top: 15px;
   right: 55px;
   height: 35px;
+  margin-right: 5px;
   filter: brightness(50%);
 }

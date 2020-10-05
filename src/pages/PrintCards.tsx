@@ -84,21 +84,12 @@ class ComponentToPrint extends React.Component<DimensionProps> {
           ))}
         </div>
       );
-    } else {
-      return (
-        <div className="SpinnerClass">
-          <div className="Print-Cards-Loading-Spinner">
-            <Spin size="large" />
-          </div>
-        </div>
-      );
     }
   }
 }
 
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
-  const { chartID } = useParams<ParamTypes>();
   const [allDimensions, setAllDimensions] = useState<
     DimensionType[] | undefined
   >(undefined);
@@ -114,7 +105,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
-    console.log(chartID);
+
     fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
@@ -140,36 +131,51 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
     props.history.push(`/Course/${params.courseID}`);
   };
 
-  return (
-    <div className="PrintCards">
-      <div className="Header">
-        <Header />
-      </div>
-      <div className="PrintCardsContainer">
-        <div className="PrintCardsContent">
-          <ComponentToPrint
-            ref={componentRef}
-            passAllDimensions={allDimensions}
-          />
+  if (allDimensions) {
+    return (
+      <div className="PrintCards">
+        <div className="Header">
+          <Header />
+        </div>
+        <div className="PrintCardsContainer">
+          <div className="PrintCardsContent">
+            <ComponentToPrint
+              ref={componentRef}
+              passAllDimensions={allDimensions}
+            />
+          </div>
+        </div>
+        <div className="Footer">
+          <Button
+            type="primary"
+            className="Footer-Button"
+            onClick={onBackClick}
+          >
+            Back
+          </Button>
+          <Button type="primary" className="Footer-Button">
+            <ReactToPrint
+              trigger={() => {
+                // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                // to the root node of the returned component as it will be overwritten.
+                return <a href="#">Print</a>;
+              }}
+              content={() => componentRef.current}
+            />
+          </Button>
         </div>
       </div>
-      <div className="Footer">
-        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
-          Back
-        </Button>
-        <Button type="primary" className="Footer-Button">
-          <ReactToPrint
-            trigger={() => {
-              // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-              // to the root node of the returned component as it will be overwritten.
-              return <a href="#">Print</a>;
-            }}
-            content={() => componentRef.current}
-          />
-        </Button>
+    );
+  } else {
+    return (
+      <div className="PrintCards">
+        <Header />
+        <div className="Print-Cards-Loading-Spinner">
+          <Spin size="large" />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default withRouter(PrintCards);
