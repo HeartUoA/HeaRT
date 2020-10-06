@@ -1,32 +1,41 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { useReactToPrint } from "react-to-print";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import Header from "../components/Header";
 import Dimension from "../components/PrintDimension";
 import "../styles/PrintCards.css";
 import "../styles/Footer.css";
+import * as QueryString from "query-string";
 import { API_DOMAIN } from "../config";
+import {
+  Dimension as DimensionType,
+  createDimension,
+} from "../types/dimension";
 
-import charts from "../dummyData/charts";
+const PRACTICE_BG_COLOUR = "#ffc4d3";
+const BELIEF_BG_COLOUR = "#c4ddff";
 
-const PracticeBGColour = "#ffc4d3";
-const BeliefBGColour = "#c4ddff";
-class ComponentToPrint extends React.Component {
+interface DimensionProps {
+  passAllDimensions: DimensionType[];
+}
+
+class ComponentToPrint extends React.Component<DimensionProps> {
   render() {
-    const allDimensions = charts[0].dimensions;
+    const allDimensions =
+      this.props.passAllDimensions && this.props.passAllDimensions;
     return (
       <div>
-        {allDimensions.map((currElement, index) => (
+        {allDimensions.map((currElement: any, index: number) => (
           <>
             <div
               className="PrintingCards"
               style={
                 allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PracticeBGColour }
-                  : { backgroundColor: BeliefBGColour }
+                  ? { backgroundColor: PRACTICE_BG_COLOUR }
+                  : { backgroundColor: BELIEF_BG_COLOUR }
               }
             >
               <span className="Print-Card-Text-TopLeft">{index + 1}</span>
@@ -37,14 +46,18 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionValue={index} SecondStatement={false} />
+              <Dimension
+                dimensionValue={index}
+                secondStatement={false}
+                allDimensions={allDimensions[index]}
+              />
             </div>
             <div
               className="PrintingCards"
               style={
-                allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PracticeBGColour }
-                  : { backgroundColor: BeliefBGColour }
+                allDimensions && allDimensions[index].type === "Practice"
+                  ? { backgroundColor: PRACTICE_BG_COLOUR }
+                  : { backgroundColor: BELIEF_BG_COLOUR }
               }
             >
               <span className="Print-Card-Text-TopLeft">{index + 1}</span>
@@ -55,7 +68,11 @@ class ComponentToPrint extends React.Component {
               </span>
             </div>
             <div className="PrintingCards">
-              <Dimension dimensionValue={index} SecondStatement={true} />
+              <Dimension
+                dimensionValue={index}
+                secondStatement={true}
+                allDimensions={allDimensions[index]}
+              />
             </div>
           </>
         ))}
@@ -66,8 +83,13 @@ class ComponentToPrint extends React.Component {
 
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
+  const [allDimensions, setAllDimensions] = useState<
+    DimensionType[] | undefined
+  >(undefined);
 
+  const params = QueryString.parse(props.location.search);
   const componentRef = useRef(null);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -77,52 +99,76 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
       props.history.push("/Login");
     }
 
-    //Set up later to get data not from dummy
-    fetch(`${API_DOMAIN}dimensions/forchart/${""}`, {
+    fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: "",
       },
     })
       .then((res) => res.json())
       .then((res) => {
-        //Get data and set it to Dimensions
+        setAllDimensions(
+          res.map((dimension: any) => {
+            return createDimension(dimension);
+          })
+        );
       })
       .catch((e) => console.log(e));
   }, [cookies]);
 
   const onBackClick = async (): Promise<void> => {
-    props.history.push("/Dashboard");
+    //Once queries are implemented in courses page
+    // props.history.push(`/Course?chartID=${params.chartID}`);
+    props.history.push(`/Course/${params.courseID}`);
   };
 
-  return (
-    <div className="PrintCards">
-      <div className="Header">
-        <Header />
-      </div>
-      <div className="PrintCardsContainer">
-        <div className="PrintCardsContent">
-          <ComponentToPrint ref={componentRef} />
+  if (allDimensions) {
+    return (
+      <div className="PrintCards">
+        <div className="Header">
+          <Header />
+        </div>
+        <div className="PrintCardsContainer">
+          <div className="PrintCardsContent">
+            <ComponentToPrint
+              ref={componentRef}
+              passAllDimensions={allDimensions}
+            />
+          </div>
+        </div>
+        <div className="Footer">
+          <Button
+            type="primary"
+            className="Footer-Button"
+            onClick={onBackClick}
+          >
+            Back
+          </Button>
+          <Button type="primary" className="Footer-Button">
+            <ReactToPrint
+              trigger={() => {
+                // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                // to the root node of the returned component as it will be overwritten.
+                return <a href="#">Print</a>;
+              }}
+              content={() => componentRef.current}
+            />
+          </Button>
         </div>
       </div>
-      <div className="Footer">
-        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
-          Back
-        </Button>
-        <Button type="primary" className="Footer-Button">
-          <ReactToPrint
-            trigger={() => {
-              // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-              // to the root node of the returned component as it will be overwritten.
-              return <a href="#">Print</a>;
-            }}
-            content={() => componentRef.current}
-          />
-        </Button>
+    );
+  } else {
+    return (
+      <div className="PrintCards">
+        <Header />
+        <div className="Print-Cards-Loading-Spinner">
+          <Spin size="large" />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default withRouter(PrintCards);
