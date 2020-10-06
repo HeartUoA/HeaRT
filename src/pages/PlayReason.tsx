@@ -124,12 +124,12 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
             >
               <Typography className="Button-Font">Confirm</Typography>
             </Button>
-            {error ? (
-              <Typography className="Error-Message-Text">{error}</Typography>
-            ) : (
-              <div style={{ height: 40 }} />
-            )}
           </div>
+          {error ? (
+            <Typography className="Error-Message">{error}</Typography>
+          ) : (
+            <div style={{ height: 35 }} />
+          )}
         </div>
       </div>
     </div>
