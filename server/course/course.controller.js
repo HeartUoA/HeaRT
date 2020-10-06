@@ -68,13 +68,13 @@ router
       chart.courseID = request.params.courseID;
       chart.reasonOfPlay = request.body.reasonOfPlay;
       chart.createdAt = Date.now();
+      chart.isComplete = false;
       await chart.save();
 
       let dimensions = [];
       // Create the default dimensions and link them to the chart
       let dimensionData;
       for (dimensionData in defaultDimensionData) {
-        console.log(defaultDimensionData[dimensionData]);
         const dimension = new Dimension(defaultDimensionData[dimensionData]);
         dimension.chartID = chart._id;
         await dimension.save();
