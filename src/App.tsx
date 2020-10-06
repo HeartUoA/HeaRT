@@ -9,6 +9,8 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Charts from "./pages/Charts";
 import PrintCards from "./pages/PrintCards";
+import CompareCharts from "./pages/CompareCharts";
+
 import { CookiesProvider } from "react-cookie";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -47,6 +49,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/PrintCards">
             <PrintCards />
+          </Route>
+          <Route path="/CompareCharts">
+            <CompareCharts />
           </Route>
         </Switch>
       </Router>

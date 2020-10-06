@@ -1,0 +1,65 @@
+import React, { useEffect } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
+import { Typography, Button, Col } from "antd";
+import Header from "../components/Header";
+import DimensionComparator from "../components/DimensionComparator";
+
+import "../styles/Preview.css";
+import "../styles/Footer.css";
+
+import charts from "../dummyData/charts";
+import courses from "../dummyData/courses";
+
+const CompareCharts: React.FC<RouteComponentProps> = (props) => {
+  const [cookies] = useCookies(["accessToken"]);
+
+  // TODO: Need to change this to grab data from backend
+  const chartsToCompare = [charts[0], charts[1], charts[2]];
+
+  useEffect(() => {
+    if (!cookies["accessToken"]) {
+      props.history.push("/Login");
+    }
+  }, [cookies]);
+
+  const onBackClick = () => {
+    props.history.push("/Dashboard");
+  };
+
+  return (
+    <div className="Charts-Compare-Container">
+      <Header />
+      <div className="Charts-Compare-Content">
+        <Typography className="Preview-Title">{courses[0].name}</Typography>
+        <Col className="Charts-Compare-Row">
+          {chartsToCompare[0].dimensions.map((item, index) => {
+            if (item.userSelectedSliderPos !== -1) {
+              return (
+                <DimensionComparator
+                  {...{
+                    dimensions: chartsToCompare.map(
+                      (chart) => chart.dimensions[index]
+                    ),
+                    dates: chartsToCompare.map((chart) => chart.createdAt),
+                    isPreview: true,
+                    key: item.name,
+                  }}
+                />
+              );
+            }
+            return undefined;
+          })}
+        </Col>
+      </div>
+      <div className="Footer">
+        <Button type="primary" className="Footer-Button" onClick={onBackClick}>
+          Back
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default withRouter(CompareCharts);
