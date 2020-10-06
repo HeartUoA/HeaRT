@@ -177,8 +177,10 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
               return (
                 <Chart
                   {...{
+                    history: props.history,
                     createdAt: item.createdAt,
                     chartID: item.id,
+                    courseID: item.courseID,
                     onChange: onChartSelected,
                     key: item.id,
                     onCardClick: onChartClick,
