@@ -15,7 +15,7 @@ import {
   Dimension,
   createBackendDimension,
 } from "../types/dimension";
-import { API_DOMAIN } from "../config";
+import { API_DOMAIN, MINIMUM_REQUIRED } from "../config";
 
 const Preview: React.FC<RouteComponentProps> = (props) => {
   const params = QueryString.parse(props.location.search);
@@ -24,8 +24,8 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     string | undefined
   >(undefined);
   const [saveSingleDimension, setSave] = useState(false);
+  const [requirementsMet, setRequirementsMet] = useState(false);
 
-  // TODO: Need to change this to grab data from backend
   const [dimensions, updateDimensions] = useState<Dimension[] | undefined>(
     undefined
   );
@@ -81,8 +81,21 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       dimensions?.map((item) => {
         saveOneDimension(item);
       });
+
+      updateProgress();
       props.history.push(`/Replay?courseID=${params.courseID}`);
     }
+  };
+
+  const updateProgress = async () => {
+    await fetch(`${API_DOMAIN}chart/${params.chartID}`, {
+      method: "PUT",
+      body: JSON.stringify({ isComplete: true }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   };
 
   const saveOneDimension = async (cardDimension: Dimension) => {

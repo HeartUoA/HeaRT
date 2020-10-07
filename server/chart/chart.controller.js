@@ -1,14 +1,13 @@
 import bodyParser from "body-parser";
 import { Router } from "express";
-import Dimension from "./dimension.model";
-import Chart from "../chart/chart.model";
+import Chart from "./chart.model";
 import authenticateJWT from "../middleware/Authentication";
 
 const router = Router();
 
 router
   .route("/:chartID")
-  .PUT(bodyParser.json(), authenticateJWT, async (request, response) => {
+  .put(bodyParser.json(), authenticateJWT, async (request, response) => {
     try {
       const chart = await Chart.findOne({
         _id: request.params.chartID,
@@ -20,7 +19,7 @@ router
       const updatedField = {};
       updatedField.isComplete = response.body.isComplete;
 
-      await Dimension.findByIdAndUpdate(
+      await Chart.findByIdAndUpdate(
         { _id: request.params.chartID },
         updatedField
       );
