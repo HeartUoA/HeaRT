@@ -11,7 +11,7 @@ const chartSchemaDef = {
   },
   reasonOfPlay: {
     type: String,
-    required: true,
+    required: false,
   },
 };
 
