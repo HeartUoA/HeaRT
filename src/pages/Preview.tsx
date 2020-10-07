@@ -10,7 +10,11 @@ import PreviewDimension from "../components/PreviewDimension";
 import "../styles/Preview.css";
 import "../styles/Footer.css";
 
-import { createDimension, Dimension } from "../types/dimension";
+import {
+  createDimension,
+  Dimension,
+  createBackendDimension,
+} from "../types/dimension";
 import { API_DOMAIN } from "../config";
 
 const Preview: React.FC<RouteComponentProps> = (props) => {
@@ -74,9 +78,24 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     if (selectedDimension) {
       setSave(true);
     } else {
-      // TODO: Write code here to make API post request to save chart
+      dimensions?.map((item) => {
+        saveOneDimension(item);
+      });
       props.history.push(`/Replay?courseID=${params.courseID}`);
     }
+  };
+
+  const saveOneDimension = async (cardDimension: Dimension) => {
+    const dimension = createBackendDimension(cardDimension);
+    await fetch(`${API_DOMAIN}dimensions/` + dimension.id, {
+      method: "PUT",
+      body: JSON.stringify(dimension),
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   };
 
   const onSaveSingleDimension = (updatedDimension: Dimension) => {
