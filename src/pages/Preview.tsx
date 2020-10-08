@@ -40,6 +40,22 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     fetchDimensions();
   }, []);
 
+  useEffect(() => {
+    fetchRequirementsMet();
+  }, [dimensions]);
+
+  const fetchRequirementsMet = () => {
+    let completedTasks = 0;
+    dimensions?.map((item) => {
+      if (item.userSelectedSliderPos !== -1) {
+        completedTasks += 1;
+      }
+    });
+    if (completedTasks >= MINIMUM_REQUIRED) {
+      setRequirementsMet(true);
+    }
+  };
+
   const fetchDimensions = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}dimensions/forchart/` + params.chartID, {
       method: "GET",
@@ -93,6 +109,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       body: JSON.stringify({ isComplete: true }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${cookies["accessToken"]}`,
         Accept: "application/json",
       },
     });
@@ -182,6 +199,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
           </Button>
           <Button
             type="primary"
+            disabled={!requirementsMet}
             className="Footer-Button Wider-Button"
             onClick={onSaveClick}
           >

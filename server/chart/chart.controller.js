@@ -17,7 +17,7 @@ router
       }
 
       const updatedField = {};
-      updatedField.isComplete = response.body.isComplete;
+      updatedField.isComplete = request.body.isComplete;
 
       await Chart.findByIdAndUpdate(
         { _id: request.params.chartID },
