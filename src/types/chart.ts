@@ -10,6 +10,7 @@ export type StubChart = {
   id: string;
   courseID: string;
   createdAt: Date;
+  isComplete: boolean;
 };
 
 export const createChart = (chart: any) => {
@@ -27,6 +28,7 @@ export const createStubChart = (chart: any) => {
   return {
     ...chart,
     id: chart._id,
+    isComplete: chart.isComplete,
     createdAt: new Date(chart.createdAt),
   };
 };

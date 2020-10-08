@@ -13,7 +13,8 @@ interface ChartProps {
   chartID: string;
   courseID: string;
   onChange: Function;
-  onCardClick: (chartID: string) => void;
+  isComplete: boolean;
+  onCardClick: (chartID: string, isComplete: boolean) => void;
 }
 
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
@@ -44,7 +45,7 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   return (
     <Card
       className="Chart-Card"
-      onClick={() => props.onCardClick(props.chartID)}
+      onClick={() => props.onCardClick(props.chartID, props.isComplete)}
     >
       <img
         className="Printbox"
