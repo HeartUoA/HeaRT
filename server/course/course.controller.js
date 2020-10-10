@@ -43,6 +43,7 @@ router
     try {
       const course = new Course(request.body);
       course.createdByUserID = request.user.userID;
+      course.reasonOfPlay = request.body.reasonOfPlay;
       course.createdAt = Date.now();
       await course.save();
       return response.status(200).send(course);
@@ -65,6 +66,7 @@ router
       }
       const chart = new Chart();
       chart.courseID = request.params.courseID;
+      chart.reasonOfPlay = request.body.reasonOfPlay;
       chart.createdAt = Date.now();
       await chart.save();
 
@@ -82,6 +84,7 @@ router
       response.status(200).json({
         chartID: chart._id,
         createdAt: chart.createdAt,
+        reasonOfPlay: chart.reasonOfPlay,
         dimensions: dimensions,
       });
     } catch (error) {
@@ -138,6 +141,48 @@ router
           .json("You do not have permissions to view charts for this course");
       }
       response.status(200).json(chart);
+    } catch (error) {
+      return response.status(400).send(error);
+    }
+  });
+
+router
+  .route("/:courseID/chart/:chartID")
+  .put(bodyParser.json(), authenticateJWT, async (request, response) => {
+    try {
+      const chart = await Chart.find({ _id: request.params.chartID }, function (
+        err,
+        result
+      ) {
+        if (!result || result.length === 0) {
+          return response
+            .status(404)
+            .send(
+              "No chart found. You can create one at /api/course/{courseID}/chart/"
+            );
+        }
+        if (err) {
+          return response.status(400).send(err);
+        }
+      });
+
+      const charts = await Chart.find({ courseID: request.params.courseID });
+      if (!charts || charts.length === 0) {
+        return response.status(404).send("No charts found");
+      }
+
+      const updatedChart = {};
+
+      updatedChart.reasonOfPlay =
+        request.body.reasonOfPlay !== undefined
+          ? request.body.reasonOfPlay
+          : chart.reasonOfPlay;
+
+      await Chart.findByIdAndUpdate(
+        { _id: request.params.chartID },
+        updatedChart
+      );
+      return response.status(200).json(updatedChart);
     } catch (error) {
       return response.status(400).send(error);
     }

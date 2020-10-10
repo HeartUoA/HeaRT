@@ -9,6 +9,10 @@ const chartSchemaDef = {
     type: Date,
     required: true,
   },
+  reasonOfPlay: {
+    type: String,
+    required: false,
+  },
 };
 
 const chartSchema = new Schema(chartSchemaDef);
