@@ -13,11 +13,23 @@ router
         _id: request.params.chartID,
       });
       if (!chart || chart.length === 0) {
-        return response.status(404).send();
+        return response
+          .status(404)
+          .send(
+            "No chart found. You can create one at /api/course/{courseID}/chart/"
+          );
       }
 
       const updatedField = {};
-      updatedField.isComplete = request.body.isComplete;
+
+      updatedField.isComplete =
+        request.body.isComplete !== undefined
+          ? request.body.isComplete
+          : chart.isComplete;
+      updatedField.reasonOfPlay =
+        request.body.reasonOfPlay !== undefined
+          ? request.body.reasonOfPlay
+          : chart.reasonOfPlay;
 
       await Chart.findByIdAndUpdate(
         { _id: request.params.chartID },
@@ -36,7 +48,11 @@ router.route("/:chartID").get(authenticateJWT, async (request, response) => {
       _id: request.params.chartID,
     });
     if (!chart || chart.length === 0) {
-      return response.status(404).send();
+      return response
+        .status(404)
+        .send(
+          "No chart found. You can create one at /api/course/{courseID}/chart/"
+        );
     }
     return response.status(200).json(chart);
   } catch (error) {
