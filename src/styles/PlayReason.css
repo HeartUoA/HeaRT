@@ -1,0 +1,106 @@
+.Play-Reason {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 100vh;
+  min-width: 700px;
+}
+
+.Main-Container {
+  display: flex;
+  height: calc(100% - 100px);
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.Reason-Container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 700px;
+  min-width: 700px;
+  background: white;
+  text-align: left;
+  border-radius: 20px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  padding: 60px 60px 40px 60px;
+  height: min-content;
+  margin: 100px;
+}
+
+.Heading-Text {
+  font-family: "ABeeZee";
+  color: #1f1f1f;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Reason-Input-Container {
+  margin: 25px 0px;
+}
+
+.Subheading-Text {
+  font-family: "ABeeZee";
+  color: #5b5b5b;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.Radio {
+  display: block;
+  height: 30px;
+  font-size: 16px;
+}
+
+.Reason-Text {
+  line-height: 40px;
+  border-radius: 10px;
+  padding-left: 15px;
+  font-family: "ABeeZee";
+  font-size: 16px;
+  border-color: #969696;
+  color: #1f1f1f;
+  margin: 10px 0px;
+  resize: none;
+}
+
+.Button-Container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+
+.Cancel-Button,
+.Confirm-Button {
+  height: 60px;
+  width: 45%;
+  text-align: center;
+  box-shadow: 0px 0px 0px 0px;
+  margin: 0px auto auto 0px;
+  font-size: 24px;
+}
+
+.Confirm-Button {
+  margin: 0px 0px auto auto;
+}
+
+.Button-Font {
+  font-size: 25px;
+}
+
+.Error-Message {
+  text-align: center;
+  margin-top: 10px;
+  color: #ff8800;
+  font-size: 16px;
+  font-weight: 500;
+}
