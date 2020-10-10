@@ -68,6 +68,7 @@ router
       chart.courseID = request.params.courseID;
       chart.reasonOfPlay = request.body.reasonOfPlay;
       chart.createdAt = Date.now();
+      chart.createdByUserID = request.user.userID;
       chart.isComplete = false;
       await chart.save();
 
@@ -96,7 +97,10 @@ router
   .route("/:courseID/chart")
   .get(bodyParser.json(), authenticateJWT, async (request, response) => {
     try {
-      const charts = await Chart.find({ courseID: request.params.courseID });
+      const charts = await Chart.find({
+        courseID: request.params.courseID,
+        createdByUserID: request.user.userID,
+      });
       if (!charts || charts.length === 0) {
         return response.status(404).send("No charts found");
       }

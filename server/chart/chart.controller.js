@@ -20,6 +20,12 @@ router
           );
       }
 
+      if (chart.createdByUserID !== request.user.userID) {
+        return response
+          .status(403)
+          .json("You do not have permissions to modify this chart");
+      }
+
       const updatedField = {};
 
       updatedField.isComplete =
@@ -54,6 +60,13 @@ router.route("/:chartID").get(authenticateJWT, async (request, response) => {
           "No chart found. You can create one at /api/course/{courseID}/chart/"
         );
     }
+
+    if (chart.createdByUserID !== request.user.userID) {
+      return response
+        .status(403)
+        .json("You do not have permissions to view this chart");
+    }
+
     return response.status(200).json(chart);
   } catch (error) {
     return response.status(400).send(error);

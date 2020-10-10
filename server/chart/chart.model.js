@@ -17,7 +17,12 @@ const chartSchemaDef = {
   reasonOfPlay: {
     type: String,
     required: false,
-  }
+  },
+  createdByUserID: {
+    type: String,
+    required: true,
+    unique: false,
+  },
 };
 
 const chartSchema = new Schema(chartSchemaDef);
