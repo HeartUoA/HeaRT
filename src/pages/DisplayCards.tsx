@@ -155,11 +155,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     } else {
       // Redirect back to appropriate page
       let from = window.history.state?.state?.from;
-      if (from === "PlayReason") {
-        props.history.push(
-          `/PlayReason?courseID=${params.courseID}&chartID=${params.chartID}`
-        );
-      } else if (from === "Charts") {
+      if (from === "Charts" || from === "PlayReason") {
         props.history.push(`/Course/${params.courseID}`);
       } else {
         props.history.push("/Dashboard");

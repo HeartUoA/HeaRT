@@ -8,8 +8,6 @@ import { Button, Typography, Radio } from "antd";
 import Header from "../components/Header";
 import "../styles/PlayReason.css";
 import TextArea from "antd/lib/input/TextArea";
-
-import { createCourse } from "../types/course";
 import { API_DOMAIN } from "../config";
 
 const NONE_SELECTED = "A reason for playing the HeaRT Game must be selected";
@@ -20,33 +18,19 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   const [state, setState] = useState("");
   const [reason, setReason] = useState("");
   const [error, setError] = useState("");
-  const [courseName, setCourseName] = useState<string | undefined>(undefined);
   const params = QueryString.parse(props.location.search);
-
-  useEffect(() => {
-    fetchCourse();
-  }, []);
-
-  const fetchCourse = async (): Promise<any> => {
-    await fetch(`${API_DOMAIN}course/${params.courseID}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${cookies["accessToken"]}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setCourseName(createCourse(data[0]).name);
-      });
-  };
 
   const radioOptions = [
     "Designing the course",
     "Reviewing the course's structure",
     "Other",
   ];
+
+  useEffect(() => {
+    if (!cookies["accessToken"]) {
+      props.history.push("/Login");
+    }
+  }, [cookies]);
 
   const onConfirmClick = () => {
     if (state === "") {
@@ -57,11 +41,53 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     ) {
       setError(NO_TEXT);
     } else {
-      props.history.push(
-        `/DisplayCards?courseID=${params.courseID}&chartID=${params.chartID}`,
-        { from: "PlayReason" }
-      );
+      createChart();
     }
+  };
+
+  const createChart = async (): Promise<any> => {
+    await fetch(`${API_DOMAIN}course/${params.courseID}/chart`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        updateBackendReason(data);
+      });
+  };
+
+  const updateBackendReason = async (data: any): Promise<any> => {
+    await fetch(
+      `${API_DOMAIN}course/${params.courseID}/chart/${data.chartID}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${cookies["accessToken"]}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          reasonOfPlay:
+            state === radioOptions[radioOptions.length - 1] ? reason : state,
+        }),
+      }
+    ).then((res) => {
+      if (res.status === 200) {
+        props.history.push(
+          `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`,
+          { from: "PlayReason" }
+        );
+      }
+    });
   };
 
   const onCancelClick = () => {
@@ -84,6 +110,7 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
               onChange={(e) => {
                 setState(e.target.value);
                 setError("");
+                console.log(e);
               }}
               value={state}
             >
