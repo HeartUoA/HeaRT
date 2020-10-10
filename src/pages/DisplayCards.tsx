@@ -143,7 +143,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         ? DEFAULT_COLOURS
         : getColours(
             allDimensions![newIndex].userSelectedSliderPos,
-            allDimensions![dimensionIndex].type
+            allDimensions![newIndex].type
           )
     );
   };
