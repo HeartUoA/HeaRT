@@ -65,22 +65,19 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   };
 
   const updateBackendReason = async (data: any): Promise<any> => {
-    await fetch(
-      `${API_DOMAIN}course/${params.courseID}/chart/${data.chartID}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${cookies["accessToken"]}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          reasonOfPlay:
-            state === radioOptions[radioOptions.length - 1] ? reason : state,
-        }),
-      }
-    ).then((res) => {
+    await fetch(`${API_DOMAIN}chart/${data.chartID}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+        reasonOfPlay:
+          state === radioOptions[radioOptions.length - 1] ? reason : state,
+      }),
+    }).then((res) => {
       if (res.status === 200) {
         props.history.push(
           `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`,
