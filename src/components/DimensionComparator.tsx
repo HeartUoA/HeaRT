@@ -41,9 +41,9 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         label: (
           <Tooltip
             title={
-              moment(labeled[mark].value).format("HH:mmA DDMMM") +
+              moment(labeled[mark].value).format("DD MMM, HH:mmA") +
               ", " +
-              moment(props.dates[index]).format("HH:mmA DDMMM")
+              moment(props.dates[index]).format("DD MMM, HH:mmA")
             }
             style={{ position: "relative" }}
             color={Object.values(colours)[index]}
@@ -65,7 +65,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         label: (
           <Tooltip
             style={{ position: "relative" }}
-            title={moment(props.dates[index]).format("HH:mmA DDMMM")}
+            title={moment(props.dates[index]).format("DD MMM, HH:mmA")}
             color={Object.values(colours)[index]}
           >
             <div
@@ -112,7 +112,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
                     color: labeled[dimension.userSelectedSliderPos].color,
                   }}
                 >
-                  {moment(props.dates[index]).format("HH:mmA DDMMM")}
+                  {moment(props.dates[index]).format("DD MMM, HH:mmA")}
                 </span>
               }
               key={index}
