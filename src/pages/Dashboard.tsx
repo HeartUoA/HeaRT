@@ -63,7 +63,8 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
               return createCourse(course);
             })
           );
-      });
+      })
+      .catch((e) => console.log(e));
   };
 
   const onInstructionsClick = () => {

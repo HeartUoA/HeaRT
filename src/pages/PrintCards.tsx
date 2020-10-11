@@ -107,7 +107,13 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          setAllDimensions([]);
+        } else {
+          return res.json();
+        }
+      })
       .then((res) => {
         setAllDimensions(
           res.map((dimension: any) => {

@@ -117,7 +117,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             })
           );
         setRetrieved(true);
-      });
+      })
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {

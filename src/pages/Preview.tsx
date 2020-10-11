@@ -79,7 +79,8 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
               return createDimension(dimension);
             })
           );
-      });
+      })
+      .catch((e) => console.log(e));
   };
 
   const onSelectDimension = (dimensionKey?: string) => {
