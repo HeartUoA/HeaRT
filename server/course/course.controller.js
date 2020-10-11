@@ -68,13 +68,14 @@ router
       chart.courseID = request.params.courseID;
       chart.reasonOfPlay = request.body.reasonOfPlay;
       chart.createdAt = Date.now();
+      chart.createdByUserID = request.user.userID;
+      chart.isComplete = false;
       await chart.save();
 
       let dimensions = [];
       // Create the default dimensions and link them to the chart
       let dimensionData;
       for (dimensionData in defaultDimensionData) {
-        console.log(defaultDimensionData[dimensionData]);
         const dimension = new Dimension(defaultDimensionData[dimensionData]);
         dimension.chartID = chart._id;
         await dimension.save();
@@ -96,7 +97,10 @@ router
   .route("/:courseID/chart")
   .get(bodyParser.json(), authenticateJWT, async (request, response) => {
     try {
-      const charts = await Chart.find({ courseID: request.params.courseID });
+      const charts = await Chart.find({
+        courseID: request.params.courseID,
+        createdByUserID: request.user.userID,
+      });
       if (!charts || charts.length === 0) {
         return response.status(404).send("No charts found");
       }
@@ -109,80 +113,6 @@ router
       charts[charts.length] =
         "To get dimensions for any of these charts, access the /api/dimensions/forchart/{chartID} endpoint";
       response.status(200).json(charts);
-    } catch (error) {
-      return response.status(400).send(error);
-    }
-  });
-
-router
-  .route("/:courseID/chart/:chartID")
-  .get(bodyParser.json(), authenticateJWT, async (request, response) => {
-    try {
-      const chart = await Chart.find({ _id: request.params.chartID }, function (
-        err,
-        result
-      ) {
-        if (!result || result.length === 0) {
-          return response
-            .status(404)
-            .send(
-              "No chart found. You can create one at /api/course/{courseID}/chart/"
-            );
-        }
-        if (err) {
-          return response.status(400).send(err);
-        }
-      });
-
-      const referenceCourse = await Course.find({ _id: chart[0].courseID });
-      if (referenceCourse[0].createdByUserID !== request.user.userID) {
-        return response
-          .status(403)
-          .json("You do not have permissions to view charts for this course");
-      }
-      response.status(200).json(chart);
-    } catch (error) {
-      return response.status(400).send(error);
-    }
-  });
-
-router
-  .route("/:courseID/chart/:chartID")
-  .put(bodyParser.json(), authenticateJWT, async (request, response) => {
-    try {
-      const chart = await Chart.find({ _id: request.params.chartID }, function (
-        err,
-        result
-      ) {
-        if (!result || result.length === 0) {
-          return response
-            .status(404)
-            .send(
-              "No chart found. You can create one at /api/course/{courseID}/chart/"
-            );
-        }
-        if (err) {
-          return response.status(400).send(err);
-        }
-      });
-
-      const charts = await Chart.find({ courseID: request.params.courseID });
-      if (!charts || charts.length === 0) {
-        return response.status(404).send("No charts found");
-      }
-
-      const updatedChart = {};
-
-      updatedChart.reasonOfPlay =
-        request.body.reasonOfPlay !== undefined
-          ? request.body.reasonOfPlay
-          : chart.reasonOfPlay;
-
-      await Chart.findByIdAndUpdate(
-        { _id: request.params.chartID },
-        updatedChart
-      );
-      return response.status(200).json(updatedChart);
     } catch (error) {
       return response.status(400).send(error);
     }

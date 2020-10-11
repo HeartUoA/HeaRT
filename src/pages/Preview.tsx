@@ -10,8 +10,12 @@ import PreviewDimension from "../components/PreviewDimension";
 import "../styles/Preview.css";
 import "../styles/Footer.css";
 
-import { createDimension, Dimension } from "../types/dimension";
-import { API_DOMAIN } from "../config";
+import {
+  createDimension,
+  Dimension,
+  createBackendDimension,
+} from "../types/dimension";
+import { API_DOMAIN, MINIMUM_REQUIRED } from "../config";
 
 const Preview: React.FC<RouteComponentProps> = (props) => {
   const params = QueryString.parse(props.location.search);
@@ -20,8 +24,8 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     string | undefined
   >(undefined);
   const [saveSingleDimension, setSave] = useState(false);
+  const [requirementsMet, setRequirementsMet] = useState(false);
 
-  // TODO: Need to change this to grab data from backend
   const [dimensions, updateDimensions] = useState<Dimension[] | undefined>(
     undefined
   );
@@ -35,6 +39,22 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
   useEffect(() => {
     fetchDimensions();
   }, []);
+
+  useEffect(() => {
+    fetchRequirementsMet();
+  }, [dimensions]);
+
+  const fetchRequirementsMet = () => {
+    let completedTasks = 0;
+    dimensions?.map((item) => {
+      if (item.userSelectedSliderPos !== -1) {
+        completedTasks += 1;
+      }
+    });
+    if (completedTasks >= MINIMUM_REQUIRED) {
+      setRequirementsMet(true);
+    }
+  };
 
   const fetchDimensions = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}dimensions/forchart/` + params.chartID, {
@@ -74,9 +94,38 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     if (selectedDimension) {
       setSave(true);
     } else {
-      // TODO: Write code here to make API post request to save chart
+      dimensions?.map((item) => {
+        saveOneDimension(item);
+      });
+
+      updateProgress();
       props.history.push(`/Replay?courseID=${params.courseID}`);
     }
+  };
+
+  const updateProgress = async () => {
+    await fetch(`${API_DOMAIN}chart/${params.chartID}`, {
+      method: "PUT",
+      body: JSON.stringify({ isComplete: true }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        Accept: "application/json",
+      },
+    });
+  };
+
+  const saveOneDimension = async (cardDimension: Dimension) => {
+    const dimension = createBackendDimension(cardDimension);
+    await fetch(`${API_DOMAIN}dimensions/` + dimension.id, {
+      method: "PUT",
+      body: JSON.stringify(dimension),
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   };
 
   const onSaveSingleDimension = (updatedDimension: Dimension) => {
@@ -150,6 +199,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
           </Button>
           <Button
             type="primary"
+            disabled={!requirementsMet}
             className="Footer-Button Wider-Button"
             onClick={onSaveClick}
           >

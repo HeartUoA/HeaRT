@@ -3,6 +3,7 @@ import { resolve } from "path";
 import courseController from "./course/course.controller";
 import usersController from "./users/users.controller";
 import dimensionsController from "./dimension/dimensions.controller";
+import chartController from "./chart/chart.controller";
 
 // Create the express application
 const app = express();
@@ -20,6 +21,7 @@ app.use(function (req, res, next) {
 app.use("/api/course", courseController);
 app.use("/api/users", usersController);
 app.use("/api/dimensions", dimensionsController);
+app.use("/api/chart", chartController);
 
 // Declare the path to frontend's static assets
 app.use(express.static(resolve("..", "build")));

@@ -122,11 +122,16 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     setSelectedCharts({ ...tempCharts });
   };
 
-  const onChartClick = (chartID: string) => {
-    props.history.push(
-      `/DisplayCards?courseID=${courseID}&chartID=${chartID}`,
-      { from: "Charts" }
-    );
+  const onChartClick = (chartID: string, isComplete: boolean) => {
+    if (isComplete) {
+      props.history.push(
+      `/Preview?courseID=${courseID}&chartID=${chartID}`, { from: "Charts" }
+      );
+    } else {
+      props.history.push(
+        `/DisplayCards?courseID=${courseID}&chartID=${chartID}`, { from: "Charts" }
+      );
+    }
   };
 
   if (charts && courseName) {
@@ -168,6 +173,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
                     chartID: item.id,
                     courseID: item.courseID,
                     onChange: onChartSelected,
+                    isComplete: item.isComplete,
                     key: item.id,
                     onCardClick: onChartClick,
                   }}
