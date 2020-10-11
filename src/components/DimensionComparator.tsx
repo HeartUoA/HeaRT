@@ -92,7 +92,6 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
     label: props.dimensions[0].marks![100].label,
     style: { marginTop: "1em" },
   };
-  console.log(labeled);
   return (
     <Card className={"Card-Compare-Preview"}>
       <p className="Card-Compare-Title">{props.dimensions[0].name}</p>
