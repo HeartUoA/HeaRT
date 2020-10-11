@@ -42,13 +42,6 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Fill in the details",
     description: (
       <div>
-        {/* You will be presented with the first pair of cards. <br /> If the
-        statements on the cards are applicable to your course, pick one that
-        resonates with you the most 💓 <br /> If the statements are not
-        applicable, don't worry, you can always skip to the next pair! ⏭️ You
-        must complete at least 8 pairs to finish the game. <br /> Psst🤫...in
-        the future versions we will add the ability to edit statements, so you
-        can tailor the HeaRT game to your course. */}
         Complete your course details, so we know which course you are playing
         the game for!
         <br /> This should be the course that you would like to evaluate! 📜
@@ -60,12 +53,6 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Open course",
     description: (
       <div>
-        {/* When you pick a statement you are presented with a dimension bar. You
-        need to select your stance on the dimension: how much does your course
-        tend towards one card over the other. <br /> For example, is your course
-        more teacher-managed, or is it more student-managed? 🤔 <br />
-        In future versions, you will be able to explain your choice for each
-        dimension in a text note. */}
         Open the course you created (or any other course that you would like to
         evaluate).
       </div>
@@ -76,8 +63,6 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Create chart and enter the reason of playing",
     description: (
       <div>
-        {/* Once you went through all teaching dimensions, you can preview and edit
-        your answers before saving your chart 💾 */}
         Press Create Chart on your course page. Once you press the button, HeaRT
         will ask you what is you goal for playing today
         <br />
@@ -91,11 +76,6 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Pick the statement",
     description: (
       <div>
-        {" "}
-        {/* Save your chart, and compare your answers with your colleagues to see
-        what your perspectives on the course are. Discuss the results, and play
-        the game again as needed! <br />
-        The HeaRT tool is all about sparking the conversation 🔥 */}
         You will be presented with the first pair of cards. <br /> If the
         statements on the cards are applicable to your course, pick one that
         resonates with you the most 💓 <br /> If the statements are not
