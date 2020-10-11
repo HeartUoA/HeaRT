@@ -110,6 +110,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
       .then((res) => {
         if (res.status !== 200) {
           setAllDimensions([]);
+          props.history.push("/Dashboard");
         } else {
           return res.json();
         }

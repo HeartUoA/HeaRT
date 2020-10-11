@@ -68,6 +68,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       .then((res) => {
         if (res.status !== 200) {
           updateDimensions([]);
+          props.history.push("/Dashboard");
         } else {
           return res.json();
         }
