@@ -110,8 +110,6 @@ router
           .status(403)
           .json("You do not have permissions to view charts for this course");
       }
-      charts[charts.length] =
-        "To get dimensions for any of these charts, access the /api/dimensions/forchart/{chartID} endpoint";
       response.status(200).json(charts);
     } catch (error) {
       return response.status(400).send(error);
