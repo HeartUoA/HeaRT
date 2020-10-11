@@ -30,67 +30,63 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   useEffect(() => {
-    const fetchCharts = async (): Promise<void> => {
-      fetch(`${API_DOMAIN}course/${params.courseID}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${cookies["accessToken"]}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setCourseName(createCourse(data[0]).name);
-        });
-
-      async function setChartsWithDimensions() {
-        let chartsArray: Chart[] = [];
-        await Object.keys(chartsToCompareIDs).forEach(
-          async (key: string): Promise<void> => {
-            const chartData = await fetch(
-              `${API_DOMAIN}chart/${chartsToCompareIDs[key]}`,
-              {
-                method: "GET",
-                headers: {
-                  Authorization: `Bearer ${cookies["accessToken"]}`,
-                  "Content-Type": "application/json",
-                  Accept: "application/json",
-                },
-              }
-            );
-            const chart = await chartData.json();
-
-            // Get dimensions
-            const dimensionData = await fetch(
-              `${API_DOMAIN}dimensions/forchart/${chartsToCompareIDs[key]}`,
-              {
-                method: "GET",
-                headers: {
-                  Authorization: `Bearer ${cookies["accessToken"]}`,
-                  "Content-Type": "application/json",
-                  Accept: "application/json",
-                },
-              }
-            );
-            const dimensions = await dimensionData.json();
-            const finalChart: Chart = {
-              ...createStubChart(chart),
-              dimensions: dimensions.map((dimension: any) => {
-                return createDimension(dimension);
-              }),
-            };
-            chartsArray.push(finalChart);
-
-            setCharts(chartsArray);
-            console.log(chartsArray);
-          }
-        );
-      }
-      setChartsWithDimensions();
-    };
     fetchCharts();
   }, [chartsToCompareIDs, cookies, params.courseID]);
+
+  const fetchCharts = async (): Promise<void> => {
+    await fetch(`${API_DOMAIN}course/${params.courseID}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${cookies["accessToken"]}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCourseName(createCourse(data[0]).name);
+      });
+    let chartsArray: Chart[] = [];
+
+    await Promise.all(
+      Object.keys(chartsToCompareIDs).map(async (key: string) => {
+        const chartData = await fetch(
+          `${API_DOMAIN}chart/${chartsToCompareIDs[key]}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${cookies["accessToken"]}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        const chart = await chartData.json();
+
+        // Get dimensions
+        const dimensionData = await fetch(
+          `${API_DOMAIN}dimensions/forchart/${chartsToCompareIDs[key]}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${cookies["accessToken"]}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        const dimensions = await dimensionData.json();
+        const finalChart: Chart = {
+          ...createStubChart(chart),
+          dimensions: dimensions.map((dimension: any) => {
+            return createDimension(dimension);
+          }),
+        };
+        chartsArray.push(finalChart);
+      })
+    );
+    setCharts(chartsArray);
+  };
 
   const onBackClick = () => {
     props.history.push("/Dashboard");
