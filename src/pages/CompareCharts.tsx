@@ -42,11 +42,22 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          props.history.push("/Dashboard");
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        setCourseName(createCourse(data[0]).name);
+        data && setCourseName(createCourse(data[0]).name);
       });
     let chartsArray: Chart[] = [];
+
+    if (chartsToCompareIDs === undefined) {
+      props.history.push("/Dashboard");
+      return;
+    }
 
     await Promise.all(
       Object.keys(chartsToCompareIDs).map(async (key: string) => {
