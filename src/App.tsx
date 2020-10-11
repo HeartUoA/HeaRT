@@ -57,6 +57,9 @@ const App: React.FC = () => {
           <Route path="/CompareCharts">
             <CompareCharts />
           </Route>
+          <Route path="*">
+            <Dashboard />
+          </Route>
         </Switch>
       </Router>
     </CookiesProvider>

@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Card, Typography } from "antd";
 import "../styles/Chart.css";
 
-import emptyCheckbox from "../assets/images/emptycheckbox.png";
-import checkbox from "../assets/images/checkbox.png";
+import emptyCheckbox from "../assets/images/checkbox-empty.svg";
+import checkbox from "../assets/images/checkbox-ticked.svg";
 import printbox from "../assets/images/printbox.png";
 
 interface ChartProps {
@@ -48,6 +48,7 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
       className="Chart-Card"
       onClick={() => props.onCardClick(props.chartID, props.isComplete)}
     >
+      {!props.isComplete && <div className="Incomplete-Tag">Incomplete</div>}
       <img
         className="Printbox"
         src={printbox}
@@ -55,7 +56,7 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
         onClick={(event) => onPrintClick(event)}
       />
       <img
-        className="Checkbox"
+        className={isSelected ? "Ticked-Checkbox" : "Empty-Checkbox"}
         src={isSelected ? checkbox : emptyCheckbox}
         alt="checkbox"
         onClick={(event) => onCheckboxClick(event)}

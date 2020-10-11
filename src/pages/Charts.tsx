@@ -57,9 +57,15 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          props.history.push("/Dashboard");
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        setCourseName(createCourse(data[0]).name);
+        data && setCourseName(createCourse(data[0]).name);
       });
 
     await fetch(`${API_DOMAIN}course/${courseID}/chart`, {

@@ -25,18 +25,38 @@
   filter: brightness(90%);
 }
 
-.Checkbox {
+.Incomplete-Tag {
   position: absolute;
   top: 15px;
-  right: 15px;
+  left: 18px;
   height: 35px;
-  filter: brightness(50%);
+  width: 100px;
+  border-radius: 10px;
+  border: 1px solid #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #212121;
 }
+
+.Empty-Checkbox {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  height: 41px;
+}
+.Ticked-Checkbox {
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  height: 45px;
+}
+
 .Printbox {
   position: absolute;
   top: 15px;
   right: 55px;
   height: 35px;
-  margin-right: 5px;
-  filter: brightness(50%);
 }
