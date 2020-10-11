@@ -49,14 +49,22 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 404) {
+          setCourses([]);
+        } else if (res.status === 200) {
+          return res.json();
+        }
+      })
       .then((data) => {
-        setCourses(
-          data.map((course: any) => {
-            return createCourse(course);
-          })
-        );
-      });
+        data &&
+          setCourses(
+            data.map((course: any) => {
+              return createCourse(course);
+            })
+          );
+      })
+      .catch((e) => console.log(e));
   };
 
   const onInstructionsClick = () => {
