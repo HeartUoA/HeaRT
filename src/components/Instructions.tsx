@@ -7,7 +7,7 @@ const stepOneImg = require("../assets/images/instructionsStart.png");
 const stepTwoImg = require("../assets/images/fillCourse.png");
 const stepThreeImg = require("../assets/images/openCourse.png");
 const stepFourImg = require("../assets/images/reasonToPlay.png");
-const stepFiveImg = require("../assets/images/pickCard.gif");
+const stepFiveImg = require("../assets/images/pickEditCard.gif");
 const stepSixImg = require("../assets/images/selectAlignment.gif");
 const stepSevenImg = require("../assets/images/preview.png");
 const stepEightImg = require("../assets/images/compareCharts.gif");
@@ -79,10 +79,9 @@ const instructionSteps: { [key: number]: Step } = {
         You will be presented with the first pair of cards. <br /> If the
         statements on the cards are applicable to your course, pick one that
         resonates with you the most 💓 <br /> If the statements are not
-        applicable, don't worry, you can always skip to the next pair! ⏭️ <br />{" "}
-        You must complete at least 8 pairs to finish the game. <br />{" "}
-        Psst🤫...in the future versions we will add the ability to edit
-        statements, so you can tailor the HeaRT game to your course.
+        applicable, don't worry, you can edit them to be more specific to your
+        course OR you can always skip to the next pair! ⏭️ <br /> You must
+        complete at least 8 pairs to finish the game. <br />{" "}
       </div>
     ),
     image: stepFiveImg,

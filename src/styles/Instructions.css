@@ -11,9 +11,11 @@
   background-color: transparent;
   box-shadow: none;
   border: none;
+  cursor: pointer;
 }
 .Navigation-Button:disabled {
   color: grey;
+  cursor: not-allowed;
 }
 .Instructions-Container {
   text-align: center;
