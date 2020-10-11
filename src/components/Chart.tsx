@@ -50,16 +50,18 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
     >
       {!props.isComplete && <div className="Incomplete-Tag">Incomplete</div>}
       <img
-        className="Printbox"
+        className="Printbox Enabled"
         src={printbox}
         alt="printbox"
         onClick={(event) => onPrintClick(event)}
       />
       <img
-        className={isSelected ? "Ticked-Checkbox" : "Empty-Checkbox"}
+        className={`${isSelected ? "Ticked-Checkbox" : "Empty-Checkbox"} ${
+          props.isComplete ? "Enabled" : "Disabled"
+        }`}
         src={isSelected ? checkbox : emptyCheckbox}
         alt="checkbox"
-        onClick={(event) => onCheckboxClick(event)}
+        onClick={(event) => props.isComplete && onCheckboxClick(event)}
       />
       <Typography>
         {props.createdAt.toLocaleDateString("en-NZ", dateOptions)}
