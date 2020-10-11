@@ -65,13 +65,20 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((responseChart) => responseChart.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          updateDimensions([]);
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        updateDimensions(
-          data.map((dimension: any) => {
-            return createDimension(dimension);
-          })
-        );
+        data &&
+          updateDimensions(
+            data.map((dimension: any) => {
+              return createDimension(dimension);
+            })
+          );
       });
   };
 
