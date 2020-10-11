@@ -110,8 +110,9 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onCompare = () => {
-    // TODO Compare charts (ID's stored in selectedCharts array)
-    props.history.push("/CompareCharts");
+    props.history.push(`/CompareCharts?courseID=${courseID}`, {
+      chartIDs: selectedCharts,
+    });
   };
 
   const onChartSelected = (chartID: string, isSelected: boolean) => {
