@@ -112,14 +112,28 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
             <Typography className="Preview-Title">{courseName}</Typography>
             <Col className="Charts-Compare-Row">
               {chartsToCompare[0].dimensions.map((item, index) => {
-                if (item.userSelectedSliderPos !== -1) {
+                if (
+                  chartsToCompare.some((chart) => {
+                    return chart.dimensions[index].userSelectedSliderPos !== -1;
+                  })
+                ) {
                   return (
                     <DimensionComparator
                       {...{
-                        dimensions: chartsToCompare.map(
-                          (chart) => chart.dimensions[index]
-                        ),
-                        dates: chartsToCompare.map((chart) => chart.createdAt),
+                        dimensions: chartsToCompare
+                          .filter(
+                            (chart) =>
+                              chart.dimensions[index].userSelectedSliderPos !==
+                              -1
+                          )
+                          .map((chart) => chart.dimensions[index]),
+                        dates: chartsToCompare
+                          .filter(
+                            (chart) =>
+                              chart.dimensions[index].userSelectedSliderPos !==
+                              -1
+                          )
+                          .map((chart) => chart.createdAt),
                         isPreview: true,
                         key: item.name,
                       }}
