@@ -9,9 +9,19 @@ const chartSchemaDef = {
     type: Date,
     required: true,
   },
+  isComplete: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   reasonOfPlay: {
     type: String,
     required: false,
+  },
+  createdByUserID: {
+    type: String,
+    required: true,
+    unique: false,
   },
 };
 

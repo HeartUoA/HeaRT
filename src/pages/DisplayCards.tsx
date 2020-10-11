@@ -15,7 +15,7 @@ import {
 } from "../types/dimension";
 
 import { DEFAULT_COLOURS, getColours } from "../utils/cards";
-import { API_DOMAIN } from "../config";
+import { API_DOMAIN, MINIMUM_REQUIRED } from "../config";
 
 import edit from "../assets/images/edit.svg";
 import save from "../assets/images/save.png";
@@ -172,12 +172,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     if (dimensionIndex < allDimensions!.length - 1) {
       setNewDimension(dimensionIndex + 1);
     } else if (dimensionIndex === allDimensions!.length - 1) {
-      if (progress.completed >= 8) {
+      if (progress.completed >= MINIMUM_REQUIRED) {
         props.history.push(
           `/Preview?courseID=${params.courseID}&chartID=${params.chartID}`
         );
       } else {
-        // Display modal to say at least 8 dimensions must be completed
+        // Display modal to say at least MINIMUM_REQUIRED dimensions must be completed
         setShowIncompleteModal(true);
       }
     }
@@ -349,7 +349,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   };
 
   const toCompleteDimensions = () => {
-    let toComplete = 8 - progress.completed;
+    let toComplete = MINIMUM_REQUIRED - progress.completed;
     return toComplete;
   };
 
@@ -373,7 +373,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           ]}
         >
           <p>
-            You must complete at least 8 dimensions to save your chart.
+            You must complete at least {MINIMUM_REQUIRED} dimensions to save
+            your chart.
             <br />
             Please complete {toCompleteDimensions()} more dimensions.
           </p>
@@ -539,12 +540,13 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
           </Button>
           <div className="Progress">
             <Typography>
-              Completed: {progress.completed}/{progress.total} (Required: 8)
+              Completed: {progress.completed}/{progress.total} (Required:{" "}
+              {MINIMUM_REQUIRED})
             </Typography>
             <Progress
               className="Progress-Bar"
               strokeColor={
-                progress.completed >= 8
+                progress.completed >= MINIMUM_REQUIRED
                   ? {
                       from: "#32C5FF",
                       to: "#00D49B",
@@ -555,7 +557,9 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
                     }
               }
               trailColor="#C3C6D4"
-              status={progress.completed >= 8 ? "success" : "active"}
+              status={
+                progress.completed >= MINIMUM_REQUIRED ? "success" : "active"
+              }
               percent={(progress.completed / progress.total) * 100}
               showInfo={false}
               strokeWidth={20}
