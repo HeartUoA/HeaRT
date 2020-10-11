@@ -100,7 +100,7 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onBackClick = () => {
-    props.history.push("/Dashboard");
+    props.history.push(`/Course/${params.courseID}`);
   };
 
   return (
