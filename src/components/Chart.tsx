@@ -44,6 +44,7 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
 
   return (
     <Card
+      key={props.chartID}
       className="Chart-Card"
       onClick={() => props.onCardClick(props.chartID, props.isComplete)}
     >
