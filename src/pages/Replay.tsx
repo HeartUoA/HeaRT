@@ -38,27 +38,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
   };
 
   const playAgainForSameCourse = async (): Promise<any> => {
-    // TODO: Need to redirect to Reason of Play once that is done
-    await fetch(`${API_DOMAIN}course/${params.courseID}/chart`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${cookies["accessToken"]}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          props.history.push("/Dashboard");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        props.history.push(
-          `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`
-        );
-      });
+    props.history.push(`/PlayReason?courseID=${params.courseID}`);
   };
 
   const goToDashboard = () => {
