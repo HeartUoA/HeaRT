@@ -123,7 +123,6 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   const onCompare = () => {
     // TODO Compare charts (ID's stored in selectedCharts array)
     props.history.push("/CompareCharts");
-    console.log(selectedCharts);
   };
 
   const onChartSelected = (chartID: string, isSelected: boolean) => {
@@ -141,12 +140,13 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
 
   const onChartClick = (chartID: string, isComplete: boolean) => {
     if (isComplete) {
-      props.history.push(
-      `/Preview?courseID=${courseID}&chartID=${chartID}`, { from: "Charts" }
-      );
+      props.history.push(`/Preview?courseID=${courseID}&chartID=${chartID}`, {
+        from: "Charts",
+      });
     } else {
       props.history.push(
-        `/DisplayCards?courseID=${courseID}&chartID=${chartID}`, { from: "Charts" }
+        `/DisplayCards?courseID=${courseID}&chartID=${chartID}`,
+        { from: "Charts" }
       );
     }
   };
