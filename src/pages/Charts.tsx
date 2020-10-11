@@ -97,25 +97,8 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     setShowInstructions(!showInstructions);
   };
 
-  const createChart = async (): Promise<any> => {
-    await fetch(`${API_DOMAIN}course/${courseID}/chart`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${cookies["accessToken"]}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        props.history.push(
-          `/PlayReason?courseID=${courseID}&chartID=${data.chartID}`
-        );
-      });
+  const redirectToCreateNewChart = () => {
+    props.history.push(`/PlayReason?courseID=${courseID}`);
   };
 
   const handleResize = () => {
@@ -181,7 +164,10 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
               marginRight: dashboardCardsMargin,
             }}
           >
-            <Button className="Create-Button" onClick={createChart}>
+            <Button
+              className="Create-Button"
+              onClick={redirectToCreateNewChart}
+            >
               <img src={plus} className="Plus-Image" alt="plus" />
               <Typography>New Chart</Typography>
             </Button>
