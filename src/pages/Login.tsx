@@ -61,6 +61,12 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     props.history.push("/SignUp");
   };
 
+  const handleKeypress = (key: string) => {
+    if (key === "Enter") {
+      onConfirmClick();
+    }
+  };
+
   return (
     <div className="Login">
       <Header />
@@ -84,6 +90,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
                 name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyPress={(e) => handleKeypress(e.key)}
               />
             </div>
             <div>
@@ -97,6 +104,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => handleKeypress(e.key)}
               />
             </div>
           </div>
