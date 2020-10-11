@@ -45,7 +45,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
               ", " +
               moment(props.dates[index]).format("DD MMM YYYY (HH:mmA)")
             }
-            style={{ position: "relative", textAlign: "center" }}
+            style={{ position: "relative" }}
             color={Object.values(colours)[index]}
           >
             <div
@@ -64,7 +64,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
         style: { color: Object.values(colours)[index], fontSize: "0.8em" },
         label: (
           <Tooltip
-            style={{ position: "relative", textAlign: "center" }}
+            style={{ position: "relative" }}
             title={moment(props.dates[index]).format("DD MMM YYYY (HH:mmA)")}
             color={Object.values(colours)[index]}
           >
