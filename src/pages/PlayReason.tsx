@@ -107,7 +107,6 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
               onChange={(e) => {
                 setState(e.target.value);
                 setError("");
-                console.log(e);
               }}
               value={state}
             >
