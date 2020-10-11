@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Typography, Image } from "antd";
+import { Card, Typography, Image, Button } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import "../styles/Instructions.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -166,20 +166,20 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
             {instructionSteps[instructionsState.currentStep].title}
           </Title>
           <div className="Navigation-Container">
-            <button
+            <Button
               className="Navigation-Button"
               disabled={instructionsState.currentStep <= 1}
               onClick={(e) => changeStep(-1)}
             >
               <LeftOutlined />
-            </button>
+            </Button>
             <span className="Instructions-Image">
               <Image
                 width={650}
                 src={instructionSteps[instructionsState.currentStep].image}
               />
             </span>
-            <button
+            <Button
               className="Navigation-Button"
               disabled={
                 instructionsState.currentStep ===
@@ -188,7 +188,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
               onClick={(e) => changeStep(1)}
             >
               <RightOutlined />
-            </button>
+            </Button>
           </div>
           <span className="Instructions-Text">
             <Typography>
