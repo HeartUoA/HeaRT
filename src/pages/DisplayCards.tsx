@@ -102,13 +102,20 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         Accept: "application/json",
       },
     })
-      .then((responseChart) => responseChart.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          props.history.push("/Dashboard");
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        setAllDimensions(
-          data.map((dimension: any) => {
-            return createDimension(dimension);
-          })
-        );
+        data &&
+          setAllDimensions(
+            data.map((dimension: any) => {
+              return createDimension(dimension);
+            })
+          );
         setRetrieved(true);
       });
   };
