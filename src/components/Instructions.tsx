@@ -32,7 +32,7 @@ const instructionSteps: { [key: number]: Step } = {
     description: (
       <div>
         {" "}
-        Press <b>Create New Course</b> if you have not added any courses yet.
+        Click <b>Create New Course</b> if you have not added any courses yet.
         <br />
       </div>
     ),
@@ -63,7 +63,7 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Create chart and enter the reason of playing",
     description: (
       <div>
-        Press Create Chart on your course page. Once you press the button, HeaRT
+        Click Create Chart on your course page. Once you click the button, HeaRT
         will ask you what is you goal for playing today
         <br />
         Please tell us why you are playing the game. This helps us understand
@@ -105,7 +105,7 @@ const instructionSteps: { [key: number]: Step } = {
       <div>
         Once you went through all teaching dimensions, you can preview your
         answers and go back to any card you would like to edit. <br />
-        If you are happy with results, don't hesitate to press 'Save Chart'! 💾
+        If you are happy with results, don't hesitate to click 'Save Chart'! 💾
       </div>
     ),
     image: stepSevenImg,
@@ -116,7 +116,7 @@ const instructionSteps: { [key: number]: Step } = {
       <div>
         With HeaRT you can also compare up to three charts to each other in
         order to see how they align with each other. To do that, select two or
-        more charts on the dashboard and press 'Compare Charts'! <br />
+        more charts on the dashboard and click 'Compare Charts'! <br />
         You can see how your charts stack up to each other on the dimension bar
         for each card - each color corresponds to a chart. You can see the date
         of that chart if you hover over the colored dot! You can also see the
@@ -131,9 +131,9 @@ const instructionSteps: { [key: number]: Step } = {
       <div>
         If you would like to use HeaRT in real life, you can always print the
         paper version of the tool! <br />
-        To print out cards, press the 🖨️ icon on a chart you would like to print
-        cards for. If you are happy with the way it looks, press 'Print' button
-        and follow your printer's instructions.
+        To print out cards, click the 🖨️ icon on a chart you would like to print
+        cards for. If you are happy with the way it looks, click the 'Print'
+        button and follow your printer's instructions.
       </div>
     ),
     image: stepNineImg,
@@ -175,7 +175,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
             </Button>
             <span className="Instructions-Image">
               <Image
-                width={650}
+                width={600}
                 src={instructionSteps[instructionsState.currentStep].image}
               />
             </span>
