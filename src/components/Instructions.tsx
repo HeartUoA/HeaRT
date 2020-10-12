@@ -100,7 +100,7 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepSixImg,
   },
   7: {
-    title: "Choose the position on the dimension bar",
+    title: "Preview your chart",
     description: (
       <div>
         Once you went through all teaching dimensions, you can preview your
@@ -131,9 +131,9 @@ const instructionSteps: { [key: number]: Step } = {
       <div>
         If you would like to use HeaRT in real life, you can always print the
         paper version of the tool! <br />
-        To print out cards, press on the 🖨️ icon on a chart you would like to
-        print cards for. If you are happy with the way it looks, press 'Print'
-        button and follow your printer's instructions.
+        To print out cards, press the 🖨️ icon on a chart you would like to print
+        cards for. If you are happy with the way it looks, press 'Print' button
+        and follow your printer's instructions.
       </div>
     ),
     image: stepNineImg,
