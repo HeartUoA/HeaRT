@@ -11,18 +11,34 @@
   background-color: transparent;
   box-shadow: none;
   border: none;
+  cursor: pointer;
+  height: min-content;
+}
+@media (max-width: 1000px) {
+  .Navigation-Button {
+    font-size: 2em;
+  }
 }
 .Navigation-Button:disabled {
   color: grey;
+  cursor: not-allowed;
+  background-color: transparent;
 }
+.Navigation-Button:hover,
+.Navigation-Button:focus {
+  background-color: transparent !important;
+}
+
 .Instructions-Container {
   text-align: center;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: visible;
   height: 100%;
 }
 
 .Instructions-Image {
-  padding: 3em;
+  padding-top: 3em;
+  padding-bottom: 3em;
   height: auto;
   width: auto;
 }
@@ -31,10 +47,10 @@
   text-align: left;
   font-size: medium;
   overflow: auto;
+  padding-bottom: 2em;
 }
 
 .Instructions-Counter {
   background-color: white;
-  position: absolute;
   bottom: 2em;
 }

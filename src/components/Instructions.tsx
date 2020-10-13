@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Card, Typography, Image } from "antd";
+import { Card, Typography, Image, Button } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import "../styles/Instructions.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-const stepOneImg = require("../assets/images/instructionsStart.JPG");
-const stepTwoImg = require("../assets/images/instructionsPickCard.JPG");
+const stepOneImg = require("../assets/images/instructionsStart.png");
+const stepTwoImg = require("../assets/images/fillCourse.png");
+const stepThreeImg = require("../assets/images/openCourse.png");
+const stepFourImg = require("../assets/images/reasonToPlay.png");
+const stepFiveImg = require("../assets/images/pickEditCard.gif");
+const stepSixImg = require("../assets/images/selectAlignment.gif");
+const stepSevenImg = require("../assets/images/preview.png");
+const stepEightImg = require("../assets/images/compareCharts.gif");
+const stepNineImg = require("../assets/images/printCards.gif");
+
 const { Title } = Typography;
 
 interface InstructionsProps {
@@ -20,67 +28,116 @@ type Step = {
 
 const instructionSteps: { [key: number]: Step } = {
   1: {
-    title: "Start the game",
+    title: "Create New Course",
     description: (
       <div>
         {" "}
-        Press <b>Play</b> and fill in your course details.
-        <br /> This should be the course that you would like to evaluate! 📜
+        Click <b>Create New Course</b> if you have not added any courses yet.
+        <br />
       </div>
     ),
     image: stepOneImg,
   },
   2: {
-    title: "Pick the card",
+    title: "Fill in the details",
     description: (
       <div>
-        You will be presented with the first pair of cards. <br /> If the
-        statements on the cards are applicable to your course, pick one that
-        resonates with you the most 💓 <br /> If the statements are not
-        applicable, don't worry, you can always skip to the next pair! ⏭️ You
-        must complete at least 8 pairs to finish the game. <br /> Psst🤫...in
-        the future versions we will add the ability to edit statements, so you
-        can tailor the HeaRT game to your course.
+        Complete your course details, so we know which course you are playing
+        the game for!
+        <br /> This should be the course that you would like to evaluate! 📜
       </div>
     ),
     image: stepTwoImg,
   },
   3: {
-    title: "Select your course dimension",
+    title: "Open course",
+    description: (
+      <div>
+        Open the course you created (or any other course that you would like to
+        evaluate).
+      </div>
+    ),
+    image: stepThreeImg,
+  },
+  4: {
+    title: "Create chart and enter the reason of playing",
+    description: (
+      <div>
+        Click Create Chart on your course page. Once you click the button, HeaRT
+        will ask you why are you playing today.
+        <br />
+        Please tell us why you are playing the game. This helps us understand
+        your needs and lets us continue improving the HeaRT tool for you!❤️
+      </div>
+    ),
+    image: stepFourImg,
+  },
+  5: {
+    title: "Pick the statement",
+    description: (
+      <div>
+        You will be presented with the first pair of cards. <br /> If the
+        statements on the cards are applicable to your course, pick one that
+        resonates with you the most 💓 <br /> If the statements are not
+        applicable, don't worry, you can edit them to be more specific to your
+        course OR you can always skip to the next pair! ⏭️ <br /> You must
+        complete at least 8 pairs to finish the game. <br />{" "}
+      </div>
+    ),
+    image: stepFiveImg,
+  },
+  6: {
+    title: "Choose the position on the dimension bar",
     description: (
       <div>
         When you pick a statement you are presented with a dimension bar. You
         need to select your stance on the dimension: how much does your course
         tend towards one card over the other. <br /> For example, is your course
         more teacher-managed, or is it more student-managed? 🤔 <br />
-        In future versions, you will be able to explain your choice for each
-        dimension in a text note.
+        You can also add a note to explain your choice. 📜
       </div>
     ),
-    image: stepOneImg,
+    image: stepSixImg,
   },
-  4: {
-    title: "Preview and edit your chart",
+  7: {
+    title: "Preview your chart",
     description: (
       <div>
-        Once you went through all teaching dimensions, you can preview and edit
-        your answers before saving your chart 💾
+        Once you have been through all teaching dimensions, you can preview your
+        answers and go back to any card you would like to edit. <br />
+        If you are happy with the results, don't hesitate to click 'Save Chart'!
+        💾
       </div>
     ),
-    image: stepTwoImg,
+    image: stepSevenImg,
   },
-  5: {
-    title: "Save your chart",
+  8: {
+    title: "Compare charts",
     description: (
       <div>
-        {" "}
-        Save your chart, and compare your answers with your colleagues to see
-        what your perspectives on the course are. Discuss the results, and play
-        the game again as needed! <br />
-        The HeaRT tool is all about sparking the conversation 🔥
+        With HeaRT you can also compare up to three charts to see how they align
+        with each other. To do this, select two or more charts on the dashboard
+        and click 'Compare Charts'! <br />
+        You can see how your charts stack up to each other on the dimension bar
+        for each card - each color corresponds to a chart. <br /> You can see
+        the date of that chart if you hover over the colored dot! You can also
+        see the notes associated with each chart in the tab section.
       </div>
     ),
-    image: stepOneImg,
+    image: stepEightImg,
+  },
+  9: {
+    title: "Print paper version of HeaRT",
+    description: (
+      <div>
+        If you would like to use HeaRT in real life, you can always print the
+        paper version of the tool! <br />
+        To print out cards, click the 🖨️ icon on a chart you would like to print
+        cards for. If you are happy with the way it looks, click the 'Print'
+        button and follow your printer's instructions.
+      </div>
+    ),
+    image: stepNineImg,
   },
 };
 const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
@@ -101,7 +158,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
       onOk={props.hide}
       onCancel={props.hide}
       width={window.innerWidth * 0.6}
-      bodyStyle={{ height: window.innerHeight * 0.6, position: "relative" }}
+      bodyStyle={{ height: "fit-content", minWidth: "fit-content" }}
       footer={null}
     >
       <div className="Instructions-Container">
@@ -110,20 +167,20 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
             {instructionSteps[instructionsState.currentStep].title}
           </Title>
           <div className="Navigation-Container">
-            <button
+            <Button
               className="Navigation-Button"
               disabled={instructionsState.currentStep <= 1}
               onClick={(e) => changeStep(-1)}
             >
               <LeftOutlined />
-            </button>
+            </Button>
             <span className="Instructions-Image">
               <Image
-                width={400}
+                width={window.innerWidth * 0.3}
                 src={instructionSteps[instructionsState.currentStep].image}
               />
             </span>
-            <button
+            <Button
               className="Navigation-Button"
               disabled={
                 instructionsState.currentStep ===
@@ -132,7 +189,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
               onClick={(e) => changeStep(1)}
             >
               <RightOutlined />
-            </button>
+            </Button>
           </div>
           <span className="Instructions-Text">
             <Typography>
