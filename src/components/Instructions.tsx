@@ -64,10 +64,10 @@ const instructionSteps: { [key: number]: Step } = {
     description: (
       <div>
         Click Create Chart on your course page. Once you click the button, HeaRT
-        will ask you what is you goal for playing today
+        will ask you why are you playing today
         <br />
         Please tell us why you are playing the game. This helps us understand
-        your needs and continue improving HeaRT tool for you!❤️
+        your needs and lets us continue improving the HeaRT tool for you!❤️
       </div>
     ),
     image: stepFourImg,
@@ -103,9 +103,10 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Preview your chart",
     description: (
       <div>
-        Once you went through all teaching dimensions, you can preview your
+        Once you have been through all teaching dimensions, you can preview your
         answers and go back to any card you would like to edit. <br />
-        If you are happy with results, don't hesitate to click 'Save Chart'! 💾
+        If you are happy with the results, don't hesitate to click 'Save Chart'!
+        💾
       </div>
     ),
     image: stepSevenImg,
@@ -114,9 +115,9 @@ const instructionSteps: { [key: number]: Step } = {
     title: "Compare charts",
     description: (
       <div>
-        With HeaRT you can also compare up to three charts to each other in
-        order to see how they align with each other. To do that, select two or
-        more charts on the dashboard and click 'Compare Charts'! <br />
+        With HeaRT you can also compare up to three charts to see how they align
+        with each other. To do this, select two or more charts on the dashboard
+        and click 'Compare Charts'! <br />
         You can see how your charts stack up to each other on the dimension bar
         for each card - each color corresponds to a chart. <br /> You can see
         the date of that chart if you hover over the colored dot! You can also
@@ -157,7 +158,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
       onOk={props.hide}
       onCancel={props.hide}
       width={window.innerWidth * 0.6}
-      bodyStyle={{ height: "fit-content" }}
+      bodyStyle={{ height: "fit-content", minWidth: "fit-content" }}
       footer={null}
     >
       <div className="Instructions-Container">
