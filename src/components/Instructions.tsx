@@ -157,7 +157,7 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
       onOk={props.hide}
       onCancel={props.hide}
       width={window.innerWidth * 0.6}
-      bodyStyle={{ height: window.innerHeight * 0.5 }}
+      bodyStyle={{ height: "fit-content" }}
       footer={null}
     >
       <div className="Instructions-Container">

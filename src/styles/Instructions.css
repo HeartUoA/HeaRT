@@ -32,6 +32,7 @@
 .Instructions-Container {
   text-align: center;
   overflow-y: auto;
+  overflow-x: visible;
   height: 100%;
 }
 
@@ -46,10 +47,10 @@
   text-align: left;
   font-size: medium;
   overflow: auto;
+  padding-bottom: 2em;
 }
 
 .Instructions-Counter {
   background-color: white;
-  position: absolute;
   bottom: 2em;
 }
