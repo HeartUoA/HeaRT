@@ -14,6 +14,11 @@
   cursor: pointer;
   height: min-content;
 }
+@media (max-width: 1000px) {
+  .Navigation-Button {
+    font-size: 2em;
+  }
+}
 .Navigation-Button:disabled {
   color: grey;
   cursor: not-allowed;
@@ -26,12 +31,13 @@
 
 .Instructions-Container {
   text-align: center;
-  overflow: auto;
+  overflow-y: auto;
   height: 100%;
 }
 
 .Instructions-Image {
-  padding: 3em;
+  padding-top: 3em;
+  padding-bottom: 3em;
   height: auto;
   width: auto;
 }
