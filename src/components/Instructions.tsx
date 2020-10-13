@@ -64,7 +64,7 @@ const instructionSteps: { [key: number]: Step } = {
     description: (
       <div>
         Click Create Chart on your course page. Once you click the button, HeaRT
-        will ask you why are you playing today
+        will ask you why are you playing today.
         <br />
         Please tell us why you are playing the game. This helps us understand
         your needs and lets us continue improving the HeaRT tool for you!❤️
@@ -94,7 +94,7 @@ const instructionSteps: { [key: number]: Step } = {
         need to select your stance on the dimension: how much does your course
         tend towards one card over the other. <br /> For example, is your course
         more teacher-managed, or is it more student-managed? 🤔 <br />
-        You can also add a note to explain your choice 📜
+        You can also add a note to explain your choice. 📜
       </div>
     ),
     image: stepSixImg,
