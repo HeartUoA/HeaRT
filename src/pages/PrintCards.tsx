@@ -5,7 +5,7 @@ import ReactToPrint from "react-to-print";
 import { useReactToPrint } from "react-to-print";
 import { Button, Spin } from "antd";
 import Header from "../components/Header";
-import Dimension from "../components/PrintDimension";
+import PrintDimensionCards from "../components/PrintDimensionCards";
 import "../styles/PrintCards.css";
 import "../styles/Footer.css";
 import * as QueryString from "query-string";
@@ -14,72 +14,6 @@ import {
   Dimension as DimensionType,
   createDimension,
 } from "../types/dimension";
-
-const PRACTICE_BG_COLOUR = "#ffc4d3";
-const BELIEF_BG_COLOUR = "#c4ddff";
-
-interface DimensionProps {
-  passAllDimensions: DimensionType[];
-}
-
-class ComponentToPrint extends React.Component<DimensionProps> {
-  render() {
-    const allDimensions =
-      this.props.passAllDimensions && this.props.passAllDimensions;
-    return (
-      <div>
-        {allDimensions.map((currElement: any, index: number) => (
-          <>
-            <div
-              className="PrintingCards"
-              style={
-                allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PRACTICE_BG_COLOUR }
-                  : { backgroundColor: BELIEF_BG_COLOUR }
-              }
-            >
-              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-              <span className="Print-Card-Text">
-                {index % 2
-                  ? allDimensions[index].rightCard.statement
-                  : allDimensions[index].leftCard.statement}
-              </span>
-            </div>
-            <div className="PrintingCards">
-              <Dimension
-                dimensionValue={index}
-                secondStatement={false}
-                allDimensions={allDimensions[index]}
-              />
-            </div>
-            <div
-              className="PrintingCards"
-              style={
-                allDimensions && allDimensions[index].type === "Practice"
-                  ? { backgroundColor: PRACTICE_BG_COLOUR }
-                  : { backgroundColor: BELIEF_BG_COLOUR }
-              }
-            >
-              <span className="Print-Card-Text-TopLeft">{index + 1}</span>
-              <span className="Print-Card-Text">
-                {index % 2
-                  ? allDimensions[index].leftCard.statement
-                  : allDimensions[index].rightCard.statement}
-              </span>
-            </div>
-            <div className="PrintingCards">
-              <Dimension
-                dimensionValue={index}
-                secondStatement={true}
-                allDimensions={allDimensions[index]}
-              />
-            </div>
-          </>
-        ))}
-      </div>
-    );
-  }
-}
 
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
@@ -139,7 +73,7 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
         </div>
         <div className="PrintCardsContainer">
           <div className="PrintCardsContent">
-            <ComponentToPrint
+            <PrintDimensionCards
               ref={componentRef}
               passAllDimensions={allDimensions}
             />
