@@ -12,6 +12,7 @@ interface CourseProps {
 const Course: React.FC<CourseProps> = (props: CourseProps) => {
   let history = useHistory();
 
+  // Redirect the user to the Course Dashboard to see charts created for that course
   const onClick = () => {
     history.push(`/Course/${props.courseID}`);
   };

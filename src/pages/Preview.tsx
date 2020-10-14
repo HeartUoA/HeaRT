@@ -30,16 +30,19 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     undefined
   );
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Fetch data from backend on component mount
   useEffect(() => {
     fetchDimensions();
   }, []);
 
+  // Once the dimensions are retrieved, check whether the minimum required dimensions have been completed
   useEffect(() => {
     fetchRequirementsMet();
   }, [dimensions]);
@@ -56,6 +59,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Retrieves the dimensions for the chart from the backend
   const fetchDimensions = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}dimensions/forchart/` + params.chartID, {
       method: "GET",
@@ -84,10 +88,12 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
       .catch((e) => console.log(e));
   };
 
+  // Opens a preview dimension in "Full View" mode so that the user explanation can also be modified and the card statements are visible
   const onSelectDimension = (dimensionKey?: string) => {
     setSelectedDimension(dimensionKey);
   };
 
+  // Return to Display Cards (the game)
   const onBackClick = () => {
     if (selectedDimension) {
       onSelectDimension(undefined);
@@ -99,10 +105,12 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Save the chart and redirect to Replay page
   const onSaveClick = () => {
     if (selectedDimension) {
       setSave(true);
     } else {
+      // Individually update each dimension on save
       dimensions?.map((item) => {
         saveOneDimension(item);
       });
@@ -112,6 +120,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Updates the chart to be completed in the backend
   const updateProgress = async () => {
     await fetch(`${API_DOMAIN}chart/${params.chartID}`, {
       method: "PUT",
@@ -124,6 +133,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     });
   };
 
+  // Updates the data for the dimension in the backend
   const saveOneDimension = async (cardDimension: Dimension) => {
     const dimension = createBackendDimension(cardDimension);
     await fetch(`${API_DOMAIN}dimensions/` + dimension.id, {
@@ -137,6 +147,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     });
   };
 
+  // Locally saves the changes made to a dimension in "Full View" mode and return to preview mode (to see all dimensions)
   const onSaveSingleDimension = (updatedDimension: Dimension) => {
     updateDimensions(
       dimensions!.map((item) => {
@@ -151,6 +162,7 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
     setSave(false);
   };
 
+  // Function to save the new slider positions for a dimension locally
   const previewSliderPosChange = (value: number, dimensionKey: string) => {
     updateDimensions(
       dimensions!.map((item) => {
@@ -178,12 +190,12 @@ const Preview: React.FC<RouteComponentProps> = (props) => {
             {dimensions.map((item) => {
               if (
                 item.userSelectedSliderPos !== -1 &&
-                (!selectedDimension || selectedDimension === item.name)
+                (!selectedDimension || selectedDimension === item.id)
               ) {
                 return (
                   <PreviewDimension
                     {...{
-                      fullDimensionView: item.name === selectedDimension,
+                      fullDimensionView: item.id === selectedDimension,
                       dimension: item,
                       saveDimensionFunction: onSaveSingleDimension,
                       saveDimensionClicked: saveSingleDimension,

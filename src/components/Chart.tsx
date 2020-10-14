@@ -29,12 +29,14 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
     minute: "numeric",
   };
 
+  // Toggles the checkbox image on the chart
   const onCheckboxClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     setIsSelected(!isSelected);
     props.onChange(props.chartID, !isSelected);
   };
 
+  // Redirects to print cards page for the chart
   const onPrintClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     props.history.push(

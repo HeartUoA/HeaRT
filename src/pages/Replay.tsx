@@ -12,16 +12,19 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const params = QueryString.parse(props.location.search);
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Ensure that the course exists upon loading the page
   useEffect(() => {
     checkCourseExists();
   }, []);
 
+  // Check that the course exists for the user in the backend otherwise redirect to their dashboard
   const checkCourseExists = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}course/${params.courseID}`, {
       method: "GET",
@@ -37,6 +40,7 @@ const Replay: React.FC<RouteComponentProps> = (props) => {
     });
   };
 
+  // Create another chart for the same course
   const playAgainForSameCourse = async (): Promise<any> => {
     props.history.push(`/PlayReason?courseID=${params.courseID}`);
   };

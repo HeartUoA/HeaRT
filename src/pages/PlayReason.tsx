@@ -26,25 +26,28 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     "Other",
   ];
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Create a new chart and post the reason if the required fields are filled out
   const onConfirmClick = () => {
     if (state === "") {
-      setError(NONE_SELECTED);
+      setError(NONE_SELECTED); // No option selected
     } else if (
       state === radioOptions[radioOptions.length - 1] &&
       !/\S/.test(reason)
     ) {
-      setError(NO_TEXT);
+      setError(NO_TEXT); // No description provided for other option
     } else {
-      createChart();
+      createChart(); // Create chart as conditions are met
     }
   };
 
+  // Creates a new chart in the backend and triggers a PUT request to update the reason of play field in that chart
   const createChart = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}course/${params.courseID}/chart`, {
       method: "POST",
@@ -64,6 +67,7 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       });
   };
 
+  // PUT request to backend to update the reason of play field in the chart and redirect to play game if successful
   const updateBackendReason = async (data: any): Promise<any> => {
     await fetch(`${API_DOMAIN}chart/${data.chartID}`, {
       method: "PUT",
@@ -87,8 +91,8 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     });
   };
 
+  // Redirect back to previous course charts page
   const onCancelClick = () => {
-    // Redirect back to previous course charts page
     props.history.push(`/Course/${params.courseID}`);
   };
 

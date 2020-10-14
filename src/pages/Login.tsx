@@ -25,6 +25,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
+  // POST request to authenticate user on backend given all the required fields are filled
   const onConfirmClick = async (): Promise<void> => {
     if (username && password) {
       const hashedPassword = md5(password);
@@ -42,13 +43,16 @@ const Login: React.FC<RouteComponentProps> = (props) => {
 
       const res = await response.json().catch((e) => setError(INCORRECT_LOGIN));
       if (res && res.accessToken) {
+        // If credentials are correct, then user logs in
         setCookie("accessToken", res.accessToken);
         setError("");
         props.history.push("/Dashboard");
       } else {
+        // If credentials are incorrect, then display error
         setError(INCORRECT_LOGIN);
       }
     } else {
+      // Errors to display missing required fields to be filled in
       if (!username) {
         setError(USERNAME_EMPTY);
       } else {
@@ -57,6 +61,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Redirect to Create Account page
   const onSignupClick = () => {
     props.history.push("/SignUp");
   };

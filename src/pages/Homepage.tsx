@@ -9,6 +9,7 @@ import "../styles/Homepage.css";
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
 
+  // If user is already logged in then redirect them to their dashboard
   useEffect(() => {
     if (cookies["accessToken"]) {
       props.history.push("/Dashboard");

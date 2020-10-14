@@ -140,15 +140,16 @@ const instructionSteps: { [key: number]: Step } = {
     image: stepNineImg,
   },
 };
+
+// Component containing the instructions modal to assist the user when playing the game
 const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
   props
 ) => {
-  const [instructionsState, setInstructionsStep] = useState({ currentStep: 1 });
+  const [instructionsPageNum, setPageNum] = useState(1);
+
+  // Changes the instructions page being viewed
   const changeStep = (changeBy: number) => {
-    setInstructionsStep({
-      ...instructionsState,
-      currentStep: instructionsState.currentStep + changeBy,
-    });
+    setPageNum(instructionsPageNum + changeBy);
   };
 
   return (
@@ -163,13 +164,11 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
     >
       <div className="Instructions-Container">
         <Card bordered={false}>
-          <Title level={2}>
-            {instructionSteps[instructionsState.currentStep].title}
-          </Title>
+          <Title level={2}>{instructionSteps[instructionsPageNum].title}</Title>
           <div className="Navigation-Container">
             <Button
               className="Navigation-Button"
-              disabled={instructionsState.currentStep <= 1}
+              disabled={instructionsPageNum <= 1}
               onClick={(e) => changeStep(-1)}
             >
               <LeftOutlined />
@@ -177,14 +176,13 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
             <span className="Instructions-Image">
               <Image
                 width={window.innerWidth * 0.3}
-                src={instructionSteps[instructionsState.currentStep].image}
+                src={instructionSteps[instructionsPageNum].image}
               />
             </span>
             <Button
               className="Navigation-Button"
               disabled={
-                instructionsState.currentStep ===
-                Object.keys(instructionSteps).length
+                instructionsPageNum === Object.keys(instructionSteps).length
               }
               onClick={(e) => changeStep(1)}
             >
@@ -193,14 +191,13 @@ const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
           </div>
           <span className="Instructions-Text">
             <Typography>
-              {instructionSteps[instructionsState.currentStep].description}
+              {instructionSteps[instructionsPageNum].description}
             </Typography>
           </span>
         </Card>
         <span className="Instructions-Counter">
           <Typography>
-            {instructionsState.currentStep}/
-            {Object.keys(instructionSteps).length}
+            {instructionsPageNum}/{Object.keys(instructionSteps).length}
           </Typography>
         </span>
       </div>
