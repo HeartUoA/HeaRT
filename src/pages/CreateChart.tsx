@@ -60,12 +60,14 @@ const CreateChart: React.FC<RouteComponentProps> = (props) => {
       },
     })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status !== 200) {
+          props.history.push("/Dashboard");
+        } else {
           return res.json();
         }
       })
       .then((data) => {
-        updateBackendReason(data);
+        data && updateBackendReason(data);
       });
   };
 
