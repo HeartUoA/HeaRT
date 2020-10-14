@@ -20,6 +20,7 @@ interface PrintDimensionProps {
   allDimensions: DimensionType;
 }
 
+// A class was used here as the team followed the NPM library format on how to use refs
 class PrintDimensionCards extends React.Component<
   PrintFullDimensionCardsProps
 > {
