@@ -14,6 +14,8 @@ interface DimensionProps {
   openSingleDimension?: (key: string) => void; // Function to open a "Preview" mode dimension in "Full View" (allowing user to make changes to their explanation)
 }
 
+// A component used in both DisplayCards and Preview pages, containing the dimension name, slider and user explanation text area.
+// Components within the Dimension component are rendered conditionally depending on whether in "Preview" or "Full View" mode.
 const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
   // Open the "Preview" mode dimension individually in a "Full View" (allowing user to make changes to their explanation)
   const redirectToFullDimensionView = () => {

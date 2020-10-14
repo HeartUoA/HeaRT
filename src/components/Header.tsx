@@ -7,6 +7,7 @@ import logo from "../assets/images/logo.svg";
 import "../styles/Header.css";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
+// A component reused heavily throughout the app allowing users to return to the homepage and log out.
 const Header: React.FC<RouteComponentProps> = (props) => {
   const [cookies, setCookie] = useCookies(["accessToken"]);
   const [showExitModal, setShowExitModal] = useState(false);

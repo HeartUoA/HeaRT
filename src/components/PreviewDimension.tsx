@@ -20,6 +20,10 @@ interface PreviewDimensionProps {
   saveDimensionClicked: boolean; // Boolean indicating whether save has been clicked in the parent component to trigger saving the dimension in local state
 }
 
+// This component is a combination of the Dimension component and the overall Display Cards page (including the main statement and cards).
+// Users can click on a dimension's name to enter "Full View" mode from "Preview" mode.
+// "Full View" mode refers to what is displayed on the DisplayCards screen where the cards and their statements are visible for a single dimension
+// as opposed to "Preview" mode which shows a summary of all the dimensions.
 const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
   const [currentDimension, setDimension] = useState<DimensionType>(
     props.dimension

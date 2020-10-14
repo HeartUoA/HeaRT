@@ -14,6 +14,8 @@ import {
   createDimension,
 } from "../types/dimension";
 
+// Users can print the cards for a chart on this page to play the HeaRT game in person.
+// Double-sided card pairs can be printed, cut out and folded.
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [allDimensions, setAllDimensions] = useState<

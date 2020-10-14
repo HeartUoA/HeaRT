@@ -6,6 +6,7 @@ import { Button, Typography } from "antd";
 import logo from "../assets/images/logo.svg";
 import "../styles/Homepage.css";
 
+// This page allows the user to login to their account or make a new account if they do not already have one.
 const Homepage: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
 

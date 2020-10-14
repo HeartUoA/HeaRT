@@ -17,6 +17,8 @@ interface ChartProps {
   onCardClick: (chartID: string, isComplete: boolean) => void;
 }
 
+// A component to display the Chart card on the Charts Dashboard.
+// Indicates whether the chart is completed, selectable and has the ability to print cards.
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   const [isSelected, setIsSelected] = useState(false);
 

@@ -20,6 +20,8 @@ interface ParamTypes {
   courseID: string;
 }
 
+// Users can view the charts they have previously created for a course as well as create a new chart to play the HeaRT game.
+// From this page, they can also compare charts for the same course and print the cards to play the game in-person.
 const Charts: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -105,7 +107,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   };
 
   const redirectToCreateNewChart = () => {
-    props.history.push(`/PlayReason?courseID=${courseID}`);
+    props.history.push(`/CreateChart?courseID=${courseID}`);
   };
 
   // Changes page margin size

@@ -13,6 +13,7 @@ const USERNAME_EMPTY = "Please enter your username.";
 const PASSWORD_EMPTY = "Please enter your password.";
 const INCORRECT_LOGIN = "Username and/or password is incorrect.";
 
+// Users can enter their credentials on this page to login. It has error-checking in place to notify the user of any invalid credentials.
 const Login: React.FC<RouteComponentProps> = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

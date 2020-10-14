@@ -141,7 +141,7 @@ const instructionSteps: { [key: number]: Step } = {
   },
 };
 
-// Component containing the instructions modal to assist the user when playing the game
+// A component containing the instructions modal to assist the user when playing the game.
 const Instructions: React.FC<React.PropsWithChildren<InstructionsProps>> = (
   props
 ) => {

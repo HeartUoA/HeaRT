@@ -14,6 +14,7 @@ const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
 const PASSWORD_MATCH = "Passwords should match.";
 const UNAVAILABLE_USERNAME = "Username is taken. Please enter a new one.";
 
+// Users can create a new account on this page. It has error-checking in place to notify the user of any invalid details.
 const Signup: React.FC<RouteComponentProps> = (props) => {
   const [cookies, setCookie] = useCookies(["accessToken"]);
   const [email, setEmail] = useState("");

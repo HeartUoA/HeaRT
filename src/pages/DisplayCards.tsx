@@ -28,7 +28,8 @@ const DEFAULT_PROGRESS = {
   completed: 0,
   total: 0,
 };
-
+// This page contains the main gameplay of the HeaRT game.
+// Users can select statements which correspond with their course the most and justify their position and reasoning for their stance.
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
@@ -172,7 +173,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     } else {
       // Redirect back to appropriate page
       const from = window.history.state?.state?.from;
-      if (from === "Charts" || from === "PlayReason" || isPrevPagePreview) {
+      if (from === "Charts" || from === "CreateChart" || isPrevPagePreview) {
         props.history.push(`/Course/${params.courseID}`);
       } else {
         props.history.push("/Dashboard");

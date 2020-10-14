@@ -6,14 +6,16 @@ import * as QueryString from "query-string";
 import { Button, Typography, Radio } from "antd";
 
 import Header from "../components/Header";
-import "../styles/PlayReason.css";
+import "../styles/CreateChart.css";
 import TextArea from "antd/lib/input/TextArea";
 import { API_DOMAIN } from "../config";
 
 const NONE_SELECTED = "A reason for playing the HeaRT Game must be selected";
 const NO_TEXT = "Please type in a reason for playing the HeaRT Game";
 
-const PlayReason: React.FC<RouteComponentProps> = (props) => {
+// Users can explain the reason they are playing the game here.
+// This information is confidential and only used for development purposes.
+const CreateChart: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [state, setState] = useState("");
   const [reason, setReason] = useState("");
@@ -85,7 +87,7 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       if (res.status === 200) {
         props.history.push(
           `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`,
-          { from: "PlayReason" }
+          { from: "CreateChart" }
         );
       }
     });
@@ -97,11 +99,11 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   };
 
   return (
-    <div className="Play-Reason">
+    <div className="Create-Chart">
       <Header />
 
       <div className="Main-Container">
-        <div className="Reason-Container">
+        <div className="Create-Chart-Panel">
           <Typography className="Heading-Text">Create Chart</Typography>
           <div className="Reason-Input-Container">
             <Typography className="Subheading-Text">
@@ -163,4 +165,4 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   );
 };
 
-export default withRouter(PlayReason);
+export default withRouter(CreateChart);

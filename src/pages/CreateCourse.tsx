@@ -19,6 +19,7 @@ import "../styles/CreateCourse.css";
 
 const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
 
+// Users can create a new course in their account by filling out the necessary details. Error-checking is in place to assist the user and notify them of any invalid details.
 const CreateCourse: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   let [courseName, setCourseName] = useState("");

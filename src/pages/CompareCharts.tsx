@@ -15,6 +15,7 @@ import { createDimension } from "../types/dimension";
 import { createCourse } from "../types/course";
 import { Chart, createStubChart } from "../types/chart";
 
+// Users can select 2-3 charts from the same course on the Charts Dashboard and compare their responses over time.
 const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [courseName, setCourseName] = useState<string | undefined>(undefined);

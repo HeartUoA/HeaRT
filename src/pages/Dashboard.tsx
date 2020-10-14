@@ -15,6 +15,7 @@ import "../styles/Dashboard.css";
 
 import plus from "../assets/images/plus.png";
 
+// Users can view their courses here and make new courses. They can also view the instructions on how to play the HeaRT game.
 const Dashboard: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);

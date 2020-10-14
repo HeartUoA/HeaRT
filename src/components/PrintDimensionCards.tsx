@@ -84,6 +84,8 @@ class PrintDimensionCards extends React.Component<
   }
 }
 
+// This component displays the printable cards to play the HeaRT game in-person.
+// It consists of a pair of cards that are double-sided to represent a single dimension.
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   props
 ) => {

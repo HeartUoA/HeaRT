@@ -9,6 +9,7 @@ interface CourseProps {
   courseID: string;
 }
 
+// A component to display the Course card on the Courses Dashboard.
 const Course: React.FC<CourseProps> = (props: CourseProps) => {
   let history = useHistory();
 

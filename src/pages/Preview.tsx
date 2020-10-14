@@ -17,6 +17,9 @@ import {
 } from "../types/dimension";
 import { API_DOMAIN, MINIMUM_REQUIRED } from "../config";
 
+// Users can preview all their responses and make changes if necessary.
+// Dimensions can be edited individually by clicking on the dimension name.
+// (Users must click "Save Chart" for their changes to be saved).
 const Preview: React.FC<RouteComponentProps> = (props) => {
   const params = QueryString.parse(props.location.search);
   const [cookies] = useCookies(["accessToken"]);

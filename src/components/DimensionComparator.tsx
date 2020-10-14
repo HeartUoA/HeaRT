@@ -24,6 +24,8 @@ const colours = {
   2: "#51C240",
 };
 
+// This component is used to compare the responses by multiple charts for one dimension.
+// Users can see the chart responses colour coded on the slider as well as click into the user explanations for each chart in that dimension.
 const DimensionComparator: React.FC<DimensionComparatorProps> = (
   props: DimensionComparatorProps
 ) => {
