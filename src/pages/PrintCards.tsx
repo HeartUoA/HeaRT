@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import ReactToPrint from "react-to-print";
-import { useReactToPrint } from "react-to-print";
 import { Button, Spin } from "antd";
 import Header from "../components/Header";
 import PrintDimensionCards from "../components/PrintDimensionCards";
@@ -15,6 +14,8 @@ import {
   createDimension,
 } from "../types/dimension";
 
+// Users can print the cards for a chart on this page to play the HeaRT game in person.
+// Double-sided card pairs can be printed, cut out and folded.
 const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [allDimensions, setAllDimensions] = useState<
@@ -24,15 +25,13 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
   const params = QueryString.parse(props.location.search);
   const componentRef = useRef(null);
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
   useEffect(() => {
+    // If user is not logged in, redirect to Login page
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
 
+    // Fetch card statements and data from backend for the chart opened
     fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
       headers: {
@@ -60,8 +59,6 @@ const PrintCards: React.FC<RouteComponentProps> = (props) => {
   }, [cookies]);
 
   const onBackClick = async (): Promise<void> => {
-    //Once queries are implemented in courses page
-    // props.history.push(`/Course?chartID=${params.chartID}`);
     props.history.push(`/Course/${params.courseID}`);
   };
 

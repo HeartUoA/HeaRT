@@ -24,6 +24,8 @@ const colours = {
   2: "#51C240",
 };
 
+// This component is used to compare the responses by multiple charts for one dimension.
+// Users can see the chart responses colour coded on the slider as well as click into the user explanations for each chart in that dimension.
 const DimensionComparator: React.FC<DimensionComparatorProps> = (
   props: DimensionComparatorProps
 ) => {
@@ -31,10 +33,12 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
     (dimension) => dimension.userSelectedSliderPos
   );
 
-  // Add marks of all charts that are being compared
+  // Add dimension positions of all charts that are being compared
   const labeled: labeledMarks = {};
   marks.forEach((mark, index) => {
     let entry = {};
+    // Checks if other charts have a users position on the same spot
+    // In this case the tooltip will display dates from all of these charts
     if (labeled[mark] !== undefined) {
       entry = {
         style: { color: Object.values(colours)[index], fontSize: "0.8em" },
@@ -48,6 +52,8 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
             style={{ position: "relative" }}
             color={Object.values(colours)[index]}
           >
+            {/* Renders a circle on top of the slider
+            This has a very specific set of css rules, so change with care */}
             <div
               className="Card-Compare-Circle"
               style={{
@@ -76,6 +82,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
             />
           </Tooltip>
         ),
+        // Keep extra info about the chart, so can be used if more than one are rendered at the same spot
         value: props.dates[index],
         color: Object.values(colours)[index],
       };
@@ -83,7 +90,7 @@ const DimensionComparator: React.FC<DimensionComparatorProps> = (
     labeled[mark] = entry;
   });
 
-  // Add markers for the left and right sides of the slider
+  // Add dimension markers for the left and right sides of the slider
   labeled[-0.1] = {
     label: props.dimensions[0].marks![0].label,
     style: { marginTop: "1em" },

@@ -19,6 +19,7 @@ import "../styles/CreateCourse.css";
 
 const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
 
+// Users can create a new course in their account by filling out the necessary details. Error-checking is in place to assist the user and notify them of any invalid details.
 const CreateCourse: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   let [courseName, setCourseName] = useState("");
@@ -29,13 +30,16 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
   );
   const [error, setError] = useState("");
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Function to create a new course in the backend given all the conditions are met
   const onConfirmClick = async (): Promise<void> => {
+    // Display error if any required fields are missing
     if (!courseName || !role || !startYear || !courseSize) {
       setError(ALL_FIELDS_SET);
       return;
@@ -48,6 +52,7 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
       startYear: startYear,
     };
 
+    // POST request to backend to create chart
     const responseSignup = await fetch(`${API_DOMAIN}course/`, {
       method: "POST",
       body: JSON.stringify(course),
@@ -58,6 +63,7 @@ const CreateCourse: React.FC<RouteComponentProps> = (props) => {
       },
     });
 
+    // Return to Dashboard upon successful creation of course
     if (responseSignup.status === 200) {
       setError("");
       props.history.push("/Dashboard");

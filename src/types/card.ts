@@ -4,6 +4,7 @@ export type Card = {
   isEditing: boolean;
 };
 
+// Used for Display Cards and Preview Dimension
 export enum CardSide {
   Left,
   Right,

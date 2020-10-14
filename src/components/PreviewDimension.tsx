@@ -12,14 +12,18 @@ import cancel from "../assets/images/cancel.png";
 import "../styles/DisplayCards.css";
 
 interface PreviewDimensionProps {
-  fullDimensionView: boolean;
-  dimension: DimensionType;
-  previewSliderPosChange: (value: number, dimensionKey: string) => void;
-  saveDimensionFunction: (updatedDimension: DimensionType) => void;
-  openSingleDimension: (key: string) => void;
-  saveDimensionClicked: boolean;
+  fullDimensionView: boolean; // Whether the current dimension is in "Preview" mode or "Full View" mode
+  dimension: DimensionType; // The type of the dimension (either Practice or Beliefs)
+  previewSliderPosChange: (value: number, dimensionKey: string) => void; // Function to update the slider position of the dimension
+  saveDimensionFunction: (updatedDimension: DimensionType) => void; // Function to save the changes made to a dimension in local state
+  openSingleDimension: (key: string) => void; // Function to view a dimension in "Full View" mode instead of Preview mode
+  saveDimensionClicked: boolean; // Boolean indicating whether save has been clicked in the parent component to trigger saving the dimension in local state
 }
 
+// This component is a combination of the Dimension component and the overall Display Cards page (including the main statement and cards).
+// Users can click on a dimension's name to enter "Full View" mode from "Preview" mode.
+// "Full View" mode refers to what is displayed on the DisplayCards screen where the cards and their statements are visible for a single dimension
+// as opposed to "Preview" mode which shows a summary of all the dimensions.
 const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
   const [currentDimension, setDimension] = useState<DimensionType>(
     props.dimension
@@ -35,6 +39,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
         )
   );
 
+  // Saves the current dimension in local state if the "Save" button is clicked in the parent component (only triggered if the dimension is in "Full View" mode)
   useEffect(() => {
     if (props.saveDimensionClicked) {
       props.saveDimensionFunction({
@@ -45,6 +50,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   }, [props.saveDimensionClicked]);
 
+  // Resets the dimension back to its original state after exiting from "Full View" mode back to "Preview" mode
   useEffect(() => {
     if (!props.fullDimensionView) {
       setDimension(props.dimension);
@@ -61,6 +67,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   }, [props.fullDimensionView]);
 
+  // Updates the slider position for the dimension in local state (and the card colours)
   const onCardClick = (side: CardSide) => {
     if (side === CardSide.Left) {
       onSliderPosChange(leftState.anchorSliderPos);
@@ -69,6 +76,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   };
 
+  // Makes the card's statement editable
   const onEditStatementClick = (event: React.MouseEvent, side: CardSide) => {
     event.stopPropagation();
     if (side === CardSide.Left) {
@@ -78,6 +86,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   };
 
+  // Discards the changes made to the card's statement and disables editing
   const onCancelStatementClick = (event: React.MouseEvent, side: CardSide) => {
     if (side === CardSide.Left) {
       setLeftState({ ...leftState, isEditing: false });
@@ -86,6 +95,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   };
 
+  // Saves the changes made to the card's statement in local state and disables editing
   const onSaveStatementClick = (event: React.MouseEvent, side: CardSide) => {
     let textElement = document.getElementById(
       side === CardSide.Left ? "leftCardEdit" : "rightCardEdit"
@@ -105,6 +115,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     }
   };
 
+  // Updates the slider position for the dimension locally and the colour of the cards based on the slider position and dimesnion type
   const onSliderPosChange = (value: number) => {
     if (!props.fullDimensionView) {
       props.previewSliderPosChange(value, props.dimension.name);
@@ -113,6 +124,7 @@ const PreviewDimension: React.FC<PreviewDimensionProps> = (props, ref) => {
     setColours(getColours(value, currentDimension.type));
   };
 
+  // Updates the user explanation for the dimension in local state
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDimension({ ...currentDimension, userExplanation: event.target.value });
   };

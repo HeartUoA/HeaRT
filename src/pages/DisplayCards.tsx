@@ -28,7 +28,8 @@ const DEFAULT_PROGRESS = {
   completed: 0,
   total: 0,
 };
-
+// This page contains the main gameplay of the HeaRT game.
+// Users can select statements which correspond with their course the most and justify their position and reasoning for their stance.
 const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const isPrevPagePreview = window.history.state?.state?.prevPage === "Preview";
@@ -44,6 +45,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     isPrevPagePreview && allDimensions ? allDimensions.length - 1 : 0
   );
 
+  // Sets the colour of the cards initially depending on whether the dimension has already been completed
   const [colours, setColours] = useState(
     allDimensions && allDimensions[dimensionIndex].userSelectedSliderPos !== -1
       ? getColours(
@@ -52,6 +54,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         )
       : DEFAULT_COLOURS
   );
+  // Determines the progress to display on the progress bar (dimensions completed)
   const [progress, setProgress] = useState(
     allDimensions
       ? {
@@ -66,10 +69,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
   const isCardSelected =
     allDimensions && allDimensions[dimensionIndex].userSelectedSliderPos !== -1;
 
+  // Fetches dimensions for the chart upon component mount
   useEffect(() => {
     fetchDimensions();
   }, []);
 
+  // Re-calculates all the initial state once the dimension have been retrieved from the backend
   useEffect(() => {
     if (retrievedResults && allDimensions) {
       const newIndex = isPrevPagePreview ? allDimensions.length - 1 : 0;
@@ -93,6 +98,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   }, [retrievedResults]);
 
+  // GET request to retrieve all the dimensions for the chart from the backend
   const fetchDimensions = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}dimensions/forchart/${params.chartID}`, {
       method: "GET",
@@ -116,19 +122,20 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
               return createDimension(dimension);
             })
           );
-        setRetrieved(true);
+        setRetrieved(true); // Indicates that the dimensions have been successfully retrieved
       })
       .catch((e) => console.log(e));
   };
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // POST request to save the changes made to the current dimension
   const saveCurrentDimension = async (): Promise<void> => {
-    // TODO: Fix this PUT request
     const dimension = createBackendDimension(allDimensions![dimensionIndex]);
     await fetch(
       `${API_DOMAIN}dimensions/` + allDimensions![dimensionIndex].id,
@@ -144,6 +151,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   };
 
+  // Reset the state to display the next/previous dimension in the chart
   const setNewDimension = (newIndex: number) => {
     setDimensionIndex(newIndex);
     setColours(
@@ -156,6 +164,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   };
 
+  // Saves the current dimension
+  // If the current dimension is not the first one in the chart then view the previous dimension, otherwise go to the previous page
   const onBackClick = () => {
     if (dimensionIndex > 0) {
       saveCurrentDimension();
@@ -163,7 +173,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     } else {
       // Redirect back to appropriate page
       const from = window.history.state?.state?.from;
-      if (from === "Charts" || from === "PlayReason" || isPrevPagePreview) {
+      if (from === "Charts" || from === "CreateChart" || isPrevPagePreview) {
         props.history.push(`/Course/${params.courseID}`);
       } else {
         props.history.push("/Dashboard");
@@ -171,26 +181,31 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Saves the current dimension and goes to the next dimension if possible
   const onNextClick = () => {
     saveCurrentDimension();
     if (dimensionIndex < allDimensions!.length - 1) {
+      // If the current dimension is not the last then displays next dimension in the chart.
       setNewDimension(dimensionIndex + 1);
     } else if (dimensionIndex === allDimensions!.length - 1) {
+      // If it is the last and minimum required number of dimensions is completed then go to Preview.
       if (progress.completed >= MINIMUM_REQUIRED) {
         props.history.push(
           `/Preview?courseID=${params.courseID}&chartID=${params.chartID}`
         );
       } else {
-        // Display modal to say at least MINIMUM_REQUIRED dimensions must be completed
+        // If requirements not met then display error modal notifying dimension left to complete
         setShowIncompleteModal(true);
       }
     }
   };
 
+  // Closes the error modal
   const handleOk = () => {
     setShowIncompleteModal(false);
   };
 
+  // Sets the slider position based on the card selected and updates the progress
   const onCardClick = (side: CardSide) => {
     if (allDimensions![dimensionIndex].userSelectedSliderPos === -1) {
       setProgress({ ...progress, completed: progress.completed + 1 });
@@ -207,6 +222,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Makes the selected card's statement editable
   const onEditClick = (event: React.MouseEvent, side: CardSide) => {
     event.stopPropagation();
     if (side === CardSide.Left) {
@@ -244,6 +260,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Discards changes made to the editable card's statement
   const onCancelClick = (side: CardSide) => {
     if (side === CardSide.Left) {
       setAllDimensions(
@@ -280,6 +297,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Saves the changes made to the editable card statement
   const onSaveClick = (side: CardSide) => {
     let textElement = document.getElementById(
       side === CardSide.Left ? "leftCardEdit" : "rightCardEdit"
@@ -321,6 +339,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Updates the dimension slider position in local state and the colours of the cards
   const onSliderPosChange = (value: number) => {
     setAllDimensions(
       allDimensions!.map((dimension, index) => {
@@ -337,6 +356,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     setColours(getColours(value, allDimensions![dimensionIndex].type));
   };
 
+  // Updates the user explanation for the dimension in local state
   const onUserExplanationChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAllDimensions(
       allDimensions!.map((dimension, index) => {
@@ -352,6 +372,7 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
     );
   };
 
+  // Calculates the number of dimensions that are required to be completed to finish the chart
   const toCompleteDimensions = () => {
     let toComplete = MINIMUM_REQUIRED - progress.completed;
     return toComplete;
@@ -537,10 +558,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         <div className="Footer">
           <Button
             type="primary"
-            className="Footer-Button"
+            className={`Footer-Button ${
+              dimensionIndex === 0 && "Wider-Button"
+            }`}
             onClick={onBackClick}
           >
-            Back
+            {dimensionIndex === 0 ? "To Dashboard" : "Previous"}
           </Button>
           <div className="Progress">
             <Typography>
@@ -574,7 +597,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             className="Footer-Button"
             onClick={onNextClick}
           >
-            {isCardSelected ? "Next" : "Skip"}
+            {dimensionIndex === allDimensions.length - 1
+              ? "Preview"
+              : isCardSelected
+              ? "Next"
+              : "Skip"}
           </Button>
         </div>
       </div>

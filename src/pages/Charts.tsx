@@ -20,6 +20,8 @@ interface ParamTypes {
   courseID: string;
 }
 
+// Users can view the charts they have previously created for a course as well as create a new chart to play the HeaRT game.
+// From this page, they can also compare charts for the same course and print the cards to play the game in-person.
 const Charts: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -31,12 +33,14 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
   const [courseName, setCourseName] = useState<string | undefined>(undefined);
   const [selectedCharts, setSelectedCharts] = useState<string[]>([]);
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Function to dynamically change margins of the page as the window viewport size changes
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
@@ -44,11 +48,14 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     };
   }, []);
 
+  // Fetches data from backend upon the component mounting
   useEffect(() => {
     fetchCharts();
   }, []);
 
+  // Function to fetch the coursename and charts under that course from the backend
   const fetchCharts = async (): Promise<any> => {
+    // Get course name and set it in state
     await fetch(`${API_DOMAIN}course/${courseID}`, {
       method: "GET",
       headers: {
@@ -68,6 +75,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
         data && setCourseName(createCourse(data[0]).name);
       });
 
+    // Get charts and set them in state
     await fetch(`${API_DOMAIN}course/${courseID}/chart`, {
       method: "GET",
       headers: {
@@ -93,14 +101,16 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
       });
   };
 
+  // Toggle instructions modal visibility
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);
   };
 
   const redirectToCreateNewChart = () => {
-    props.history.push(`/PlayReason?courseID=${courseID}`);
+    props.history.push(`/CreateChart?courseID=${courseID}`);
   };
 
+  // Changes page margin size
   const handleResize = () => {
     setMargin((window.innerWidth % 500) / 2);
   };
@@ -109,12 +119,14 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     props.history.push("/Dashboard");
   };
 
+  // Redirects to Compare Charts page, passing in IDs of charts to be compared
   const onCompare = () => {
     props.history.push(`/CompareCharts?courseID=${courseID}`, {
       chartIDs: selectedCharts,
     });
   };
 
+  // Adds or removes the specified chart to/from the list of charts selected for comparison
   const onChartSelected = (chartID: string, isSelected: boolean) => {
     let tempCharts = Object.assign([], selectedCharts);
     if (isSelected) {
@@ -128,6 +140,7 @@ const Charts: React.FC<RouteComponentProps> = (props) => {
     setSelectedCharts({ ...tempCharts });
   };
 
+  // Redirects chart to the appropriate page depending on whether it is completed.
   const onChartClick = (chartID: string, isComplete: boolean) => {
     if (isComplete) {
       props.history.push(`/Preview?courseID=${courseID}&chartID=${chartID}`, {

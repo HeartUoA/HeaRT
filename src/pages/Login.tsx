@@ -13,6 +13,7 @@ const USERNAME_EMPTY = "Please enter your username.";
 const PASSWORD_EMPTY = "Please enter your password.";
 const INCORRECT_LOGIN = "Username and/or password is incorrect.";
 
+// Users can enter their credentials on this page to login. It has error-checking in place to notify the user of any invalid credentials.
 const Login: React.FC<RouteComponentProps> = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     }
   }, [cookies]);
 
+  // POST request to authenticate user on backend given all the required fields are filled
   const onConfirmClick = async (): Promise<void> => {
     if (username && password) {
       const hashedPassword = md5(password);
@@ -42,13 +44,16 @@ const Login: React.FC<RouteComponentProps> = (props) => {
 
       const res = await response.json().catch((e) => setError(INCORRECT_LOGIN));
       if (res && res.accessToken) {
+        // If credentials are correct, then user logs in
         setCookie("accessToken", res.accessToken);
         setError("");
         props.history.push("/Dashboard");
       } else {
+        // If credentials are incorrect, then display error
         setError(INCORRECT_LOGIN);
       }
     } else {
+      // Errors to display missing required fields to be filled in
       if (!username) {
         setError(USERNAME_EMPTY);
       } else {
@@ -57,6 +62,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Redirect to Create Account page
   const onSignupClick = () => {
     props.history.push("/SignUp");
   };

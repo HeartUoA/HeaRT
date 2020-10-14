@@ -7,17 +7,20 @@ import "../styles/Dimension.css";
 import { Dimension as DimensionType } from "../types/dimension";
 
 interface DimensionProps {
-  dimension: DimensionType;
-  sliderUpdate: (value: number) => void;
-  userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  isPreview: boolean;
-  openSingleDimension?: (key: string) => void;
+  dimension: DimensionType; // The type of the dimension (either Practice or Beliefs)
+  sliderUpdate: (value: number) => void; // Function to update the slider position for the dimension
+  userExplanationUpdate?: (event: ChangeEvent<HTMLTextAreaElement>) => void; // Function to update the user explanation for the dimension
+  isPreview: boolean; // Whether the Dimension component is in "Preview" mode or "Display Cards" mode
+  openSingleDimension?: (key: string) => void; // Function to open a "Preview" mode dimension in "Full View" (allowing user to make changes to their explanation)
 }
 
+// A component used in both DisplayCards and Preview pages, containing the dimension name, slider and user explanation text area.
+// Components within the Dimension component are rendered conditionally depending on whether in "Preview" or "Full View" mode.
 const Dimension: React.FC<DimensionProps> = (props: DimensionProps) => {
+  // Open the "Preview" mode dimension individually in a "Full View" (allowing user to make changes to their explanation)
   const redirectToFullDimensionView = () => {
     if (props.openSingleDimension) {
-      props.openSingleDimension(props.dimension.name); // TODO: Change this to ID
+      props.openSingleDimension(props.dimension.id);
     }
   };
 

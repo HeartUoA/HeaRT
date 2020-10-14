@@ -6,14 +6,16 @@ import * as QueryString from "query-string";
 import { Button, Typography, Radio } from "antd";
 
 import Header from "../components/Header";
-import "../styles/PlayReason.css";
+import "../styles/CreateChart.css";
 import TextArea from "antd/lib/input/TextArea";
 import { API_DOMAIN } from "../config";
 
 const NONE_SELECTED = "A reason for playing the HeaRT Game must be selected";
 const NO_TEXT = "Please type in a reason for playing the HeaRT Game";
 
-const PlayReason: React.FC<RouteComponentProps> = (props) => {
+// Users can explain the reason they are playing the game here.
+// This information is confidential and only used for development purposes.
+const CreateChart: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [state, setState] = useState("");
   const [reason, setReason] = useState("");
@@ -26,25 +28,28 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
     "Other",
   ];
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Create a new chart and post the reason if the required fields are filled out
   const onConfirmClick = () => {
     if (state === "") {
-      setError(NONE_SELECTED);
+      setError(NONE_SELECTED); // No option selected
     } else if (
       state === radioOptions[radioOptions.length - 1] &&
       !/\S/.test(reason)
     ) {
-      setError(NO_TEXT);
+      setError(NO_TEXT); // No description provided for other option
     } else {
-      createChart();
+      createChart(); // Create chart as conditions are met
     }
   };
 
+  // Creates a new chart in the backend and triggers a PUT request to update the reason of play field in that chart
   const createChart = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}course/${params.courseID}/chart`, {
       method: "POST",
@@ -64,6 +69,7 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       });
   };
 
+  // PUT request to backend to update the reason of play field in the chart and redirect to play game if successful
   const updateBackendReason = async (data: any): Promise<any> => {
     await fetch(`${API_DOMAIN}chart/${data.chartID}`, {
       method: "PUT",
@@ -81,23 +87,23 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
       if (res.status === 200) {
         props.history.push(
           `/DisplayCards?courseID=${params.courseID}&chartID=${data.chartID}`,
-          { from: "PlayReason" }
+          { from: "CreateChart" }
         );
       }
     });
   };
 
+  // Redirect back to previous course charts page
   const onCancelClick = () => {
-    // Redirect back to previous course charts page
     props.history.push(`/Course/${params.courseID}`);
   };
 
   return (
-    <div className="Play-Reason">
+    <div className="Create-Chart">
       <Header />
 
       <div className="Main-Container">
-        <div className="Reason-Container">
+        <div className="Create-Chart-Panel">
           <Typography className="Heading-Text">Create Chart</Typography>
           <div className="Reason-Input-Container">
             <Typography className="Subheading-Text">
@@ -159,4 +165,4 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
   );
 };
 
-export default withRouter(PlayReason);
+export default withRouter(CreateChart);

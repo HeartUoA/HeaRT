@@ -15,6 +15,7 @@ import { createDimension } from "../types/dimension";
 import { createCourse } from "../types/course";
 import { Chart, createStubChart } from "../types/chart";
 
+// Users can select 2-3 charts from the same course on the Charts Dashboard and compare their responses over time.
 const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [courseName, setCourseName] = useState<string | undefined>(undefined);
@@ -23,17 +24,21 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
   const chartsToCompareIDs = window.history.state?.state?.chartIDs;
   const [chartsToCompare, setCharts] = useState<Chart[]>([]);
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Fetches data from backend on component mounting
   useEffect(() => {
     fetchCharts();
   }, [chartsToCompareIDs, cookies, params.courseID]);
 
+  // Fetches the course name and the charts to be compared from the backend
   const fetchCharts = async (): Promise<void> => {
+    // Gets the course name
     await fetch(`${API_DOMAIN}course/${params.courseID}`, {
       method: "GET",
       headers: {
@@ -52,13 +57,14 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
       .then((data) => {
         data && setCourseName(createCourse(data[0]).name);
       });
+
     let chartsArray: Chart[] = [];
 
     if (chartsToCompareIDs === undefined) {
       props.history.push("/Dashboard");
       return;
     }
-
+    // Gets the charts from the backend
     await Promise.all(
       Object.keys(chartsToCompareIDs).map(async (key: string) => {
         const chartData = await fetch(
@@ -74,7 +80,7 @@ const CompareCharts: React.FC<RouteComponentProps> = (props) => {
         );
         const chart = await chartData.json();
 
-        // Get dimensions
+        // Get dimensions for the specified chart
         const dimensionData = await fetch(
           `${API_DOMAIN}dimensions/forchart/${chartsToCompareIDs[key]}`,
           {

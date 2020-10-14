@@ -14,6 +14,7 @@ const ALL_FIELDS_SET = "All fields must be filled before proceeding.";
 const PASSWORD_MATCH = "Passwords should match.";
 const UNAVAILABLE_USERNAME = "Username is taken. Please enter a new one.";
 
+// Users can create a new account on this page. It has error-checking in place to notify the user of any invalid details.
 const Signup: React.FC<RouteComponentProps> = (props) => {
   const [cookies, setCookie] = useCookies(["accessToken"]);
   const [email, setEmail] = useState("");
@@ -28,15 +29,17 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
 
   const [error, setError] = useState("");
 
+  // If the user is already logged in, redirect to their Dashboard
   useEffect(() => {
     if (cookies["accessToken"]) {
       props.history.push("/Dashboard");
     }
   }, [cookies]);
 
+  // Create a new user account if all the conditions are met
   const onCreateClick = async (): Promise<void> => {
     if (password !== confirmPassword) {
-      setError(PASSWORD_MATCH);
+      setError(PASSWORD_MATCH); // Passwords do not match
       return;
     } else if (
       !username ||
@@ -47,11 +50,11 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
       !dept ||
       !position
     ) {
-      setError(ALL_FIELDS_SET);
+      setError(ALL_FIELDS_SET); // All required fields are not set
       return;
     }
 
-    const hashedPassword = md5(password);
+    const hashedPassword = md5(password); // Hash the password before passing it over the network for security purposes
     const user = {
       username: username,
       name: fullName,
@@ -63,6 +66,7 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
       passwordHash: hashedPassword,
     };
 
+    // POST request to create new user
     const responseSignup = await fetch(`${API_DOMAIN}users/`, {
       method: "POST",
       body: JSON.stringify(user),
@@ -73,13 +77,14 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
     });
 
     if (responseSignup.status === 409) {
-      //duplicate username
+      // Duplicate username error
       setError(UNAVAILABLE_USERNAME);
       return;
     } else if (responseSignup.status !== 200) {
       return;
     }
 
+    // If creation of user is successful then automatically log them into their account
     const responseLogin = await fetch(
       `${API_DOMAIN}users/authenticate/${username}`,
       {
@@ -92,6 +97,7 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
       }
     );
 
+    // Redirect user to Dashboard after successfully authenticating
     const res = await responseLogin.json().catch((e) => setError(e));
     if (res && res.accessToken) {
       setCookie("accessToken", res.accessToken);
@@ -100,6 +106,7 @@ const Signup: React.FC<RouteComponentProps> = (props) => {
     }
   };
 
+  // Redirect to Login page
   const onLoginClick = () => {
     props.history.push("/Login");
   };

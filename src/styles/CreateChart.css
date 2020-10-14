@@ -1,4 +1,4 @@
-.Play-Reason {
+.Create-Chart {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -14,7 +14,7 @@
   margin-top: 100px;
 }
 
-.Reason-Container {
+.Create-Chart-Panel {
   display: flex;
   flex-direction: column;
   align-content: center;

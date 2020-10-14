@@ -17,6 +17,8 @@ interface ChartProps {
   onCardClick: (chartID: string, isComplete: boolean) => void;
 }
 
+// A component to display the Chart card on the Charts Dashboard.
+// Indicates whether the chart is completed, selectable and has the ability to print cards.
 const Chart: React.FC<ChartProps> = (props: ChartProps) => {
   const [isSelected, setIsSelected] = useState(false);
 
@@ -29,12 +31,14 @@ const Chart: React.FC<ChartProps> = (props: ChartProps) => {
     minute: "numeric",
   };
 
+  // Toggles the checkbox image on the chart
   const onCheckboxClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     setIsSelected(!isSelected);
     props.onChange(props.chartID, !isSelected);
   };
 
+  // Redirects to print cards page for the chart
   const onPrintClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     props.history.push(

@@ -7,6 +7,7 @@ import { Slider } from "antd";
 
 import "../styles/PrintDimension.css";
 
+// Default card colours depending of dimension type
 const PRACTICE_BG_COLOUR = "#ffc4d3";
 const BELIEF_BG_COLOUR = "#c4ddff";
 
@@ -21,6 +22,7 @@ interface PrintDimensionProps {
 }
 
 // A class was used here as the team followed the NPM library format on how to use refs
+// This component prints out the cards for a dimension (4 cards in total - front and back side of two statement cards)
 class PrintDimensionCards extends React.Component<
   PrintFullDimensionCardsProps
 > {
@@ -82,6 +84,8 @@ class PrintDimensionCards extends React.Component<
   }
 }
 
+// This component displays the printable cards to play the HeaRT game in-person.
+// It consists of a pair of cards that are double-sided to represent a single dimension.
 const PrintDimension: React.FC<React.PropsWithChildren<PrintDimensionProps>> = (
   props
 ) => {

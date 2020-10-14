@@ -15,6 +15,7 @@ import "../styles/Dashboard.css";
 
 import plus from "../assets/images/plus.png";
 
+// Users can view their courses here and make new courses. They can also view the instructions on how to play the HeaRT game.
 const Dashboard: React.FC<RouteComponentProps> = (props) => {
   const [cookies] = useCookies(["accessToken"]);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -23,16 +24,19 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
   );
   const [courses, setCourses] = useState<CourseType[] | undefined>(undefined);
 
+  // If user is not logged in, redirect to Login page
   useEffect(() => {
     if (!cookies["accessToken"]) {
       props.history.push("/Login");
     }
   }, [cookies]);
 
+  // Fetch data from backend upon component mounting
   useEffect(() => {
     fetchCourses();
   }, []);
 
+  // Function to dynamically change margins of the page as the window viewport size changes
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
@@ -40,6 +44,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
     };
   }, []);
 
+  // Gets all courses created by the user from the backend
   const fetchCourses = async (): Promise<any> => {
     await fetch(`${API_DOMAIN}course/`, {
       method: "GET",
@@ -67,6 +72,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
       .catch((e) => console.log(e));
   };
 
+  // Toggles instructions modal visibility
   const onInstructionsClick = () => {
     setShowInstructions(!showInstructions);
   };
@@ -75,6 +81,7 @@ const Dashboard: React.FC<RouteComponentProps> = (props) => {
     props.history.push("/CreateCourse");
   };
 
+  // Changes the margin size of the page
   const handleResize = () => {
     setMargin((window.innerWidth % 500) / 2);
   };
