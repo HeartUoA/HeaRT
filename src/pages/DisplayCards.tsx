@@ -557,10 +557,12 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
         <div className="Footer">
           <Button
             type="primary"
-            className="Footer-Button"
+            className={`Footer-Button ${
+              dimensionIndex === 0 && "Wider-Button"
+            }`}
             onClick={onBackClick}
           >
-            Back
+            {dimensionIndex === 0 ? "To Dashboard" : "Previous"}
           </Button>
           <div className="Progress">
             <Typography>
@@ -594,7 +596,11 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
             className="Footer-Button"
             onClick={onNextClick}
           >
-            {isCardSelected ? "Next" : "Skip"}
+            {dimensionIndex === allDimensions.length - 1
+              ? "Preview"
+              : isCardSelected
+              ? "Next"
+              : "Skip"}
           </Button>
         </div>
       </div>
