@@ -98,7 +98,7 @@ const PlayReason: React.FC<RouteComponentProps> = (props) => {
 
       <div className="Main-Container">
         <div className="Reason-Container">
-          <Typography className="Heading-Text">Create a New Chart</Typography>
+          <Typography className="Heading-Text">Create Chart</Typography>
           <div className="Reason-Input-Container">
             <Typography className="Subheading-Text">
               Why are you playing the HeaRT game?

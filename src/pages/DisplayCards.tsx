@@ -162,8 +162,8 @@ const DisplayCards: React.FC<RouteComponentProps> = (props) => {
       setNewDimension(dimensionIndex - 1);
     } else {
       // Redirect back to appropriate page
-      let from = window.history.state?.state?.from;
-      if (from === "Charts" || from === "PlayReason") {
+      const from = window.history.state?.state?.from;
+      if (from === "Charts" || from === "PlayReason" || isPrevPagePreview) {
         props.history.push(`/Course/${params.courseID}`);
       } else {
         props.history.push("/Dashboard");
